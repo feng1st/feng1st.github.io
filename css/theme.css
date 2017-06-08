@@ -1,0 +1,37 @@
+/* Generics */
+@font-face {
+    font-family: "Cantarell";
+    src: url("/fonts/Cantarell-Regular-webfont.woff") format('woff');
+}
+
+body {
+    font-family: 'Cantarell', sans-serif;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #EEEEEE;
+}
+
+h1, h2, h3 {
+    margin-top: 0px;
+}
+
+/* Article */
+address {
+    margin-bottom: 0px;
+}
+
+/* Sidebar */
+.navbar-default,
+.well {
+    background: #FFFFFF;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+}
+
+li.navbar-item.active a {
+    color: #333333 !important;
+    background-color: #FFFFFF !important;
+}
