@@ -106,20 +106,26 @@
 &lt;li&gt;滑动窗口流控&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;建立连接，三次握手：&lt;br /&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Client-&amp;gt;&amp;gt;Server: SYN&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Server&amp;ndash;&amp;gt;&amp;gt;Client: ACK&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Client&amp;ndash;&amp;gt;&amp;gt;Server: ACK&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+    sequenceDiagram
+    
+      Client-&gt;&gt;Server: SYN
+      Server--&gt;&gt;Client: ACK
+      Client--&gt;&gt;Server: ACK
+   
+&lt;/div&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;断开连接，四次握手：&lt;br /&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Client-&amp;gt;&amp;gt;Server: FIN&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Server&amp;ndash;&amp;gt;&amp;gt;Client: ACK&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Server-&amp;gt;&amp;gt;Client: FIN&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Client&amp;ndash;&amp;gt;&amp;gt;Server: ACK&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+    sequenceDiagram
+    
+      Client-&gt;&gt;Server: FIN
+      Server--&gt;&gt;Client: ACK
+      Server-&gt;&gt;Client: FIN
+      Client--&gt;&gt;Server: ACK
+   
+&lt;/div&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;流量控制&lt;br /&gt;
 
 &lt;ul&gt;
