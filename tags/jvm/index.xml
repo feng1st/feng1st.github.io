@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>jvm on 知耻而后勇，知不足而后进</title>
-    <link>https://feng1st.github.io/tags/jvm/index.xml</link>
-    <description>Recent content in jvm on 知耻而后勇，知不足而后进</description>
+    <title>JVM on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/tags/jvm/</link>
+    <description>Recent content in JVM on 知耻而后勇，知不足而后进</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
-    <copyright>nf_xp</copyright>
+    <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://feng1st.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +17,7 @@
       <guid>https://feng1st.github.io/post/2017-06-06-jvm-memory-gc/</guid>
       <description>
 
-&lt;h2 id=&#34;java对象&#34;&gt;Java对象&lt;/h2&gt;
+&lt;h2 id=&#34;java对象:f83914257d3b33026de5ffce00ad7f99&#34;&gt;Java对象&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;对象位置&lt;br /&gt;
@@ -39,12 +39,11 @@
 &lt;li&gt;空对象大小等于对象头大小，在32位虚拟机占8字节，64位占16字节，开启压缩占12字节&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;引用在32位虚拟机占4字节，64位占8字节，开启压缩占4字节&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;数组类型大小要在元素类型大小上增加4字节数组长度&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;对象最终大小按8字节对齐&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对象最终大小按8字节对齐&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;java内存区域&#34;&gt;Java内存区域&lt;/h2&gt;
+&lt;h2 id=&#34;java内存区域:f83914257d3b33026de5ffce00ad7f99&#34;&gt;Java内存区域&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;程序计数器 Program Counter Register&lt;br /&gt;
@@ -85,20 +84,18 @@
 &lt;li&gt;线程共享&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;保存加载的类信息（包括版本、接口、属性、方法、final常量、静态变量等）和运行时常量池 Runtime Constant Pool（包括字面常量、符号引用和直接引用）&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;在分代GC机制里，一般被成为永久代 Permanent Gen&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;对于存在大量Proxy动态类的系统，要考虑回收的问题&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对于存在大量Proxy动态类的系统，要考虑回收的问题&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;堆和栈的区别&#34;&gt;堆和栈的区别&lt;/h2&gt;
+&lt;h2 id=&#34;堆和栈的区别:f83914257d3b33026de5ffce00ad7f99&#34;&gt;堆和栈的区别&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;栈：存放栈帧，内部包括简单变量和对象引用，在栈顶分配，后进先出，速度快&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;堆：存放对象实例，会因回收造成内存碎片，需要寻找下一个可供分配的连续空间，速度慢&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;堆：存放对象实例，会因回收造成内存碎片，需要寻找下一个可供分配的连续空间，速度慢&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;对象访问方式&#34;&gt;对象访问方式&lt;/h2&gt;
+&lt;h2 id=&#34;对象访问方式:f83914257d3b33026de5ffce00ad7f99&#34;&gt;对象访问方式&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;通过句柄池&lt;br /&gt;
@@ -112,12 +109,11 @@
 &lt;ul&gt;
 &lt;li&gt;栈或堆中的对象引用指向堆中的对象实例，对象实例内部指向方法区类信息&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无中间层，较快。但是一旦对象实例移动，则需要更新所有的引用&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;HotSpot采用&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;HotSpot采用&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;对象生命周期&#34;&gt;对象生命周期&lt;/h2&gt;
+&lt;h2 id=&#34;对象生命周期:f83914257d3b33026de5ffce00ad7f99&#34;&gt;对象生命周期&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;引用计数法&lt;br /&gt;
@@ -134,13 +130,12 @@
 &lt;li&gt;虚拟机栈引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;本地方法栈引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;方法区类静态属性引用的对象&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;方法区常量引用的对象&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;方法区常量引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;内存分代&#34;&gt;内存分代&lt;/h2&gt;
+&lt;h2 id=&#34;内存分代:f83914257d3b33026de5ffce00ad7f99&#34;&gt;内存分代&lt;/h2&gt;
 
 &lt;p&gt;不同对象的生存周期不同，不能因为回收短期对象，就扫描整个堆区&lt;/p&gt;
 
@@ -158,12 +153,11 @@
 &lt;li&gt;永久代 Permanent Gen&lt;br /&gt;
 
 &lt;ul&gt;
-&lt;li&gt;存放方法区内容，HotSpot采用，但计划弃用&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;存放方法区内容，HotSpot采用，但计划弃用&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;回收算法&#34;&gt;回收算法&lt;/h2&gt;
+&lt;h2 id=&#34;回收算法:f83914257d3b33026de5ffce00ad7f99&#34;&gt;回收算法&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;复制算法 Copying&lt;br /&gt;
@@ -182,16 +176,15 @@
 
 &lt;ul&gt;
 &lt;li&gt;先对所有可回收对象做标记，然后将幸存对象依次前移&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;需要移动，慢；回收后无内存碎片&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;需要移动，慢；回收后无内存碎片&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;分配机制&#34;&gt;分配机制&lt;/h2&gt;
+&lt;h2 id=&#34;分配机制:f83914257d3b33026de5ffce00ad7f99&#34;&gt;分配机制&lt;/h2&gt;
 
 &lt;p&gt;HotSpot中，年轻代分为1个Eden和2个Survivor。在Eden区分配对象，如果空间不足，将Eden区和活动Survivor区幸存对象，根据幸存次数，分别移至备用Survivor和老年代中，然后切换活动/备用Survivor。&lt;/p&gt;
 
-&lt;h2 id=&#34;回收方式&#34;&gt;回收方式&lt;/h2&gt;
+&lt;h2 id=&#34;回收方式:f83914257d3b33026de5ffce00ad7f99&#34;&gt;回收方式&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;串行 Serial&lt;br /&gt;
@@ -207,12 +200,11 @@
 &lt;li&gt;并发 Concurrent&lt;br /&gt;
 
 &lt;ul&gt;
-&lt;li&gt;回收线程和用户线程同时工作&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;回收线程和用户线程同时工作&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;垃圾回收器&#34;&gt;垃圾回收器&lt;/h2&gt;
+&lt;h2 id=&#34;垃圾回收器:f83914257d3b33026de5ffce00ad7f99&#34;&gt;垃圾回收器&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Serial收集器&lt;br /&gt;
@@ -281,13 +273,12 @@
 &lt;li&gt;初始标记：停止，串行&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;并发标记：并发&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;最终标记：停止，并行&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;筛选回收：停止，并行&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;筛选回收：停止，并行&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;gc监控&#34;&gt;GC监控&lt;/h2&gt;
+&lt;h2 id=&#34;gc监控:f83914257d3b33026de5ffce00ad7f99&#34;&gt;GC监控&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;jstat可以用来实时查看内存分配及GC信息&lt;br /&gt;&lt;/li&gt;

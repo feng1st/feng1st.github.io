@@ -2,23 +2,208 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 知耻而后勇，知不足而后进</title>
-    <link>https://feng1st.github.io/post/index.xml</link>
+    <link>https://feng1st.github.io/post/</link>
     <description>Recent content in Posts on 知耻而后勇，知不足而后进</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
-    <copyright>nf_xp</copyright>
-    <lastBuildDate>Thu, 08 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://feng1st.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>TCP/IP协议摘要</title>
-      <link>https://feng1st.github.io/post/2017-06-08-tcp-ip/</link>
-      <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
+      <title>HTTP协议摘要</title>
+      <link>https://feng1st.github.io/post/2017-06-09-http-protocol/</link>
+      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017-06-08-tcp-ip/</guid>
+      <guid>https://feng1st.github.io/post/2017-06-09-http-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;协议分层&#34;&gt;协议分层&lt;/h2&gt;
+&lt;h2 id=&#34;http协议概述:a4249565045168f736a68b4656d83e06&#34;&gt;HTTP协议概述&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;基于服务器/客户端，请求/响应&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;无连接（1.1开始支持长连接Web Socket）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;无状态（需要依赖会话维持状态）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;应用层协议，基于TCP&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;url:a4249565045168f736a68b4656d83e06&#34;&gt;URL&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;http://host:port/res_uri.html?param=...&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;协议：如http, https, ftp等&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;用户名/密码：部分协议例如ftp支持用户名密码&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;访问资源：要访问资源的路径和参数&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;请求:a4249565045168f736a68b4656d83e06&#34;&gt;请求&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /index.html HTTP/1.0&amp;lt;CRLF&amp;gt;
+Host:www.sina.com.cn&amp;lt;CRLF&amp;gt;
+Accept-Encoding:gzip, deflate&amp;lt;CRLF&amp;gt;
+User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&amp;lt;CRLF&amp;gt;
+Connection:Keep-Alive&amp;lt;CRLF&amp;gt;
+&amp;lt;CRLF&amp;gt;
+{Optional Content Body}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;起始行：Method Request-URI HTTP-Version&lt;CRLF&gt;&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;请求方法&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GET 请求Request-URI所标识的资源&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;POST 在资源后附加新的数据&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;HEAD 请求获取资源的响应消息报头&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;PUT 请求服务器存储一个资源&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;DELETE 请求删除资源&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;TRACE 请求服务器回送收到的请求信息，用于诊断测试&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;CONNECT 保留字&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;OPTIONS 请求查询服务器性能&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;消息报头：（见后）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，对POST请求，消息主体为POST的数据&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;响应:a4249565045168f736a68b4656d83e06&#34;&gt;响应&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK&amp;lt;CRLF&amp;gt;
+Content-Length:123&amp;lt;CRLF&amp;gt;
+Content-Type:text/html;charset=utf-8&amp;lt;CRLF&amp;gt;
+...&amp;lt;CRLF&amp;gt;
+&amp;lt;CRLF&amp;gt;
+{Optional Content Body}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;起始行：HTTP-Version Status-Code Reason-Phrase&lt;CRLF&gt;&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;状态码&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1xx：指示信息&amp;ndash;消息已接收，继续处理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;2xx：成功&amp;ndash;消息已被成功接收、理解、接受&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;200 OK&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;3xx：重定向&amp;ndash;要完成请求必须进行进一步的操作&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;4xx：客户端错误&amp;ndash;请求有语法错误或者请求无法实现&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;400 Bad Request&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;401 Unauthorized&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;403 Forbidden&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;404 Not Found&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;5xx：服务端错误&amp;ndash;服务端无法实现请求&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;500 Internal Server Error&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;503 Server Unavailable&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;消息报头：（见下）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，返回的内容&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;消息报头:a4249565045168f736a68b4656d83e06&#34;&gt;消息报头&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;常见请求报文头信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip, deflate, sdch, br
+Accept-Language:en-US,en;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:BAIDUID=BDE50BA6209B0C5BC935D4BBF631F90D:FG=1; pgv_pvi=5348235264
+Host:www.baidu.com
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;常见响应头信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Cache-Control:private
+Connection:keep-alive
+Content-Encoding:gzip
+Content-Type:text/html; charset=utf-8
+Date:Fri, 09 Jun 2017 09:08:42 GMT
+Expires:Fri, 09 Jun 2017 09:08:42 GMT
+Server:bfe/1.0.8.18
+Set-Cookie:BDSVRTM=9; path=/
+Set-Cookie:BD_HOME=0; path=/
+Set-Cookie:H_PS_PSSID=1461_21094_17001_20929; path=/; domain=.baidu.com
+Set-Cookie:__bsi=12742868508732542774_00_0_I_R_15_0303_C02F_N_I_I_0; expires=Fri, 09-Jun-17 09:08:47 GMT; domain=www.baidu.com; path=/
+Strict-Transport-Security:max-age=172800
+Transfer-Encoding:chunked
+Vary:Accept-Encoding
+X-Powered-By:HPHP
+X-UA-Compatible:IE=Edge,chrome=1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;浏览器打开网页完整过程:a4249565045168f736a68b4656d83e06&#34;&gt;浏览器打开网页完整过程&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;浏览器解析用户输入的URL&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;如果是输入的域名，则需要向DNS请求实际IP地址&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DNS有缓存&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;DNS服务器如果本身没有数据，有一个向上级DNS服务器请求的过程&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;DNS解析一般会根据请求所在地区、网络（电信、联通）进行初步的负载均衡，返回一个相对较快的IP&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;拿到的IP地址，一般是一个前端服务器地址，前端服务器负责负载均衡，会为你分配一台服务器处理你的请求&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;负载均衡一般由LVS (Linux Virtual Server)，或者自定义服务实现&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;服务器会解析你的请求，处理请求，生成数据，渲染页面，返回页面&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一般使用MVC框架&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理请求的过程一般不会是单台服务器能完成的，这里涉及到分布式集群、服务中间件、缓存、数据库、消息队列、日志等概念&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求一般分为搜索、事务&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;搜索：底层有一个分布式数据库建索引库的问题，上层有一个中文分词的问题&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;事务：购买、支付等都是事务，要保证事务在分布式环境中的完整性&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;用户访问的全部信息，可以被保存，用于数据挖掘&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;返回的页面，如果是一个重定向，浏览器会请求新的地址&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;返回的页面，如果包含资源/异步请求，浏览器会依次请求这些资源&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;返回的报文头，一般包含SessionID（一般放在Cookies里）。浏览器后继请求，会带上SessionID，用于服务器维持会话&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;会话可能会影响请求被分配处理的集群，比如，前后放在同一个机房处理，这个完全看服务端实现&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;请求的静态资源，一般会使用CDN (Content Delivery Network)，减轻主/计算服务器压力&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如同分布式数据库，CDN有分发和同步的过程&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;浏览器拿到返回的页面（及页面内资源）后，有一个渲染的过程&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议摘要</title>
+      <link>https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/</link>
+      <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/</guid>
+      <description>
+
+&lt;h2 id=&#34;协议分层:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;协议分层&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;应用层 Application&lt;br /&gt;
@@ -65,12 +250,11 @@
 
 &lt;ul&gt;
 &lt;li&gt;对应OSI协议Data Link、Physical两层&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;附加以太网部首&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;附加以太网部首&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;ip协议&#34;&gt;IP协议&lt;/h2&gt;
+&lt;h2 id=&#34;ip协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;IP协议&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;附加IP部首&lt;br /&gt;
@@ -91,11 +275,10 @@
 &lt;li&gt;匹配同网号路由器&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;匹配默认路由器&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;tcp协议&#34;&gt;TCP协议&lt;/h2&gt;
+&lt;h2 id=&#34;tcp协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;TCP协议&lt;/h2&gt;
 
 &lt;p&gt;流量控制的思想可以用于上层应用的开发&lt;/p&gt;
 
@@ -196,7 +379,7 @@
       <guid>https://feng1st.github.io/post/2017-06-06-jvm-memory-gc/</guid>
       <description>
 
-&lt;h2 id=&#34;java对象&#34;&gt;Java对象&lt;/h2&gt;
+&lt;h2 id=&#34;java对象:f83914257d3b33026de5ffce00ad7f99&#34;&gt;Java对象&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;对象位置&lt;br /&gt;
@@ -218,12 +401,11 @@
 &lt;li&gt;空对象大小等于对象头大小，在32位虚拟机占8字节，64位占16字节，开启压缩占12字节&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;引用在32位虚拟机占4字节，64位占8字节，开启压缩占4字节&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;数组类型大小要在元素类型大小上增加4字节数组长度&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;对象最终大小按8字节对齐&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对象最终大小按8字节对齐&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;java内存区域&#34;&gt;Java内存区域&lt;/h2&gt;
+&lt;h2 id=&#34;java内存区域:f83914257d3b33026de5ffce00ad7f99&#34;&gt;Java内存区域&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;程序计数器 Program Counter Register&lt;br /&gt;
@@ -264,20 +446,18 @@
 &lt;li&gt;线程共享&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;保存加载的类信息（包括版本、接口、属性、方法、final常量、静态变量等）和运行时常量池 Runtime Constant Pool（包括字面常量、符号引用和直接引用）&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;在分代GC机制里，一般被成为永久代 Permanent Gen&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;对于存在大量Proxy动态类的系统，要考虑回收的问题&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对于存在大量Proxy动态类的系统，要考虑回收的问题&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;堆和栈的区别&#34;&gt;堆和栈的区别&lt;/h2&gt;
+&lt;h2 id=&#34;堆和栈的区别:f83914257d3b33026de5ffce00ad7f99&#34;&gt;堆和栈的区别&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;栈：存放栈帧，内部包括简单变量和对象引用，在栈顶分配，后进先出，速度快&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;堆：存放对象实例，会因回收造成内存碎片，需要寻找下一个可供分配的连续空间，速度慢&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;堆：存放对象实例，会因回收造成内存碎片，需要寻找下一个可供分配的连续空间，速度慢&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;对象访问方式&#34;&gt;对象访问方式&lt;/h2&gt;
+&lt;h2 id=&#34;对象访问方式:f83914257d3b33026de5ffce00ad7f99&#34;&gt;对象访问方式&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;通过句柄池&lt;br /&gt;
@@ -291,12 +471,11 @@
 &lt;ul&gt;
 &lt;li&gt;栈或堆中的对象引用指向堆中的对象实例，对象实例内部指向方法区类信息&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无中间层，较快。但是一旦对象实例移动，则需要更新所有的引用&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;HotSpot采用&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;HotSpot采用&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;对象生命周期&#34;&gt;对象生命周期&lt;/h2&gt;
+&lt;h2 id=&#34;对象生命周期:f83914257d3b33026de5ffce00ad7f99&#34;&gt;对象生命周期&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;引用计数法&lt;br /&gt;
@@ -313,13 +492,12 @@
 &lt;li&gt;虚拟机栈引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;本地方法栈引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;方法区类静态属性引用的对象&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;方法区常量引用的对象&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;方法区常量引用的对象&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;内存分代&#34;&gt;内存分代&lt;/h2&gt;
+&lt;h2 id=&#34;内存分代:f83914257d3b33026de5ffce00ad7f99&#34;&gt;内存分代&lt;/h2&gt;
 
 &lt;p&gt;不同对象的生存周期不同，不能因为回收短期对象，就扫描整个堆区&lt;/p&gt;
 
@@ -337,12 +515,11 @@
 &lt;li&gt;永久代 Permanent Gen&lt;br /&gt;
 
 &lt;ul&gt;
-&lt;li&gt;存放方法区内容，HotSpot采用，但计划弃用&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;存放方法区内容，HotSpot采用，但计划弃用&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;回收算法&#34;&gt;回收算法&lt;/h2&gt;
+&lt;h2 id=&#34;回收算法:f83914257d3b33026de5ffce00ad7f99&#34;&gt;回收算法&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;复制算法 Copying&lt;br /&gt;
@@ -361,16 +538,15 @@
 
 &lt;ul&gt;
 &lt;li&gt;先对所有可回收对象做标记，然后将幸存对象依次前移&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;需要移动，慢；回收后无内存碎片&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;需要移动，慢；回收后无内存碎片&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;分配机制&#34;&gt;分配机制&lt;/h2&gt;
+&lt;h2 id=&#34;分配机制:f83914257d3b33026de5ffce00ad7f99&#34;&gt;分配机制&lt;/h2&gt;
 
 &lt;p&gt;HotSpot中，年轻代分为1个Eden和2个Survivor。在Eden区分配对象，如果空间不足，将Eden区和活动Survivor区幸存对象，根据幸存次数，分别移至备用Survivor和老年代中，然后切换活动/备用Survivor。&lt;/p&gt;
 
-&lt;h2 id=&#34;回收方式&#34;&gt;回收方式&lt;/h2&gt;
+&lt;h2 id=&#34;回收方式:f83914257d3b33026de5ffce00ad7f99&#34;&gt;回收方式&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;串行 Serial&lt;br /&gt;
@@ -386,12 +562,11 @@
 &lt;li&gt;并发 Concurrent&lt;br /&gt;
 
 &lt;ul&gt;
-&lt;li&gt;回收线程和用户线程同时工作&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;回收线程和用户线程同时工作&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;垃圾回收器&#34;&gt;垃圾回收器&lt;/h2&gt;
+&lt;h2 id=&#34;垃圾回收器:f83914257d3b33026de5ffce00ad7f99&#34;&gt;垃圾回收器&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Serial收集器&lt;br /&gt;
@@ -460,13 +635,12 @@
 &lt;li&gt;初始标记：停止，串行&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;并发标记：并发&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;最终标记：停止，并行&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;筛选回收：停止，并行&lt;br /&gt;
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;筛选回收：停止，并行&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;gc监控&#34;&gt;GC监控&lt;/h2&gt;
+&lt;h2 id=&#34;gc监控:f83914257d3b33026de5ffce00ad7f99&#34;&gt;GC监控&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;jstat可以用来实时查看内存分配及GC信息&lt;br /&gt;&lt;/li&gt;

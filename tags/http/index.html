@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>Categories - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="Categories - 知耻而后勇，知不足而后进">
+    <title>HTTP - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="HTTP - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/categories/">
+    <meta property="og:url" content="https://feng1st.github.io/tags/http/">
     
     
 </head>
@@ -56,12 +56,23 @@
 <div class="row">
     <div class="col-lg-8">
 
-      <header class="title"><h1>Categories</h1></header>
+      <header class="title"><h1>HTTP</h1></header>
 
-      
-      <a href="/categories/java/" class="category">Java</a>
-      
-      <a href="/categories/network/" class="category">Network</a>
+      <div class="articles">
+          
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-09-http-protocol/">HTTP协议摘要</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 9, 2017
+    </p>
+    
+    <p>HTTP协议概述 基于服务器/客户端，请求/响应 无连接（1.1开始支持长连接Web Socket） 无状态（需要依赖会话维持状态） 应用层协议，基于TCP URL http://host:port/res_uri.html?param=... 协议：如http, https, ftp等 用户名/密码：部分协议例如ftp支持用户名密码 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口 访问资源：要访问资源的路径和参数 请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body} 起始行：Method Request-URI HTTP-Version 请求方法 GET 请求Request-URI所标识的资源 POST 在资源后附加新的数据 HEAD 请求获取资源的响应消息报头 PUT 请求服务器存储一个资源 DELETE 请求删除资源 TRACE 请求服务器回送收到的请求信息，用于诊断测试 CONNECT 保留字 OPTIONS 请求查询服务器性能 消息报头：（见后） 消息主体：可选，对POST请求，消息主体为POST的数据 响应 HTTP/1.1 200 OK&lt;CRLF&gt; Content-Length:123&lt;CRLF&gt; Content-Type:text/html;charset=utf-8&lt;CRLF&gt; ...&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body} 起始行：HTTP-Version Status-Code Reason-Phrase 状态码 1xx：指示信息&ndash;消息已接收，继续处理 2xx：成功&ndash;消息已被成功接收、理解、接受 200 OK</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-09-http-protocol/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+      </div>
+
       
 
     </div>
