@@ -96,6 +96,14 @@
 &lt;li&gt;Reactor：轮询Channel对应底层IO句柄。当连接数过多时，性能低下。这个可以算是多路复用，因为select()时还是有等待的过程&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;e-poll：注册回调函数，只有当有对应事件发生时，才通知Selector。这个算是真正的异步。Linux直接支持&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;阻塞/非阻塞，同步/异步&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;阻塞：调用io函数会一直等待，比如System.in.read()&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;同步：用等待或者轮询的方式拿到结果，比如NIO&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
