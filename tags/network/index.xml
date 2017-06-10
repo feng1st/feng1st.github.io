@@ -1,13 +1,104 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Network on 知耻而后勇，知不足而后进</title>
-    <link>https://feng1st.github.io/tags/network/</link>
-    <description>Recent content in Network on 知耻而后勇，知不足而后进</description>
+    <title>network on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/tags/network/index.xml</link>
+    <description>Recent content in network on 知耻而后勇，知不足而后进</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
-    <lastBuildDate>Fri, 09 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <copyright>nf_xp</copyright>
     <atom:link href="https://feng1st.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Java NIO摘要</title>
+      <link>https://feng1st.github.io/post/2017-06-10-java-nio/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-10-java-nio/</guid>
+      <description>
+
+&lt;p&gt;比较经典和精简的教程，先直接发链接：&lt;br /&gt;
+&lt;a href=&#34;http://tutorials.jenkov.com/java-nio/&#34;&gt;http://tutorials.jenkov.com/java-nio/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想&lt;br /&gt;
+例如，换用消息队列，就可以扩展到分布式系统里去&lt;/p&gt;
+
+&lt;h2 id=&#34;一些思考点&#34;&gt;一些思考点&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Channel和Stream有什么不同？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Channel双向，Stream一般单向&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Channel支持异步&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Channel搭配Buffer使用&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;ServerSocketChannel和SocketChannel有什么不同？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;SocketChannel用于单个连接&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;FileChannel.transferTo(&amp;hellip;, SocketChannel)有什么需要注意的？&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SocketChannel非阻塞且发送缓冲已满，可能只传输部分&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;SocketChannel的blocking和non-blocking模式有什么不同？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;write()/read()可能未实际读写就返回&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;ServerSocketChannel的blocking和non-blocking模式有什么不同？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;相对于阻塞，accept()直接返回，如没有接受连接，返回null&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;write()/read()可能未实际读写就返回&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Blocking模式Socket有什么问题？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;一般会用一个线程处理一个连接，所以支撑的连接数非常有限&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Non-blocking模式Socket有哪些挑战？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;长度：TLV中的L&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;内容：类型是包含在这里面的，比如protobuf协议&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;校验：用于验证数据错误，或者网络错误，通知重传&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;总段数&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;本段序号&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;本段内容&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;发送方不能把所有的Channel都注册到Selector，因为Selector.select()时，可能大部分Channel都可写，全部返回，性能低下&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;当本Channel对应缓冲区有待发送数据时，才注册到Selector&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;当缓冲区数据发送完毕时，从Selector取消注册&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Selector有哪两种底层实现？&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Reactor：轮询Channel对应底层IO句柄。当连接数过多时，性能低下。这个可以算是多路复用，因为select()时还是有等待的过程&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;e-poll：注册回调函数，只有当有对应事件发生时，才通知Selector。这个算是真正的异步。Linux直接支持&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>HTTP协议摘要</title>
@@ -17,16 +108,17 @@
       <guid>https://feng1st.github.io/post/2017-06-09-http-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;http协议概述:a4249565045168f736a68b4656d83e06&#34;&gt;HTTP协议概述&lt;/h2&gt;
+&lt;h2 id=&#34;http协议概述&#34;&gt;HTTP协议概述&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;基于服务器/客户端，请求/响应&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无连接（1.1开始支持长连接Web Socket）&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无状态（需要依赖会话维持状态）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;应用层协议，基于TCP&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;应用层协议，基于TCP&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;url:a4249565045168f736a68b4656d83e06&#34;&gt;URL&lt;/h2&gt;
+&lt;h2 id=&#34;url&#34;&gt;URL&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;http://host:port/res_uri.html?param=...&lt;/code&gt;&lt;/p&gt;
 
@@ -34,10 +126,11 @@
 &lt;li&gt;协议：如http, https, ftp等&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;用户名/密码：部分协议例如ftp支持用户名密码&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;访问资源：要访问资源的路径和参数&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;访问资源：要访问资源的路径和参数&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;请求:a4249565045168f736a68b4656d83e06&#34;&gt;请求&lt;/h2&gt;
+&lt;h2 id=&#34;请求&#34;&gt;请求&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;GET /index.html HTTP/1.0&amp;lt;CRLF&amp;gt;
 Host:www.sina.com.cn&amp;lt;CRLF&amp;gt;
@@ -66,10 +159,11 @@ Connection:Keep-Alive&amp;lt;CRLF&amp;gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;消息报头：（见后）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;消息主体：可选，对POST请求，消息主体为POST的数据&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，对POST请求，消息主体为POST的数据&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;响应:a4249565045168f736a68b4656d83e06&#34;&gt;响应&lt;/h2&gt;
+&lt;h2 id=&#34;响应&#34;&gt;响应&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK&amp;lt;CRLF&amp;gt;
 Content-Length:123&amp;lt;CRLF&amp;gt;
@@ -110,10 +204,11 @@ Content-Type:text/html;charset=utf-8&amp;lt;CRLF&amp;gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;消息报头：（见下）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;消息主体：可选，返回的内容&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，返回的内容&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;消息报头:a4249565045168f736a68b4656d83e06&#34;&gt;消息报头&lt;/h2&gt;
+&lt;h2 id=&#34;消息报头&#34;&gt;消息报头&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;常见请求报文头信息&lt;/p&gt;
@@ -149,7 +244,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;浏览器打开网页完整过程:a4249565045168f736a68b4656d83e06&#34;&gt;浏览器打开网页完整过程&lt;/h2&gt;
+&lt;h2 id=&#34;浏览器打开网页完整过程&#34;&gt;浏览器打开网页完整过程&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;浏览器解析用户输入的URL&lt;br /&gt;&lt;/li&gt;
@@ -203,7 +298,7 @@ X-UA-Compatible:IE=Edge,chrome=1
       <guid>https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;协议分层:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;协议分层&lt;/h2&gt;
+&lt;h2 id=&#34;协议分层&#34;&gt;协议分层&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;应用层 Application&lt;br /&gt;
@@ -250,11 +345,12 @@ X-UA-Compatible:IE=Edge,chrome=1
 
 &lt;ul&gt;
 &lt;li&gt;对应OSI协议Data Link、Physical两层&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;附加以太网部首&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;附加以太网部首&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;ip协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;IP协议&lt;/h2&gt;
+&lt;h2 id=&#34;ip协议&#34;&gt;IP协议&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;附加IP部首&lt;br /&gt;
@@ -275,10 +371,11 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;li&gt;匹配同网号路由器&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;匹配默认路由器&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;tcp协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;TCP协议&lt;/h2&gt;
+&lt;h2 id=&#34;tcp协议&#34;&gt;TCP协议&lt;/h2&gt;
 
 &lt;p&gt;流量控制的思想可以用于上层应用的开发&lt;/p&gt;
 
@@ -296,8 +393,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;建立连接，三次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: SYN
     Server--&gt;&gt;Client: ACK
     Client--&gt;&gt;Server: ACK
@@ -306,8 +402,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;断开连接，四次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: FIN
     Server--&gt;&gt;Client: ACK
     Server-&gt;&gt;Client: FIN

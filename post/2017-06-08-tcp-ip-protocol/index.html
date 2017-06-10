@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.16-DEV" />
+    <meta name="generator" content="Hugo 0.18.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -60,7 +60,32 @@
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
             <meta itemprop="dateModified" content="2017-06-08T00:00:00&#43;00:00">
             <meta itemprop="headline" content="TCP/IP协议摘要">
-            <meta itemprop="description" content="协议分层 应用层 Application 对应OSI协议Application、Presentation、Session三层 常见上层协议：HTTP、FTP、SMTP、TELNET 传输层 Transport 对应OSI协议Transport层 协议： TCP：（见下） UDP：不超时重传、不错误重传、不保证顺序 网络层 Internet 对应OSI协议Network层 协议： IP：（见下） ARP：IP地址到MAC地址转换 DARP：（略） ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文 ping traceroute 利用IP协议的TTL实现 利用主机不可达和端口不可达区分 网络接口层 Network Interface 对应OSI协议Data Link、Physical两层 附加以太网部首 IP协议 附加IP部首 TTL，生存周期，每路由一层减1，为0时丢弃 实现traceroute 路由顺序： TTL为0时丢弃 匹配主机 匹配同子网路由器 匹配同网号路由器 匹配默认路由器 不保证可达，需配合ICMP由上层实现可靠性 TCP协议 流量控制的思想可以用于上层应用的开发 附加TCP部首 可靠协议 合理分块 超时重发 校验和校验 发送确认 组装时排序 滑动窗口流控 建立连接，三次握手： sequenceDiagram Client-Server: SYN Server--Client: ACK Client--Server: ACK 断开连接，四次握手： sequenceDiagram Client-Server: FIN Server--Client: ACK Server-Client: FIN Client--Server: ACK 流量控制 延迟发送">
+            <meta itemprop="description" content="协议分层  应用层 Application
+ 对应OSI协议Application、Presentation、Session三层
+ 常见上层协议：HTTP、FTP、SMTP、TELNET
+  传输层 Transport
+ 对应OSI协议Transport层
+ 协议：
+ TCP：（见下）
+ UDP：不超时重传、不错误重传、不保证顺序
+   网络层 Internet
+ 对应OSI协议Network层
+ 协议：
+ IP：（见下）
+ ARP：IP地址到MAC地址转换
+ DARP：（略）
+ ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文
+ ping
+ traceroute
+ 利用IP协议的TTL实现
+ 利用主机不可达和端口不可达区分
+     网络接口层 Network Interface
+ 对应OSI协议Data Link、Physical两层
+ 附加以太网部首
+   IP协议  附加IP部首
+ TTL，生存周期，每路由一层减1，为0时丢弃
+ 实现traceroute
+   路由顺序：">
             <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
@@ -99,7 +124,7 @@
             
             
 
-<h2 id="协议分层:b7a3a3f6cfccac1a3ae9acb925ba932d">协议分层</h2>
+<h2 id="协议分层">协议分层</h2>
 
 <ol>
 <li>应用层 Application<br />
@@ -146,11 +171,12 @@
 
 <ul>
 <li>对应OSI协议Data Link、Physical两层<br /></li>
-<li>附加以太网部首<br /></li>
+<li>附加以太网部首<br />
+<br /></li>
 </ul></li>
 </ol>
 
-<h2 id="ip协议:b7a3a3f6cfccac1a3ae9acb925ba932d">IP协议</h2>
+<h2 id="ip协议">IP协议</h2>
 
 <ul>
 <li>附加IP部首<br />
@@ -171,10 +197,11 @@
 <li>匹配同网号路由器<br /></li>
 <li>匹配默认路由器<br /></li>
 </ol></li>
-<li>不保证可达，需配合ICMP由上层实现可靠性<br /></li>
+<li>不保证可达，需配合ICMP由上层实现可靠性<br />
+<br /></li>
 </ul>
 
-<h2 id="tcp协议:b7a3a3f6cfccac1a3ae9acb925ba932d">TCP协议</h2>
+<h2 id="tcp协议">TCP协议</h2>
 
 <p>流量控制的思想可以用于上层应用的开发</p>
 
@@ -192,8 +219,7 @@
 </ol></li>
 <li>建立连接，三次握手：<br />
 <div class="mermaid">
-    sequenceDiagram
-    
+sequenceDiagram
     Client->>Server: SYN
     Server-->>Client: ACK
     Client-->>Server: ACK
@@ -202,8 +228,7 @@
 <br /></li>
 <li>断开连接，四次握手：<br />
 <div class="mermaid">
-    sequenceDiagram
-    
+sequenceDiagram
     Client->>Server: FIN
     Server-->>Client: ACK
     Server->>Client: FIN
@@ -323,6 +348,8 @@
             <li><a href="/tags/jvm">JVM</a></li>
         
             <li><a href="/tags/java">Java</a></li>
+        
+            <li><a href="/tags/nio">NIO</a></li>
         
             <li><a href="/tags/network">Network</a></li>
         

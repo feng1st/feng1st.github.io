@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.16-DEV" />
+    <meta name="generator" content="Hugo 0.18.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -21,8 +21,8 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>TCP-IP - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="TCP-IP - 知耻而后勇，知不足而后进">
+    <title>tcp-ip - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="tcp-ip - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
@@ -56,7 +56,7 @@
 <div class="row">
     <div class="col-lg-8">
 
-      <header class="title"><h1>TCP-IP</h1></header>
+      <header class="title"><h1>tcp-ip</h1></header>
 
       <div class="articles">
           
@@ -66,7 +66,32 @@
         <i class="fa fa-clock-o"></i> Posted on June 8, 2017
     </p>
     
-    <p>协议分层 应用层 Application 对应OSI协议Application、Presentation、Session三层 常见上层协议：HTTP、FTP、SMTP、TELNET 传输层 Transport 对应OSI协议Transport层 协议： TCP：（见下） UDP：不超时重传、不错误重传、不保证顺序 网络层 Internet 对应OSI协议Network层 协议： IP：（见下） ARP：IP地址到MAC地址转换 DARP：（略） ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文 ping traceroute 利用IP协议的TTL实现 利用主机不可达和端口不可达区分 网络接口层 Network Interface 对应OSI协议Data Link、Physical两层 附加以太网部首 IP协议 附加IP部首 TTL，生存周期，每路由一层减1，为0时丢弃 实现traceroute 路由顺序： TTL为0时丢弃 匹配主机 匹配同子网路由器 匹配同网号路由器 匹配默认路由器 不保证可达，需配合ICMP由上层实现可靠性 TCP协议 流量控制的思想可以用于上层应用的开发 附加TCP部首 可靠协议 合理分块 超时重发 校验和校验 发送确认 组装时排序 滑动窗口流控 建立连接，三次握手： sequenceDiagram Client-Server: SYN Server--Client: ACK Client--Server: ACK 断开连接，四次握手： sequenceDiagram Client-Server: FIN Server--Client: ACK Server-Client: FIN Client--Server: ACK 流量控制 延迟发送</p>
+    <p>协议分层  应用层 Application
+ 对应OSI协议Application、Presentation、Session三层
+ 常见上层协议：HTTP、FTP、SMTP、TELNET
+  传输层 Transport
+ 对应OSI协议Transport层
+ 协议：
+ TCP：（见下）
+ UDP：不超时重传、不错误重传、不保证顺序
+   网络层 Internet
+ 对应OSI协议Network层
+ 协议：
+ IP：（见下）
+ ARP：IP地址到MAC地址转换
+ DARP：（略）
+ ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文
+ ping
+ traceroute
+ 利用IP协议的TTL实现
+ 利用主机不可达和端口不可达区分
+     网络接口层 Network Interface
+ 对应OSI协议Data Link、Physical两层
+ 附加以太网部首
+   IP协议  附加IP部首
+ TTL，生存周期，每路由一层减1，为0时丢弃
+ 实现traceroute
+   路由顺序：</p>
     <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/">Read More <i class="fa fa-chevron-right"></i></a>
 </article>
 
@@ -108,6 +133,8 @@
             <li><a href="/tags/jvm">JVM</a></li>
         
             <li><a href="/tags/java">Java</a></li>
+        
+            <li><a href="/tags/nio">NIO</a></li>
         
             <li><a href="/tags/network">Network</a></li>
         

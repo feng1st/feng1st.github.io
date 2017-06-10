@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.16-DEV" />
+    <meta name="generator" content="Hugo 0.18.1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -60,7 +60,24 @@
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
             <meta itemprop="dateModified" content="2017-06-09T00:00:00&#43;00:00">
             <meta itemprop="headline" content="HTTP协议摘要">
-            <meta itemprop="description" content="HTTP协议概述 基于服务器/客户端，请求/响应 无连接（1.1开始支持长连接Web Socket） 无状态（需要依赖会话维持状态） 应用层协议，基于TCP URL http://host:port/res_uri.html?param=... 协议：如http, https, ftp等 用户名/密码：部分协议例如ftp支持用户名密码 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口 访问资源：要访问资源的路径和参数 请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body} 起始行：Method Request-URI HTTP-Version 请求方法 GET 请求Request-URI所标识的资源 POST 在资源后附加新的数据 HEAD 请求获取资源的响应消息报头 PUT 请求服务器存储一个资源 DELETE 请求删除资源 TRACE 请求服务器回送收到的请求信息，用于诊断测试 CONNECT 保留字 OPTIONS 请求查询服务器性能 消息报头：（见后） 消息主体：可选，对POST请求，消息主体为POST的数据 响应 HTTP/1.1 200 OK&lt;CRLF&gt; Content-Length:123&lt;CRLF&gt; Content-Type:text/html;charset=utf-8&lt;CRLF&gt; ...&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body} 起始行：HTTP-Version Status-Code Reason-Phrase 状态码 1xx：指示信息&ndash;消息已接收，继续处理 2xx：成功&ndash;消息已被成功接收、理解、接受 200 OK">
+            <meta itemprop="description" content="HTTP协议概述  基于服务器/客户端，请求/响应
+ 无连接（1.1开始支持长连接Web Socket）
+ 无状态（需要依赖会话维持状态）
+ 应用层协议，基于TCP
+  URL http://host:port/res_uri.html?param=...
+ 协议：如http, https, ftp等
+ 用户名/密码：部分协议例如ftp支持用户名密码
+ 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口
+ 访问资源：要访问资源的路径和参数
+  请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body}   起始行：Method Request-URI HTTP-Version
+ 请求方法
+ GET 请求Request-URI所标识的资源
+ POST 在资源后附加新的数据
+ HEAD 请求获取资源的响应消息报头
+ PUT 请求服务器存储一个资源
+ DELETE 请求删除资源
+ TRACE 请求服务器回送收到的请求信息，用于诊断测试
+ CONNECT 保留字">
             <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-09-http-protocol/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
@@ -99,16 +116,17 @@
             
             
 
-<h2 id="http协议概述:a4249565045168f736a68b4656d83e06">HTTP协议概述</h2>
+<h2 id="http协议概述">HTTP协议概述</h2>
 
 <ol>
 <li>基于服务器/客户端，请求/响应<br /></li>
 <li>无连接（1.1开始支持长连接Web Socket）<br /></li>
 <li>无状态（需要依赖会话维持状态）<br /></li>
-<li>应用层协议，基于TCP<br /></li>
+<li>应用层协议，基于TCP<br />
+<br /></li>
 </ol>
 
-<h2 id="url:a4249565045168f736a68b4656d83e06">URL</h2>
+<h2 id="url">URL</h2>
 
 <p><code>http://host:port/res_uri.html?param=...</code></p>
 
@@ -116,10 +134,11 @@
 <li>协议：如http, https, ftp等<br /></li>
 <li>用户名/密码：部分协议例如ftp支持用户名密码<br /></li>
 <li>域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口<br /></li>
-<li>访问资源：要访问资源的路径和参数<br /></li>
+<li>访问资源：要访问资源的路径和参数<br />
+<br /></li>
 </ol>
 
-<h2 id="请求:a4249565045168f736a68b4656d83e06">请求</h2>
+<h2 id="请求">请求</h2>
 
 <pre><code>GET /index.html HTTP/1.0&lt;CRLF&gt;
 Host:www.sina.com.cn&lt;CRLF&gt;
@@ -148,10 +167,11 @@ Connection:Keep-Alive&lt;CRLF&gt;
 </ul></li>
 </ol></li>
 <li>消息报头：（见后）<br /></li>
-<li>消息主体：可选，对POST请求，消息主体为POST的数据<br /></li>
+<li>消息主体：可选，对POST请求，消息主体为POST的数据<br />
+<br /></li>
 </ol>
 
-<h2 id="响应:a4249565045168f736a68b4656d83e06">响应</h2>
+<h2 id="响应">响应</h2>
 
 <pre><code>HTTP/1.1 200 OK&lt;CRLF&gt;
 Content-Length:123&lt;CRLF&gt;
@@ -192,10 +212,11 @@ Content-Type:text/html;charset=utf-8&lt;CRLF&gt;
 </ul></li>
 </ol></li>
 <li>消息报头：（见下）<br /></li>
-<li>消息主体：可选，返回的内容<br /></li>
+<li>消息主体：可选，返回的内容<br />
+<br /></li>
 </ol>
 
-<h2 id="消息报头:a4249565045168f736a68b4656d83e06">消息报头</h2>
+<h2 id="消息报头">消息报头</h2>
 
 <ul>
 <li><p>常见请求报文头信息</p>
@@ -231,7 +252,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 </code></pre></li>
 </ul>
 
-<h2 id="浏览器打开网页完整过程:a4249565045168f736a68b4656d83e06">浏览器打开网页完整过程</h2>
+<h2 id="浏览器打开网页完整过程">浏览器打开网页完整过程</h2>
 
 <ol>
 <li>浏览器解析用户输入的URL<br /></li>
@@ -333,6 +354,8 @@ X-UA-Compatible:IE=Edge,chrome=1
             <li><a href="/tags/jvm">JVM</a></li>
         
             <li><a href="/tags/java">Java</a></li>
+        
+            <li><a href="/tags/nio">NIO</a></li>
         
             <li><a href="/tags/network">Network</a></li>
         

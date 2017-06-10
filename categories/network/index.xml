@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Network on 知耻而后勇，知不足而后进</title>
-    <link>https://feng1st.github.io/categories/network/</link>
-    <description>Recent content in Network on 知耻而后勇，知不足而后进</description>
+    <title>network on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/categories/network/index.xml</link>
+    <description>Recent content in network on 知耻而后勇，知不足而后进</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
-    <lastBuildDate>Fri, 09 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <copyright>nf_xp</copyright>
     <atom:link href="https://feng1st.github.io/categories/network/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,16 +17,17 @@
       <guid>https://feng1st.github.io/post/2017-06-09-http-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;http协议概述:a4249565045168f736a68b4656d83e06&#34;&gt;HTTP协议概述&lt;/h2&gt;
+&lt;h2 id=&#34;http协议概述&#34;&gt;HTTP协议概述&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;基于服务器/客户端，请求/响应&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无连接（1.1开始支持长连接Web Socket）&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;无状态（需要依赖会话维持状态）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;应用层协议，基于TCP&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;应用层协议，基于TCP&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;url:a4249565045168f736a68b4656d83e06&#34;&gt;URL&lt;/h2&gt;
+&lt;h2 id=&#34;url&#34;&gt;URL&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;http://host:port/res_uri.html?param=...&lt;/code&gt;&lt;/p&gt;
 
@@ -34,10 +35,11 @@
 &lt;li&gt;协议：如http, https, ftp等&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;用户名/密码：部分协议例如ftp支持用户名密码&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;访问资源：要访问资源的路径和参数&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;访问资源：要访问资源的路径和参数&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;请求:a4249565045168f736a68b4656d83e06&#34;&gt;请求&lt;/h2&gt;
+&lt;h2 id=&#34;请求&#34;&gt;请求&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;GET /index.html HTTP/1.0&amp;lt;CRLF&amp;gt;
 Host:www.sina.com.cn&amp;lt;CRLF&amp;gt;
@@ -66,10 +68,11 @@ Connection:Keep-Alive&amp;lt;CRLF&amp;gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;消息报头：（见后）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;消息主体：可选，对POST请求，消息主体为POST的数据&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，对POST请求，消息主体为POST的数据&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;响应:a4249565045168f736a68b4656d83e06&#34;&gt;响应&lt;/h2&gt;
+&lt;h2 id=&#34;响应&#34;&gt;响应&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK&amp;lt;CRLF&amp;gt;
 Content-Length:123&amp;lt;CRLF&amp;gt;
@@ -110,10 +113,11 @@ Content-Type:text/html;charset=utf-8&amp;lt;CRLF&amp;gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;消息报头：（见下）&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;消息主体：可选，返回的内容&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息主体：可选，返回的内容&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;消息报头:a4249565045168f736a68b4656d83e06&#34;&gt;消息报头&lt;/h2&gt;
+&lt;h2 id=&#34;消息报头&#34;&gt;消息报头&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;常见请求报文头信息&lt;/p&gt;
@@ -149,7 +153,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;浏览器打开网页完整过程:a4249565045168f736a68b4656d83e06&#34;&gt;浏览器打开网页完整过程&lt;/h2&gt;
+&lt;h2 id=&#34;浏览器打开网页完整过程&#34;&gt;浏览器打开网页完整过程&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;浏览器解析用户输入的URL&lt;br /&gt;&lt;/li&gt;
@@ -203,7 +207,7 @@ X-UA-Compatible:IE=Edge,chrome=1
       <guid>https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;协议分层:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;协议分层&lt;/h2&gt;
+&lt;h2 id=&#34;协议分层&#34;&gt;协议分层&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;应用层 Application&lt;br /&gt;
@@ -250,11 +254,12 @@ X-UA-Compatible:IE=Edge,chrome=1
 
 &lt;ul&gt;
 &lt;li&gt;对应OSI协议Data Link、Physical两层&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;附加以太网部首&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;附加以太网部首&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;ip协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;IP协议&lt;/h2&gt;
+&lt;h2 id=&#34;ip协议&#34;&gt;IP协议&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;附加IP部首&lt;br /&gt;
@@ -275,10 +280,11 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;li&gt;匹配同网号路由器&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;匹配默认路由器&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;tcp协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;TCP协议&lt;/h2&gt;
+&lt;h2 id=&#34;tcp协议&#34;&gt;TCP协议&lt;/h2&gt;
 
 &lt;p&gt;流量控制的思想可以用于上层应用的开发&lt;/p&gt;
 
@@ -296,8 +302,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;建立连接，三次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: SYN
     Server--&gt;&gt;Client: ACK
     Client--&gt;&gt;Server: ACK
@@ -306,8 +311,7 @@ X-UA-Compatible:IE=Edge,chrome=1
 &lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;断开连接，四次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: FIN
     Server--&gt;&gt;Client: ACK
     Server-&gt;&gt;Client: FIN

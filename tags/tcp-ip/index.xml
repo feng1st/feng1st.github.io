@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>TCP-IP on 知耻而后勇，知不足而后进</title>
-    <link>https://feng1st.github.io/tags/tcp-ip/</link>
-    <description>Recent content in TCP-IP on 知耻而后勇，知不足而后进</description>
+    <title>tcp-ip on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/tags/tcp-ip/index.xml</link>
+    <description>Recent content in tcp-ip on 知耻而后勇，知不足而后进</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
-    <lastBuildDate>Thu, 08 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <copyright>nf_xp</copyright>
     <atom:link href="https://feng1st.github.io/tags/tcp-ip/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -17,7 +17,7 @@
       <guid>https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/</guid>
       <description>
 
-&lt;h2 id=&#34;协议分层:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;协议分层&lt;/h2&gt;
+&lt;h2 id=&#34;协议分层&#34;&gt;协议分层&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;应用层 Application&lt;br /&gt;
@@ -64,11 +64,12 @@
 
 &lt;ul&gt;
 &lt;li&gt;对应OSI协议Data Link、Physical两层&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;附加以太网部首&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;附加以太网部首&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;ip协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;IP协议&lt;/h2&gt;
+&lt;h2 id=&#34;ip协议&#34;&gt;IP协议&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;附加IP部首&lt;br /&gt;
@@ -89,10 +90,11 @@
 &lt;li&gt;匹配同网号路由器&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;匹配默认路由器&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不保证可达，需配合ICMP由上层实现可靠性&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;tcp协议:b7a3a3f6cfccac1a3ae9acb925ba932d&#34;&gt;TCP协议&lt;/h2&gt;
+&lt;h2 id=&#34;tcp协议&#34;&gt;TCP协议&lt;/h2&gt;
 
 &lt;p&gt;流量控制的思想可以用于上层应用的开发&lt;/p&gt;
 
@@ -110,8 +112,7 @@
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;建立连接，三次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: SYN
     Server--&gt;&gt;Client: ACK
     Client--&gt;&gt;Server: ACK
@@ -120,8 +121,7 @@
 &lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;断开连接，四次握手：&lt;br /&gt;
 &lt;div class=&#34;mermaid&#34;&gt;
-    sequenceDiagram
-    
+sequenceDiagram
     Client-&gt;&gt;Server: FIN
     Server--&gt;&gt;Client: ACK
     Server-&gt;&gt;Client: FIN
