@@ -7,8 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
     <copyright>nf_xp</copyright>
-    <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://feng1st.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Servlet简介</title>
+      <link>https://feng1st.github.io/post/2017-06-11-servlet-and-containers/</link>
+      <pubDate>Sun, 11 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-11-servlet-and-containers/</guid>
+      <description>
+
+&lt;p&gt;教程：&lt;br /&gt;
+&lt;a href=&#34;http://tutorials.jenkov.com/java-servlets/&#34;&gt;http://tutorials.jenkov.com/java-servlets/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;一些思考点&#34;&gt;一些思考点&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Servlet的生命周期是怎样被&lt;strong&gt;容器&lt;/strong&gt;管理的？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Session是怎样被管理和传递的？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;分布式环境下Session是怎样被管理的？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;ServletContext是怎样被管理和传递的，典型用途是什么？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Filter和Servlet有什么异同？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;怎样用Filter实现GZip，这个实现和AOP有什么区别？&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Session和ServletContext是线程安全的吗？&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>Java NIO摘要</title>
