@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>Servlet简介 - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="Servlet简介 - 知耻而后勇，知不足而后进">
+    <title>Jetty简介 - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="Jetty简介 - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-11-servlet/">
+    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-12-jetty/">
     
     
 </head>
@@ -58,21 +58,28 @@
 
         <article class="single well" itemscope="itemscope" itemtype="http://schema.org/Article">
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
-            <meta itemprop="dateModified" content="2017-06-11T00:00:00&#43;00:00">
-            <meta itemprop="headline" content="Servlet简介">
-            <meta itemprop="description" content=" 教程：
-http://tutorials.jenkov.com/java-servlets/
-一些思考点  Servlet的生命周期是怎样被容器管理的？
- Session是怎样被管理和传递的？
- 分布式环境下Session是怎样被管理的？
- ServletContext是怎样被管理和传递的，典型用途是什么？
- 为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
- Filter和Servlet有什么异同？
- Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
- 怎样用Filter实现GZip，这个实现和AOP有什么区别？
- Session和ServletContext是线程安全的吗？
-  ">
-            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-11-servlet/">
+            <meta itemprop="dateModified" content="2017-06-12T00:00:00&#43;00:00">
+            <meta itemprop="headline" content="Jetty简介">
+            <meta itemprop="description" content="核心组成部分 graph LR L(LifeCycle) C(Connector)---S(Server) H(Handler)---S S---P(ThreadPool)  LifeCycle start(); stop();   管理server对象的生命周期
+ Connector, Handler, ThreadPool都实现了LifeCycle接口
+ LifeCycle的监听使用了观察者模式
+  Connector  接受TCP连接
+ 用配置的ConnectionFactory创建Connection，和连接绑定
+ 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+ ProxyConnectionFactory：处理Proxy协议
+ SslConnectionFactory：SSL加密解密
+ HttpConnectionFactory：处理实际的HTTP请求
+   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+ HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+ 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
+ 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
+  HandlerContainer：组合模式 Composite，树形结构
+ 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
+ 门面模式 Facade：Context相关类，限制暴露方法的范围
+  Handler风格分类：
+ 协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）
+ 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）">
+            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-12-jetty/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
                 <meta itemprop="width" content="800">
@@ -90,9 +97,9 @@ http://tutorials.jenkov.com/java-servlets/
                 <meta itemprop="name" content="nf_xp">
             </div>
             <header class="article-header">
-                <h1>Servlet简介</h1>
+                <h1>Jetty简介</h1>
                 
-                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-11T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 11, 2017</time>
+                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-12T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 12, 2017</time>
                 
                 
                 
@@ -102,7 +109,7 @@ http://tutorials.jenkov.com/java-servlets/
                 
                 
                 <div class="section">
-                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/java" class="tag">Java</a>, <a href="https://feng1st.github.io//tags/servlet" class="tag">Servlet</a>, <a href="https://feng1st.github.io//tags/web" class="tag">Web</a>
+                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/java" class="tag">Java</a>, <a href="https://feng1st.github.io//tags/servlet-container" class="tag">Servlet-Container</a>, <a href="https://feng1st.github.io//tags/web-server" class="tag">Web-Server</a>
                 </div>
                 
             </header>
@@ -110,21 +117,123 @@ http://tutorials.jenkov.com/java-servlets/
             
             
 
-<p>教程：<br />
-<a href="http://tutorials.jenkov.com/java-servlets/">http://tutorials.jenkov.com/java-servlets/</a></p>
+<h2 id="核心组成部分">核心组成部分</h2>
 
-<h2 id="一些思考点">一些思考点</h2>
+<div class="mermaid">
+graph LR
+L(LifeCycle)
+C(Connector)---S(Server)
+H(Handler)---S
+S---P(ThreadPool)
+
+</div>
+
+
+<h2 id="lifecycle">LifeCycle</h2>
+
+<pre><code>start();
+stop();
+</code></pre>
 
 <ol>
-<li>Servlet的生命周期是怎样被<strong>容器</strong>管理的？<br /></li>
-<li>Session是怎样被管理和传递的？<br /></li>
-<li>分布式环境下Session是怎样被管理的？<br /></li>
-<li>ServletContext是怎样被管理和传递的，典型用途是什么？<br /></li>
-<li>为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？<br /></li>
-<li>Filter和Servlet有什么异同？<br /></li>
-<li>Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet<br /></li>
-<li>怎样用Filter实现GZip，这个实现和AOP有什么区别？<br /></li>
-<li>Session和ServletContext是线程安全的吗？<br /></li>
+<li>管理server对象的生命周期<br /></li>
+<li>Connector, Handler, ThreadPool都实现了LifeCycle接口<br /></li>
+<li>LifeCycle的监听使用了观察者模式<br />
+<br /></li>
+</ol>
+
+<h2 id="connector">Connector</h2>
+
+<ol>
+<li>接受TCP连接<br /></li>
+<li>用配置的ConnectionFactory创建Connection，和连接绑定<br /></li>
+<li>可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：<br />
+
+<ol>
+<li>ProxyConnectionFactory：处理Proxy协议<br /></li>
+<li>SslConnectionFactory：SSL加密解密<br /></li>
+<li>HttpConnectionFactory：处理实际的HTTP请求<br />
+<br /></li>
+</ol></li>
+</ol>
+
+<h2 id="handler">Handler</h2>
+
+<p><img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png" alt="" /></p>
+
+<ol>
+<li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。<br />
+
+<ol>
+<li>HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式<br />
+
+<ul>
+<li>装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()<br /></li>
+<li>责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链<br /></li>
+</ul></li>
+<li>HandlerContainer：组合模式 Composite，树形结构<br /></li>
+<li>模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责<br /></li>
+<li>门面模式 Facade：Context相关类，限制暴露方法的范围<br /></li>
+</ol></li>
+<li>Handler风格分类：<br />
+
+<ol>
+<li>协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）<br /></li>
+<li>过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）<br /></li>
+<li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）<br /></li>
+</ol></li>
+<li>调用方式：<br />
+<img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png" alt="" /><br />
+
+<ol>
+<li>顺序调用，代表：HandlerCollection<br /></li>
+<li>嵌套调用，代表：HandlerWrapper<br />
+<br /></li>
+</ol></li>
+</ol>
+
+<h2 id="servlethandler">ServletHandler</h2>
+
+<p><img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png" alt="" /></p>
+
+<ol>
+<li>ServletHandler持有多个FilterHolder和ServletHolder<br /></li>
+<li>作为Servlet容器，调用时先调用所有的Filter，再调用Servlet<br />
+<br /></li>
+</ol>
+
+<h2 id="context">Context</h2>
+
+<ol>
+<li>简单的说，分组环境变量<br />
+<br /></li>
+</ol>
+
+<h2 id="几个时序图">几个时序图</h2>
+
+<ol>
+<li>Jetty启动<br />
+<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg" alt="" /><br />
+
+<ul>
+<li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。<br /></li>
+</ul></li>
+<li>Jetty建立连接<br />
+<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg" alt="" /><br /></li>
+<li>Jetty处理连接<br />
+<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg" alt="" /><br />
+
+<ul>
+<li>注意Request/Response是在什么地方创建的<br />
+<br /></li>
+</ul></li>
+</ol>
+
+<h2 id="引用来源">引用来源</h2>
+
+<ol>
+<li><a href="http://www.eclipse.org/jetty/documentation/current/architecture.html">http://www.eclipse.org/jetty/documentation/current/architecture.html</a><br /></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/">https://www.ibm.com/developerworks/cn/java/j-lo-jetty/</a><br /></li>
 </ol>
 
 

@@ -61,6 +61,35 @@
       <div class="articles">
           
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-12-jetty/">Jetty简介</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 12, 2017
+    </p>
+    
+    <p>核心组成部分 graph LR L(LifeCycle) C(Connector)---S(Server) H(Handler)---S S---P(ThreadPool)  LifeCycle start(); stop();   管理server对象的生命周期
+ Connector, Handler, ThreadPool都实现了LifeCycle接口
+ LifeCycle的监听使用了观察者模式
+  Connector  接受TCP连接
+ 用配置的ConnectionFactory创建Connection，和连接绑定
+ 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+ ProxyConnectionFactory：处理Proxy协议
+ SslConnectionFactory：SSL加密解密
+ HttpConnectionFactory：处理实际的HTTP请求
+   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+ HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+ 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
+ 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
+  HandlerContainer：组合模式 Composite，树形结构
+ 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
+ 门面模式 Facade：Context相关类，限制暴露方法的范围
+  Handler风格分类：
+ 协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）
+ 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-12-jetty/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-11-servlet/">Servlet简介</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 11, 2017
@@ -128,9 +157,13 @@ http://tutorials.jenkov.com/java-servlets/
         
             <li><a href="/tags/servlet">Servlet</a></li>
         
+            <li><a href="/tags/servlet-container">Servlet-Container</a></li>
+        
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
         
             <li><a href="/tags/web">Web</a></li>
+        
+            <li><a href="/tags/web-server">Web-Server</a></li>
         
         </ul>
     </div>
