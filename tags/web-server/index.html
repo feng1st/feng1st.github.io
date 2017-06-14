@@ -61,7 +61,36 @@
       <div class="articles">
           
             <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-12-jetty/">Jetty简介</a></h2>
+    <h2><a href="https://feng1st.github.io/post/2017-06-14-tomcat/">Tomcat笔记</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 14, 2017
+    </p>
+    
+    <p>架构  Server: 整个容器
+ Service: 关联Container和Connector的中间人，包含一个Container和多个Connector
+ Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应
+ 维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行
+ Request, Response是在这里创建的，然后传递给Container
+ 低版本Tomcat可以修改配置文件server.xml，为Connector使用protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot;
+  Container: 所有容器的父接口，下面4个重要的实现类/子接口
+ Engine, Host, Context, Wrapper
+ 4个之间不是并列关系，是父子包含关系
+  Engine: 是一个Service的根容器，处理请求的总管道 Pipeline
+ Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动
+ Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位
+ Wrapper: Context的子容器，负责调用Filter和Servlet
+ LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器
+ Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline
+ EngineValve1 -&gt; EngineValve2 -&gt; ... -&gt; StandardEngineValve -&gt; HostPipeline
+  Valve: Pipeline的切入点
+ StandardEngineValve: Engine pipeline上最后一个valve，调用Host
+ StandardHostValve: Host pipeline上最后一个valve，调用Context</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-14-tomcat/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-12-jetty/">Jetty笔记</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 12, 2017
     </p>

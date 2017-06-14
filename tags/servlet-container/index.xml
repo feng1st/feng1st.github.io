@@ -10,7 +10,85 @@
     <atom:link href="https://feng1st.github.io/tags/servlet-container/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Jetty简介</title>
+      <title>Tomcat笔记</title>
+      <link>https://feng1st.github.io/post/2017-06-14-tomcat/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-14-tomcat/</guid>
+      <description>
+
+&lt;h2 id=&#34;架构&#34;&gt;架构&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Server: 整个容器&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Service: 关联Container和Connector的中间人，包含一个Container和多个Connector&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Request, Response是在这里创建的，然后传递给Container&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;低版本Tomcat可以修改配置文件server.xml，为Connector使用&lt;code&gt;protocol=&amp;quot;org.apache.coyote.http11.Http11NioProtocol&amp;quot;&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Container: 所有容器的父接口，下面4个重要的实现类/子接口&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Engine, Host, Context, Wrapper&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;4个之间不是并列关系，是父子包含关系&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Engine: 是一个Service的根容器，处理请求的总管道 Pipeline&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Wrapper: Context的子容器，负责调用Filter和Servlet&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EngineValve1 -&amp;gt; EngineValve2 -&amp;gt; ... -&amp;gt; StandardEngineValve -&amp;gt; HostPipeline&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Valve: Pipeline的切入点&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;StandardEngineValve: Engine pipeline上最后一个valve，调用Host&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;StandardHostValve: Host pipeline上最后一个valve，调用Context&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;StandardContextValve: Context pipeline上最后一个valve，调用Wrapper&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;StandardWrapperValve: Wrapper pipeline上最后一个valve，负责生成并调用filterChain，最后调用servlet&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;处理请求&#34;&gt;处理请求&lt;/h2&gt;
+
+&lt;p&gt;时序图见&lt;a href=&#34;http://tomcat.apache.org/tomcat-9.0-doc/architecture/requestProcess/request-process.png&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;classloader&#34;&gt;ClassLoader&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;是典型的双亲委托模式 Parents Delegation Model&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;要求：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;common目录下的类被Tomcat和应用使用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;server目录下的类只被Tomcat使用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;shared目录下的类可以被所有应用使用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;应用目录下的类只可以被本应用使用&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;实现（ClassLoader层级关系）：&lt;br /&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+graph RL
+    commonLoader--&gt;systemLoader
+    catalinaLoader--&gt;commonLoader
+    sharedLoader--&gt;commonLoader
+    webAppLoader1--&gt;sharedLoader
+    webAppLoader2--&gt;sharedLoader
+    
+&lt;/div&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Jetty笔记</title>
       <link>https://feng1st.github.io/post/2017-06-12-jetty/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
