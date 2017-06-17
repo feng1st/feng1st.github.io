@@ -69,7 +69,7 @@
  ProxyConnectionFactory：处理Proxy协议
  SslConnectionFactory：SSL加密解密
  HttpConnectionFactory：处理实际的HTTP请求
-   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+   Handler   Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
  责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
@@ -77,8 +77,7 @@
  模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
  门面模式 Facade：Context相关类，限制暴露方法的范围
   Handler风格分类：
- 协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）
- 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）">
+ 协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）">
             <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-12-jetty/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
@@ -159,7 +158,14 @@ stop();
 
 <h2 id="handler">Handler</h2>
 
-<p><img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png" alt="" /></p>
+
+<figure >
+    
+        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png" />
+    
+    
+</figure>
+
 
 <ol>
 <li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。<br />
@@ -183,7 +189,14 @@ stop();
 <li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）<br /></li>
 </ol></li>
 <li>调用方式：<br />
-<img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png" alt="" /><br />
+
+<figure >
+    
+        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png" />
+    
+    
+</figure>
+<br />
 
 <ol>
 <li>顺序调用，代表：HandlerCollection<br /></li>
@@ -194,7 +207,14 @@ stop();
 
 <h2 id="servlethandler">ServletHandler</h2>
 
-<p><img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png" alt="" /></p>
+
+<figure >
+    
+        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png" />
+    
+    
+</figure>
+
 
 <ol>
 <li>ServletHandler持有多个FilterHolder和ServletHolder<br /></li>
@@ -213,15 +233,36 @@ stop();
 
 <ol>
 <li>Jetty启动<br />
-<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg" alt="" /><br />
+
+<figure >
+    
+        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg" />
+    
+    
+</figure>
+<br />
 
 <ul>
 <li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。<br /></li>
 </ul></li>
 <li>Jetty建立连接<br />
-<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg" alt="" /><br /></li>
+
+<figure >
+    
+        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg" />
+    
+    
+</figure>
+<br /></li>
 <li>Jetty处理连接<br />
-<img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg" alt="" /><br />
+
+<figure >
+    
+        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg" />
+    
+    
+</figure>
+<br />
 
 <ul>
 <li>注意Request/Response是在什么地方创建的<br />

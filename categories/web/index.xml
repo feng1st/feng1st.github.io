@@ -137,7 +137,14 @@ stop();
 
 &lt;h2 id=&#34;handler&#34;&gt;Handler&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
 
 &lt;ol&gt;
 &lt;li&gt;Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。&lt;br /&gt;
@@ -161,7 +168,14 @@ stop();
 &lt;li&gt;处理型，处理请求，生成响应（StaticHandler, ServletHandler）&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;调用方式：&lt;br /&gt;
-&lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;br /&gt;
 
 &lt;ol&gt;
 &lt;li&gt;顺序调用，代表：HandlerCollection&lt;br /&gt;&lt;/li&gt;
@@ -172,7 +186,14 @@ stop();
 
 &lt;h2 id=&#34;servlethandler&#34;&gt;ServletHandler&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
 
 &lt;ol&gt;
 &lt;li&gt;ServletHandler持有多个FilterHolder和ServletHolder&lt;br /&gt;&lt;/li&gt;
@@ -191,15 +212,36 @@ stop();
 
 &lt;ol&gt;
 &lt;li&gt;Jetty启动&lt;br /&gt;
-&lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;br /&gt;
 
 &lt;ul&gt;
 &lt;li&gt;先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Jetty建立连接&lt;br /&gt;
-&lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;Jetty处理连接&lt;br /&gt;
-&lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;br /&gt;
 
 &lt;ul&gt;
 &lt;li&gt;注意Request/Response是在什么地方创建的&lt;br /&gt;

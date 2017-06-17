@@ -2,3 +2,7 @@ span#copyright {
     display: inline-block;
     transform: rotate(180deg);
 }
+
+figure>img {
+    max-width: 100%;
+}
