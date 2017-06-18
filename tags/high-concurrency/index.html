@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>http - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="http - 知耻而后勇，知不足而后进">
+    <title>high-concurrency - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="high-concurrency - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/tags/http/">
+    <meta property="og:url" content="https://feng1st.github.io/tags/high-concurrency/">
     
     
 </head>
@@ -56,35 +56,50 @@
 <div class="row">
     <div class="col-lg-8">
 
-      <header class="title"><h1>http</h1></header>
+      <header class="title"><h1>high-concurrency</h1></header>
 
       <div class="articles">
           
             <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-09-http-protocol/">HTTP协议摘要</a></h2>
+    <h2><a href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">高并发解决思路</a></h2>
     <p>
-        <i class="fa fa-clock-o"></i> Posted on June 9, 2017
+        <i class="fa fa-clock-o"></i> Posted on June 17, 2017
     </p>
     
-    <p>HTTP协议概述  基于服务器/客户端，请求/响应
- 无连接（1.1开始支持长连接Web Socket）
- 无状态（需要依赖会话维持状态）
- 应用层协议，基于TCP
-  URL http://host:port/res_uri.html?param=...
- 协议：如http, https, ftp等
- 用户名/密码：部分协议例如ftp支持用户名密码
- 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口
- 访问资源：要访问资源的路径和参数
-  请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body}   起始行：Method Request-URI HTTP-Version
- 请求方法
- GET 请求Request-URI所标识的资源
- POST 在资源后附加新的数据
- HEAD 请求获取资源的响应消息报头
- PUT 请求服务器存储一个资源
- DELETE 请求删除资源
- TRACE 请求服务器回送收到的请求信息，用于诊断测试
- CONNECT 保留字</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-09-http-protocol/">Read More <i class="fa fa-chevron-right"></i></a>
+    <p>解决高并发，无非两个方向：
+ 分而治之：分流
+ 优化单个服务器处理能力
+  客户端  尽量使用缓存
+ 尽量本地处理
+ 尽量减少不必要的访问
+  分流 LVS、Nginx、Varnish放到一块说
+ 负载均衡
+ 业务拆分
+ 静态内容直接返回，包括使用CDN
+ 缓存（动态内容缓存、页面片段缓存）
+  优化单个服务器处理程序  缓存：缓存永远是最重要的
+ 异步：能异步就异步
+如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
+ 多线程：
+如果是CPU吃重的应用，线程数过高不能解决问题
+I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
+另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
+ 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
+ 还有一种预处理，是和缓存结合的预处理
+不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
+ 优化SQL，正确使用索引
+ 尽量不要使用分布式事务
+2阶段提交不是万能药
+ 各节点进入事务
+ 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
+ 各节点commit
+假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
+  应用算法优化
+  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
+ 合理设置索引
+ 合理分表分库
+分表我看来最大的好处是，是索引变小，能够加载到内存</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">Read More <i class="fa fa-chevron-right"></i></a>
 </article>
 
           

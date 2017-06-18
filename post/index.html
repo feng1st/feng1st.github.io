@@ -61,6 +61,49 @@
       <div class="articles">
           
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">高并发解决思路</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 17, 2017
+    </p>
+    
+    <p>解决高并发，无非两个方向：
+ 分而治之：分流
+ 优化单个服务器处理能力
+  客户端  尽量使用缓存
+ 尽量本地处理
+ 尽量减少不必要的访问
+  分流 LVS、Nginx、Varnish放到一块说
+ 负载均衡
+ 业务拆分
+ 静态内容直接返回，包括使用CDN
+ 缓存（动态内容缓存、页面片段缓存）
+  优化单个服务器处理程序  缓存：缓存永远是最重要的
+ 异步：能异步就异步
+如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
+ 多线程：
+如果是CPU吃重的应用，线程数过高不能解决问题
+I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
+另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
+ 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
+ 还有一种预处理，是和缓存结合的预处理
+不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
+ 优化SQL，正确使用索引
+ 尽量不要使用分布式事务
+2阶段提交不是万能药
+ 各节点进入事务
+ 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
+ 各节点commit
+假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
+  应用算法优化
+  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
+ 合理设置索引
+ 合理分表分库
+分表我看来最大的好处是，是索引变小，能够加载到内存</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-14-tomcat/">Tomcat笔记</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 14, 2017
@@ -301,6 +344,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
         
             <li><a href="/categories/network">Network</a></li>
         
+            <li><a href="/categories/service">Service</a></li>
+        
             <li><a href="/categories/web">Web</a></li>
         
         </ul>
@@ -316,6 +361,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
         
             <li><a href="/tags/http">HTTP</a></li>
         
+            <li><a href="/tags/high-concurrency">High-Concurrency</a></li>
+        
             <li><a href="/tags/jvm">JVM</a></li>
         
             <li><a href="/tags/java">Java</a></li>
@@ -323,6 +370,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
             <li><a href="/tags/nio">NIO</a></li>
         
             <li><a href="/tags/network">Network</a></li>
+        
+            <li><a href="/tags/service">Service</a></li>
         
             <li><a href="/tags/servlet">Servlet</a></li>
         

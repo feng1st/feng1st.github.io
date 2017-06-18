@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>service on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/categories/service/index.xml</link>
+    <description>Recent content in service on 知耻而后勇，知不足而后进</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>utf-8</language>
+    <copyright>nf_xp</copyright>
+    <atom:link href="https://feng1st.github.io/categories/service/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>高并发解决思路</title>
+      <link>https://feng1st.github.io/post/2017-06-17-high-concurrency/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-17-high-concurrency/</guid>
+      <description>
+
+&lt;p&gt;解决高并发，无非两个方向：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;分而治之：分流&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优化单个服务器处理能力&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;客户端&#34;&gt;客户端&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;尽量使用缓存&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;尽量本地处理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;尽量减少不必要的访问&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;分流&#34;&gt;分流&lt;/h2&gt;
+
+&lt;p&gt;LVS、Nginx、Varnish放到一块说&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;负载均衡&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;业务拆分&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;静态内容直接返回，包括使用CDN&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;缓存（动态内容缓存、页面片段缓存）&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;优化单个服务器处理程序&#34;&gt;优化单个服务器处理程序&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;缓存：缓存永远是最重要的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;异步：能异步就异步&lt;br /&gt;
+如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;多线程：&lt;br /&gt;
+如果是CPU吃重的应用，线程数过高不能解决问题&lt;br /&gt;
+I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题&lt;br /&gt;
+另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;还有一种预处理，是和缓存结合的预处理&lt;br /&gt;
+不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优化SQL，正确使用索引&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;尽量不要使用分布式事务&lt;br /&gt;
+2阶段提交不是万能药&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;各节点进入事务&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;各节点commit&lt;br /&gt;
+假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;应用算法优化&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;优化数据层&#34;&gt;优化数据层&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;合理设置索引&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;合理分表分库&lt;br /&gt;
+分表我看来最大的好处是，是索引变小，能够加载到内存&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
