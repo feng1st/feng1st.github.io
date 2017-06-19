@@ -7,8 +7,114 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
     <copyright>nf_xp</copyright>
-    <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://feng1st.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>面向服务架构简介</title>
+      <link>https://feng1st.github.io/post/2017-06-18-soa/</link>
+      <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-18-soa/</guid>
+      <description>
+
+&lt;h2 id=&#34;分布式应用架构的演化&#34;&gt;分布式应用架构的演化&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DOA 分布式对象架构&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;主要特征：&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;对象是可以在服务器/容器间自由“移动”的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;被调用的对象究竟是本地，还是远程，对调用者来说是透明的&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;例子：EJB&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;问题：复杂和性能&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;远程调用有更多可能出错的环节&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;分布式事务需要两阶段提交&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;远程通讯额外的开销&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;SOA 面向服务架构&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;服务是可“移动”的，但是远没有DOA那样不可控&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;企业服务总线-esb&#34;&gt;企业服务总线 ESB&lt;/h2&gt;
+
+&lt;p&gt;ESB是SOA的核心组件，其主要特点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;事物管理器：分布式事物管理器放在这个地方很自然&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;安全管理器：访问权限、授权管理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务代理：统一服务接口和数据格式的一个Adaptor和Proxy&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对外部的网关&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但是ESB也有一定的缺点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;单点故障：ESB发生故障，整个系统将不可用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。&lt;br /&gt;
+但是，究竟要承担哪些具体的工作，是一个需要考虑的点。&lt;br /&gt;
+比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;同上，增加了服务间访问的间接性，降低了性能&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;soa简介&#34;&gt;SOA简介&lt;/h2&gt;
+
+&lt;p&gt;SOA的目标是实现灵活可变的分布式IT系统，这需要：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;标准化：协议标准化，实现互访问&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;复用：服务可复用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;soa治理&#34;&gt;SOA治理&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;服务注册与发现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;可靠性&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;安全性&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;负载均衡&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;监控与日志&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务限流和容错&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;完整soa模型&#34;&gt;完整SOA模型&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;基础设施服务&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;企业服务总线&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;关键服务组件&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;开发工具&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;管理工具&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://tutorials.jenkov.com/soa/&#34;&gt;http://tutorials.jenkov.com/soa/&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.vsharing.com/fengjicheng/A1059842.html&#34;&gt;http://blog.vsharing.com/fengjicheng/A1059842.html&lt;/a&gt;&lt;br /&gt;
+-&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>高并发解决思路</title>
@@ -79,6 +185,7 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
 &lt;ol&gt;
 &lt;li&gt;合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;合理设置索引&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;使用集群，读写分离&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;合理分表分库&lt;br /&gt;
 分表我看来最大的好处是，是索引变小，能够加载到内存&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;

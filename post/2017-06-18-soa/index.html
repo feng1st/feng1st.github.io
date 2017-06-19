@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>高并发解决思路 - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="高并发解决思路 - 知耻而后勇，知不足而后进">
+    <title>面向服务架构简介 - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="面向服务架构简介 - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-17-high-concurrency/">
+    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-18-soa/">
     
     
 </head>
@@ -58,42 +58,38 @@
 
         <article class="single well" itemscope="itemscope" itemtype="http://schema.org/Article">
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
-            <meta itemprop="dateModified" content="2017-06-17T00:00:00&#43;00:00">
-            <meta itemprop="headline" content="高并发解决思路">
-            <meta itemprop="description" content="解决高并发，无非两个方向：
- 分而治之：分流
- 优化单个服务器处理能力
-  客户端  尽量使用缓存
- 尽量本地处理
- 尽量减少不必要的访问
-  分流 LVS、Nginx、Varnish放到一块说
- 负载均衡
- 业务拆分
- 静态内容直接返回，包括使用CDN
- 缓存（动态内容缓存、页面片段缓存）
-  优化单个服务器处理程序  缓存：缓存永远是最重要的
- 异步：能异步就异步
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
- 多线程：
-如果是CPU吃重的应用，线程数过高不能解决问题
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
- 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
- 还有一种预处理，是和缓存结合的预处理
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
- 优化SQL，正确使用索引
- 尽量不要使用分布式事务
-2阶段提交不是万能药
- 各节点进入事务
- 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
- 各节点commit
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
-  应用算法优化
-  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
- 合理设置索引
- 使用集群，读写分离
- 合理分表分库">
-            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-17-high-concurrency/">
+            <meta itemprop="dateModified" content="2017-06-18T00:00:00&#43;00:00">
+            <meta itemprop="headline" content="面向服务架构简介">
+            <meta itemprop="description" content="分布式应用架构的演化  DOA 分布式对象架构
+ 主要特征：
+ 对象是可以在服务器/容器间自由“移动”的
+ 被调用的对象究竟是本地，还是远程，对调用者来说是透明的
+  例子：EJB
+ 问题：复杂和性能
+ 远程调用有更多可能出错的环节
+ 分布式事务需要两阶段提交
+ 远程通讯额外的开销
+   SOA 面向服务架构
+ 服务是可“移动”的，但是远没有DOA那样不可控
+ 当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控
+   企业服务总线 ESB ESB是SOA的核心组件，其主要特点：
+ 服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置
+ 事物管理器：分布式事物管理器放在这个地方很自然
+ 安全管理器：访问权限、授权管理
+ 服务代理：统一服务接口和数据格式的一个Adaptor和Proxy
+ 对外部的网关
+  但是ESB也有一定的缺点：
+ 单点故障：ESB发生故障，整个系统将不可用
+ 单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。
+但是，究竟要承担哪些具体的工作，是一个需要考虑的点。
+比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率
+ 同上，增加了服务间访问的间接性，降低了性能
+  SOA简介 SOA的目标是实现灵活可变的分布式IT系统，这需要：
+ 标准化：协议标准化，实现互访问
+ 复用：服务可复用
+ 松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦
+  SOA治理  服务注册与发现">
+            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-18-soa/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
                 <meta itemprop="width" content="800">
@@ -111,9 +107,9 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
                 <meta itemprop="name" content="nf_xp">
             </div>
             <header class="article-header">
-                <h1>高并发解决思路</h1>
+                <h1>面向服务架构简介</h1>
                 
-                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-17T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 17, 2017</time>
+                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-18T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 18, 2017</time>
                 
                 
                 
@@ -123,7 +119,7 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
                 
                 
                 <div class="section">
-                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/high-concurrency" class="tag">High-Concurrency</a>, <a href="https://feng1st.github.io//tags/service" class="tag">Service</a>
+                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/soa" class="tag">SOA</a>
                 </div>
                 
             </header>
@@ -131,71 +127,101 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
             
             
 
-<p>解决高并发，无非两个方向：</p>
+<h2 id="分布式应用架构的演化">分布式应用架构的演化</h2>
+
+<ul>
+<li>DOA 分布式对象架构<br />
+
+<ul>
+<li>主要特征：<br />
 
 <ol>
-<li>分而治之：分流<br /></li>
-<li>优化单个服务器处理能力<br />
-<br /></li>
-</ol>
-
-<h2 id="客户端">客户端</h2>
-
-<ol>
-<li>尽量使用缓存<br /></li>
-<li>尽量本地处理<br /></li>
-<li>尽量减少不必要的访问<br />
-<br /></li>
-</ol>
-
-<h2 id="分流">分流</h2>
-
-<p>LVS、Nginx、Varnish放到一块说</p>
-
-<ol>
-<li>负载均衡<br /></li>
-<li>业务拆分<br /></li>
-<li>静态内容直接返回，包括使用CDN<br /></li>
-<li>缓存（动态内容缓存、页面片段缓存）<br />
-<br /></li>
-</ol>
-
-<h2 id="优化单个服务器处理程序">优化单个服务器处理程序</h2>
-
-<ol>
-<li>缓存：缓存永远是最重要的<br /></li>
-<li>异步：能异步就异步<br />
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果<br /></li>
-<li>多线程：<br />
-如果是CPU吃重的应用，线程数过高不能解决问题<br />
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题<br />
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务<br /></li>
-<li>预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表<br /></li>
-<li>还有一种预处理，是和缓存结合的预处理<br />
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新<br /></li>
-<li>优化SQL，正确使用索引<br /></li>
-<li>尽量不要使用分布式事务<br />
-2阶段提交不是万能药<br />
-
-<ol>
-<li>各节点进入事务<br /></li>
-<li>各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）<br /></li>
-<li>各节点commit<br />
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的<br /></li>
+<li>对象是可以在服务器/容器间自由“移动”的<br /></li>
+<li>被调用的对象究竟是本地，还是远程，对调用者来说是透明的<br /></li>
 </ol></li>
-<li>应用算法优化<br />
+<li>例子：EJB<br /></li>
+<li>问题：复杂和性能<br />
+
+<ol>
+<li>远程调用有更多可能出错的环节<br /></li>
+<li>分布式事务需要两阶段提交<br /></li>
+<li>远程通讯额外的开销<br /></li>
+</ol></li>
+</ul></li>
+<li>SOA 面向服务架构<br />
+
+<ol>
+<li>服务是可“移动”的，但是远没有DOA那样不可控<br /></li>
+<li>当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控<br />
+<br /></li>
+</ol></li>
+</ul>
+
+<h2 id="企业服务总线-esb">企业服务总线 ESB</h2>
+
+<p>ESB是SOA的核心组件，其主要特点：</p>
+
+<ol>
+<li>服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置<br /></li>
+<li>事物管理器：分布式事物管理器放在这个地方很自然<br /></li>
+<li>安全管理器：访问权限、授权管理<br /></li>
+<li>服务代理：统一服务接口和数据格式的一个Adaptor和Proxy<br /></li>
+<li>对外部的网关<br />
 <br /></li>
 </ol>
 
-<h2 id="优化数据层">优化数据层</h2>
+<p>但是ESB也有一定的缺点：</p>
 
 <ol>
-<li>合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）<br /></li>
-<li>合理设置索引<br /></li>
-<li>使用集群，读写分离<br /></li>
-<li>合理分表分库<br />
-分表我看来最大的好处是，是索引变小，能够加载到内存<br /></li>
+<li>单点故障：ESB发生故障，整个系统将不可用<br /></li>
+<li>单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。<br />
+但是，究竟要承担哪些具体的工作，是一个需要考虑的点。<br />
+比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率<br /></li>
+<li>同上，增加了服务间访问的间接性，降低了性能<br />
+<br /></li>
 </ol>
+
+<h2 id="soa简介">SOA简介</h2>
+
+<p>SOA的目标是实现灵活可变的分布式IT系统，这需要：</p>
+
+<ol>
+<li>标准化：协议标准化，实现互访问<br /></li>
+<li>复用：服务可复用<br /></li>
+<li>松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦<br />
+<br /></li>
+</ol>
+
+<h2 id="soa治理">SOA治理</h2>
+
+<ol>
+<li>服务注册与发现<br /></li>
+<li>可靠性<br /></li>
+<li>安全性<br /></li>
+<li>负载均衡<br /></li>
+<li>监控与日志<br /></li>
+<li>服务限流和容错<br />
+<br /></li>
+</ol>
+
+<h2 id="完整soa模型">完整SOA模型</h2>
+
+<ol>
+<li>基础设施服务<br /></li>
+<li>企业服务总线<br /></li>
+<li>关键服务组件<br /></li>
+<li>开发工具<br /></li>
+<li>管理工具<br />
+<br /></li>
+</ol>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+<li><a href="http://tutorials.jenkov.com/soa/">http://tutorials.jenkov.com/soa/</a><br /></li>
+<li><a href="http://blog.vsharing.com/fengjicheng/A1059842.html">http://blog.vsharing.com/fengjicheng/A1059842.html</a><br />
+-<br /></li>
+</ul>
 
 
             <aside>

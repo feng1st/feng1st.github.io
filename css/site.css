@@ -6,3 +6,11 @@ span#copyright {
 figure>img {
     max-width: 100%;
 }
+
+div.mermaid {
+    max-width: 100%;
+}
+
+canvas.nomnoml {
+    max-width: 100%;
+}
