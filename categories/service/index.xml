@@ -10,7 +10,60 @@
     <atom:link href="https://feng1st.github.io/categories/service/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>面向服务架构简介</title>
+      <title>微服务架构笔记</title>
+      <link>https://feng1st.github.io/post/2017-06-19-microservices/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-19-microservices/</guid>
+      <description>
+
+&lt;p&gt;原文：&lt;a href=&#34;http://blog.csdn.net/mindfloating/article/details/24583369&#34;&gt;http://blog.csdn.net/mindfloating/article/details/24583369&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;什么是微服务架构&#34;&gt;什么是微服务架构&lt;/h2&gt;
+
+&lt;p&gt;采用一组服务的方式来构建一个应用；&lt;br /&gt;
+服务独立部署在不同的进程；&lt;br /&gt;
+服务之间通过轻量级的机制来通讯，比如RPC、HTTP；&lt;br /&gt;
+服务可独立扩展伸缩；&lt;br /&gt;
+每个服务定义了明确的边界；&lt;br /&gt;
+不同服务可以采用不同的技术实现，由独立的团队维护。&lt;/p&gt;
+
+&lt;h2 id=&#34;微服务架构的特征&#34;&gt;微服务架构的特征&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;通过服务实现组件化&lt;br /&gt;
+和传统方式，或者说单一架构(Monolithic Architecture)类比：&lt;br /&gt;
+传统方式实现组件化：通过库(library)；和应用运行在一个进程里；组件升级，应用需要重新部署&lt;br /&gt;
+服务方式实现组件化：通过服务；部署在不同的进程；可以单独升级&lt;br /&gt;
+因为服务是跨进程的，所以在设计阶段就必须定义好明确的边界&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;按业务能力来划分服务和组织团队&lt;br /&gt;
+传统方式按技术分层：前端、后端、数据库&lt;br /&gt;
+微服务架构：按业务划分，全栈工程师或全栈团队&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务即产品&lt;br /&gt;
+团队即负责开发，也负责维护&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;智能终端和哑管道&lt;br /&gt;
+抛弃过于复杂的ESB，服务自己处理自己的业务逻辑&lt;br /&gt;
+服务间通讯尽量轻量，不添加额外的规则&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;去中心统一化&lt;br /&gt;
+各服务可以选用自己的技术实现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;自动化基础设施服务&lt;br /&gt;
+必须要存在自动化的服务治理平台，才能降低开发、调试、测试、部署、监控、维护的复杂度&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Design for failure&lt;br /&gt;
+服务消费者要优雅的处理远程调用带来的错误&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;进化设计&lt;br /&gt;
+发送方要最小化，只发送必要的信息&lt;br /&gt;
+接收方要最大化，要最大化容错，要允许传入不认识的参数&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;服务的划分&#34;&gt;服务的划分&lt;/h2&gt;
+
+&lt;p&gt;参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>面向服务架构笔记</title>
       <link>https://feng1st.github.io/post/2017-06-18-soa/</link>
       <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
       

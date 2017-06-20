@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>service - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="service - 知耻而后勇，知不足而后进">
+    <title>微服务架构笔记 - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="微服务架构笔记 - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/categories/service/">
+    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-19-microservices/">
     
     
 </head>
@@ -56,17 +56,11 @@
 <div class="row">
     <div class="col-lg-8">
 
-      <header class="title"><h1>service</h1></header>
-
-      <div class="articles">
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-19-microservices/">微服务架构笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 19, 2017
-    </p>
-    
-    <p>原文：http://blog.csdn.net/mindfloating/article/details/24583369
+        <article class="single well" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
+            <meta itemprop="dateModified" content="2017-06-19T00:00:00&#43;00:00">
+            <meta itemprop="headline" content="微服务架构笔记">
+            <meta itemprop="description" content="原文：http://blog.csdn.net/mindfloating/article/details/24583369
 什么是微服务架构 采用一组服务的方式来构建一个应用；
 服务独立部署在不同的进程；
 服务之间通过轻量级的机制来通讯，比如RPC、HTTP；
@@ -95,96 +89,112 @@
  进化设计
 发送方要最小化，只发送必要的信息
 接收方要最大化，要最大化容错，要允许传入不认识的参数
-  服务的划分 参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-19-microservices/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
+  服务的划分 参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里">
+            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-19-microservices/">
+            <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
+                <meta itemprop="width" content="800">
+                <meta itemprop="height" content="800">
+            </div>
+            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="https://feng1st.github.io/images/logo.jpg">
+                    <meta itemprop="width" content="100">
+                    <meta itemprop="height" content="100">
+                </div>
+                <meta itemprop="name" content="知耻而后勇，知不足而后进">
+            </div>
+            <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                <meta itemprop="name" content="nf_xp">
+            </div>
+            <header class="article-header">
+                <h1>微服务架构笔记</h1>
+                
+                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-19T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 19, 2017</time>
+                
+                
+                
+                <div class="section">
+                    <i class="fa fa-folder-o"></i> <a href="https://feng1st.github.io//categories/service" class="tag">Service</a>
+                </div>
+                
+                
+                <div class="section">
+                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/microservices" class="tag">Microservices</a>
+                </div>
+                
+            </header>
 
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-18-soa/">面向服务架构笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 18, 2017
-    </p>
+            
+            
+
+<p>原文：<a href="http://blog.csdn.net/mindfloating/article/details/24583369">http://blog.csdn.net/mindfloating/article/details/24583369</a></p>
+
+<h2 id="什么是微服务架构">什么是微服务架构</h2>
+
+<p>采用一组服务的方式来构建一个应用；<br />
+服务独立部署在不同的进程；<br />
+服务之间通过轻量级的机制来通讯，比如RPC、HTTP；<br />
+服务可独立扩展伸缩；<br />
+每个服务定义了明确的边界；<br />
+不同服务可以采用不同的技术实现，由独立的团队维护。</p>
+
+<h2 id="微服务架构的特征">微服务架构的特征</h2>
+
+<ol>
+<li>通过服务实现组件化<br />
+和传统方式，或者说单一架构(Monolithic Architecture)类比：<br />
+传统方式实现组件化：通过库(library)；和应用运行在一个进程里；组件升级，应用需要重新部署<br />
+服务方式实现组件化：通过服务；部署在不同的进程；可以单独升级<br />
+因为服务是跨进程的，所以在设计阶段就必须定义好明确的边界<br /></li>
+<li>按业务能力来划分服务和组织团队<br />
+传统方式按技术分层：前端、后端、数据库<br />
+微服务架构：按业务划分，全栈工程师或全栈团队<br /></li>
+<li>服务即产品<br />
+团队即负责开发，也负责维护<br /></li>
+<li>智能终端和哑管道<br />
+抛弃过于复杂的ESB，服务自己处理自己的业务逻辑<br />
+服务间通讯尽量轻量，不添加额外的规则<br /></li>
+<li>去中心统一化<br />
+各服务可以选用自己的技术实现<br /></li>
+<li>自动化基础设施服务<br />
+必须要存在自动化的服务治理平台，才能降低开发、调试、测试、部署、监控、维护的复杂度<br /></li>
+<li>Design for failure<br />
+服务消费者要优雅的处理远程调用带来的错误<br /></li>
+<li>进化设计<br />
+发送方要最小化，只发送必要的信息<br />
+接收方要最大化，要最大化容错，要允许传入不认识的参数<br />
+<br /></li>
+</ol>
+
+<h2 id="服务的划分">服务的划分</h2>
+
+<p>参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里</p>
+
+
+            <aside>
+                
+                
+<div id="disqus_thread"></div>
+<script>
     
-    <p>分布式应用架构的演化  DOA 分布式对象架构
- 主要特征：
- 对象是可以在服务器/容器间自由“移动”的
- 被调用的对象究竟是本地，还是远程，对调用者来说是透明的
-  例子：EJB
- 问题：复杂和性能
- 远程调用有更多可能出错的环节
- 分布式事务需要两阶段提交
- 远程通讯额外的开销
-   SOA 面向服务架构
- 服务是可“移动”的，但是远没有DOA那样不可控
- 当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控
-   企业服务总线 ESB ESB是SOA的核心组件，其主要特点：
- 服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置
- 事物管理器：分布式事物管理器放在这个地方很自然
- 安全管理器：访问权限、授权管理
- 服务代理：统一服务接口和数据格式的一个Adaptor和Proxy
- 对外部的网关
-  但是ESB也有一定的缺点：
- 单点故障：ESB发生故障，整个系统将不可用
- 单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。
-但是，究竟要承担哪些具体的工作，是一个需要考虑的点。
-比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率
- 同上，增加了服务间访问的间接性，降低了性能
-  SOA简介 SOA的目标是实现灵活可变的分布式IT系统，这需要：
- 标准化：协议标准化，实现互访问
- 复用：服务可复用
- 松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦
-  SOA治理  服务注册与发现</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-18-soa/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
 
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">高并发解决思路</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 17, 2017
-    </p>
     
-    <p>解决高并发，无非两个方向：
- 分而治之：分流
- 优化单个服务器处理能力
-  客户端  尽量使用缓存
- 尽量本地处理
- 尽量减少不必要的访问
-  分流 LVS、Nginx、Varnish放到一块说
- 负载均衡
- 业务拆分
- 静态内容直接返回，包括使用CDN
- 缓存（动态内容缓存、页面片段缓存）
-  优化单个服务器处理程序  缓存：缓存永远是最重要的
- 异步：能异步就异步
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
- 多线程：
-如果是CPU吃重的应用，线程数过高不能解决问题
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
- 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
- 还有一种预处理，是和缓存结合的预处理
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
- 优化SQL，正确使用索引
- 尽量不要使用分布式事务
-2阶段提交不是万能药
- 各节点进入事务
- 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
- 各节点commit
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
-  应用算法优化
-  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
- 合理设置索引
- 使用集群，读写分离
- 合理分表分库</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
 
-          
-      </div>
+    (function() {  
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
-      
+
+            </aside>
+        </article>
 
     </div>
     <aside class="col-md-4">

@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://feng1st.github.io/post/2017-06-19-microservices/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/post/2017-06-18-soa/</loc>
     <lastmod>2017-06-18T00:00:00+00:00</lastmod>
   </url>
@@ -53,7 +58,7 @@
   
   <url>
     <loc>https://feng1st.github.io/post/</loc>
-    <lastmod>2017-06-18T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -99,6 +104,12 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/tags/microservices/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/tags/network/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -124,7 +135,7 @@
   
   <url>
     <loc>https://feng1st.github.io/categories/service/</loc>
-    <lastmod>2017-06-18T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -172,7 +183,7 @@
   
   <url>
     <loc>https://feng1st.github.io/</loc>
-    <lastmod>2017-06-18T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
