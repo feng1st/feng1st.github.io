@@ -7,8 +7,587 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
     <copyright>nf_xp</copyright>
-    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://feng1st.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>微服务架构摘要</title>
+      <link>https://feng1st.github.io/post/2017-06-23-microservices/</link>
+      <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-23-microservices/</guid>
+      <description>
+
+&lt;p&gt;原文: &lt;a href=&#34;https://www.nginx.com/blog/introduction-to-microservices/&#34;&gt;https://www.nginx.com/blog/introduction-to-microservices/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;单一框架有什么问题-微服务框架解决什么问题&#34;&gt;单一框架有什么问题 / 微服务框架解决什么问题？&lt;/h2&gt;
+
+&lt;p&gt;单一框架经过常年发展，扩充之后：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;过于复杂，难于理解和修改。修改容易引入bug&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;启动变慢，降低调试和开发速度&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;可靠性，组件异常（比如内存泄露），导致整个应用异常&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;难于升级到新的技术和框架&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;微服务框架&#34;&gt;微服务框架&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;按功能划分，比如订单管理、客户端管理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;每个微服务是一个单独的小应用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;微服务对外暴露API，比如REST API&lt;br /&gt;
+微服务之间可以通过暴露的API互相调用&lt;br /&gt;
+微服务间还可以通过消息系统实现异步调用&lt;br /&gt;
+外界一般不直接范围后端服务，而是通过API网关&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;微服务通常通过虚拟机或Docker部署&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;伸缩模型&#34;&gt;伸缩模型&lt;/h3&gt;
+
+&lt;p&gt;x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题&lt;br /&gt;
+y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务&lt;br /&gt;
+z轴：数据分区，靠拆分相似的事物伸缩&lt;/p&gt;
+
+&lt;h3 id=&#34;微服务架构对数据库schema的影响&#34;&gt;微服务架构对数据库schema的影响&lt;/h3&gt;
+
+&lt;p&gt;微服务架构要求每个微服务有自己单独的数据库schema&lt;br /&gt;
+这是为了更彻底的解耦&lt;br /&gt;
+但是不可避免的，多个微服务数据库间存在重复数据&lt;/p&gt;
+
+&lt;h3 id=&#34;微服务架构和soa的异同&#34;&gt;微服务架构和SOA的异同&lt;/h3&gt;
+
+&lt;p&gt;微服务架构和SOA在表现层有相似性：都是由多个服务构成&lt;br /&gt;
+区别：&lt;br /&gt;
+1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST&lt;br /&gt;
+2. 微服务架构弃用了ESB&lt;/p&gt;
+
+&lt;h3 id=&#34;微服务的好处&#34;&gt;微服务的好处&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;开发方面：可以选用自己的技术，可以使用较新的技术&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;部署方面：可以单独部署，更容易部署和测试&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;伸缩方面：更容易按需扩展多实例&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;微服务的问题&#34;&gt;微服务的问题&lt;/h3&gt;
+
+&lt;p&gt;下面这些问题都不难解决，但是需要清楚存在这些问题&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;分布式架构下调用的开销，以及服务不可用的处理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;数据库拆分后，分布式事务基本不采用，需要最终一致方案&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;升级链，如果A依赖于B，需要先升级B，再升级A&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;部署，需要自动化工具&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;api网关&#34;&gt;API网关&lt;/h2&gt;
+
+&lt;p&gt;门面模式 Facade&lt;/p&gt;
+
+&lt;h3 id=&#34;客户端直接和后端服务通讯的问题-api网关要解决的问题&#34;&gt;客户端直接和后端服务通讯的问题 / API网关要解决的问题&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;客户端需要调用多个后端服务，走广域网，非常慢&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端代码复杂&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端需要支持后端服务API所使用的通讯协议&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;后端服务接口无法自由变更，服务之间无法合并和拆分&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;API网关除了解决上诉问题，还能：&lt;br /&gt;
+1. 提供负载均衡、缓存、安全/权限控制，监控等&lt;br /&gt;
+2. 为不同的客户端提供不同的接口&lt;/p&gt;
+
+&lt;h3 id=&#34;挑战&#34;&gt;挑战：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;需要额外实现和维护一个高可用的组件&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;可能成为开发瓶颈&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;实现api网关&#34;&gt;实现API网关&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;性能和高伸缩性&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;要支持异步、非阻塞通讯&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;技术选型：Netty, Spring Reactor, &amp;hellip;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;使用反应式编程模型 Reactive Programming Model&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不推荐使用回调实现异步（不直观、不容易理解、容易出错）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;推荐使用Reactive&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;技术选型：CompletableFuture, RxJava&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;服务调用&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;同步调用：HTTP、Thrift&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;异步、消息机制：JMS、AMQP、Zeromq&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;API网关需要这些服务通讯，也应支持上诉通讯机制&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;服务发现&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务端发现：注册总心选好后发给客户端，负载均衡在服务端&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;（这里的客户端指API网关）&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理部分失败&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;面对服务慢或者不可用的处理。核心是不能阻塞API网关&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;要根据服务是否重要，选择：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;直接返回给客户端错误&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;返回空、默认值、缓存值、备份数据等&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;技术选型：Netflix Hystrix&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;进程间通讯-ipc&#34;&gt;进程间通讯 IPC&lt;/h2&gt;
+
+&lt;h3 id=&#34;交互风格&#34;&gt;交互风格&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;一对一&lt;/th&gt;
+&lt;th&gt;一对多&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;同步&lt;/td&gt;
+&lt;td&gt;Request/Response&lt;/td&gt;
+&lt;td&gt;&amp;ndash;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;异步&lt;/td&gt;
+&lt;td&gt;Notification&lt;/td&gt;
+&lt;td&gt;Publish/Subscribe&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Request/Async response&lt;/td&gt;
+&lt;td&gt;Public/Async responses&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Request/Response: 发送请求，等待响应。应有超时。线程阻塞&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Notification (单向请求): 发送请求，不期待有响应&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Request/Async response: 发送请求，不期待有即时响应。线程不阻塞&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Publish/Subscribe: 发布请求，多个消费者消费&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Publish/Async responses: 发布请求，等待多个响应。有超时&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;接口设计&#34;&gt;接口设计&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;基于消息：定义消息channel和消息类型&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;基于HTTP：定义URL、请求和响应格式&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;接口升级&#34;&gt;接口升级&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;向前兼容的小升级，比如增加/删除请求/响应字段：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;缺失的字段采用默认值，忽略额外的字段&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息格式要支持，比如Protobuf，Json&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;处理部分失败&#34;&gt;处理部分失败&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一定要有超时，不能无限阻塞&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;要限制客户端向同一服务的请求的数量，如果超限，直接失败&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;船舱隔离模式：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;电路熔断器模式：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;连续超时：断开&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;等待一段时间：半开放&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;又有超时：再断开&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;或不再超时：恢复&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;要根据服务是否重要，选择：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;直接返回给客户端错误&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;返回空、默认值、缓存值、备份数据等&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ipc技术&#34;&gt;IPC技术&lt;/h3&gt;
+
+&lt;h4 id=&#34;异步-基于消息的通讯&#34;&gt;异步、基于消息的通讯&lt;/h4&gt;
+
+&lt;p&gt;关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、……&lt;br /&gt;
+这里不展开&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;好处&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;客户端和服务解耦。客户端也不需要使用服务发现机制&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;消息缓存。支持消费者不实时在线&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;支持上面提到的所有交互风格&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是显式IPC，不像有些RPC机制，尝试屏蔽是远程调用的事实。开发者有更好的意识和控制权&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;缺点&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;额外的操作复杂性，需要引入一个高可用的消息中间件（这个应该不是问题）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;用来实现Request/Response比较复杂：&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;客户端的请求消息要带上响应的channel和唯一id&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务的响应消息要带上这个唯一id，发送到响应channel&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端要用唯一id，从响应channel找到匹配响应消息&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;不难理解，但是确实比直接基于请求/响应的机制更复杂&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;同步-基于请求-响应的通讯&#34;&gt;同步、基于请求/响应的通讯&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;REST&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;核心是“资源”，基于HTTP请求类型和参数，实现资源的“增删改查”&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;REST定义也有不同的级别，从POST到同一URL，靠参数指定操作和对象，到靠HTTP请求类型指定操作，不同URL指定操作对象。不绝对&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优势&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;基于HTTP，简单熟悉&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;构造请求简单，测试方便&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;天然支持请求/响应模式&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;防火墙友好&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;无中间层，系统结构简单&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;缺点&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对逻辑上的单向请求（Notification），服务端也要发响应&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;服务端必须实时在线&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端和服务端耦合。需要有服务发现机制&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;IDL：RAML和Swagger&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Thrift&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;支持请求/响应和通知（单向）&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;支持Json、二进制和压缩二进制。取舍是人工可读和占空间大小&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;支持HTTP和TCP。取舍是是否防火墙友好和效率&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;服务发现&#34;&gt;服务发现&lt;/h2&gt;
+
+&lt;h3 id=&#34;为什么需要服务发现&#34;&gt;为什么需要服务发现&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;集群动态伸缩&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;基于Container的部署方式，IP和端口也是动态分配的&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;服务发现方式&#34;&gt;服务发现方式&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;客户端发现模式&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;服务端在启动时向注册中心注册、停止时取消注册、靠心跳刷新&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端向注册中心获取服务端列表&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;客户端主动负载均衡，比如采用一致性hash&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优点：直接&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优点：可根据业务灵活选用负载均衡策略&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;缺点：客户端和注册中心耦合&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;实现技巧：客户端和服务端均在注册中心注册，便于服务端变更时，注册中心主动推送。参考dubbo&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;服务端发现模式&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;客户端请求发给负载均衡服务器&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;负载均衡服务器负责和注册中心通讯&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;优点：客户端和服务发现逻辑解耦&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;缺点：需要高可用的负载均衡服务器&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;注册中心&#34;&gt;注册中心&lt;/h3&gt;
+
+&lt;p&gt;参考：Zookeeper&lt;br /&gt;
+注册方式：&lt;br /&gt;
+1. 自注册：优点：直接；缺点：服务和注册中心耦合&lt;br /&gt;
+2. 第三方组件注册：优点：解耦；缺点：额外高可用组件&lt;/p&gt;
+
+&lt;h2 id=&#34;事件驱动数据模型&#34;&gt;事件驱动数据模型&lt;/h2&gt;
+
+&lt;p&gt;数据随着微服务拆分，带来下面的挑战：&lt;br /&gt;
+1. 跨服务事务的一致性&lt;br /&gt;
+    - 2PC 两阶段提交在此情况下不可用，CAP要优先满足A，或者BASE&lt;br /&gt;
+2. 怎样从多个服务请求数据&lt;/p&gt;
+
+&lt;h3 id=&#34;事件驱动架构&#34;&gt;事件驱动架构&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;将跨服务的事务划分为多步&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;每一步，一个微服务更新业务对象（本地事务），同时产生一个事件以激发下一步&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;事件通过消息系统传递&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;例子：创建订单&lt;br /&gt;
+1. 订单服务创建订单，状态为NEW，然后发布订单创建消息到消息系统&lt;br /&gt;
+2. 客户服务收到订单创建消息，预留订单费用，发布预留订单费用消息&lt;br /&gt;
+    - 预留费用至少涉及到两个表，是一个本地事务。要能想到&lt;br /&gt;
+    - 1. &lt;code&gt;customer.credit_limit - sum(reserved_credit.amount) &amp;gt;= order_total&lt;/code&gt;&lt;br /&gt;
+    - 2. &lt;code&gt;insert into reserved_credit (... amount) values (... order_total)&lt;/code&gt;&lt;br /&gt;
+    - 如果要保证事务发送成功，事务里还要包括第3个表，事务表（见下）&lt;br /&gt;
+    - 
+&lt;figure &gt;
+    &lt;a href=&#34;Richardson-microservices-part5-credit-check-2-e1449727579423.png&#34;&gt;
+        &lt;img src=&#34;Richardson-microservices-part5-credit-check-2-e1449727579423.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;
+3. 订单服务收到预留订单费用消息，将订单状态更新为OPEN&lt;/p&gt;
+
+&lt;p&gt;因为服务统一向消息系统发事务，可以有一个视图服务，订阅这些事务，更新事务，实现跨服务查询&lt;/p&gt;
+
+&lt;h3 id=&#34;原子性&#34;&gt;原子性&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使用本地事务发布事件&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;将操作业务对象和插入事件表放到一个事务里面&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;figure &gt;
+    &lt;a href=&#34;Richardson-microservices-part5-local-transaction-e1449727484579.png&#34;&gt;
+        &lt;img src=&#34;Richardson-microservices-part5-local-transaction-e1449727484579.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;事件发布者轮询事件表，确保事件发送成功 at least once&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;挖掘数据库事务日志&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;实现较复杂&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;使用事件源&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;保存的不是结果，而是操作步骤&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;逻辑较复杂&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;部署&#34;&gt;部署&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;每微服务一虚拟机&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;隔离性高&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;开销大&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;每微服务一容器&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;隔离性低&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;开销小&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;实现：Docker&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;重构单一架构到微服务架构&#34;&gt;重构单一架构到微服务架构&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;新功能直接使用微服务实现&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;前端路由请求到旧单一应用和新微服务&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;新微服务使用“胶水代码”访问旧单一应用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;访问旧单一应用的数据&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;远程调用旧单一应用接口&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;直接访问旧单一应用数据库&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;维护独立数据，和旧数据库同步&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;拆分前后端&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最容易拆的是表现层和逻辑层。逻辑层和数据层稍难&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;表现层拆出来后便于独立开发和A/B测试&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;拆模块&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;优先级&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;先拆变化频繁的，便于加速后继开发&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;再拆资源要求不一样的，便于分开部署和伸缩&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;再拆和其它模块交互较粗的，比如通过消息系统交互的&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;步骤&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;模块和剩余部分改成IPC通讯&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;将模块独立成微服务&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>工具推荐：PlantUML，文本转UML图工具</title>
+      <link>https://feng1st.github.io/post/2017-06-22-plantuml/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-22-plantuml/</guid>
+      <description>
+
+&lt;p&gt;官网：&lt;a href=&#34;http://plantuml.com/&#34;&gt;http://plantuml.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;为什么要用文本生成UML，而不直接画UML？&lt;br /&gt;
+这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：&lt;br /&gt;
+这属于强迫症，得治。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;如果使用ubuntu，直接：&lt;br /&gt;
+&lt;code&gt;sudo apt-get install graphviz plantuml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;其它平台或者安装方法请参考官网&lt;/p&gt;
+
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;plantuml src.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;如果是下载的jar：&lt;br /&gt;
+&lt;code&gt;java -jar plantuml.jar src.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;会在当前目录下生成&lt;code&gt;src.png&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+
+&lt;p&gt;输入：&lt;br /&gt;
+&lt;code&gt;jetty-handler.pu&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@startuml
+interface Handler {
+  +handle(request)
+}
+abstract class AbstractHandler
+class HandlerWrapper
+class ServletHandler
+class HandlerContainer
+class Server
+class SessionHandler {
+  +SessionManager
+}
+class SecurityHandler {
+  +SecurityConstraint[]
+}
+class ContextHandler {
+  +contextPath
+  +resourceBase
+  +classLoader
+}
+class ContextHandlerContainer {
+  -contexts: PathMap
+}
+class WebAppContext {
+  +descriptor
+}
+
+Handler &amp;lt;|.. AbstractHandler
+Handler &amp;quot;1&amp;quot; --o HandlerWrapper
+Handler &amp;quot;*&amp;quot; --o HandlerContainer
+AbstractHandler &amp;lt;|-- HandlerWrapper
+AbstractHandler &amp;lt;|-- ServletHandler
+AbstractHandler &amp;lt;|-- HandlerContainer
+AbstractHandler ..&amp;gt; Server
+HandlerWrapper &amp;lt;|-- Server
+HandlerWrapper &amp;lt;|-- SessionHandler
+HandlerWrapper &amp;lt;|-- SecurityHandler
+HandlerWrapper &amp;lt;|-- ContextHandler
+ServletHandler &amp;lt;.. WebAppContext
+HandlerContainer &amp;lt;|-- ContextHandlerContainer
+SessionHandler &amp;lt;.. WebAppContext
+SecurityHandler &amp;lt;.. WebAppContext
+ContextHandler &amp;lt;. ContextHandlerContainer
+ContextHandler &amp;lt;|-- WebAppContext
+@enduml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出：&lt;br /&gt;
+&lt;code&gt;jetty-handler.png&lt;/code&gt;&lt;br /&gt;
+
+&lt;figure &gt;
+    &lt;a href=&#34;jetty-handler.png&#34;&gt;
+        &lt;img src=&#34;jetty-handler.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>微服务架构笔记</title>
@@ -294,7 +873,15 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
 
 &lt;h2 id=&#34;处理请求&#34;&gt;处理请求&lt;/h2&gt;
 
-&lt;p&gt;时序图见&lt;a href=&#34;http://tomcat.apache.org/tomcat-9.0-doc/architecture/requestProcess/request-process.png&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;时序图&lt;br /&gt;
+
+&lt;figure &gt;
+    &lt;a href=&#34;request-process.png&#34;&gt;
+        &lt;img src=&#34;request-process.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
 
 &lt;h2 id=&#34;classloader&#34;&gt;ClassLoader&lt;/h2&gt;
 
@@ -375,9 +962,9 @@ stop();
 
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-handlers.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-handlers.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 
@@ -406,9 +993,9 @@ stop();
 &lt;li&gt;调用方式：&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-nested-handlers.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-nested-handlers.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -424,9 +1011,9 @@ stop();
 
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-servlet-handler.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-servlet-handler.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 
@@ -450,9 +1037,9 @@ stop();
 &lt;li&gt;Jetty启动&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image011.jpg&#34;&gt;
+        &lt;img src=&#34;image011.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -463,18 +1050,18 @@ stop();
 &lt;li&gt;Jetty建立连接&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image013.jpg&#34;&gt;
+        &lt;img src=&#34;image013.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;Jetty处理连接&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image015.jpg&#34;&gt;
+        &lt;img src=&#34;image015.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -615,6 +1202,18 @@ stop();
 &lt;li&gt;非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;同步：用等待或者轮询的方式拿到结果，比如NIO&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;额外提一下Node.js的线程模型&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;figure &gt;
+    &lt;a href=&#34;733213-20160306210005159-1364173213.png&#34;&gt;
+        &lt;img src=&#34;733213-20160306210005159-1364173213.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>

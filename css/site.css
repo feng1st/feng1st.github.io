@@ -7,6 +7,10 @@ figure>img {
     max-width: 100%;
 }
 
+figure>a>img {
+    max-width: 100%;
+}
+
 div.mermaid {
     max-width: 100%;
 }

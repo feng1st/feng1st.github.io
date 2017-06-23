@@ -61,6 +61,49 @@
       <div class="articles">
           
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-23-microservices/">微服务架构摘要</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 23, 2017
+    </p>
+    
+    <p>原文: https://www.nginx.com/blog/introduction-to-microservices/
+单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
+ 过于复杂，难于理解和修改。修改容易引入bug
+ 启动变慢，降低调试和开发速度
+ 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试
+ 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求
+ 可靠性，组件异常（比如内存泄露），导致整个应用异常
+ 难于升级到新的技术和框架
+  微服务框架  按功能划分，比如订单管理、客户端管理
+ 每个微服务是一个单独的小应用
+ 微服务对外暴露API，比如REST API
+微服务之间可以通过暴露的API互相调用
+微服务间还可以通过消息系统实现异步调用
+外界一般不直接范围后端服务，而是通过API网关
+ 微服务通常通过虚拟机或Docker部署
+  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题
+y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务
+z轴：数据分区，靠拆分相似的事物伸缩
+微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema
+这是为了更彻底的解耦
+但是不可避免的，多个微服务数据库间存在重复数据
+微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成
+区别：
+1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST
+2. 微服务架构弃用了ESB
+微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护
+ 开发方面：可以选用自己的技术，可以使用较新的技术
+ 部署方面：可以单独部署，更容易部署和测试
+ 伸缩方面：更容易按需扩展多实例
+  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
+ 分布式架构下调用的开销，以及服务不可用的处理
+ 数据库拆分后，分布式事务基本不采用，需要最终一致方案
+ 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-23-microservices/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-19-microservices/">微服务架构笔记</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 19, 2017
@@ -205,6 +248,8 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
         
             <li><a href="/categories/service">Service</a></li>
         
+            <li><a href="/categories/utility">Utility</a></li>
+        
             <li><a href="/categories/web">Web</a></li>
         
         </ul>
@@ -241,6 +286,10 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
             <li><a href="/tags/servlet-container">Servlet-Container</a></li>
         
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
+        
+            <li><a href="/tags/uml">UML</a></li>
+        
+            <li><a href="/tags/utility">Utility</a></li>
         
             <li><a href="/tags/web">Web</a></li>
         

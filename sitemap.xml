@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://feng1st.github.io/post/2017-06-23-microservices/</loc>
+    <lastmod>2017-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/post/2017-06-22-plantuml/</loc>
+    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/post/2017-06-19-microservices/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url>
@@ -58,7 +68,7 @@
   
   <url>
     <loc>https://feng1st.github.io/post/</loc>
-    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -105,7 +115,7 @@
   
   <url>
     <loc>https://feng1st.github.io/tags/microservices/</loc>
-    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -135,7 +145,7 @@
   
   <url>
     <loc>https://feng1st.github.io/categories/service/</loc>
-    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -164,6 +174,24 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/tags/uml/</loc>
+    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/tags/utility/</loc>
+    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/categories/utility/</loc>
+    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/tags/web/</loc>
     <lastmod>2017-06-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -183,7 +211,7 @@
   
   <url>
     <loc>https://feng1st.github.io/</loc>
-    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

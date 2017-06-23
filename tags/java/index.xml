@@ -58,7 +58,15 @@
 
 &lt;h2 id=&#34;处理请求&#34;&gt;处理请求&lt;/h2&gt;
 
-&lt;p&gt;时序图见&lt;a href=&#34;http://tomcat.apache.org/tomcat-9.0-doc/architecture/requestProcess/request-process.png&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;时序图&lt;br /&gt;
+
+&lt;figure &gt;
+    &lt;a href=&#34;request-process.png&#34;&gt;
+        &lt;img src=&#34;request-process.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
 
 &lt;h2 id=&#34;classloader&#34;&gt;ClassLoader&lt;/h2&gt;
 
@@ -139,9 +147,9 @@ stop();
 
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-handlers.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-handlers.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 
@@ -170,9 +178,9 @@ stop();
 &lt;li&gt;调用方式：&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-nested-handlers.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-nested-handlers.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -188,9 +196,9 @@ stop();
 
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png&#34; /&gt;
-    
+    &lt;a href=&#34;basic-architecture-servlet-handler.png&#34;&gt;
+        &lt;img src=&#34;basic-architecture-servlet-handler.png&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 
@@ -214,9 +222,9 @@ stop();
 &lt;li&gt;Jetty启动&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image011.jpg&#34;&gt;
+        &lt;img src=&#34;image011.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -227,18 +235,18 @@ stop();
 &lt;li&gt;Jetty建立连接&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image013.jpg&#34;&gt;
+        &lt;img src=&#34;image013.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;Jetty处理连接&lt;br /&gt;
 
 &lt;figure &gt;
-    
-        &lt;img src=&#34;https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg&#34; /&gt;
-    
+    &lt;a href=&#34;image015.jpg&#34;&gt;
+        &lt;img src=&#34;image015.jpg&#34; /&gt;
+    &lt;/a&gt;
     
 &lt;/figure&gt;
 &lt;br /&gt;
@@ -379,6 +387,18 @@ stop();
 &lt;li&gt;非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;同步：用等待或者轮询的方式拿到结果，比如NIO&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;额外提一下Node.js的线程模型&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;figure &gt;
+    &lt;a href=&#34;733213-20160306210005159-1364173213.png&#34;&gt;
+        &lt;img src=&#34;733213-20160306210005159-1364173213.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>

@@ -69,7 +69,7 @@
  ProxyConnectionFactory：处理Proxy协议
  SslConnectionFactory：SSL加密解密
  HttpConnectionFactory：处理实际的HTTP请求
-   Handler   Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+   Handler    Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
  责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
@@ -160,9 +160,9 @@ stop();
 
 
 <figure >
-    
-        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-handlers.png" />
-    
+    <a href="basic-architecture-handlers.png">
+        <img src="basic-architecture-handlers.png" />
+    </a>
     
 </figure>
 
@@ -191,9 +191,9 @@ stop();
 <li>调用方式：<br />
 
 <figure >
-    
-        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-nested-handlers.png" />
-    
+    <a href="basic-architecture-nested-handlers.png">
+        <img src="basic-architecture-nested-handlers.png" />
+    </a>
     
 </figure>
 <br />
@@ -209,9 +209,9 @@ stop();
 
 
 <figure >
-    
-        <img src="http://www.eclipse.org/jetty/documentation/current/images/basic-architecture-servlet-handler.png" />
-    
+    <a href="basic-architecture-servlet-handler.png">
+        <img src="basic-architecture-servlet-handler.png" />
+    </a>
     
 </figure>
 
@@ -235,9 +235,9 @@ stop();
 <li>Jetty启动<br />
 
 <figure >
-    
-        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image011.jpg" />
-    
+    <a href="image011.jpg">
+        <img src="image011.jpg" />
+    </a>
     
 </figure>
 <br />
@@ -248,18 +248,18 @@ stop();
 <li>Jetty建立连接<br />
 
 <figure >
-    
-        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image013.jpg" />
-    
+    <a href="image013.jpg">
+        <img src="image013.jpg" />
+    </a>
     
 </figure>
 <br /></li>
 <li>Jetty处理连接<br />
 
 <figure >
-    
-        <img src="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/image015.jpg" />
-    
+    <a href="image015.jpg">
+        <img src="image015.jpg" />
+    </a>
     
 </figure>
 <br />
@@ -321,6 +321,8 @@ stop();
         
             <li><a href="/categories/service">Service</a></li>
         
+            <li><a href="/categories/utility">Utility</a></li>
+        
             <li><a href="/categories/web">Web</a></li>
         
         </ul>
@@ -357,6 +359,10 @@ stop();
             <li><a href="/tags/servlet-container">Servlet-Container</a></li>
         
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
+        
+            <li><a href="/tags/uml">UML</a></li>
+        
+            <li><a href="/tags/utility">Utility</a></li>
         
             <li><a href="/tags/web">Web</a></li>
         

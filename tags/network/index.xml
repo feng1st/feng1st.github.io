@@ -104,6 +104,18 @@
 &lt;li&gt;同步：用等待或者轮询的方式拿到结果，比如NIO&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;额外提一下Node.js的线程模型&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;figure &gt;
+    &lt;a href=&#34;733213-20160306210005159-1364173213.png&#34;&gt;
+        &lt;img src=&#34;733213-20160306210005159-1364173213.png&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
