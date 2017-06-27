@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>servlet - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="servlet - 知耻而后勇，知不足而后进">
+    <title>dubbo - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="dubbo - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/tags/servlet/">
+    <meta property="og:url" content="https://feng1st.github.io/tags/dubbo/">
     
     
 </head>
@@ -56,29 +56,31 @@
 <div class="row">
     <div class="col-lg-8">
 
-      <header class="title"><h1>servlet</h1></header>
+      <header class="title"><h1>dubbo</h1></header>
 
       <div class="articles">
           
             <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-11-servlet/">Servlet笔记</a></h2>
+    <h2><a href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Docker容器运行dubbo应用</a></h2>
     <p>
-        <i class="fa fa-clock-o"></i> Posted on June 11, 2017
+        <i class="fa fa-clock-o"></i> Posted on June 27, 2017
     </p>
     
-    <p> 教程：
-http://tutorials.jenkov.com/java-servlets/
-一些思考点  Servlet的生命周期是怎样被容器管理的？
- Session是怎样被管理和传递的？
- 分布式环境下Session是怎样被管理的？
- ServletContext是怎样被管理和传递的，典型用途是什么？
- 为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
- Filter和Servlet有什么异同？
- Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
- 怎样用Filter实现GZip，这个实现和AOP有什么区别？
- Session和ServletContext是线程安全的吗？
-  </p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-11-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
+    <p>参考了这篇文章： https://yq.aliyun.com/articles/60789
+大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
+它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
+但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。
+为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
+application.properties
+server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
+services.xml
+ &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
+docker-compose.yml
+version: '2' services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口
+zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
+还有其它一些细节，可以参考源代码：
+https://github.com/feng1st/microservices-demo</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Read More <i class="fa fa-chevron-right"></i></a>
 </article>
 
           

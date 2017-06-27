@@ -21,12 +21,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
 
     
-    <title>高并发解决思路 - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="高并发解决思路 - 知耻而后勇，知不足而后进">
+    <title>Docker容器运行dubbo应用 - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="Docker容器运行dubbo应用 - 知耻而后勇，知不足而后进">
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-17-high-concurrency/">
+    <meta property="og:url" content="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">
     
     
 </head>
@@ -58,42 +58,23 @@
 
         <article class="single well" itemscope="itemscope" itemtype="http://schema.org/Article">
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
-            <meta itemprop="dateModified" content="2017-06-17T00:00:00&#43;00:00">
-            <meta itemprop="headline" content="高并发解决思路">
-            <meta itemprop="description" content="解决高并发，无非两个方向：
- 分而治之：分流
- 优化单个服务器处理能力
-  客户端  尽量使用缓存
- 尽量本地处理
- 尽量减少不必要的访问
-  分流 LVS、Nginx、Varnish放到一块说
- 负载均衡
- 业务拆分
- 静态内容直接返回，包括使用CDN
- 缓存（动态内容缓存、页面片段缓存）
-  优化单个服务器处理程序  缓存：缓存永远是最重要的
- 异步：能异步就异步
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
- 多线程：
-如果是CPU吃重的应用，线程数过高不能解决问题
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
- 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
- 还有一种预处理，是和缓存结合的预处理
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
- 优化SQL，正确使用索引
- 尽量不要使用分布式事务
-2阶段提交不是万能药
- 各节点进入事务
- 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
- 各节点commit
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
-  应用算法优化
-  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
- 合理设置索引
- 使用集群，读写分离
- 合理分表分库">
-            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-17-high-concurrency/">
+            <meta itemprop="dateModified" content="2017-06-27T00:00:00&#43;00:00">
+            <meta itemprop="headline" content="Docker容器运行dubbo应用">
+            <meta itemprop="description" content="参考了这篇文章： https://yq.aliyun.com/articles/60789
+大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
+它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
+但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。
+为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
+application.properties
+server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
+services.xml
+ &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
+docker-compose.yml
+version: &#39;2&#39; services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口
+zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
+还有其它一些细节，可以参考源代码：
+https://github.com/feng1st/microservices-demo">
+            <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
                 <meta itemprop="width" content="800">
@@ -111,9 +92,9 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
                 <meta itemprop="name" content="nf_xp">
             </div>
             <header class="article-header">
-                <h1>高并发解决思路</h1>
+                <h1>Docker容器运行dubbo应用</h1>
                 
-                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-17T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 17, 2017</time>
+                <time itemprop="datePublished" pubdate="pubdate" datetime="2017-06-27T00:00:00&#43;00:00"><i class="fa fa-clock-o"></i> Posted on June 27, 2017</time>
                 
                 
                 
@@ -123,79 +104,63 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
                 
                 
                 <div class="section">
-                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/high-concurrency" class="tag">High-Concurrency</a>, <a href="https://feng1st.github.io//tags/service" class="tag">Service</a>
+                    <i class="fa fa-tag"></i> <a href="https://feng1st.github.io//tags/docker" class="tag">Docker</a>, <a href="https://feng1st.github.io//tags/dubbo" class="tag">Dubbo</a>
                 </div>
                 
             </header>
 
             
-            
+            <p>参考了这篇文章： <a href="https://yq.aliyun.com/articles/60789">https://yq.aliyun.com/articles/60789</a></p>
 
-<p>解决高并发，无非两个方向：</p>
+<p>大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。<br />
+它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。</p>
 
-<ol>
-<li>分而治之：分流<br /></li>
-<li>优化单个服务器处理能力<br />
-<br /></li>
-</ol>
+<p>但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。<br />
+为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。</p>
 
-<h2 id="客户端">客户端</h2>
+<p><strong>application.properties</strong></p>
 
-<ol>
-<li>尽量使用缓存<br /></li>
-<li>尽量本地处理<br /></li>
-<li>尽量减少不必要的访问<br />
-<br /></li>
-</ol>
+<pre><code>server.port=${SERVER_PORT:0}
+</code></pre>
 
-<h2 id="分流">分流</h2>
+<p>这个是用来区分spring-boot-starter-web里自带tomcat的端口</p>
 
-<p>LVS、Nginx、Varnish放到一块说</p>
+<p><strong>services.xml</strong></p>
 
-<ol>
-<li>负载均衡<br /></li>
-<li>业务拆分<br /></li>
-<li>静态内容直接返回，包括使用CDN<br /></li>
-<li>缓存（动态内容缓存、页面片段缓存）<br />
-<br /></li>
-</ol>
+<pre><code>    &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt;
+    &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;
+</code></pre>
 
-<h2 id="优化单个服务器处理程序">优化单个服务器处理程序</h2>
+<p>这个是用来区分provider通过dubbo协议暴露服务的端口</p>
 
-<ol>
-<li>缓存：缓存永远是最重要的<br /></li>
-<li>异步：能异步就异步<br />
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果<br /></li>
-<li>多线程：<br />
-如果是CPU吃重的应用，线程数过高不能解决问题<br />
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题<br />
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务<br /></li>
-<li>预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表<br /></li>
-<li>还有一种预处理，是和缓存结合的预处理<br />
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新<br /></li>
-<li>优化SQL，正确使用索引<br /></li>
-<li>尽量不要使用分布式事务<br />
-2阶段提交不是万能药<br />
+<p><strong>docker-compose.yml</strong></p>
 
-<ol>
-<li>各节点进入事务<br /></li>
-<li>各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）<br /></li>
-<li>各节点commit<br />
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的<br /></li>
-</ol></li>
-<li>应用算法优化<br />
-<br /></li>
-</ol>
+<pre><code>version: '2'
+services:
+    provider1:
+        image: provider
+        restart: always
+        network_mode: host
+        environment:
+            ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183
+            DUBBO_PORT: 20880
+            SERVER_PORT: 8080
 
-<h2 id="优化数据层">优化数据层</h2>
+    provider2:
+        image: provider
+        restart: always
+        network_mode: host
+        environment:
+            ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183
+            DUBBO_PORT: 20881
+            SERVER_PORT: 8081
+</code></pre>
 
-<ol>
-<li>合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）<br /></li>
-<li>合理设置索引<br /></li>
-<li>使用集群，读写分离<br /></li>
-<li>合理分表分库<br />
-分表我看来最大的好处是，是索引变小，能够加载到内存<br /></li>
-</ol>
+<p>起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口<br />
+zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183</p>
+
+<p>还有其它一些细节，可以参考源代码：<br />
+<a href="https://github.com/feng1st/microservices-demo">https://github.com/feng1st/microservices-demo</a></p>
 
 
             <aside>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 知耻而后勇，知不足而后进</title>
+    <link>https://feng1st.github.io/tags/docker/index.xml</link>
+    <description>Recent content in docker on 知耻而后勇，知不足而后进</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>utf-8</language>
+    <copyright>nf_xp</copyright>
+    <atom:link href="https://feng1st.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Docker容器运行dubbo应用</title>
+      <link>https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/</guid>
+      <description>&lt;p&gt;参考了这篇文章： &lt;a href=&#34;https://yq.aliyun.com/articles/60789&#34;&gt;https://yq.aliyun.com/articles/60789&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。&lt;br /&gt;
+它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。&lt;/p&gt;
+
+&lt;p&gt;但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。&lt;br /&gt;
+为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;application.properties&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server.port=${SERVER_PORT:0}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个是用来区分spring-boot-starter-web里自带tomcat的端口&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;services.xml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    &amp;lt;dubbo:registry protocol=&amp;quot;zookeeper&amp;quot; address=&amp;quot;${ZOO_SERVERS}&amp;quot;/&amp;gt;
+    &amp;lt;dubbo:protocol name=&amp;quot;dubbo&amp;quot; port=&amp;quot;${DUBBO_PORT}&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个是用来区分provider通过dubbo协议暴露服务的端口&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker-compose.yml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;version: &#39;2&#39;
+services:
+    provider1:
+        image: provider
+        restart: always
+        network_mode: host
+        environment:
+            ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183
+            DUBBO_PORT: 20880
+            SERVER_PORT: 8080
+
+    provider2:
+        image: provider
+        restart: always
+        network_mode: host
+        environment:
+            ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183
+            DUBBO_PORT: 20881
+            SERVER_PORT: 8081
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口&lt;br /&gt;
+zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183&lt;/p&gt;
+
+&lt;p&gt;还有其它一些细节，可以参考源代码：&lt;br /&gt;
+&lt;a href=&#34;https://github.com/feng1st/microservices-demo&#34;&gt;https://github.com/feng1st/microservices-demo&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

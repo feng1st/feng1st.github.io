@@ -58,6 +58,30 @@
         
         
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Docker容器运行dubbo应用</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 27, 2017
+    </p>
+    
+    <p>参考了这篇文章： https://yq.aliyun.com/articles/60789
+大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
+它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
+但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。
+为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
+application.properties
+server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
+services.xml
+ &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
+docker-compose.yml
+version: '2' services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口
+zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
+还有其它一些细节，可以参考源代码：
+https://github.com/feng1st/microservices-demo</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+        
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-23-microservices/">微服务架构摘要</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 23, 2017
@@ -367,34 +391,6 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
 </article>
 
         
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-09-http-protocol/">HTTP协议摘要</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 9, 2017
-    </p>
-    
-    <p>HTTP协议概述  基于服务器/客户端，请求/响应
- 无连接（1.1开始支持长连接Web Socket）
- 无状态（需要依赖会话维持状态）
- 应用层协议，基于TCP
-  URL http://host:port/res_uri.html?param=...
- 协议：如http, https, ftp等
- 用户名/密码：部分协议例如ftp支持用户名密码
- 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口
- 访问资源：要访问资源的路径和参数
-  请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body}   起始行：Method Request-URI HTTP-Version
- 请求方法
- GET 请求Request-URI所标识的资源
- POST 在资源后附加新的数据
- HEAD 请求获取资源的响应消息报头
- PUT 请求服务器存储一个资源
- DELETE 请求删除资源
- TRACE 请求服务器回送收到的请求信息，用于诊断测试
- CONNECT 保留字</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-09-http-protocol/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-        
         
 <nav>
     <ul class="pager">
@@ -437,6 +433,10 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
     <div class="well">
         <h3 class="text-capitalize">tags</h3>
         <ul class="list-unstyled">
+        
+            <li><a href="/tags/docker">Docker</a></li>
+        
+            <li><a href="/tags/dubbo">Dubbo</a></li>
         
             <li><a href="/tags/gc">GC</a></li>
         

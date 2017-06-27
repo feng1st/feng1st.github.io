@@ -61,6 +61,34 @@
       <div class="articles">
           
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-09-http-protocol/">HTTP协议摘要</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 9, 2017
+    </p>
+    
+    <p>HTTP协议概述  基于服务器/客户端，请求/响应
+ 无连接（1.1开始支持长连接Web Socket）
+ 无状态（需要依赖会话维持状态）
+ 应用层协议，基于TCP
+  URL http://host:port/res_uri.html?param=...
+ 协议：如http, https, ftp等
+ 用户名/密码：部分协议例如ftp支持用户名密码
+ 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口
+ 访问资源：要访问资源的路径和参数
+  请求 GET /index.html HTTP/1.0&lt;CRLF&gt; Host:www.sina.com.cn&lt;CRLF&gt; Accept-Encoding:gzip, deflate&lt;CRLF&gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)&lt;CRLF&gt; Connection:Keep-Alive&lt;CRLF&gt; &lt;CRLF&gt; {Optional Content Body}   起始行：Method Request-URI HTTP-Version
+ 请求方法
+ GET 请求Request-URI所标识的资源
+ POST 在资源后附加新的数据
+ HEAD 请求获取资源的响应消息报头
+ PUT 请求服务器存储一个资源
+ DELETE 请求删除资源
+ TRACE 请求服务器回送收到的请求信息，用于诊断测试
+ CONNECT 保留字</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-09-http-protocol/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-08-tcp-ip-protocol/">TCP/IP协议摘要</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 8, 2017
@@ -175,6 +203,10 @@
     <div class="well">
         <h3 class="text-capitalize">tags</h3>
         <ul class="list-unstyled">
+        
+            <li><a href="/tags/docker">Docker</a></li>
+        
+            <li><a href="/tags/dubbo">Dubbo</a></li>
         
             <li><a href="/tags/gc">GC</a></li>
         
