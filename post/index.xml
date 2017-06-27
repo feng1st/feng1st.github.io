@@ -19,7 +19,7 @@
       <description>&lt;p&gt;参考了这篇文章： &lt;a href=&#34;https://yq.aliyun.com/articles/60789&#34;&gt;https://yq.aliyun.com/articles/60789&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。&lt;br /&gt;
-它们使用的是一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。&lt;/p&gt;
+它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。&lt;/p&gt;
 
 &lt;p&gt;但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。&lt;br /&gt;
 为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。&lt;/p&gt;
@@ -64,6 +64,8 @@ services:
 
 &lt;p&gt;起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口&lt;br /&gt;
 zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183&lt;/p&gt;
+
+&lt;p&gt;更复杂的部署，应考虑使用Docker Swarm&lt;/p&gt;
 
 &lt;p&gt;还有其它一些细节，可以参考源代码：&lt;br /&gt;
 &lt;a href=&#34;https://github.com/feng1st/microservices-demo&#34;&gt;https://github.com/feng1st/microservices-demo&lt;/a&gt;&lt;/p&gt;
