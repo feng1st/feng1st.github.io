@@ -60,18 +60,31 @@
             <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="https://feng1st.github.io/"/>
             <meta itemprop="dateModified" content="2017-06-11T00:00:00&#43;00:00">
             <meta itemprop="headline" content="Servlet笔记">
-            <meta itemprop="description" content=" 教程：
+            <meta itemprop="description" content="教程：
 http://tutorials.jenkov.com/java-servlets/
 一些思考点  Servlet的生命周期是怎样被容器管理的？
  Session是怎样被管理和传递的？
  分布式环境下Session是怎样被管理的？
- ServletContext是怎样被管理和传递的，典型用途是什么？
- 为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
+ 统一Session中心
+ 或者Session Sticky
+  ServletContext是怎样被管理和传递的，典型用途是什么？
+ request.getSession().getServletContext();
+  为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
  Filter和Servlet有什么异同？
- Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
- 怎样用Filter实现GZip，这个实现和AOP有什么区别？
- Session和ServletContext是线程安全的吗？
-  ">
+ 接口
+ Servlet: init(), service(), destroy()
+ HttpServlet: doGet(), doPost(), &hellip;
+  Filter: init(), doFilter(), destroy()
+  设计
+ Servlet: 面向事务
+ Filter: 面向切面
+   Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
+ filterChain最后一个默认的filter调用servlet
+  怎样用Filter实现GZip，这个实现和AOP有什么区别？
+ 判断请求头Accept-Encoding是否包括gzip
+ 增加响应头Content-Encoding
+ 用带GZip的Response封装原Response，并向后传递
+  Session和ServletContext是线程安全的吗？">
             <meta itemprop="url" content="https://feng1st.github.io/post/2017-06-11-servlet/">
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="https://feng1st.github.io/images/default.jpg" />
@@ -118,13 +131,52 @@ http://tutorials.jenkov.com/java-servlets/
 <ol>
 <li>Servlet的生命周期是怎样被<strong>容器</strong>管理的？<br /></li>
 <li>Session是怎样被管理和传递的？<br /></li>
-<li>分布式环境下Session是怎样被管理的？<br /></li>
-<li>ServletContext是怎样被管理和传递的，典型用途是什么？<br /></li>
+<li>分布式环境下Session是怎样被管理的？<br />
+
+<ol>
+<li>统一Session中心<br /></li>
+<li>或者Session Sticky<br /></li>
+</ol></li>
+<li>ServletContext是怎样被管理和传递的，典型用途是什么？<br />
+
+<ul>
+<li>request.getSession().getServletContext();<br /></li>
+</ul></li>
 <li>为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？<br /></li>
-<li>Filter和Servlet有什么异同？<br /></li>
-<li>Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet<br /></li>
-<li>怎样用Filter实现GZip，这个实现和AOP有什么区别？<br /></li>
-<li>Session和ServletContext是线程安全的吗？<br /></li>
+<li>Filter和Servlet有什么异同？<br />
+
+<ul>
+<li>接口<br />
+
+<ul>
+<li>Servlet: init(), service(), destroy()<br />
+
+<ul>
+<li>HttpServlet: doGet(), doPost(), &hellip;<br /></li>
+</ul></li>
+<li>Filter: init(), doFilter(), destroy()<br /></li>
+</ul></li>
+<li>设计<br />
+
+<ul>
+<li>Servlet: 面向事务<br /></li>
+<li>Filter: 面向切面<br /></li>
+</ul></li>
+</ul></li>
+<li>Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet<br />
+
+<ul>
+<li>filterChain最后一个默认的filter调用servlet<br /></li>
+</ul></li>
+<li>怎样用Filter实现GZip，这个实现和AOP有什么区别？<br />
+
+<ol>
+<li>判断请求头Accept-Encoding是否包括gzip<br /></li>
+<li>增加响应头Content-Encoding<br /></li>
+<li>用带GZip的Response封装原Response，并向后传递<br /></li>
+</ol></li>
+<li>Session和ServletContext是线程安全的吗？<br />
+不安全<br /></li>
 </ol>
 
 

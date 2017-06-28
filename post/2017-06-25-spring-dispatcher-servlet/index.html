@@ -185,6 +185,25 @@ DispatcherServlet流程  请求被DispatcherServlet截获
 </ul></li>
 </ol>
 
+<h2 id="filter和handlerinterceptor">Filter和HandlerInterceptor</h2>
+
+<p>总体来说，两者是类似的。不同点：</p>
+
+<ol>
+<li>Filter在web.xml定义，HandlerInterceptor在application context里定义<br /></li>
+<li>HandlerInterceptor接口分得更细<br /></li>
+<li>Filter一般用来处理请求内容和视图内容，比如压缩和分块<br /></li>
+<li>HandlerInterceptor用来处理一般性面向切面逻辑，比如授权<br />
+<br /></li>
+</ol>
+
+<pre><code>public interface HandlerInterceptor {
+    boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+    void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception;
+    void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception;
+}
+</code></pre>
+
 <h2 id="参考资料">参考资料</h2>
 
 <p><a href="http://www.chawenti.com/articles/23718.html">http://www.chawenti.com/articles/23718.html</a></p>
