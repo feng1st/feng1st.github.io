@@ -58,6 +58,70 @@
         
         
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-11-servlet/">Servlet笔记</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 11, 2017
+    </p>
+    
+    <p> 教程：
+http://tutorials.jenkov.com/java-servlets/
+一些思考点  Servlet的生命周期是怎样被容器管理的？
+ Session是怎样被管理和传递的？
+ 分布式环境下Session是怎样被管理的？
+ ServletContext是怎样被管理和传递的，典型用途是什么？
+ 为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
+ Filter和Servlet有什么异同？
+ Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
+ 怎样用Filter实现GZip，这个实现和AOP有什么区别？
+ Session和ServletContext是线程安全的吗？
+  </p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-11-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+        
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-10-java-nio/">Java NIO摘要</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 10, 2017
+    </p>
+    
+    <p>比较经典和精简的教程，先直接发链接：
+http://tutorials.jenkov.com/java-nio/
+NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想
+例如，换用消息队列，就可以扩展到分布式系统里去
+一些思考点  Channel和Stream有什么不同？
+ Channel双向，Stream一般单向
+ Channel支持异步
+ Channel搭配Buffer使用
+  ServerSocketChannel和SocketChannel有什么不同？
+ SocketChannel用于单个连接
+ ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel
+  FileChannel.transferTo(&hellip;, SocketChannel)有什么需要注意的？
+ SocketChannel非阻塞且发送缓冲已满，可能只传输部分
+  SocketChannel的blocking和non-blocking模式有什么不同？
+ 相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功
+ write()/read()可能未实际读写就返回
+  ServerSocketChannel的blocking和non-blocking模式有什么不同？
+ 相对于阻塞，accept()直接返回，如没有接受连接，返回null
+ write()/read()可能未实际读写就返回
+  Blocking模式Socket有什么问题？
+ 一般会用一个线程处理一个连接，所以支撑的连接数非常有限
+ 如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池
+  Non-blocking模式Socket有哪些挑战？
+ 读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成
+ 长度：TLV中的L
+ 内容：类型是包含在这里面的，比如protobuf协议
+ 校验：用于验证数据错误，或者网络错误，通知重传
+  读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮
+ 一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下
+ 总段数
+ 本段序号
+ 本段内容</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-10-java-nio/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+        
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-09-http-protocol/">HTTP协议摘要</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 9, 2017
@@ -199,6 +263,8 @@
         <h3 class="text-capitalize">tags</h3>
         <ul class="list-unstyled">
         
+            <li><a href="/tags/dispatcherservlet">DispatcherServlet</a></li>
+        
             <li><a href="/tags/docker">Docker</a></li>
         
             <li><a href="/tags/dubbo">Dubbo</a></li>
@@ -219,6 +285,8 @@
         
             <li><a href="/tags/network">Network</a></li>
         
+            <li><a href="/tags/restful">RESTful</a></li>
+        
             <li><a href="/tags/soa">SOA</a></li>
         
             <li><a href="/tags/service">Service</a></li>
@@ -226,6 +294,8 @@
             <li><a href="/tags/servlet">Servlet</a></li>
         
             <li><a href="/tags/servlet-container">Servlet-Container</a></li>
+        
+            <li><a href="/tags/spring">Spring</a></li>
         
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
         

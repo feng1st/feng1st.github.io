@@ -73,6 +73,336 @@ zookeeper集群使用自己的网络，但是将端口映射到了主机的2181,
     </item>
     
     <item>
+      <title>Spring实现RESTful Service笔记</title>
+      <link>https://feng1st.github.io/post/2017-06-26-spring-rest/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-26-spring-rest/</guid>
+      <description>
+
+&lt;p&gt;来源：&lt;br /&gt;
+&lt;a href=&#34;https://spring.io/guides/gs/rest-service/&#34;&gt;https://spring.io/guides/gs/rest-service/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;本文采用代码及分析的形式&lt;/p&gt;
+
+&lt;h2 id=&#34;greetingcontroller-java&#34;&gt;GreetingController.java&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;src/main/java/hello/GreetingController.java&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package hello;
+
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GreetingController {
+
+    private static final String template = &amp;quot;Hello, %s!&amp;quot;;
+    private final AtomicLong counter = new AtomicLong();
+
+    @RequestMapping(&amp;quot;/greeting&amp;quot;)
+    public Greeting greeting(@RequestParam(value=&amp;quot;name&amp;quot;, defaultValue=&amp;quot;World&amp;quot;) String name) {
+        return new Greeting(counter.incrementAndGet(),
+                            String.format(template, name));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@RestController&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;整合&lt;code&gt;@Controller&lt;/code&gt;, &lt;code&gt;@ResponseBody&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Controller&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@ResponseBody&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;对应的是&lt;code&gt;@RequestBody&lt;/code&gt;，通过Request header的Content-Type，将Request的body转换成对象&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@RequestMapping&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;URL到Controller类和方法的映射&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@RequestParam&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;URL参数到方法参数的映射&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;RestController和一般的MVC Controller最主要的不同的地方：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RestController用Response Body返回json序列化后的对象&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MVC Controller使用视图模板，返回ModelAndView经渲染后的HTML视图&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+&lt;figure &gt;
+    &lt;a href=&#34;1353059506_5137.jpg&#34;&gt;
+        &lt;img src=&#34;1353059506_5137.jpg&#34; /&gt;
+    &lt;/a&gt;
+    
+&lt;/figure&gt;
+&lt;br /&gt;
+图片来源：&lt;a href=&#34;http://blog.csdn.net/cswhale/article/details/16941281&#34;&gt;http://blog.csdn.net/cswhale/article/details/16941281&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;DispatcherServlet实际上分开处理请求和响应的&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;处理请求&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RestController: 返回对象&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MVC: 返回ModelAndView&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理响应&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RestController: 找到合适的HttpMessageConverter，转换成字符串，写入Response的Body&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MVC: 找到对应的View，对ModelAndView进行渲染，渲染成HTML&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;application-java&#34;&gt;Application.java&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;src/main/java/hello/Application.java&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package hello;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@SpringBootApplication&lt;/code&gt;, 整合下列注解:&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@Configuration&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;类作为Bean定义的来源，参考&lt;code&gt;AnnotationConfigApplicationContext&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@EnableAutoConfiguration&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;指示Spring Boot根据classpath、其它Bean和一些属性自动配置&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@EnableWebMvc&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果在classpath发现&lt;strong&gt;spring-webmvc&lt;/strong&gt;，自动启用&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;视应用为web application，并启用DispatcherServlet等关键行为&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@ComponentScan&lt;/code&gt;&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;从类所在包下扫描其它组件、配置、服务，找到其它controller&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;整个SpringBoot应用可以打包成一个单独的jar，这个特性非常有利于部署到容器&lt;/p&gt;
+
+&lt;h2 id=&#34;依靠配置实现mvc&#34;&gt;依靠配置实现MVC&lt;/h2&gt;
+
+&lt;p&gt;如果不使用SpringBoot，而是通过配置来实现，应该怎样做呢？&lt;br /&gt;
+这个不是完全RESTful相关的，但有助于我们了解Spring的内部机制&lt;/p&gt;
+
+&lt;p&gt;Controller接口，注意不是@Controller注解：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface Controller {
+    ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该方法被DispatcherServlet调用&lt;/p&gt;
+
+&lt;p&gt;重要的实现类：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AbstractController：检查HTTP方法，检查Session等&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MultiActionController：在一个Controller里处理多个动作，比如对同一资源的增删改查，通过MethodNameResolver映射请求到方法&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;web.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;ISO-8859-1&amp;quot;?&amp;gt;
+&amp;lt;web-app xmlns=&amp;quot;http://java.sun.com/xml/ns/j2ee&amp;quot;
+  xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;
+  xsi:schemaLocation=&amp;quot;http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd&amp;quot;
+  version=&amp;quot;2.5&amp;quot;&amp;gt;
+&amp;lt;servlet&amp;gt;
+     &amp;lt;servlet-name&amp;gt;dispatcherServlet&amp;lt;/servlet-name&amp;gt;
+     &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;lt;/servlet-class&amp;gt;
+     &amp;lt;init-param&amp;gt;
+           &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt;
+           &amp;lt;param-value&amp;gt;/WEB-INF/dispatcherServlet-servlet.xml&amp;lt;/param-value&amp;gt;
+     &amp;lt;/init-param&amp;gt;
+     &amp;lt;load-on-startup&amp;gt;1&amp;lt;/load-on-startup&amp;gt;
+&amp;lt;/servlet&amp;gt;
+&amp;lt;servlet-mapping&amp;gt;
+     &amp;lt;servlet-name&amp;gt;dispatcherServlet&amp;lt;/servlet-name&amp;gt;
+     &amp;lt;url-pattern&amp;gt;*.do&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/servlet-mapping&amp;gt;
+&amp;lt;/web-app&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;所有以.do结尾的请求，都将被DispatcherServlet处理&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;dispatcherServlet-servlet.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;!DOCTYPE beans PUBLIC &amp;quot;-//SPRING//DTD BEAN 2.0//EN&amp;quot;
+&amp;quot;http://www.springframework.org/dtd/spring-beans-2.0.dtd&amp;quot;&amp;gt;
+&amp;lt;beans&amp;gt;
+     &amp;lt;bean id=&amp;quot;urlMapping&amp;quot; class=&amp;quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping&amp;quot;&amp;gt;
+            &amp;lt;property name=&amp;quot;mappings&amp;quot;&amp;gt;
+                 &amp;lt;props&amp;gt;
+                       &amp;lt;prop key=&amp;quot;sample.do&amp;quot;&amp;gt;sampleMultiActionController&amp;lt;/prop&amp;gt;
+                 &amp;lt;/props&amp;gt;
+            &amp;lt;/property&amp;gt;
+     &amp;lt;/bean&amp;gt;
+     &amp;lt;bean id=&amp;quot;viewResolver&amp;quot; class=&amp;quot;org.springframework.web.servlet.view.InternalResourceViewResolver&amp;quot;&amp;gt;
+            &amp;lt;property name=&amp;quot;viewClass&amp;quot;&amp;gt;
+                 &amp;lt;value&amp;gt;org.springframework.web.servlet.view.InternalResourceView&amp;lt;/value&amp;gt;
+            &amp;lt;/property&amp;gt;
+            &amp;lt;property name=&amp;quot;prefix&amp;quot;&amp;gt;
+                 &amp;lt;value&amp;gt;/WEB-INF/jsp/&amp;lt;/value&amp;gt;
+            &amp;lt;/property&amp;gt;
+            &amp;lt;property name=&amp;quot;suffix&amp;quot;&amp;gt;
+                 &amp;lt;value&amp;gt;.jsp&amp;lt;/value&amp;gt;
+            &amp;lt;/property&amp;gt;
+     &amp;lt;/bean&amp;gt;
+
+
+     &amp;lt;bean id=&amp;quot;sampleMultiActionController&amp;quot; class=&amp;quot;com.test.SampleMultiActionController&amp;quot;&amp;gt;
+           &amp;lt;property name=&amp;quot;methodNameResolver&amp;quot;&amp;gt;
+                 &amp;lt;ref bean=&amp;quot;paraMethodResolver&amp;quot;/&amp;gt;
+           &amp;lt;/property&amp;gt;
+     &amp;lt;!--viewName属性将依赖注入sampleMultiActionController类--&amp;gt;
+           &amp;lt;property name=&amp;quot;viewName&amp;quot;&amp;gt;
+                 &amp;lt;value&amp;gt;showme&amp;lt;/value&amp;gt;
+           &amp;lt;/property&amp;gt;
+     &amp;lt;/bean&amp;gt;
+
+     &amp;lt;bean id=&amp;quot;paraMethodResolver&amp;quot; class=&amp;quot;org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver&amp;quot;&amp;gt;
+           &amp;lt;property name=&amp;quot;paramName&amp;quot; value=&amp;quot;whichMethod&amp;quot;/&amp;gt;
+     &amp;lt;/bean&amp;gt;
+&amp;lt;/beans&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sample.do&lt;/code&gt;会被&lt;code&gt;SampleMultiActionController&lt;/code&gt;处理&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;viewName&lt;/code&gt;即&lt;code&gt;showme&lt;/code&gt;，被依赖注入传入Controller，通过&lt;code&gt;return new ModelAndView(getViewName(), ...)&lt;/code&gt;指定视图名称&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;viewResolver&lt;/code&gt;解析视图为&lt;code&gt;/WEB-INF/jsp/showme.jsp&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;methodNameResolver&lt;/code&gt;指定&lt;code&gt;ParameterMethodNameResolver&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;paraMethodResolver&lt;/code&gt;指定的参数名为&lt;code&gt;whichMethod&lt;/code&gt;，即能将&lt;code&gt;sample.do?whichMethod=insert&lt;/code&gt;这样的请求，映射到&lt;code&gt;insert()&lt;/code&gt;方法&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spring DispatcherServlet相关知识点</title>
+      <link>https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/</guid>
+      <description>
+
+&lt;h2 id=&#34;dispatcherservlet作用&#34;&gt;DispatcherServlet作用&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;作为Spring MVC的集中访问点&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;通过HandlerMapping，将请求映射到Handler&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;通过不同的HandlerAdaptor，支持不同的处理器&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;通过ViewResolver，支持到具体视图的解析&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;通过HandlerExceptionResolver，实现对异常的处理&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;每一部分都可以很方便的扩展&lt;/p&gt;
+
+&lt;h2 id=&#34;dispatcherservlet流程&#34;&gt;DispatcherServlet流程&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;请求被DispatcherServlet截获&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Object returnValue = invokeForRequest(...);&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;this.returnValueHandlers.handleReturnValue(returnValue, ...);&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;处理请求主要是支持对不同类型的参数的解析&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过argumentResolvers实现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在父类InvocableHandlerMethod定义&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodArgumentResolverComposite类&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodArgumentResolver的组合&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理响应主要是对不同返回值做不同的转换&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过returnValueHandlers实现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodReturnValueHandlerComposite类&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodReturnValueHandler的组合&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;这就是为什么Controller的方法自动支持包括&lt;code&gt;@RequestBody&lt;/code&gt;, &lt;code&gt;@RequestParam&lt;/code&gt;，&lt;code&gt;@PathValue&lt;/code&gt;, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;例子：RequestResponseBodyMethodProcessor&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用来处理&lt;code&gt;@RequestBody&lt;/code&gt;和&lt;code&gt;@ResponseBody&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.chawenti.com/articles/23718.html&#34;&gt;http://www.chawenti.com/articles/23718.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>微服务架构摘要</title>
       <link>https://feng1st.github.io/post/2017-06-23-microservices/</link>
       <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>

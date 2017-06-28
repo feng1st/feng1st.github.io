@@ -86,6 +86,64 @@ https://github.com/feng1st/microservices-demo</p>
 
           
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Spring实现RESTful Service笔记</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 26, 2017
+    </p>
+    
+    <p>来源：
+https://spring.io/guides/gs/rest-service/
+本文采用代码及分析的形式
+GreetingController.java src/main/java/hello/GreetingController.java
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
+ 整合@Controller, @ResponseBody
+ @Controller
+ MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
+  @ResponseBody
+ 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
+ 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
+   @RequestMapping</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 25, 2017
+    </p>
+    
+    <p>DispatcherServlet作用  作为Spring MVC的集中访问点
+ 通过HandlerMapping，将请求映射到Handler
+ 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
+  通过不同的HandlerAdaptor，支持不同的处理器
+ 通过ViewResolver，支持到具体视图的解析
+ 通过HandlerExceptionResolver，实现对异常的处理
+  每一部分都可以很方便的扩展
+DispatcherServlet流程  请求被DispatcherServlet截获
+ DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor
+ HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法
+ ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理
+ Object returnValue = invokeForRequest(...);
+ this.returnValueHandlers.handleReturnValue(returnValue, ...);
+  处理请求主要是支持对不同类型的参数的解析
+ 通过argumentResolvers实现
+ 在父类InvocableHandlerMethod定义
+ 是HandlerMethodArgumentResolverComposite类
+ 是HandlerMethodArgumentResolver的组合
+  处理响应主要是对不同返回值做不同的转换
+ 通过returnValueHandlers实现
+ 是HandlerMethodReturnValueHandlerComposite类
+ 是HandlerMethodReturnValueHandler的组合
+  argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的
+ RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的
+ 这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler
+ 这就是为什么Controller的方法自动支持包括@RequestBody, @RequestParam，@PathValue, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-23-microservices/">微服务架构摘要</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 23, 2017
@@ -286,6 +344,8 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
         <h3 class="text-capitalize">tags</h3>
         <ul class="list-unstyled">
         
+            <li><a href="/tags/dispatcherservlet">DispatcherServlet</a></li>
+        
             <li><a href="/tags/docker">Docker</a></li>
         
             <li><a href="/tags/dubbo">Dubbo</a></li>
@@ -306,6 +366,8 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
         
             <li><a href="/tags/network">Network</a></li>
         
+            <li><a href="/tags/restful">RESTful</a></li>
+        
             <li><a href="/tags/soa">SOA</a></li>
         
             <li><a href="/tags/service">Service</a></li>
@@ -313,6 +375,8 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
             <li><a href="/tags/servlet">Servlet</a></li>
         
             <li><a href="/tags/servlet-container">Servlet-Container</a></li>
+        
+            <li><a href="/tags/spring">Spring</a></li>
         
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
         

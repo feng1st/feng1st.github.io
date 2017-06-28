@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.18.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="知耻而后勇，知不足而后进">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="/css/bootstrap-3.3.7.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/highlight-github-9.10.0.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
+
+    
+    <title>dispatcherservlet - 知耻而后勇，知不足而后进</title>
+    <meta property='og:title' content="dispatcherservlet - 知耻而后勇，知不足而后进">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="https://feng1st.github.io/tags/dispatcherservlet/">
+    
+    
+</head>
+
+<body>
+
+
+    <div class="container">
+
+      
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">知耻而后勇，知不足而后进</a>
+          </div>
+          
+        </div>
+      </nav>
+
+
+<div class="row">
+    <div class="col-lg-8">
+
+      <header class="title"><h1>dispatcherservlet</h1></header>
+
+      <div class="articles">
+          
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 25, 2017
+    </p>
+    
+    <p>DispatcherServlet作用  作为Spring MVC的集中访问点
+ 通过HandlerMapping，将请求映射到Handler
+ 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
+  通过不同的HandlerAdaptor，支持不同的处理器
+ 通过ViewResolver，支持到具体视图的解析
+ 通过HandlerExceptionResolver，实现对异常的处理
+  每一部分都可以很方便的扩展
+DispatcherServlet流程  请求被DispatcherServlet截获
+ DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor
+ HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法
+ ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理
+ Object returnValue = invokeForRequest(...);
+ this.returnValueHandlers.handleReturnValue(returnValue, ...);
+  处理请求主要是支持对不同类型的参数的解析
+ 通过argumentResolvers实现
+ 在父类InvocableHandlerMethod定义
+ 是HandlerMethodArgumentResolverComposite类
+ 是HandlerMethodArgumentResolver的组合
+  处理响应主要是对不同返回值做不同的转换
+ 通过returnValueHandlers实现
+ 是HandlerMethodReturnValueHandlerComposite类
+ 是HandlerMethodReturnValueHandler的组合
+  argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的
+ RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的
+ 这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler
+ 这就是为什么Controller的方法自动支持包括@RequestBody, @RequestParam，@PathValue, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+          
+      </div>
+
+      
+
+    </div>
+    <aside class="col-md-4">
+
+    
+
+    
+
+    
+    
+    <div class="well">
+        <h3 class="text-capitalize">categories</h3>
+        <ul class="list-unstyled">
+        
+            <li><a href="/categories/java">Java</a></li>
+        
+            <li><a href="/categories/network">Network</a></li>
+        
+            <li><a href="/categories/service">Service</a></li>
+        
+            <li><a href="/categories/utility">Utility</a></li>
+        
+            <li><a href="/categories/web">Web</a></li>
+        
+        </ul>
+    </div>
+    
+    
+    
+    <div class="well">
+        <h3 class="text-capitalize">tags</h3>
+        <ul class="list-unstyled">
+        
+            <li><a href="/tags/dispatcherservlet">DispatcherServlet</a></li>
+        
+            <li><a href="/tags/docker">Docker</a></li>
+        
+            <li><a href="/tags/dubbo">Dubbo</a></li>
+        
+            <li><a href="/tags/gc">GC</a></li>
+        
+            <li><a href="/tags/http">HTTP</a></li>
+        
+            <li><a href="/tags/high-concurrency">High-Concurrency</a></li>
+        
+            <li><a href="/tags/jvm">JVM</a></li>
+        
+            <li><a href="/tags/java">Java</a></li>
+        
+            <li><a href="/tags/microservices">Microservices</a></li>
+        
+            <li><a href="/tags/nio">NIO</a></li>
+        
+            <li><a href="/tags/network">Network</a></li>
+        
+            <li><a href="/tags/restful">RESTful</a></li>
+        
+            <li><a href="/tags/soa">SOA</a></li>
+        
+            <li><a href="/tags/service">Service</a></li>
+        
+            <li><a href="/tags/servlet">Servlet</a></li>
+        
+            <li><a href="/tags/servlet-container">Servlet-Container</a></li>
+        
+            <li><a href="/tags/spring">Spring</a></li>
+        
+            <li><a href="/tags/tcp-ip">TCP-IP</a></li>
+        
+            <li><a href="/tags/uml">UML</a></li>
+        
+            <li><a href="/tags/utility">Utility</a></li>
+        
+            <li><a href="/tags/web">Web</a></li>
+        
+            <li><a href="/tags/web-server">Web-Server</a></li>
+        
+        </ul>
+    </div>
+    
+    
+
+</aside>
+
+</div>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            <span id="copyright">&copy;</span>
+                            
+                                2017
+                            
+                            
+                                <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a> -
+                            
+                                nf_xp
+                                <br />
+                            
+                                Template by <a href="https://github.com/Fale/fale.io">fale.io</a> -
+                            
+                            
+                                Theme by <a href="https://github.com/Fale/bootstrap2hugo">bootstrap2hugo</a> -
+                            
+                            Powered by <a href="http://gohugo.io" target="_blank">Hugo</a><br />
+                        </p>
+                    </div>
+                </div>
+            
+            </footer>
+        </div>
+
+        <script src="/js/jquery-3.1.1.min.js"></script>
+        <script src="/js/bootstrap-3.3.7.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                var css = document.createElement('link');
+                css.href = '/css/font-awesome-4.7.0.min.css';
+                css.rel = 'stylesheet';
+                css.type = 'text/css';
+                document.getElementsByTagName('head')[0].appendChild(css);
+            })();
+        </script>
+        <script src="/js/highlight-9.10.0.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript" src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
+        <script>
+(function() {
+  if (window.location.hostname === "localhost") {
+    console.log("Local dev, so no Google Analytics.");
+    return;
+  } else {
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', '', 'auto');
+    ga('set', 'anonymizeIp', true);
+    ga('send', 'pageview');
+  }
+})();
+</script>
+
+    </body>
+</html>
+

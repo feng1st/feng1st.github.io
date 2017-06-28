@@ -7,6 +7,16 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/post/2017-06-26-spring-rest/</loc>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/</loc>
+    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/post/2017-06-23-microservices/</loc>
     <lastmod>2017-06-23T00:00:00+00:00</lastmod>
   </url>
@@ -83,6 +93,12 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/tags/dispatcherservlet/</loc>
+    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/tags/docker/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -113,14 +129,14 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/categories/java/</loc>
-    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/tags/java/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/tags/java/</loc>
-    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/categories/java/</loc>
+    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -137,14 +153,14 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/categories/network/</loc>
-    <lastmod>2017-06-09T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/tags/network/</loc>
+    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/tags/network/</loc>
-    <lastmod>2017-06-10T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/categories/network/</loc>
+    <lastmod>2017-06-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -155,14 +171,20 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/categories/service/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/tags/restful/</loc>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://feng1st.github.io/tags/service/</loc>
     <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/categories/service/</loc>
+    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -185,6 +207,12 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/tags/spring/</loc>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/tags/tcp-ip/</loc>
     <lastmod>2017-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -197,26 +225,26 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/categories/utility/</loc>
-    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://feng1st.github.io/tags/utility/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/categories/web/</loc>
-    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <loc>https://feng1st.github.io/categories/utility/</loc>
+    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://feng1st.github.io/tags/web/</loc>
     <lastmod>2017-06-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/categories/web/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -83,6 +83,64 @@ https://github.com/feng1st/microservices-demo</p>
 
         
             <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Spring实现RESTful Service笔记</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 26, 2017
+    </p>
+    
+    <p>来源：
+https://spring.io/guides/gs/rest-service/
+本文采用代码及分析的形式
+GreetingController.java src/main/java/hello/GreetingController.java
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
+ 整合@Controller, @ResponseBody
+ @Controller
+ MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
+  @ResponseBody
+ 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
+ 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
+   @RequestMapping</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+        
+            <article class="well">
+    <h2><a href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a></h2>
+    <p>
+        <i class="fa fa-clock-o"></i> Posted on June 25, 2017
+    </p>
+    
+    <p>DispatcherServlet作用  作为Spring MVC的集中访问点
+ 通过HandlerMapping，将请求映射到Handler
+ 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
+  通过不同的HandlerAdaptor，支持不同的处理器
+ 通过ViewResolver，支持到具体视图的解析
+ 通过HandlerExceptionResolver，实现对异常的处理
+  每一部分都可以很方便的扩展
+DispatcherServlet流程  请求被DispatcherServlet截获
+ DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor
+ HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法
+ ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理
+ Object returnValue = invokeForRequest(...);
+ this.returnValueHandlers.handleReturnValue(returnValue, ...);
+  处理请求主要是支持对不同类型的参数的解析
+ 通过argumentResolvers实现
+ 在父类InvocableHandlerMethod定义
+ 是HandlerMethodArgumentResolverComposite类
+ 是HandlerMethodArgumentResolver的组合
+  处理响应主要是对不同返回值做不同的转换
+ 通过returnValueHandlers实现
+ 是HandlerMethodReturnValueHandlerComposite类
+ 是HandlerMethodReturnValueHandler的组合
+  argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的
+ RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的
+ 这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler
+ 这就是为什么Controller的方法自动支持包括@RequestBody, @RequestParam，@PathValue, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数</p>
+    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
+</article>
+
+        
+            <article class="well">
     <h2><a href="https://feng1st.github.io/post/2017-06-23-microservices/">微服务架构摘要</a></h2>
     <p>
         <i class="fa fa-clock-o"></i> Posted on June 23, 2017
@@ -328,70 +386,6 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
 </article>
 
         
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-11-servlet/">Servlet笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 11, 2017
-    </p>
-    
-    <p> 教程：
-http://tutorials.jenkov.com/java-servlets/
-一些思考点  Servlet的生命周期是怎样被容器管理的？
- Session是怎样被管理和传递的？
- 分布式环境下Session是怎样被管理的？
- ServletContext是怎样被管理和传递的，典型用途是什么？
- 为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
- Filter和Servlet有什么异同？
- Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
- 怎样用Filter实现GZip，这个实现和AOP有什么区别？
- Session和ServletContext是线程安全的吗？
-  </p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-11-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-        
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-10-java-nio/">Java NIO摘要</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 10, 2017
-    </p>
-    
-    <p>比较经典和精简的教程，先直接发链接：
-http://tutorials.jenkov.com/java-nio/
-NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想
-例如，换用消息队列，就可以扩展到分布式系统里去
-一些思考点  Channel和Stream有什么不同？
- Channel双向，Stream一般单向
- Channel支持异步
- Channel搭配Buffer使用
-  ServerSocketChannel和SocketChannel有什么不同？
- SocketChannel用于单个连接
- ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel
-  FileChannel.transferTo(&hellip;, SocketChannel)有什么需要注意的？
- SocketChannel非阻塞且发送缓冲已满，可能只传输部分
-  SocketChannel的blocking和non-blocking模式有什么不同？
- 相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功
- write()/read()可能未实际读写就返回
-  ServerSocketChannel的blocking和non-blocking模式有什么不同？
- 相对于阻塞，accept()直接返回，如没有接受连接，返回null
- write()/read()可能未实际读写就返回
-  Blocking模式Socket有什么问题？
- 一般会用一个线程处理一个连接，所以支撑的连接数非常有限
- 如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池
-  Non-blocking模式Socket有哪些挑战？
- 读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成
- 长度：TLV中的L
- 内容：类型是包含在这里面的，比如protobuf协议
- 校验：用于验证数据错误，或者网络错误，通知重传
-  读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮
- 一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下
- 总段数
- 本段序号
- 本段内容</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-10-java-nio/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-        
         
 <nav>
     <ul class="pager">
@@ -435,6 +429,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
         <h3 class="text-capitalize">tags</h3>
         <ul class="list-unstyled">
         
+            <li><a href="/tags/dispatcherservlet">DispatcherServlet</a></li>
+        
             <li><a href="/tags/docker">Docker</a></li>
         
             <li><a href="/tags/dubbo">Dubbo</a></li>
@@ -455,6 +451,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
         
             <li><a href="/tags/network">Network</a></li>
         
+            <li><a href="/tags/restful">RESTful</a></li>
+        
             <li><a href="/tags/soa">SOA</a></li>
         
             <li><a href="/tags/service">Service</a></li>
@@ -462,6 +460,8 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
             <li><a href="/tags/servlet">Servlet</a></li>
         
             <li><a href="/tags/servlet-container">Servlet-Container</a></li>
+        
+            <li><a href="/tags/spring">Spring</a></li>
         
             <li><a href="/tags/tcp-ip">TCP-IP</a></li>
         
