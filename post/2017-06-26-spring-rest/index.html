@@ -188,24 +188,6 @@ public class GreetingController {
 <br />
 图片来源：<a href="http://blog.csdn.net/cswhale/article/details/16941281">http://blog.csdn.net/cswhale/article/details/16941281</a></p>
 
-<p>DispatcherServlet实际上分开处理请求和响应的</p>
-
-<ul>
-<li>处理请求<br />
-
-<ul>
-<li>RestController: 返回对象<br /></li>
-<li>MVC: 返回ModelAndView<br /></li>
-</ul></li>
-<li>处理响应<br />
-
-<ul>
-<li>RestController: 找到合适的HttpMessageConverter，转换成字符串，写入Response的Body<br /></li>
-<li>MVC: 找到对应的View，对ModelAndView进行渲染，渲染成HTML<br />
-<br /></li>
-</ul></li>
-</ul>
-
 <h2 id="application-java">Application.java</h2>
 
 <p><code>src/main/java/hello/Application.java</code></p>
