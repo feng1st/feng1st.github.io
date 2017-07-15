@@ -134,12 +134,12 @@ DispatcherServlet流程  请求被DispatcherServlet截获
  不同的handler接口不同，通过adaptor统一接口
  DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
  HandlerMethod对应的是RequestMappingHandlerAdaptor
-  HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
+  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
+ HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
  除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
   ServletInvocableHandlerMethod.invokeAndHandle()里
  用argumentResolvers和dataBinderFactory转化参数
- 用argumentResolvers解析参数
- 用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参</p>
+ 用argumentResolvers解析参数</p>
     <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
 </article>
 

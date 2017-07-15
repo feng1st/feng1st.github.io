@@ -306,6 +306,7 @@ public class Application {
 &lt;li&gt;DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;HandlerMethod对应的是RequestMappingHandlerAdaptor&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod&lt;br /&gt;
 
 &lt;ul&gt;
