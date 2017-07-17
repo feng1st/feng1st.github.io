@@ -188,6 +188,24 @@ public class GreetingController {
 <br />
 图片来源：<a href="http://blog.csdn.net/cswhale/article/details/16941281">http://blog.csdn.net/cswhale/article/details/16941281</a></p>
 
+<p>DispatcherServlet实际上分开处理请求和响应的</p>
+
+<ul>
+<li>处理请求<br />
+
+<ul>
+<li>RestController: 返回对象<br /></li>
+<li>MVC: 返回ModelAndView<br /></li>
+</ul></li>
+<li>处理响应<br />
+
+<ul>
+<li>RestController: 找到合适的HttpMessageConverter，转换成字符串，写入Response的Body<br /></li>
+<li>MVC: 找到对应的View，对ModelAndView进行渲染，渲染成HTML<br />
+<br /></li>
+</ul></li>
+</ul>
+
 <h2 id="application-java">Application.java</h2>
 
 <p><code>src/main/java/hello/Application.java</code></p>
@@ -340,25 +358,6 @@ public class Application {
 
             <aside>
                 
-                
-<div id="disqus_thread"></div>
-<script>
-    
-
-    
-
-    (function() {  
-        var d = document, s = d.createElement('script');
-        
-        s.src = '//.disqus.com/embed.js';
-        
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-
             </aside>
         </article>
 
@@ -489,31 +488,6 @@ public class Application {
 
 <script type="text/javascript" src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
-
-        <script>
-(function() {
-  if (window.location.hostname === "localhost") {
-    console.log("Local dev, so no Google Analytics.");
-    return;
-  } else {
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', '', 'auto');
-    ga('set', 'anonymizeIp', true);
-    ga('send', 'pageview');
-  }
-})();
-</script>
 
     </body>
 </html>

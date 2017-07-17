@@ -118,25 +118,24 @@ package hello; import java.util.concurrent.atomic.AtomicLong; import org.springf
  通过HandlerExceptionResolver，实现对异常的处理
   每一部分都可以很方便的扩展
 DispatcherServlet流程  请求被DispatcherServlet截获
- DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
- 常见的handlerMapping：
- RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
- 内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理
-  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置
-   handlerMapping构造一个HandlerExecutionChain
- HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
- Handler是一个HandlerMethod，通过构造函数参数传入request
- Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换
-   用HandlerAdaptor封装chain里的handler
- 不同的handler接口不同，通过adaptor统一接口
- DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
- HandlerMethod对应的是RequestMappingHandlerAdaptor
-  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
- HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
- 除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
-  ServletInvocableHandlerMethod.invokeAndHandle()里
- 用argumentResolvers和dataBinderFactory转化参数
- 用argumentResolvers解析参数</p>
+ DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor
+ HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法
+ ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理
+ Object returnValue = invokeForRequest(...);
+ this.returnValueHandlers.handleReturnValue(returnValue, ...);
+  处理请求主要是支持对不同类型的参数的解析
+ 通过argumentResolvers实现
+ 在父类InvocableHandlerMethod定义
+ 是HandlerMethodArgumentResolverComposite类
+ 是HandlerMethodArgumentResolver的组合
+  处理响应主要是对不同返回值做不同的转换
+ 通过returnValueHandlers实现
+ 是HandlerMethodReturnValueHandlerComposite类
+ 是HandlerMethodReturnValueHandler的组合
+  argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的
+ RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的
+ 这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler
+ 这就是为什么Controller的方法自动支持包括@RequestBody, @RequestParam，@PathValue, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数</p>
     <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
 </article>
 
@@ -526,31 +525,6 @@ I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，�
 
 <script type="text/javascript" src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
-
-        <script>
-(function() {
-  if (window.location.hostname === "localhost") {
-    console.log("Local dev, so no Google Analytics.");
-    return;
-  } else {
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', '', 'auto');
-    ga('set', 'anonymizeIp', true);
-    ga('send', 'pageview');
-  }
-})();
-</script>
 
     </body>
 </html>

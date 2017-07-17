@@ -158,6 +158,24 @@ public class GreetingController {
 &lt;br /&gt;
 图片来源：&lt;a href=&#34;http://blog.csdn.net/cswhale/article/details/16941281&#34;&gt;http://blog.csdn.net/cswhale/article/details/16941281&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;DispatcherServlet实际上分开处理请求和响应的&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;处理请求&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RestController: 返回对象&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MVC: 返回ModelAndView&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理响应&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RestController: 找到合适的HttpMessageConverter，转换成字符串，写入Response的Body&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;MVC: 找到对应的View，对ModelAndView进行渲染，渲染成HTML&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&#34;application-java&#34;&gt;Application.java&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;src/main/java/hello/Application.java&lt;/code&gt;&lt;/p&gt;
@@ -338,66 +356,37 @@ public class Application {
 
 &lt;ol&gt;
 &lt;li&gt;请求被DispatcherServlet截获&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;常见的handlerMapping：&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;handlerMapping构造一个HandlerExecutionChain&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;HandlerExecutionChain包含多个HandlerInterceptor和一个Handler&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Handler是一个HandlerMethod，通过构造函数参数传入request&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;用HandlerAdaptor封装chain里的handler&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不同的handler接口不同，通过adaptor统一接口&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;HandlerMethod对应的是RequestMappingHandlerAdaptor&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;ServletInvocableHandlerMethod.invokeAndHandle()里&lt;br /&gt;
+&lt;li&gt;DispatcherServlet根据handlerMapping，获得一个HandlerExecutionChain，然后获得HandlerAdaptor&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;HandlerAdaptor实例化一个ServletInvocableHandlerMethod，对应具体Contrller的一个方法&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;ServletInvocableHandlerMethod.invokeAndHandle()分两步进行处理&lt;br /&gt;
 
 &lt;ol&gt;
-&lt;li&gt;用argumentResolvers和dataBinderFactory转化参数&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;用argumentResolvers解析参数&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;调用用户在Controller的方法实现&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;用returnValueHandlers处理返回的结果&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;对于@ResponseBody类，直接转换成xml/json后写response，并返回null&lt;br /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;否则返回一个ModelAndView&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Object returnValue = invokeForRequest(...);&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;this.returnValueHandlers.handleReturnValue(returnValue, ...);&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor&lt;br /&gt;
+&lt;li&gt;处理请求主要是支持对不同类型的参数的解析&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过argumentResolvers实现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在父类InvocableHandlerMethod定义&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodArgumentResolverComposite类&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodArgumentResolver的组合&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;处理响应主要是对不同返回值做不同的转换&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过returnValueHandlers实现&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodReturnValueHandlerComposite类&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;是HandlerMethodReturnValueHandler的组合&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;argumentResolvers和returnValueHandlers是在实例化ServletInvocableHandlerMethod时，从RequestMappingHandlerAdaptor传入的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;RequestMappingHandlerAdaptor的这两个属性，是在实例化时，从Spring容器依赖注入的&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;这两个属性默认值就包含了各种常见的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;这就是为什么Controller的方法自动支持包括&lt;code&gt;@RequestBody&lt;/code&gt;, &lt;code&gt;@RequestParam&lt;/code&gt;，&lt;code&gt;@PathValue&lt;/code&gt;, 对象, WebRequest, ServletRequst, HttpSession, InputStream, Reader, ServletResponse, OutputStream, Writer等类型的参数&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;例子：RequestResponseBodyMethodProcessor&lt;br /&gt;
 
 &lt;ul&gt;
 &lt;li&gt;用来处理&lt;code&gt;@RequestBody&lt;/code&gt;和&lt;code&gt;@ResponseBody&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
