@@ -834,17 +834,19 @@
 <li>滑动窗口流控</li>
 </ol></li>
 <li>建立连接，三次握手：
-<div class="mermaid" align="error: cannot access positional params by string name" >
-    Client->>Server: SYN
-    Server-->>Client: ACK
-    Client-->>Server: ACK
+<div class="mermaid" align="left" >
+    sequenceDiagram
+        Client->>Server: SYN
+        Server-->>Client: ACK
+        Client-->>Server: ACK
     </div></li>
 <li>断开连接，四次握手：
-<div class="mermaid" align="error: cannot access positional params by string name" >
-    Client->>Server: FIN
-    Server-->>Client: ACK
-    Server->>Client: FIN
-    Client-->>Server: ACK
+<div class="mermaid" align="left" >
+    sequenceDiagram
+        Client->>Server: FIN
+        Server-->>Client: ACK
+        Server->>Client: FIN
+        Client-->>Server: ACK
     </div></li>
 <li>流量控制
 

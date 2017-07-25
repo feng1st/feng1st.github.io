@@ -751,11 +751,12 @@
 
 <h2 id="核心组成部分">核心组成部分</h2>
 
-<div class="mermaid" align="error: cannot access positional params by string name" >
-L(LifeCycle)
-C(Connector)---S(Server)
-H(Handler)---S
-S---P(ThreadPool)
+<div class="mermaid" align="left" >
+graph LR;
+    L(LifeCycle)
+    C(Connector)---S(Server)
+    H(Handler)---S
+    S---P(ThreadPool)
 </div>
 
 <h2 id="lifecycle">LifeCycle</h2>
@@ -786,14 +787,7 @@ stop();
 
 <h2 id="handler">Handler</h2>
 
-
-<figure >
-    <a href="basic-architecture-handlers.png">
-        <img src="basic-architecture-handlers.png" />
-    </a>
-    
-</figure>
-
+<p><img src="basic-architecture-handlers.png" alt="" /></p>
 
 <ol>
 <li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
@@ -817,14 +811,7 @@ stop();
 <li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）</li>
 </ol></li>
 <li>调用方式：
-
-<figure >
-    <a href="basic-architecture-nested-handlers.png">
-        <img src="basic-architecture-nested-handlers.png" />
-    </a>
-    
-</figure>
-
+<img src="basic-architecture-nested-handlers.png" alt="" />
 
 <ol>
 <li>顺序调用，代表：HandlerCollection</li>
@@ -834,14 +821,7 @@ stop();
 
 <h2 id="servlethandler">ServletHandler</h2>
 
-
-<figure >
-    <a href="basic-architecture-servlet-handler.png">
-        <img src="basic-architecture-servlet-handler.png" />
-    </a>
-    
-</figure>
-
+<p><img src="basic-architecture-servlet-handler.png" alt="" /></p>
 
 <ol>
 <li>ServletHandler持有多个FilterHolder和ServletHolder</li>
@@ -858,36 +838,15 @@ stop();
 
 <ol>
 <li>Jetty启动
-
-<figure >
-    <a href="image011.jpg">
-        <img src="image011.jpg" />
-    </a>
-    
-</figure>
-
+<img src="image011.jpg" alt="" />
 
 <ul>
 <li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。</li>
 </ul></li>
 <li>Jetty建立连接
-
-<figure >
-    <a href="image013.jpg">
-        <img src="image013.jpg" />
-    </a>
-    
-</figure>
-</li>
+<img src="image013.jpg" alt="" /></li>
 <li>Jetty处理连接
-
-<figure >
-    <a href="image015.jpg">
-        <img src="image015.jpg" />
-    </a>
-    
-</figure>
-
+<img src="image015.jpg" alt="" />
 
 <ul>
 <li>注意Request/Response是在什么地方创建的</li>

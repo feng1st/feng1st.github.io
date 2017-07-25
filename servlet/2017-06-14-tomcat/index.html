@@ -785,14 +785,7 @@
 <h2 id="处理请求">处理请求</h2>
 
 <p>时序图
-
-<figure >
-    <a href="request-process.png">
-        <img src="request-process.png" />
-    </a>
-    
-</figure>
-</p>
+<img src="request-process.png" alt="" /></p>
 
 <h2 id="classloader">ClassLoader</h2>
 
@@ -807,12 +800,13 @@
 <li>应用目录下的类只可以被本应用使用</li>
 </ul></li>
 <li>实现（ClassLoader层级关系）：
-<div class="mermaid" align="error: cannot access positional params by string name" >
-    commonLoader-->systemLoader
-    catalinaLoader-->commonLoader
-    sharedLoader-->commonLoader
-    webAppLoader1-->sharedLoader
-    webAppLoader2-->sharedLoader
+<div class="mermaid" align="left" >
+    graph RL;
+        commonLoader-->systemLoader
+        catalinaLoader-->commonLoader
+        sharedLoader-->commonLoader
+        webAppLoader1-->sharedLoader
+        webAppLoader2-->sharedLoader
     </div></li>
 </ul>
 

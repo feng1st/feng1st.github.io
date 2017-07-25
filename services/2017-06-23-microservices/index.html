@@ -1132,14 +1132,7 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
     - 1. <code>customer.credit_limit - sum(reserved_credit.amount) &gt;= order_total</code>
     - 2. <code>insert into reserved_credit (... amount) values (... order_total)</code>
     - 如果要保证事务发送成功，事务里还要包括第3个表，事务表（见下）
-    - 
-<figure >
-    <a href="Richardson-microservices-part5-credit-check-2-e1449727579423.png">
-        <img src="Richardson-microservices-part5-credit-check-2-e1449727579423.png" />
-    </a>
-    
-</figure>
-
+    - <img src="Richardson-microservices-part5-credit-check-2-e1449727579423.png" alt="" />
 3. 订单服务收到预留订单费用消息，将订单状态更新为OPEN</p>
 
 <p>因为服务统一向消息系统发事务，可以有一个视图服务，订阅这些事务，更新事务，实现跨服务查询</p>
@@ -1151,14 +1144,7 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
 
 <ul>
 <li>将操作业务对象和插入事件表放到一个事务里面</li>
-<li>
-<figure >
-    <a href="Richardson-microservices-part5-local-transaction-e1449727484579.png">
-        <img src="Richardson-microservices-part5-local-transaction-e1449727484579.png" />
-    </a>
-    
-</figure>
-</li>
+<li><img src="Richardson-microservices-part5-local-transaction-e1449727484579.png" alt="" /></li>
 <li>事件发布者轮询事件表，确保事件发送成功 at least once</li>
 </ul></li>
 <li>挖掘数据库事务日志
