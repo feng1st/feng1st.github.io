@@ -1,0 +1,372 @@
+[
+{
+	"uri": "https://feng1st.github.io/java/",
+	"title": "Java",
+	"tags": [],
+	"description": "",
+	"content": "  Java NIO摘要     Java内存模型和GC机制摘要     "
+},
+{
+	"uri": "https://feng1st.github.io/network/",
+	"title": "Network",
+	"tags": [],
+	"description": "",
+	"content": "  HTTP协议摘要     TCP/IP协议摘要     "
+},
+{
+	"uri": "https://feng1st.github.io/servlet/",
+	"title": "Servlet",
+	"tags": [],
+	"description": "",
+	"content": "  Tomcat笔记     Jetty笔记     Servlet笔记     "
+},
+{
+	"uri": "https://feng1st.github.io/services/",
+	"title": "Services",
+	"tags": [],
+	"description": "",
+	"content": "  微服务架构摘要     微服务架构笔记     面向服务架构笔记     高并发解决思路     "
+},
+{
+	"uri": "https://feng1st.github.io/spring/",
+	"title": "Spring",
+	"tags": [],
+	"description": "",
+	"content": "  Spring实现RESTful Service笔记     Spring DispatcherServlet相关知识点     "
+},
+{
+	"uri": "https://feng1st.github.io/docker/",
+	"title": "Docker",
+	"tags": [],
+	"description": "",
+	"content": "  Docker容器运行dubbo应用     "
+},
+{
+	"uri": "https://feng1st.github.io/utilities/",
+	"title": "Utilities",
+	"tags": [],
+	"description": "",
+	"content": "  工具推荐：PlantUML，文本转UML图工具     "
+},
+{
+	"uri": "https://feng1st.github.io/docker/2017-06-27-dubbo-in-docker/",
+	"title": "Docker容器运行dubbo应用",
+	"tags": ["Docker", "Dubbo"],
+	"description": "",
+	"content": "参考了这篇文章： https://yq.aliyun.com/articles/60789\n大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。 它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。\n但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。 为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。\napplication.properties\nserver.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口\nservices.xml\n \u0026lt;dubbo:registry protocol=\u0026quot;zookeeper\u0026quot; address=\u0026quot;${ZOO_SERVERS}\u0026quot;/\u0026gt; \u0026lt;dubbo:protocol name=\u0026quot;dubbo\u0026quot; port=\u0026quot;${DUBBO_PORT}\u0026quot;/\u0026gt;  这个是用来区分provider通过dubbo协议暴露服务的端口\ndocker-compose.yml\nversion: '2' services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口 zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183\n更复杂的部署，应考虑使用Docker Swarm\n还有其它一些细节，可以参考源代码： https://github.com/feng1st/microservices-demo\n"
+},
+{
+	"uri": "https://feng1st.github.io/spring/2017-06-26-spring-rest/",
+	"title": "Spring实现RESTful Service笔记",
+	"tags": ["Spring", "RESTful"],
+	"description": "",
+	"content": " 来源： https://spring.io/guides/gs/rest-service/\n本文采用代码及分析的形式\nGreetingController.java src/main/java/hello/GreetingController.java\npackage hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = \u0026quot;Hello, %s!\u0026quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(\u0026quot;/greeting\u0026quot;) public Greeting greeting(@RequestParam(value=\u0026quot;name\u0026quot;, defaultValue=\u0026quot;World\u0026quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：\n RestController用Response Body返回json序列化后的对象 MVC Controller使用视图模板，返回ModelAndView经渲染后的HTML视图     图片来源：http://blog.csdn.net/cswhale/article/details/16941281\nApplication.java src/main/java/hello/Application.java\npackage hello; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; @SpringBootApplication public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } }   @SpringBootApplication, 整合下列注解:  @Configuration  类作为Bean定义的来源，参考AnnotationConfigApplicationContext  @EnableAutoConfiguration  指示Spring Boot根据classpath、其它Bean和一些属性自动配置  @EnableWebMvc  如果在classpath发现spring-webmvc，自动启用 视应用为web application，并启用DispatcherServlet等关键行为  @ComponentScan  从类所在包下扫描其它组件、配置、服务，找到其它controller    整个SpringBoot应用可以打包成一个单独的jar，这个特性非常有利于部署到容器\n依靠配置实现MVC 如果不使用SpringBoot，而是通过配置来实现，应该怎样做呢？ 这个不是完全RESTful相关的，但有助于我们了解Spring的内部机制\nController接口，注意不是@Controller注解：\npublic interface Controller { ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception; }  该方法被DispatcherServlet调用\n重要的实现类：\n AbstractController：检查HTTP方法，检查Session等 MultiActionController：在一个Controller里处理多个动作，比如对同一资源的增删改查，通过MethodNameResolver映射请求到方法  web.xml\n\u0026lt;?xml version=\u0026quot;1.0\u0026quot; encoding=\u0026quot;ISO-8859-1\u0026quot;?\u0026gt; \u0026lt;web-app xmlns=\u0026quot;http://java.sun.com/xml/ns/j2ee\u0026quot; xmlns:xsi=\u0026quot;http://www.w3.org/2001/XMLSchema-instance\u0026quot; xsi:schemaLocation=\u0026quot;http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd\u0026quot; version=\u0026quot;2.5\u0026quot;\u0026gt; \u0026lt;servlet\u0026gt; \u0026lt;servlet-name\u0026gt;dispatcherServlet\u0026lt;/servlet-name\u0026gt; \u0026lt;servlet-class\u0026gt;org.springframework.web.servlet.DispatcherServlet\u0026lt;/servlet-class\u0026gt; \u0026lt;init-param\u0026gt; \u0026lt;param-name\u0026gt;contextConfigLocation\u0026lt;/param-name\u0026gt; \u0026lt;param-value\u0026gt;/WEB-INF/dispatcherServlet-servlet.xml\u0026lt;/param-value\u0026gt; \u0026lt;/init-param\u0026gt; \u0026lt;load-on-startup\u0026gt;1\u0026lt;/load-on-startup\u0026gt; \u0026lt;/servlet\u0026gt; \u0026lt;servlet-mapping\u0026gt; \u0026lt;servlet-name\u0026gt;dispatcherServlet\u0026lt;/servlet-name\u0026gt; \u0026lt;url-pattern\u0026gt;*.do\u0026lt;/url-pattern\u0026gt; \u0026lt;/servlet-mapping\u0026gt; \u0026lt;/web-app\u0026gt;   所有以.do结尾的请求，都将被DispatcherServlet处理  dispatcherServlet-servlet.xml\n\u0026lt;?xml version=\u0026quot;1.0\u0026quot; encoding=\u0026quot;UTF-8\u0026quot;?\u0026gt; \u0026lt;!DOCTYPE beans PUBLIC \u0026quot;-//SPRING//DTD BEAN 2.0//EN\u0026quot; \u0026quot;http://www.springframework.org/dtd/spring-beans-2.0.dtd\u0026quot;\u0026gt; \u0026lt;beans\u0026gt; \u0026lt;bean id=\u0026quot;urlMapping\u0026quot; class=\u0026quot;org.springframework.web.servlet.handler.SimpleUrlHandlerMapping\u0026quot;\u0026gt; \u0026lt;property name=\u0026quot;mappings\u0026quot;\u0026gt; \u0026lt;props\u0026gt; \u0026lt;prop key=\u0026quot;sample.do\u0026quot;\u0026gt;sampleMultiActionController\u0026lt;/prop\u0026gt; \u0026lt;/props\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;/bean\u0026gt; \u0026lt;bean id=\u0026quot;viewResolver\u0026quot; class=\u0026quot;org.springframework.web.servlet.view.InternalResourceViewResolver\u0026quot;\u0026gt; \u0026lt;property name=\u0026quot;viewClass\u0026quot;\u0026gt; \u0026lt;value\u0026gt;org.springframework.web.servlet.view.InternalResourceView\u0026lt;/value\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;property name=\u0026quot;prefix\u0026quot;\u0026gt; \u0026lt;value\u0026gt;/WEB-INF/jsp/\u0026lt;/value\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;property name=\u0026quot;suffix\u0026quot;\u0026gt; \u0026lt;value\u0026gt;.jsp\u0026lt;/value\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;/bean\u0026gt; \u0026lt;bean id=\u0026quot;sampleMultiActionController\u0026quot; class=\u0026quot;com.test.SampleMultiActionController\u0026quot;\u0026gt; \u0026lt;property name=\u0026quot;methodNameResolver\u0026quot;\u0026gt; \u0026lt;ref bean=\u0026quot;paraMethodResolver\u0026quot;/\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;!--viewName属性将依赖注入sampleMultiActionController类--\u0026gt; \u0026lt;property name=\u0026quot;viewName\u0026quot;\u0026gt; \u0026lt;value\u0026gt;showme\u0026lt;/value\u0026gt; \u0026lt;/property\u0026gt; \u0026lt;/bean\u0026gt; \u0026lt;bean id=\u0026quot;paraMethodResolver\u0026quot; class=\u0026quot;org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver\u0026quot;\u0026gt; \u0026lt;property name=\u0026quot;paramName\u0026quot; value=\u0026quot;whichMethod\u0026quot;/\u0026gt; \u0026lt;/bean\u0026gt; \u0026lt;/beans\u0026gt;   sample.do会被SampleMultiActionController处理 viewName即showme，被依赖注入传入Controller，通过return new ModelAndView(getViewName(), ...)指定视图名称 viewResolver解析视图为/WEB-INF/jsp/showme.jsp methodNameResolver指定ParameterMethodNameResolver paraMethodResolver指定的参数名为whichMethod，即能将sample.do?whichMethod=insert这样的请求，映射到insert()方法  "
+},
+{
+	"uri": "https://feng1st.github.io/spring/2017-06-25-spring-dispatcher-servlet/",
+	"title": "Spring DispatcherServlet相关知识点",
+	"tags": ["Spring", "DispatcherServlet"],
+	"description": "",
+	"content": " DispatcherServlet作用  作为Spring MVC的集中访问点 通过HandlerMapping，将请求映射到Handler  返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor  通过不同的HandlerAdaptor，支持不同的处理器 通过ViewResolver，支持到具体视图的解析 通过HandlerExceptionResolver，实现对异常的处理  每一部分都可以很方便的扩展\nDispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping  常见的handlerMapping：  RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法  内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置   handlerMapping构造一个HandlerExecutionChain  HandlerExecutionChain包含多个HandlerInterceptor和一个Handler  Handler是一个HandlerMethod，通过构造函数参数传入request Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换   用HandlerAdaptor封装chain里的handler  不同的handler接口不同，通过adaptor统一接口 DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor HandlerMethod对应的是RequestMappingHandlerAdaptor  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod  除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory  ServletInvocableHandlerMethod.invokeAndHandle()里  用argumentResolvers和dataBinderFactory转化参数  用argumentResolvers解析参数 用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参  调用用户在Controller的方法实现 用returnValueHandlers处理返回的结果  对于@ResponseBody类，直接转换成xml/json后写response，并返回null  使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter  否则返回一个ModelAndView   DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor  用来处理@RequestBody和@ResponseBody 同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口 内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据   Filter和HandlerInterceptor 总体来说，两者是类似的。不同点：\n Filter在web.xml定义，HandlerInterceptor在application context里定义 HandlerInterceptor接口分得更细 Filter一般用来处理请求内容和视图内容，比如压缩和分块 HandlerInterceptor用来处理一般性面向切面逻辑，比如授权  public interface HandlerInterceptor { boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception; void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception; void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception; }  参考资料 http://www.chawenti.com/articles/23718.html\n"
+},
+{
+	"uri": "https://feng1st.github.io/services/2017-06-23-microservices/",
+	"title": "微服务架构摘要",
+	"tags": ["Microservices"],
+	"description": "",
+	"content": " 原文: https://www.nginx.com/blog/introduction-to-microservices/\n单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：\n 过于复杂，难于理解和修改。修改容易引入bug 启动变慢，降低调试和开发速度 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求 可靠性，组件异常（比如内存泄露），导致整个应用异常 难于升级到新的技术和框架  微服务框架  按功能划分，比如订单管理、客户端管理 每个微服务是一个单独的小应用 微服务对外暴露API，比如REST API 微服务之间可以通过暴露的API互相调用 微服务间还可以通过消息系统实现异步调用 外界一般不直接范围后端服务，而是通过API网关 微服务通常通过虚拟机或Docker部署  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题 y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务 z轴：数据分区，靠拆分相似的事物伸缩\n微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema 这是为了更彻底的解耦 但是不可避免的，多个微服务数据库间存在重复数据\n微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成 区别： 1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST 2. 微服务架构弃用了ESB\n微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护 开发方面：可以选用自己的技术，可以使用较新的技术 部署方面：可以单独部署，更容易部署和测试 伸缩方面：更容易按需扩展多实例  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题\n 分布式架构下调用的开销，以及服务不可用的处理 数据库拆分后，分布式事务基本不采用，需要最终一致方案 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务） 升级链，如果A依赖于B，需要先升级B，再升级A 部署，需要自动化工具  API网关 门面模式 Facade\n客户端直接和后端服务通讯的问题 / API网关要解决的问题  客户端需要调用多个后端服务，走广域网，非常慢 客户端代码复杂 客户端需要支持后端服务API所使用的通讯协议 后端服务接口无法自由变更，服务之间无法合并和拆分  API网关除了解决上诉问题，还能： 1. 提供负载均衡、缓存、安全/权限控制，监控等 2. 为不同的客户端提供不同的接口\n挑战：  需要额外实现和维护一个高可用的组件 可能成为开发瓶颈  实现API网关  性能和高伸缩性  要支持异步、非阻塞通讯 技术选型：Netty, Spring Reactor, \u0026hellip;  使用反应式编程模型 Reactive Programming Model  需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果 需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用 不推荐使用回调实现异步（不直观、不容易理解、容易出错） 推荐使用Reactive 技术选型：CompletableFuture, RxJava  服务调用  同步调用：HTTP、Thrift 异步、消息机制：JMS、AMQP、Zeromq API网关需要这些服务通讯，也应支持上诉通讯机制  服务发现  客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端 服务端发现：注册总心选好后发给客户端，负载均衡在服务端 （这里的客户端指API网关）  处理部分失败  面对服务慢或者不可用的处理。核心是不能阻塞API网关 要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等  技术选型：Netflix Hystrix   进程间通讯 IPC 交互风格     一对一 一对多     同步 Request/Response \u0026ndash;   异步 Notification Publish/Subscribe    Request/Async response Public/Async responses     Request/Response: 发送请求，等待响应。应有超时。线程阻塞 Notification (单向请求): 发送请求，不期待有响应 Request/Async response: 发送请求，不期待有即时响应。线程不阻塞 Publish/Subscribe: 发布请求，多个消费者消费 Publish/Async responses: 发布请求，等待多个响应。有超时  接口设计  基于消息：定义消息channel和消息类型 基于HTTP：定义URL、请求和响应格式  接口升级  向前兼容的小升级，比如增加/删除请求/响应字段：  缺失的字段采用默认值，忽略额外的字段 消息格式要支持，比如Protobuf，Json  大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口  处理部分失败  一定要有超时，不能无限阻塞 要限制客户端向同一服务的请求的数量，如果超限，直接失败 船舱隔离模式：  不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池  电路熔断器模式：  连续超时：断开 等待一段时间：半开放  又有超时：再断开 或不再超时：恢复   要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等   IPC技术 异步、基于消息的通讯 关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、…… 这里不展开\n 好处  客户端和服务解耦。客户端也不需要使用服务发现机制 消息缓存。支持消费者不实时在线 支持上面提到的所有交互风格 是显式IPC，不像有些RPC机制，尝试屏蔽是远程调用的事实。开发者有更好的意识和控制权  缺点  额外的操作复杂性，需要引入一个高可用的消息中间件（这个应该不是问题） 用来实现Request/Response比较复杂：  客户端的请求消息要带上响应的channel和唯一id 服务的响应消息要带上这个唯一id，发送到响应channel 客户端要用唯一id，从响应channel找到匹配响应消息 不难理解，但是确实比直接基于请求/响应的机制更复杂    同步、基于请求/响应的通讯  REST  核心是“资源”，基于HTTP请求类型和参数，实现资源的“增删改查” REST定义也有不同的级别，从POST到同一URL，靠参数指定操作和对象，到靠HTTP请求类型指定操作，不同URL指定操作对象。不绝对 优势  基于HTTP，简单熟悉 构造请求简单，测试方便 天然支持请求/响应模式 防火墙友好 无中间层，系统结构简单  缺点  对逻辑上的单向请求（Notification），服务端也要发响应 服务端必须实时在线 客户端和服务端耦合。需要有服务发现机制  IDL：RAML和Swagger  Thrift  支持请求/响应和通知（单向） 支持Json、二进制和压缩二进制。取舍是人工可读和占空间大小 支持HTTP和TCP。取舍是是否防火墙友好和效率   服务发现 为什么需要服务发现  集群动态伸缩 基于Container的部署方式，IP和端口也是动态分配的  服务发现方式  客户端发现模式  服务端在启动时向注册中心注册、停止时取消注册、靠心跳刷新 客户端向注册中心获取服务端列表 客户端主动负载均衡，比如采用一致性hash 优点：直接 优点：可根据业务灵活选用负载均衡策略 缺点：客户端和注册中心耦合 实现技巧：客户端和服务端均在注册中心注册，便于服务端变更时，注册中心主动推送。参考dubbo  服务端发现模式  客户端请求发给负载均衡服务器 负载均衡服务器负责和注册中心通讯 优点：客户端和服务发现逻辑解耦 缺点：需要高可用的负载均衡服务器   注册中心 参考：Zookeeper 注册方式： 1. 自注册：优点：直接；缺点：服务和注册中心耦合 2. 第三方组件注册：优点：解耦；缺点：额外高可用组件\n事件驱动数据模型 数据随着微服务拆分，带来下面的挑战： 1. 跨服务事务的一致性 - 2PC 两阶段提交在此情况下不可用，CAP要优先满足A，或者BASE 2. 怎样从多个服务请求数据\n事件驱动架构  将跨服务的事务划分为多步 每一步，一个微服务更新业务对象（本地事务），同时产生一个事件以激发下一步 事件通过消息系统传递  例子：创建订单 1. 订单服务创建订单，状态为NEW，然后发布订单创建消息到消息系统 2. 客户服务收到订单创建消息，预留订单费用，发布预留订单费用消息 - 预留费用至少涉及到两个表，是一个本地事务。要能想到 - 1. customer.credit_limit - sum(reserved_credit.amount) \u0026gt;= order_total - 2. insert into reserved_credit (... amount) values (... order_total) - 如果要保证事务发送成功，事务里还要包括第3个表，事务表（见下） -   3. 订单服务收到预留订单费用消息，将订单状态更新为OPEN\n因为服务统一向消息系统发事务，可以有一个视图服务，订阅这些事务，更新事务，实现跨服务查询\n原子性  使用本地事务发布事件  将操作业务对象和插入事件表放到一个事务里面     事件发布者轮询事件表，确保事件发送成功 at least once  挖掘数据库事务日志  实现较复杂  使用事件源  保存的不是结果，而是操作步骤 逻辑较复杂   部署  每微服务一虚拟机  隔离性高 开销大  每微服务一容器  隔离性低 开销小 实现：Docker   重构单一架构到微服务架构  新功能直接使用微服务实现  前端路由请求到旧单一应用和新微服务 新微服务使用“胶水代码”访问旧单一应用 访问旧单一应用的数据  远程调用旧单一应用接口 直接访问旧单一应用数据库 维护独立数据，和旧数据库同步   拆分前后端  最容易拆的是表现层和逻辑层。逻辑层和数据层稍难 表现层拆出来后便于独立开发和A/B测试  拆模块  优先级  先拆变化频繁的，便于加速后继开发 再拆资源要求不一样的，便于分开部署和伸缩 再拆和其它模块交互较粗的，比如通过消息系统交互的  步骤  模块和剩余部分改成IPC通讯 将模块独立成微服务    "
+},
+{
+	"uri": "https://feng1st.github.io/utilities/2017-06-22-plantuml/",
+	"title": "工具推荐：PlantUML，文本转UML图工具",
+	"tags": ["Utility", "UML"],
+	"description": "",
+	"content": " 官网：http://plantuml.com/\n为什么要用文本生成UML，而不直接画UML？ 这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样： 这属于强迫症，得治。\n安装 如果使用ubuntu，直接： sudo apt-get install graphviz plantuml\n其它平台或者安装方法请参考官网\n使用 plantuml src.txt\n如果是下载的jar： java -jar plantuml.jar src.txt\n会在当前目录下生成src.png\n示例 输入： jetty-handler.pu\n@startuml interface Handler { +handle(request) } abstract class AbstractHandler class HandlerWrapper class ServletHandler class HandlerContainer class Server class SessionHandler { +SessionManager } class SecurityHandler { +SecurityConstraint[] } class ContextHandler { +contextPath +resourceBase +classLoader } class ContextHandlerContainer { -contexts: PathMap } class WebAppContext { +descriptor } Handler \u0026lt;|.. AbstractHandler Handler \u0026quot;1\u0026quot; --o HandlerWrapper Handler \u0026quot;*\u0026quot; --o HandlerContainer AbstractHandler \u0026lt;|-- HandlerWrapper AbstractHandler \u0026lt;|-- ServletHandler AbstractHandler \u0026lt;|-- HandlerContainer AbstractHandler ..\u0026gt; Server HandlerWrapper \u0026lt;|-- Server HandlerWrapper \u0026lt;|-- SessionHandler HandlerWrapper \u0026lt;|-- SecurityHandler HandlerWrapper \u0026lt;|-- ContextHandler ServletHandler \u0026lt;.. WebAppContext HandlerContainer \u0026lt;|-- ContextHandlerContainer SessionHandler \u0026lt;.. WebAppContext SecurityHandler \u0026lt;.. WebAppContext ContextHandler \u0026lt;. ContextHandlerContainer ContextHandler \u0026lt;|-- WebAppContext @enduml  输出： jetty-handler.png   "
+},
+{
+	"uri": "https://feng1st.github.io/services/2017-06-19-microservices/",
+	"title": "微服务架构笔记",
+	"tags": ["Microservices"],
+	"description": "",
+	"content": " 原文：http://blog.csdn.net/mindfloating/article/details/24583369\n什么是微服务架构 采用一组服务的方式来构建一个应用； 服务独立部署在不同的进程； 服务之间通过轻量级的机制来通讯，比如RPC、HTTP； 服务可独立扩展伸缩； 每个服务定义了明确的边界； 不同服务可以采用不同的技术实现，由独立的团队维护。\n微服务架构的特征  通过服务实现组件化 和传统方式，或者说单一架构(Monolithic Architecture)类比： 传统方式实现组件化：通过库(library)；和应用运行在一个进程里；组件升级，应用需要重新部署 服务方式实现组件化：通过服务；部署在不同的进程；可以单独升级 因为服务是跨进程的，所以在设计阶段就必须定义好明确的边界 按业务能力来划分服务和组织团队 传统方式按技术分层：前端、后端、数据库 微服务架构：按业务划分，全栈工程师或全栈团队 服务即产品 团队即负责开发，也负责维护 智能终端和哑管道 抛弃过于复杂的ESB，服务自己处理自己的业务逻辑 服务间通讯尽量轻量，不添加额外的规则 去中心统一化 各服务可以选用自己的技术实现 自动化基础设施服务 必须要存在自动化的服务治理平台，才能降低开发、调试、测试、部署、监控、维护的复杂度 Design for failure 服务消费者要优雅的处理远程调用带来的错误 进化设计 发送方要最小化，只发送必要的信息 接收方要最大化，要最大化容错，要允许传入不认识的参数  服务的划分 参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里\n"
+},
+{
+	"uri": "https://feng1st.github.io/services/2017-06-18-soa/",
+	"title": "面向服务架构笔记",
+	"tags": ["SOA"],
+	"description": "",
+	"content": " 分布式应用架构的演化  DOA 分布式对象架构  主要特征：  对象是可以在服务器/容器间自由“移动”的 被调用的对象究竟是本地，还是远程，对调用者来说是透明的  例子：EJB 问题：复杂和性能  远程调用有更多可能出错的环节 分布式事务需要两阶段提交 远程通讯额外的开销   SOA 面向服务架构  服务是可“移动”的，但是远没有DOA那样不可控 当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控   企业服务总线 ESB ESB是SOA的核心组件，其主要特点：\n 服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置 事物管理器：分布式事物管理器放在这个地方很自然 安全管理器：访问权限、授权管理 服务代理：统一服务接口和数据格式的一个Adaptor和Proxy 对外部的网关  但是ESB也有一定的缺点：\n 单点故障：ESB发生故障，整个系统将不可用 单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。 但是，究竟要承担哪些具体的工作，是一个需要考虑的点。 比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率 同上，增加了服务间访问的间接性，降低了性能  SOA简介 SOA的目标是实现灵活可变的分布式IT系统，这需要：\n 标准化：协议标准化，实现互访问 复用：服务可复用 松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦  SOA治理  服务注册与发现 可靠性 安全性 负载均衡 监控与日志 服务限流和容错  完整SOA模型  基础设施服务 企业服务总线 关键服务组件 开发工具 管理工具  参考资料  http://tutorials.jenkov.com/soa/ http://blog.vsharing.com/fengjicheng/A1059842.html -  "
+},
+{
+	"uri": "https://feng1st.github.io/services/2017-06-17-high-concurrency/",
+	"title": "高并发解决思路",
+	"tags": ["Service", "High-Concurrency"],
+	"description": "",
+	"content": " 解决高并发，无非两个方向：\n 分而治之：分流 优化单个服务器处理能力  客户端  尽量使用缓存 尽量本地处理 尽量减少不必要的访问  分流 LVS、Nginx、Varnish放到一块说\n 负载均衡 业务拆分 静态内容直接返回，包括使用CDN 缓存（动态内容缓存、页面片段缓存）  优化单个服务器处理程序  缓存：缓存永远是最重要的 异步：能异步就异步 如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果 多线程： 如果是CPU吃重的应用，线程数过高不能解决问题 I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题 另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表 还有一种预处理，是和缓存结合的预处理 不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新 优化SQL，正确使用索引 尽量不要使用分布式事务 2阶段提交不是万能药  各节点进入事务 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效） 各节点commit 假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的  应用算法优化  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM） 合理设置索引 使用集群，读写分离 合理分表分库 分表我看来最大的好处是，是索引变小，能够加载到内存  "
+},
+{
+	"uri": "https://feng1st.github.io/servlet/2017-06-14-tomcat/",
+	"title": "Tomcat笔记",
+	"tags": ["Java", "Web-Server", "Servlet-Container"],
+	"description": "",
+	"content": " 架构  Server: 整个容器 Service: 关联Container和Connector的中间人，包含一个Container和多个Connector Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应  维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行 Request, Response是在这里创建的，然后传递给Container 低版本Tomcat可以修改配置文件server.xml，为Connector使用protocol=\u0026quot;org.apache.coyote.http11.Http11NioProtocol\u0026quot;  Container: 所有容器的父接口，下面4个重要的实现类/子接口  Engine, Host, Context, Wrapper 4个之间不是并列关系，是父子包含关系  Engine: 是一个Service的根容器，处理请求的总管道 Pipeline Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动 Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位 Wrapper: Context的子容器，负责调用Filter和Servlet LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器 Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline  EngineValve1 -\u0026gt; EngineValve2 -\u0026gt; ... -\u0026gt; StandardEngineValve -\u0026gt; HostPipeline  Valve: Pipeline的切入点  StandardEngineValve: Engine pipeline上最后一个valve，调用Host StandardHostValve: Host pipeline上最后一个valve，调用Context StandardContextValve: Context pipeline上最后一个valve，调用Wrapper StandardWrapperValve: Wrapper pipeline上最后一个valve，负责生成并调用filterChain，最后调用servlet   处理请求 时序图   ClassLoader  是典型的双亲委托模式 Parents Delegation Model 要求：  common目录下的类被Tomcat和应用使用 server目录下的类只被Tomcat使用 shared目录下的类可以被所有应用使用 应用目录下的类只可以被本应用使用  实现（ClassLoader层级关系）： commonLoader--systemLoader catalinaLoader--commonLoader sharedLoader--commonLoader webAppLoader1--sharedLoader webAppLoader2--sharedLoader   "
+},
+{
+	"uri": "https://feng1st.github.io/servlet/2017-06-12-jetty/",
+	"title": "Jetty笔记",
+	"tags": ["Java", "Web-Server", "Servlet-Container"],
+	"description": "",
+	"content": " 核心组成部分 L(LifeCycle) C(Connector)---S(Server) H(Handler)---S S---P(ThreadPool)  LifeCycle start(); stop();   管理server对象的生命周期 Connector, Handler, ThreadPool都实现了LifeCycle接口 LifeCycle的监听使用了观察者模式  Connector  接受TCP连接 用配置的ConnectionFactory创建Connection，和连接绑定 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：  ProxyConnectionFactory：处理Proxy协议 SslConnectionFactory：SSL加密解密 HttpConnectionFactory：处理实际的HTTP请求   Handler    Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle() 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链  HandlerContainer：组合模式 Composite，树形结构 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责 门面模式 Facade：Context相关类，限制暴露方法的范围  Handler风格分类：  协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection） 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler） 处理型，处理请求，生成响应（StaticHandler, ServletHandler）  调用方式：    顺序调用，代表：HandlerCollection 嵌套调用，代表：HandlerWrapper   ServletHandler    ServletHandler持有多个FilterHolder和ServletHolder 作为Servlet容器，调用时先调用所有的Filter，再调用Servlet  Context  简单的说，分组环境变量  几个时序图  Jetty启动    先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。  Jetty建立连接    Jetty处理连接    注意Request/Response是在什么地方创建的   引用来源  http://www.eclipse.org/jetty/documentation/current/architecture.html https://www.ibm.com/developerworks/cn/java/j-lo-jetty/  "
+},
+{
+	"uri": "https://feng1st.github.io/servlet/2017-06-11-servlet/",
+	"title": "Servlet笔记",
+	"tags": ["Java", "Web", "Servlet"],
+	"description": "",
+	"content": " 教程： http://tutorials.jenkov.com/java-servlets/\n一些思考点  Servlet的生命周期是怎样被容器管理的？ Session是怎样被管理和传递的？ 分布式环境下Session是怎样被管理的？  统一Session中心 或者Session Sticky  ServletContext是怎样被管理和传递的，典型用途是什么？  request.getSession().getServletContext();  为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？ Filter和Servlet有什么异同？  接口  Servlet: init(), service(), destroy()  HttpServlet: doGet(), doPost(), \u0026hellip;  Filter: init(), doFilter(), destroy()  设计  Servlet: 面向事务 Filter: 面向切面   Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet  filterChain最后一个默认的filter调用servlet  怎样用Filter实现GZip，这个实现和AOP有什么区别？  判断请求头Accept-Encoding是否包括gzip 增加响应头Content-Encoding 用带GZip的Response封装原Response，并向后传递  Session和ServletContext是线程安全的吗？ 不安全  "
+},
+{
+	"uri": "https://feng1st.github.io/java/2017-06-10-java-nio/",
+	"title": "Java NIO摘要",
+	"tags": ["Java", "Network", "NIO"],
+	"description": "",
+	"content": " 比较经典和精简的教程，先直接发链接： http://tutorials.jenkov.com/java-nio/\nNIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想 例如，换用消息队列，就可以扩展到分布式系统里去\n一些思考点  Channel和Stream有什么不同？  Channel双向，Stream一般单向 Channel支持异步 Channel搭配Buffer使用  ServerSocketChannel和SocketChannel有什么不同？  SocketChannel用于单个连接 ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel  FileChannel.transferTo(\u0026hellip;, SocketChannel)有什么需要注意的？  SocketChannel非阻塞且发送缓冲已满，可能只传输部分  SocketChannel的blocking和non-blocking模式有什么不同？  相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功 write()/read()可能未实际读写就返回  ServerSocketChannel的blocking和non-blocking模式有什么不同？  相对于阻塞，accept()直接返回，如没有接受连接，返回null write()/read()可能未实际读写就返回  Blocking模式Socket有什么问题？  一般会用一个线程处理一个连接，所以支撑的连接数非常有限 如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池  Non-blocking模式Socket有哪些挑战？  读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成  长度：TLV中的L 内容：类型是包含在这里面的，比如protobuf协议 校验：用于验证数据错误，或者网络错误，通知重传  读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮  一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下  总段数 本段序号 本段内容   发送方不能把所有的Channel都注册到Selector，因为Selector.select()时，可能大部分Channel都可写，全部返回，性能低下  当本Channel对应缓冲区有待发送数据时，才注册到Selector 当缓冲区数据发送完毕时，从Selector取消注册   Selector有哪两种底层实现？  Reactor：轮询Channel对应底层IO句柄。当连接数过多时，性能低下。这个可以算是多路复用，因为select()时还是有等待的过程 e-poll：注册回调函数，只有当有对应事件发生时，才通知Selector。这个算是真正的异步。Linux直接支持  阻塞/非阻塞，同步/异步  阻塞：调用io函数会一直等待，比如System.in.read() 非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO 同步：用等待或者轮询的方式拿到结果，比如NIO 异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel  额外提一下Node.js的线程模型        "
+},
+{
+	"uri": "https://feng1st.github.io/network/2017-06-09-http-protocol/",
+	"title": "HTTP协议摘要",
+	"tags": ["Network", "HTTP"],
+	"description": "",
+	"content": " HTTP协议概述  基于服务器/客户端，请求/响应 无连接（1.1开始支持长连接Web Socket） 无状态（需要依赖会话维持状态） 应用层协议，基于TCP  URL http://host:port/res_uri.html?param=...\n 协议：如http, https, ftp等 用户名/密码：部分协议例如ftp支持用户名密码 域名和端口：要访问服务器的域名和端口，不同协议有自己的默认端口 访问资源：要访问资源的路径和参数  请求 GET /index.html HTTP/1.0\u0026lt;CRLF\u0026gt; Host:www.sina.com.cn\u0026lt;CRLF\u0026gt; Accept-Encoding:gzip, deflate\u0026lt;CRLF\u0026gt; User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0)\u0026lt;CRLF\u0026gt; Connection:Keep-Alive\u0026lt;CRLF\u0026gt; \u0026lt;CRLF\u0026gt; {Optional Content Body}   起始行：Method Request-URI HTTP-Version  请求方法  GET 请求Request-URI所标识的资源 POST 在资源后附加新的数据 HEAD 请求获取资源的响应消息报头 PUT 请求服务器存储一个资源 DELETE 请求删除资源 TRACE 请求服务器回送收到的请求信息，用于诊断测试 CONNECT 保留字 OPTIONS 请求查询服务器性能   消息报头：（见后） 消息主体：可选，对POST请求，消息主体为POST的数据  响应 HTTP/1.1 200 OK\u0026lt;CRLF\u0026gt; Content-Length:123\u0026lt;CRLF\u0026gt; Content-Type:text/html;charset=utf-8\u0026lt;CRLF\u0026gt; ...\u0026lt;CRLF\u0026gt; \u0026lt;CRLF\u0026gt; {Optional Content Body}   起始行：HTTP-Version Status-Code Reason-Phrase  状态码  1xx：指示信息\u0026ndash;消息已接收，继续处理 2xx：成功\u0026ndash;消息已被成功接收、理解、接受  200 OK  3xx：重定向\u0026ndash;要完成请求必须进行进一步的操作 4xx：客户端错误\u0026ndash;请求有语法错误或者请求无法实现  400 Bad Request 401 Unauthorized 403 Forbidden 404 Not Found  5xx：服务端错误\u0026ndash;服务端无法实现请求  500 Internal Server Error 503 Server Unavailable    消息报头：（见下） 消息主体：可选，返回的内容  消息报头  常见请求报文头信息\nAccept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8 Accept-Encoding:gzip, deflate, sdch, br Accept-Language:en-US,en;q=0.8 Cache-Control:max-age=0 Connection:keep-alive Cookie:BAIDUID=BDE50BA6209B0C5BC935D4BBF631F90D:FG=1; pgv_pvi=5348235264 Host:www.baidu.com User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36  常见响应头信息\nCache-Control:private Connection:keep-alive Content-Encoding:gzip Content-Type:text/html; charset=utf-8 Date:Fri, 09 Jun 2017 09:08:42 GMT Expires:Fri, 09 Jun 2017 09:08:42 GMT Server:bfe/1.0.8.18 Set-Cookie:BDSVRTM=9; path=/ Set-Cookie:BD_HOME=0; path=/ Set-Cookie:H_PS_PSSID=1461_21094_17001_20929; path=/; domain=.baidu.com Set-Cookie:__bsi=12742868508732542774_00_0_I_R_15_0303_C02F_N_I_I_0; expires=Fri, 09-Jun-17 09:08:47 GMT; domain=www.baidu.com; path=/ Strict-Transport-Security:max-age=172800 Transfer-Encoding:chunked Vary:Accept-Encoding X-Powered-By:HPHP X-UA-Compatible:IE=Edge,chrome=1   浏览器打开网页完整过程  浏览器解析用户输入的URL 如果是输入的域名，则需要向DNS请求实际IP地址  DNS有缓存 DNS服务器如果本身没有数据，有一个向上级DNS服务器请求的过程 DNS解析一般会根据请求所在地区、网络（电信、联通）进行初步的负载均衡，返回一个相对较快的IP  拿到的IP地址，一般是一个前端服务器地址，前端服务器负责负载均衡，会为你分配一台服务器处理你的请求  负载均衡一般由LVS (Linux Virtual Server)，或者自定义服务实现  服务器会解析你的请求，处理请求，生成数据，渲染页面，返回页面  一般使用MVC框架  处理请求的过程一般不会是单台服务器能完成的，这里涉及到分布式集群、服务中间件、缓存、数据库、消息队列、日志等概念  请求一般分为搜索、事务 搜索：底层有一个分布式数据库建索引库的问题，上层有一个中文分词的问题 事务：购买、支付等都是事务，要保证事务在分布式环境中的完整性  用户访问的全部信息，可以被保存，用于数据挖掘 返回的页面，如果是一个重定向，浏览器会请求新的地址 返回的页面，如果包含资源/异步请求，浏览器会依次请求这些资源 返回的报文头，一般包含SessionID（一般放在Cookies里）。浏览器后继请求，会带上SessionID，用于服务器维持会话  会话可能会影响请求被分配处理的集群，比如，前后放在同一个机房处理，这个完全看服务端实现  请求的静态资源，一般会使用CDN (Content Delivery Network)，减轻主/计算服务器压力  如同分布式数据库，CDN有分发和同步的过程  浏览器拿到返回的页面（及页面内资源）后，有一个渲染的过程  "
+},
+{
+	"uri": "https://feng1st.github.io/network/2017-06-08-tcp-ip-protocol/",
+	"title": "TCP/IP协议摘要",
+	"tags": ["Network", "TCP-IP"],
+	"description": "",
+	"content": " 协议分层  应用层 Application  对应OSI协议Application、Presentation、Session三层 常见上层协议：HTTP、FTP、SMTP、TELNET  传输层 Transport  对应OSI协议Transport层 协议：  TCP：（见下） UDP：不超时重传、不错误重传、不保证顺序   网络层 Internet  对应OSI协议Network层 协议：  IP：（见下） ARP：IP地址到MAC地址转换 DARP：（略） ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文  ping traceroute  利用IP协议的TTL实现 利用主机不可达和端口不可达区分     网络接口层 Network Interface  对应OSI协议Data Link、Physical两层 附加以太网部首   IP协议  附加IP部首  TTL，生存周期，每路由一层减1，为0时丢弃  实现traceroute   路由顺序：  TTL为0时丢弃 匹配主机 匹配同子网路由器 匹配同网号路由器 匹配默认路由器  不保证可达，需配合ICMP由上层实现可靠性  TCP协议 流量控制的思想可以用于上层应用的开发\n 附加TCP部首 可靠协议  合理分块 超时重发 校验和校验 发送确认 组装时排序 滑动窗口流控  建立连接，三次握手： Client-Server: SYN Server--Client: ACK Client--Server: ACK  断开连接，四次握手： Client-Server: FIN Server--Client: ACK Server-Client: FIN Client--Server: ACK  流量控制  延迟发送  捎带ACK：延迟发送ACK Nagle算法：延迟发送数据  滑动窗口 rwnd：接收方缓冲区 拥塞窗口 cwnd：探测带宽上限  慢启动阶段（未超过门限 ssthresh）  cwnd *= 2  拥塞避免阶段（超过门限）  cwnd += 1    超时重传  超时时间调整：简单的说，是一个涉及旧超时时间、新传输时间、经验系数、方差的函数 拥塞：某报文超时需要重传  ssthresh /= 2 cwnd = 1 进入慢启动阶段  快速重传：当收到3个重复ACK时（=3个，丢包是大概率事件）  ssthresh /= 2 cwnd = ssthresh 进入拥塞避免阶段  快速恢复：（略）  其它计时器  坚持定时器：双方滑动窗口为0时的试探间隔，避免互相等待死锁 保活定时器：判断保持或断开半开放连接 2MSL定时器：端口可再次使用的计时器，在此期间，服务端可以重启而不报端口占用错误，但不可以建立连接   "
+},
+{
+	"uri": "https://feng1st.github.io/java/2017-06-07-jvm-memory-gc/",
+	"title": "Java内存模型和GC机制摘要",
+	"tags": ["Java", "JVM", "GC"],
+	"description": "",
+	"content": " Java对象  对象位置  对象实例在堆中分配 实例对应的类信息在方法区分配  对象信息  对象实例包含对象头和对象属性 对象头包含对象信息，包括分代年龄、锁信息等；还包括对方法区类信息的引用 类信息包含对父类/接口的引用，用于方法重载  对象大小  空对象大小等于对象头大小，在32位虚拟机占8字节，64位占16字节，开启压缩占12字节 引用在32位虚拟机占4字节，64位占8字节，开启压缩占4字节 数组类型大小要在元素类型大小上增加4字节数组长度 对象最终大小按8字节对齐   Java内存区域  程序计数器 Program Counter Register  每线程 对于Java方法，记录当前字节码位置；对于Native方法，记录为Undefined  虚拟机栈 VM Stack  每线程 保存方法调用时的栈帧 Stack Frame  栈帧存放方法调用的局部变量表、操作栈、动态连接、方法出口等 局部变量表保存简单变量和对象的引用 栈帧大小在方法生存期内固定  如果栈深度超过虚拟机规定大小，抛出StackOverflowError 如果可供分配的内存不够，抛出OutOfMemoryError  本地方法栈 Native Method Stack  类似虚拟机栈  堆 Heap  线程共享 存储对象实例 是涉及GC的主要区域  方法区 Method Area  线程共享 保存加载的类信息（包括版本、接口、属性、方法、final常量、静态变量等）和运行时常量池 Runtime Constant Pool（包括字面常量、符号引用和直接引用） 在分代GC机制里，一般被成为永久代 Permanent Gen 对于存在大量Proxy动态类的系统，要考虑回收的问题   堆和栈的区别  栈：存放栈帧，内部包括简单变量和对象引用，在栈顶分配，后进先出，速度快 堆：存放对象实例，会因回收造成内存碎片，需要寻找下一个可供分配的连续空间，速度慢  对象访问方式  通过句柄池  栈或堆中的对象引用指向句柄池句柄，句柄分别指向堆中对象实例和方法区类信息 对象引用到句柄是多对一，句柄到对象实例是一对一，意味着对象实例因为GC移动而发生地址改变，只需要修改句柄  直接分配  栈或堆中的对象引用指向堆中的对象实例，对象实例内部指向方法区类信息 无中间层，较快。但是一旦对象实例移动，则需要更新所有的引用 HotSpot采用   对象生命周期  引用计数法  存在环状引用的问题  可达性分析算法  GC Roots  虚拟机栈引用的对象 本地方法栈引用的对象 方法区类静态属性引用的对象 方法区常量引用的对象    内存分代 不同对象的生存周期不同，不能因为回收短期对象，就扫描整个堆区\n 年轻代 Young Gen  默认分配区域  老年代 Old Gen  存放多次回收后依然幸存的对象，或者无法在年轻代分配的大对象  永久代 Permanent Gen  存放方法区内容，HotSpot采用，但计划弃用   回收算法  复制算法 Copying  A、B两块空间，在A块连续分配，空间不够时，将A块的存活对象依次复制到B块头部，并切换使用B块，A块清空 分配简单，连续分配，快；需要两倍空间，浪费；复制内容如果过大，依然会慢  标记-清除算法 Mark-Sweep  先对所有可回收对象做标记，然后再回收这些对象所占的空间 不需要移动，快；回收后会有内存碎片  标记-整理算法 Mark-Compact  先对所有可回收对象做标记，然后将幸存对象依次前移 需要移动，慢；回收后无内存碎片   分配机制 HotSpot中，年轻代分为1个Eden和2个Survivor。在Eden区分配对象，如果空间不足，将Eden区和活动Survivor区幸存对象，根据幸存次数，分别移至备用Survivor和老年代中，然后切换活动/备用Survivor。\n回收方式  串行 Serial  暂停用户线程，单线程回收  并行 Parallel  暂停用户线程，多线程并行回收  并发 Concurrent  回收线程和用户线程同时工作   垃圾回收器  Serial收集器  新生代 停止复制算法（停止 Stop-the-World，在垃圾回收时，暂停用户线程） 串行回收  ParNew收集器  新生代 停止复制算法 并行回收  Parallel Scavenge收集器  新生代 停止复制算法 并行回收 关注吞吐量、支持自适应调节  Serial Old收集器  老年代 停止标记整理算法 串行回收 CMS收集器Concurrent Mode Failure的后备  Parallel Old收集器  老年代 停止标记整理算法 并行回收 搭配Parallel Scavenge收集器  CMS收集器  老年代 标记清除算法  初始标记：停止，串行，仅标记GC Roots直接引用的对象 并发标记：并发，从初始标记对象往下追踪 重新标记：停止，并行，修正并发标记期间改变的对象 并发清除：并发  并发回收会占用运行时CPU资源 因为是并发回收，所以要为GC期间新生成的对象预留空间，如果空间不够，会抛出Concurrent Mode Failure，回退到Serial Old收集器 因为是标记清除算法，如果产生的内存碎片导致可用连续空间不足，会触发一次带整理的Full GC  G1收集器  堆划分为相同的区域 Region 优先回收价值最大的区域 使用Remembered Set避免全堆扫描 整体为标记整理算法，区域间为复制算法  初始标记：停止，串行 并发标记：并发 最终标记：停止，并行 筛选回收：停止，并行    GC监控  jstat可以用来实时查看内存分配及GC信息 jmap可以dump出内存对象，供进一步分析 Java命令行参数可以设置输出详细GC日志，供进一步分析  "
+},
+{
+	"uri": "https://feng1st.github.io/_header/",
+	"title": "",
+	"tags": [],
+	"description": "",
+	"content": "知不足而后进\n"
+},
+{
+	"uri": "https://feng1st.github.io/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/dispatcherservlet/",
+	"title": "Dispatcherservlet",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/docker/",
+	"title": "Docker",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/dubbo/",
+	"title": "Dubbo",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/gc/",
+	"title": "Gc",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/high-concurrency/",
+	"title": "High Concurrency",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/http/",
+	"title": "Http",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/java/",
+	"title": "Java",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/categories/java/",
+	"title": "Java",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/jvm/",
+	"title": "Jvm",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/microservices/",
+	"title": "Microservices",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/network/",
+	"title": "Network",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/categories/network/",
+	"title": "Network",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/nio/",
+	"title": "Nio",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/restful/",
+	"title": "Restful",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/service/",
+	"title": "Service",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/categories/service/",
+	"title": "Service",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/servlet/",
+	"title": "Servlet",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/servlet-container/",
+	"title": "Servlet Container",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/soa/",
+	"title": "Soa",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/spring/",
+	"title": "Spring",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/tcp-ip/",
+	"title": "Tcp Ip",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/uml/",
+	"title": "Uml",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/utility/",
+	"title": "Utility",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/categories/utility/",
+	"title": "Utility",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/web/",
+	"title": "Web",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/categories/web/",
+	"title": "Web",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/web-server/",
+	"title": "Web Server",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/",
+	"title": "首页",
+	"tags": [],
+	"description": "",
+	"content": "  Java    Java NIO摘要   Java内存模型和GC机制摘要    Network    HTTP协议摘要   TCP/IP协议摘要    Servlet    Tomcat笔记   Jetty笔记   Servlet笔记    Services    微服务架构摘要   微服务架构笔记   面向服务架构笔记   高并发解决思路    Spring    Spring实现RESTful Service笔记   Spring DispatcherServlet相关知识点    Docker    Docker容器运行dubbo应用    Utilities    工具推荐：PlantUML，文本转UML图工具    "
+}]

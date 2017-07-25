@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <meta name="description" content="">
+
+
+    <title>Java NIO摘要 :: 知不足而后进</title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <link href="/css/nucleus.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/hybrid.css" rel="stylesheet">
+    <link href="/css/featherlight.min.css" rel="stylesheet">
+    <link href="/css/horsey.css" rel="stylesheet">
+    
+    <link href="/css/theme.css" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-2.x.min.js"></script>
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left {
+        display:none !important;
+      }
+    </style>
+
+    
+
+    
+
+  </head>
+  <body class="" data-url="/java/2017-06-10-java-nio/">
+    <nav id="sidebar" class="">
+
+
+
+
+
+<div class="highlightable">
+  <div id="header-wrapper">
+    <div id="header">
+       
+	<p>知不足而后进</p>
+ 
+
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+<script type="text/javascript" src="/js/lunr.min.js"></script>
+<script type="text/javascript" src="/js/horsey.js"></script>
+<script type="text/javascript">
+    var baseurl = "https:\/\/feng1st.github.io\/";
+</script>
+<script type="text/javascript" src="/js/search.js"></script>
+
+    
+  </div>
+
+  
+    <ul class="topics">
+        
+            <li data-nav-id="/" class="dd-item">
+            <a href="/"><i class="fa fa-fw fa-home"></i></a>
+            </li>
+        
+        
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/java/" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/java/">
+        <span>Java</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-down fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/java/2017-06-10-java-nio/" class="dd-item
+     active
+      ">
+        <a href="/java/2017-06-10-java-nio/">
+        <span>Java NIO摘要</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/java/2017-06-07-jvm-memory-gc/" class="dd-item
+     
+      ">
+        <a href="/java/2017-06-07-jvm-memory-gc/">
+        <span>Java内存模型和GC机制摘要</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/network/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/network/">
+        <span>Network</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/network/2017-06-09-http-protocol/" class="dd-item
+     
+      ">
+        <a href="/network/2017-06-09-http-protocol/">
+        <span>HTTP协议摘要</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/network/2017-06-08-tcp-ip-protocol/" class="dd-item
+     
+      ">
+        <a href="/network/2017-06-08-tcp-ip-protocol/">
+        <span>TCP/IP协议摘要</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/servlet/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/servlet/">
+        <span>Servlet</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/servlet/2017-06-14-tomcat/" class="dd-item
+     
+      ">
+        <a href="/servlet/2017-06-14-tomcat/">
+        <span>Tomcat笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/servlet/2017-06-12-jetty/" class="dd-item
+     
+      ">
+        <a href="/servlet/2017-06-12-jetty/">
+        <span>Jetty笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/servlet/2017-06-11-servlet/" class="dd-item
+     
+      ">
+        <a href="/servlet/2017-06-11-servlet/">
+        <span>Servlet笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/services/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/services/">
+        <span>Services</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/services/2017-06-23-microservices/" class="dd-item
+     
+      ">
+        <a href="/services/2017-06-23-microservices/">
+        <span>微服务架构摘要</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/services/2017-06-19-microservices/" class="dd-item
+     
+      ">
+        <a href="/services/2017-06-19-microservices/">
+        <span>微服务架构笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/services/2017-06-18-soa/" class="dd-item
+     
+      ">
+        <a href="/services/2017-06-18-soa/">
+        <span>面向服务架构笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/services/2017-06-17-high-concurrency/" class="dd-item
+     
+      ">
+        <a href="/services/2017-06-17-high-concurrency/">
+        <span>高并发解决思路</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/spring/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/spring/">
+        <span>Spring</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/spring/2017-06-26-spring-rest/" class="dd-item
+     
+      ">
+        <a href="/spring/2017-06-26-spring-rest/">
+        <span>Spring实现RESTful Service笔记</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/spring/2017-06-25-spring-dispatcher-servlet/" class="dd-item
+     
+      ">
+        <a href="/spring/2017-06-25-spring-dispatcher-servlet/">
+        <span>Spring DispatcherServlet相关知识点</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/docker/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/docker/">
+        <span>Docker</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/docker/2017-06-27-dubbo-in-docker/" class="dd-item
+     
+      ">
+        <a href="/docker/2017-06-27-dubbo-in-docker/">
+        <span>Docker容器运行dubbo应用</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/utilities/" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/utilities/">
+        <span>Utilities</span>
+
+        
+        
+
+          
+            <i class="fa fa-angle-right fa-lg category-icon"></i>
+          
+
+        
+
+        
+      </a>
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/utilities/2017-06-22-plantuml/" class="dd-item
+     
+      ">
+        <a href="/utilities/2017-06-22-plantuml/">
+        <span>工具推荐：PlantUML，文本转UML图工具</span> 
+        
+        </a></li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+        
+
+        
+    </ul>
+    
+     
+    <section id="footer">
+      
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+        
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='/'>首页</a> > <a href='/java/'>Java</a> > Java NIO摘要
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#一些思考点">一些思考点</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+          </div>
+        
+        
+          <div id="tags">
+            
+              <a class="label label-default" href="https://feng1st.github.io//tags/java">Java</a>
+            
+              <a class="label label-default" href="https://feng1st.github.io//tags/network">Network</a>
+            
+              <a class="label label-default" href="https://feng1st.github.io//tags/nio">NIO</a>
+            
+          </div>
+        
+        <div id="body-inner">
+          
+            <h1>Java NIO摘要</h1>
+          
+
+
+
+
+
+
+<p>比较经典和精简的教程，先直接发链接：
+<a href="http://tutorials.jenkov.com/java-nio/">http://tutorials.jenkov.com/java-nio/</a></p>
+
+<p>NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想
+例如，换用消息队列，就可以扩展到分布式系统里去</p>
+
+<h2 id="一些思考点">一些思考点</h2>
+
+<ol>
+<li>Channel和Stream有什么不同？
+
+<ol>
+<li>Channel双向，Stream一般单向</li>
+<li>Channel支持异步</li>
+<li>Channel搭配Buffer使用</li>
+</ol></li>
+<li>ServerSocketChannel和SocketChannel有什么不同？
+
+<ol>
+<li>SocketChannel用于单个连接</li>
+<li>ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel</li>
+</ol></li>
+<li>FileChannel.transferTo(&hellip;, SocketChannel)有什么需要注意的？
+
+<ul>
+<li>SocketChannel非阻塞且发送缓冲已满，可能只传输部分</li>
+</ul></li>
+<li>SocketChannel的blocking和non-blocking模式有什么不同？
+
+<ol>
+<li>相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功</li>
+<li>write()/read()可能未实际读写就返回</li>
+</ol></li>
+<li>ServerSocketChannel的blocking和non-blocking模式有什么不同？
+
+<ol>
+<li>相对于阻塞，accept()直接返回，如没有接受连接，返回null</li>
+<li>write()/read()可能未实际读写就返回</li>
+</ol></li>
+<li>Blocking模式Socket有什么问题？
+
+<ol>
+<li>一般会用一个线程处理一个连接，所以支撑的连接数非常有限</li>
+<li>如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池</li>
+</ol></li>
+<li>Non-blocking模式Socket有哪些挑战？
+
+<ol>
+<li>读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成
+
+<ul>
+<li>长度：TLV中的L</li>
+<li>内容：类型是包含在这里面的，比如protobuf协议</li>
+<li>校验：用于验证数据错误，或者网络错误，通知重传</li>
+</ul></li>
+<li>读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮
+
+<ul>
+<li>一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下
+
+<ul>
+<li>总段数</li>
+<li>本段序号</li>
+<li>本段内容</li>
+</ul></li>
+</ul></li>
+<li>发送方不能把所有的Channel都注册到Selector，因为Selector.select()时，可能大部分Channel都可写，全部返回，性能低下
+
+<ol>
+<li>当本Channel对应缓冲区有待发送数据时，才注册到Selector</li>
+<li>当缓冲区数据发送完毕时，从Selector取消注册</li>
+</ol></li>
+</ol></li>
+<li>Selector有哪两种底层实现？
+
+<ol>
+<li>Reactor：轮询Channel对应底层IO句柄。当连接数过多时，性能低下。这个可以算是多路复用，因为select()时还是有等待的过程</li>
+<li>e-poll：注册回调函数，只有当有对应事件发生时，才通知Selector。这个算是真正的异步。Linux直接支持</li>
+</ol></li>
+<li>阻塞/非阻塞，同步/异步
+
+<ul>
+<li>阻塞：调用io函数会一直等待，比如System.in.read()</li>
+<li>非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO</li>
+<li>同步：用等待或者轮询的方式拿到结果，比如NIO</li>
+<li>异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel</li>
+</ul></li>
+<li>额外提一下Node.js的线程模型
+
+<ul>
+<li>
+<figure >
+    <a href="733213-20160306210005159-1364173213.png">
+        <img src="733213-20160306210005159-1364173213.png" />
+    </a>
+    
+</figure>
+</li>
+</ul></li>
+</ol>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+
+      </div>
+    </div>
+
+    
+ 
+    
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="/java/" title="Java"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="/java/2017-06-07-jvm-memory-gc/" title="Java内存模型和GC机制摘要" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/featherlight.min.js"></script>
+    <script src="/js/html5shiv-printshiv.min.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom.71422.js"></script>
+    <script src="/js/learn.js"></script>
+    <script src="/js/hugo-learn.js"></script>
+
+    
+    <link href="/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
+    <script src="/mermaid/mermaid.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    
+
+    
+
+  </body>
+</html>
+
