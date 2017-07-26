@@ -210,14 +210,14 @@
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/tags/java/",
+	"uri": "https://feng1st.github.io/categories/java/",
 	"title": "Java",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/categories/java/",
+	"uri": "https://feng1st.github.io/tags/java/",
 	"title": "Java",
 	"tags": [],
 	"description": "",
@@ -238,14 +238,14 @@
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/tags/network/",
+	"uri": "https://feng1st.github.io/categories/network/",
 	"title": "Network",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/categories/network/",
+	"uri": "https://feng1st.github.io/tags/network/",
 	"title": "Network",
 	"tags": [],
 	"description": "",
@@ -266,14 +266,14 @@
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/tags/service/",
+	"uri": "https://feng1st.github.io/categories/service/",
 	"title": "Service",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/categories/service/",
+	"uri": "https://feng1st.github.io/tags/service/",
 	"title": "Service",
 	"tags": [],
 	"description": "",
@@ -329,13 +329,6 @@
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/tags/utility/",
-	"title": "Utility",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
 	"uri": "https://feng1st.github.io/categories/utility/",
 	"title": "Utility",
 	"tags": [],
@@ -343,14 +336,21 @@
 	"content": ""
 },
 {
-	"uri": "https://feng1st.github.io/tags/web/",
-	"title": "Web",
+	"uri": "https://feng1st.github.io/tags/utility/",
+	"title": "Utility",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
 	"uri": "https://feng1st.github.io/categories/web/",
+	"title": "Web",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://feng1st.github.io/tags/web/",
 	"title": "Web",
 	"tags": [],
 	"description": "",
