@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+    
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Jetty笔记 | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
+      
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
+        </div>
+      </header>
+      <div class="container">
+        <div id="main">
+
+<div class="article">
+  <header>
+    <div class="article-header">
+      <h1>Jetty笔记</h1>
+      <div class="article-meta">
+        <span class="posttime">2017/06/12</span>
+        
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    
+
+  </header>
+  <div class="content">
+    
+
+<h2 id="核心组成部分">核心组成部分</h2>
+
+<ul>
+<li>Server</li>
+<li>Connector</li>
+<li>Handler</li>
+<li>ThreadPool</li>
+<li>LifeCycle</li>
+</ul>
+
+<h2 id="lifecycle">LifeCycle</h2>
+
+<pre><code>start();
+stop();
+</code></pre>
+
+<ol>
+<li>管理server对象的生命周期</li>
+<li>Connector, Handler, ThreadPool都实现了LifeCycle接口</li>
+<li>LifeCycle的监听使用了观察者模式</li>
+</ol>
+
+<h2 id="connector">Connector</h2>
+
+<ol>
+<li>接受TCP连接</li>
+<li>用配置的ConnectionFactory创建Connection，和连接绑定</li>
+<li>可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+
+<ol>
+<li>ProxyConnectionFactory：处理Proxy协议</li>
+<li>SslConnectionFactory：SSL加密解密</li>
+<li>HttpConnectionFactory：处理实际的HTTP请求</li>
+</ol></li>
+</ol>
+
+<h2 id="handler">Handler</h2>
+
+<p><img src="basic-architecture-handlers.png" alt="" /></p>
+
+<ol>
+<li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+
+<ol>
+<li>HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+
+<ul>
+<li>装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()</li>
+<li>责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链</li>
+</ul></li>
+<li>HandlerContainer：组合模式 Composite，树形结构</li>
+<li>模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责</li>
+<li>门面模式 Facade：Context相关类，限制暴露方法的范围</li>
+</ol></li>
+<li>Handler风格分类：
+
+<ol>
+<li>协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）</li>
+<li>过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）</li>
+<li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）</li>
+</ol></li>
+<li>调用方式：
+<img src="basic-architecture-nested-handlers.png" alt="" />
+
+<ol>
+<li>顺序调用，代表：HandlerCollection</li>
+<li>嵌套调用，代表：HandlerWrapper</li>
+</ol></li>
+</ol>
+
+<h2 id="servlethandler">ServletHandler</h2>
+
+<p><img src="basic-architecture-servlet-handler.png" alt="" /></p>
+
+<ol>
+<li>ServletHandler持有多个FilterHolder和ServletHolder</li>
+<li>作为Servlet容器，调用时先调用所有的Filter，再调用Servlet</li>
+</ol>
+
+<h2 id="context">Context</h2>
+
+<ol>
+<li>简单的说，分组环境变量</li>
+</ol>
+
+<h2 id="几个时序图">几个时序图</h2>
+
+<ol>
+<li>Jetty启动
+<img src="image011.jpg" alt="" />
+
+<ul>
+<li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。</li>
+</ul></li>
+<li>Jetty建立连接
+<img src="image013.jpg" alt="" /></li>
+<li>Jetty处理连接
+<img src="image015.jpg" alt="" />
+
+<ul>
+<li>注意Request/Response是在什么地方创建的</li>
+</ul></li>
+</ol>
+
+<h2 id="引用来源">引用来源</h2>
+
+<ol>
+<li><a href="http://www.eclipse.org/jetty/documentation/current/architecture.html">http://www.eclipse.org/jetty/documentation/current/architecture.html</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/">https://www.ibm.com/developerworks/cn/java/j-lo-jetty/</a></li>
+</ol>
+
+  </div>
+  <footer>
+    <div class="article-footer">
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      
+      
+
+      
+      
+      <div id="pagenavigation-next-prev">
+        
+        <div id="pagenavigation-next">
+          <span class="pagenav-label">Previous</span>
+          <a href="https://feng1st.github.io/post/2017/06/servlet/">Servlet笔记</a>
+        </div>
+        
+        
+        <div id="pagenavigation-prev">
+          <span class="pagenav-label">Next</span>
+          <a href="https://feng1st.github.io/post/2017/06/tomcat/">Tomcat笔记</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </footer>
+</div>
+        </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+

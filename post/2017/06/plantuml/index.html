@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+    
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>工具推荐：PlantUML，文本转UML图工具 | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
+      
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
+        </div>
+      </header>
+      <div class="container">
+        <div id="main">
+
+<div class="article">
+  <header>
+    <div class="article-header">
+      <h1>工具推荐：PlantUML，文本转UML图工具</h1>
+      <div class="article-meta">
+        <span class="posttime">2017/06/22</span>
+        
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/utilities">Utilities</a>
+    </li>
+    
+    <li>
+        <a href="/tags/uml">UML</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    
+
+  </header>
+  <div class="content">
+    
+
+<p>官网：<a href="http://plantuml.com/">http://plantuml.com/</a></p>
+
+<p>为什么要用文本生成UML，而不直接画UML？
+这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：
+这属于强迫症，得治。</p>
+
+<h2 id="安装">安装</h2>
+
+<p>如果使用ubuntu，直接：
+<code>sudo apt-get install graphviz plantuml</code></p>
+
+<p>其它平台或者安装方法请参考官网</p>
+
+<h2 id="使用">使用</h2>
+
+<p><code>plantuml src.txt</code></p>
+
+<p>如果是下载的jar：
+<code>java -jar plantuml.jar src.txt</code></p>
+
+<p>会在当前目录下生成<code>src.png</code></p>
+
+<h2 id="示例">示例</h2>
+
+<p>输入：
+<code>jetty-handler.pu</code></p>
+
+<pre><code>@startuml
+interface Handler {
+  +handle(request)
+}
+abstract class AbstractHandler
+class HandlerWrapper
+class ServletHandler
+class HandlerContainer
+class Server
+class SessionHandler {
+  +SessionManager
+}
+class SecurityHandler {
+  +SecurityConstraint[]
+}
+class ContextHandler {
+  +contextPath
+  +resourceBase
+  +classLoader
+}
+class ContextHandlerContainer {
+  -contexts: PathMap
+}
+class WebAppContext {
+  +descriptor
+}
+
+Handler &lt;|.. AbstractHandler
+Handler &quot;1&quot; --o HandlerWrapper
+Handler &quot;*&quot; --o HandlerContainer
+AbstractHandler &lt;|-- HandlerWrapper
+AbstractHandler &lt;|-- ServletHandler
+AbstractHandler &lt;|-- HandlerContainer
+AbstractHandler ..&gt; Server
+HandlerWrapper &lt;|-- Server
+HandlerWrapper &lt;|-- SessionHandler
+HandlerWrapper &lt;|-- SecurityHandler
+HandlerWrapper &lt;|-- ContextHandler
+ServletHandler &lt;.. WebAppContext
+HandlerContainer &lt;|-- ContextHandlerContainer
+SessionHandler &lt;.. WebAppContext
+SecurityHandler &lt;.. WebAppContext
+ContextHandler &lt;. ContextHandlerContainer
+ContextHandler &lt;|-- WebAppContext
+@enduml
+</code></pre>
+
+<p>输出：
+<code>jetty-handler.png</code>
+<img src="jetty-handler.png" alt="" /></p>
+
+  </div>
+  <footer>
+    <div class="article-footer">
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/utilities">Utilities</a>
+    </li>
+    
+    <li>
+        <a href="/tags/uml">UML</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      
+      
+
+      
+      
+      <div id="pagenavigation-next-prev">
+        
+        <div id="pagenavigation-next">
+          <span class="pagenav-label">Previous</span>
+          <a href="https://feng1st.github.io/post/2017/06/soa/">面向服务架构笔记</a>
+        </div>
+        
+        
+        <div id="pagenavigation-prev">
+          <span class="pagenav-label">Next</span>
+          <a href="https://feng1st.github.io/post/2017/06/microservices/">微服务架构摘要</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </footer>
+</div>
+        </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+

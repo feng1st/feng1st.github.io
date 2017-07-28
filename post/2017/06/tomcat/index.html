@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+    
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Tomcat笔记 | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
+      
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
+        </div>
+      </header>
+      <div class="container">
+        <div id="main">
+
+<div class="article">
+  <header>
+    <div class="article-header">
+      <h1>Tomcat笔记</h1>
+      <div class="article-meta">
+        <span class="posttime">2017/06/14</span>
+        
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    
+
+  </header>
+  <div class="content">
+    
+
+<h2 id="架构">架构</h2>
+
+<ol>
+<li>Server: 整个容器</li>
+<li>Service: 关联Container和Connector的中间人，包含一个Container和多个Connector</li>
+<li>Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应
+
+<ul>
+<li>维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行</li>
+<li>Request, Response是在这里创建的，然后传递给Container</li>
+<li>低版本Tomcat可以修改配置文件server.xml，为Connector使用<code>protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</code></li>
+</ul></li>
+<li>Container: 所有容器的父接口，下面4个重要的实现类/子接口
+
+<ul>
+<li>Engine, Host, Context, Wrapper</li>
+<li>4个之间不是并列关系，是父子包含关系</li>
+</ul></li>
+<li>Engine: 是一个Service的根容器，处理请求的总管道 Pipeline</li>
+<li>Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动</li>
+<li>Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位</li>
+<li>Wrapper: Context的子容器，负责调用Filter和Servlet</li>
+<li>LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器</li>
+<li>Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline
+
+<ul>
+<li><code>EngineValve1 -&gt; EngineValve2 -&gt; ... -&gt; StandardEngineValve -&gt; HostPipeline</code></li>
+</ul></li>
+<li>Valve: Pipeline的切入点
+
+<ul>
+<li>StandardEngineValve: Engine pipeline上最后一个valve，调用Host</li>
+<li>StandardHostValve: Host pipeline上最后一个valve，调用Context</li>
+<li>StandardContextValve: Context pipeline上最后一个valve，调用Wrapper</li>
+<li>StandardWrapperValve: Wrapper pipeline上最后一个valve，负责生成并调用filterChain，最后调用servlet</li>
+</ul></li>
+</ol>
+
+<h2 id="处理请求">处理请求</h2>
+
+<p>时序图
+<img src="request-process.png" alt="" /></p>
+
+<h2 id="classloader">ClassLoader</h2>
+
+<ul>
+<li>是典型的双亲委托模式 Parents Delegation Model</li>
+<li>要求：
+
+<ul>
+<li>common目录下的类被Tomcat和应用使用</li>
+<li>server目录下的类只被Tomcat使用</li>
+<li>shared目录下的类可以被所有应用使用</li>
+<li>应用目录下的类只可以被本应用使用</li>
+</ul></li>
+<li>实现（ClassLoader层级关系）：
+
+<ul>
+<li><img src="tomcat-class-loaders.png" alt="" /></li>
+</ul></li>
+</ul>
+
+  </div>
+  <footer>
+    <div class="article-footer">
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      
+      
+
+      
+      
+      <div id="pagenavigation-next-prev">
+        
+        <div id="pagenavigation-next">
+          <span class="pagenav-label">Previous</span>
+          <a href="https://feng1st.github.io/post/2017/06/jetty/">Jetty笔记</a>
+        </div>
+        
+        
+        <div id="pagenavigation-prev">
+          <span class="pagenav-label">Next</span>
+          <a href="https://feng1st.github.io/post/2017/06/high-concurrency/">高并发解决思路</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </footer>
+</div>
+        </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+

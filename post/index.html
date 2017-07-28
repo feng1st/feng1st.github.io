@@ -1,536 +1,401 @@
 <!DOCTYPE html>
 <html lang="utf-8">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
     
-    <meta name="description" content="知耻而后勇，知不足而后进">
-    <meta name="author" content="">
-
-    <link rel="stylesheet" href="/css/bootstrap-3.3.7.min.css">
-    <link rel="stylesheet" href="/css/theme.css">
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/highlight-github-9.10.0.min.css">
-
-<link rel="stylesheet" type="text/css" href="/css/mermaid/mermaid.css">
-
-
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feng1st.github.io//index.xml">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     
-    <title>Posts - 知耻而后勇，知不足而后进</title>
-    <meta property='og:title' content="Posts - 知耻而后勇，知不足而后进">
-    <meta property="og:type" content="article">
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
     
-
-    <meta property="og:url" content="https://feng1st.github.io/post/">
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     
-    
-</head>
-
-<body>
-
-
-    <div class="container">
-
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Posts | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
       
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">知耻而后勇，知不足而后进</a>
-          </div>
-          
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
         </div>
-      </nav>
+      </header>
+      <div class="container">
+        <div id="main">
 
-
-<div class="row">
-    <div class="col-lg-8">
-
-      <header class="title"><h1>Posts</h1></header>
-
-      <div class="articles">
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Docker容器运行dubbo应用</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 27, 2017
-    </p>
-    
-    <p>参考了这篇文章： https://yq.aliyun.com/articles/60789
-大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
-它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
-但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。
-为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
-application.properties
-server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
-services.xml
- &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
-docker-compose.yml
-version: '2' services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口
-zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
-更复杂的部署，应考虑使用Docker Swarm
-还有其它一些细节，可以参考源代码：
-https://github.com/feng1st/microservices-demo</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-27-dubbo-in-docker/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Spring实现RESTful Service笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 26, 2017
-    </p>
-    
-    <p>来源：
-https://spring.io/guides/gs/rest-service/
-本文采用代码及分析的形式
-GreetingController.java src/main/java/hello/GreetingController.java
-package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
- 整合@Controller, @ResponseBody
- @Controller
- MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
-  @ResponseBody
- 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
- 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
-   @RequestMapping</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-26-spring-rest/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 25, 2017
-    </p>
-    
-    <p>DispatcherServlet作用  作为Spring MVC的集中访问点
- 通过HandlerMapping，将请求映射到Handler
- 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
-  通过不同的HandlerAdaptor，支持不同的处理器
- 通过ViewResolver，支持到具体视图的解析
- 通过HandlerExceptionResolver，实现对异常的处理
-  每一部分都可以很方便的扩展
-DispatcherServlet流程  请求被DispatcherServlet截获
- DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
- 常见的handlerMapping：
- RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
- 内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理
-  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置
-   handlerMapping构造一个HandlerExecutionChain
- HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
- Handler是一个HandlerMethod，通过构造函数参数传入request
- Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换
-   用HandlerAdaptor封装chain里的handler
- 不同的handler接口不同，通过adaptor统一接口
- DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
- HandlerMethod对应的是RequestMappingHandlerAdaptor
-  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
- HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
- 除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
-  ServletInvocableHandlerMethod.invokeAndHandle()里
- 用argumentResolvers和dataBinderFactory转化参数
- 用argumentResolvers解析参数</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-25-spring-dispatcher-servlet/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-23-microservices/">微服务架构摘要</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 23, 2017
-    </p>
-    
-    <p>原文: https://www.nginx.com/blog/introduction-to-microservices/
-单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
- 过于复杂，难于理解和修改。修改容易引入bug
- 启动变慢，降低调试和开发速度
- 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试
- 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求
- 可靠性，组件异常（比如内存泄露），导致整个应用异常
- 难于升级到新的技术和框架
-  微服务框架  按功能划分，比如订单管理、客户端管理
- 每个微服务是一个单独的小应用
- 微服务对外暴露API，比如REST API
-微服务之间可以通过暴露的API互相调用
-微服务间还可以通过消息系统实现异步调用
-外界一般不直接范围后端服务，而是通过API网关
- 微服务通常通过虚拟机或Docker部署
-  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题
-y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务
-z轴：数据分区，靠拆分相似的事物伸缩
-微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema
-这是为了更彻底的解耦
-但是不可避免的，多个微服务数据库间存在重复数据
-微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成
-区别：
-1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST
-2. 微服务架构弃用了ESB
-微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护
- 开发方面：可以选用自己的技术，可以使用较新的技术
- 部署方面：可以单独部署，更容易部署和测试
- 伸缩方面：更容易按需扩展多实例
-  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
- 分布式架构下调用的开销，以及服务不可用的处理
- 数据库拆分后，分布式事务基本不采用，需要最终一致方案
- 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-23-microservices/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-22-plantuml/">工具推荐：PlantUML，文本转UML图工具</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 22, 2017
-    </p>
-    
-    <p>官网：http://plantuml.com/
-为什么要用文本生成UML，而不直接画UML？
-这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：
-这属于强迫症，得治。
-安装 如果使用ubuntu，直接：
-sudo apt-get install graphviz plantuml
-其它平台或者安装方法请参考官网
-使用 plantuml src.txt
-如果是下载的jar：
-java -jar plantuml.jar src.txt
-会在当前目录下生成src.png
-示例 输入：
-jetty-handler.pu
-@startuml interface Handler { +handle(request) } abstract class AbstractHandler class HandlerWrapper class ServletHandler class HandlerContainer class Server class SessionHandler { +SessionManager } class SecurityHandler { +SecurityConstraint[] } class ContextHandler { +contextPath +resourceBase +classLoader } class ContextHandlerContainer { -contexts: PathMap } class WebAppContext { +descriptor } Handler &lt;|.</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-22-plantuml/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-19-microservices/">微服务架构笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 19, 2017
-    </p>
-    
-    <p>原文：http://blog.csdn.net/mindfloating/article/details/24583369
-什么是微服务架构 采用一组服务的方式来构建一个应用；
-服务独立部署在不同的进程；
-服务之间通过轻量级的机制来通讯，比如RPC、HTTP；
-服务可独立扩展伸缩；
-每个服务定义了明确的边界；
-不同服务可以采用不同的技术实现，由独立的团队维护。
-微服务架构的特征  通过服务实现组件化
-和传统方式，或者说单一架构(Monolithic Architecture)类比：
-传统方式实现组件化：通过库(library)；和应用运行在一个进程里；组件升级，应用需要重新部署
-服务方式实现组件化：通过服务；部署在不同的进程；可以单独升级
-因为服务是跨进程的，所以在设计阶段就必须定义好明确的边界
- 按业务能力来划分服务和组织团队
-传统方式按技术分层：前端、后端、数据库
-微服务架构：按业务划分，全栈工程师或全栈团队
- 服务即产品
-团队即负责开发，也负责维护
- 智能终端和哑管道
-抛弃过于复杂的ESB，服务自己处理自己的业务逻辑
-服务间通讯尽量轻量，不添加额外的规则
- 去中心统一化
-各服务可以选用自己的技术实现
- 自动化基础设施服务
-必须要存在自动化的服务治理平台，才能降低开发、调试、测试、部署、监控、维护的复杂度
- Design for failure
-服务消费者要优雅的处理远程调用带来的错误
- 进化设计
-发送方要最小化，只发送必要的信息
-接收方要最大化，要最大化容错，要允许传入不认识的参数
-  服务的划分 参考点之一：如果功能A发生改变，功能B也要随之改变，一般它们应划在同一个服务里</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-19-microservices/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-18-soa/">面向服务架构笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 18, 2017
-    </p>
-    
-    <p>分布式应用架构的演化  DOA 分布式对象架构
- 主要特征：
- 对象是可以在服务器/容器间自由“移动”的
- 被调用的对象究竟是本地，还是远程，对调用者来说是透明的
-  例子：EJB
- 问题：复杂和性能
- 远程调用有更多可能出错的环节
- 分布式事务需要两阶段提交
- 远程通讯额外的开销
-   SOA 面向服务架构
- 服务是可“移动”的，但是远没有DOA那样不可控
- 当调用其它服务时，调用者知道这是一个远程调用。对复杂度和性能有更好的把控
-   企业服务总线 ESB ESB是SOA的核心组件，其主要特点：
- 服务访问单点：服务提供者和服务消费者都只需要知道ESB的存在。服务发生变化，只需要修改ESB的配置
- 事物管理器：分布式事物管理器放在这个地方很自然
- 安全管理器：访问权限、授权管理
- 服务代理：统一服务接口和数据格式的一个Adaptor和Proxy
- 对外部的网关
-  但是ESB也有一定的缺点：
- 单点故障：ESB发生故障，整个系统将不可用
- 单点性能：分布式系统中，承担ESB角色的单点是必须的，比如服务注册和发现。
-但是，究竟要承担哪些具体的工作，是一个需要考虑的点。
-比如，如果服务之间的通讯都要经过ESB，ESB会不会成为整个系统的性能瓶颈，会不会增大故障的概率
- 同上，增加了服务间访问的间接性，降低了性能
-  SOA简介 SOA的目标是实现灵活可变的分布式IT系统，这需要：
- 标准化：协议标准化，实现互访问
- 复用：服务可复用
- 松耦合可编排：分布式对象技术分离了连接逻辑，消息中间件实现了连接逻辑的异步，SOA架构实现了业务逻辑的解耦
-  SOA治理  服务注册与发现</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-18-soa/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">高并发解决思路</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 17, 2017
-    </p>
-    
-    <p>解决高并发，无非两个方向：
- 分而治之：分流
- 优化单个服务器处理能力
-  客户端  尽量使用缓存
- 尽量本地处理
- 尽量减少不必要的访问
-  分流 LVS、Nginx、Varnish放到一块说
- 负载均衡
- 业务拆分
- 静态内容直接返回，包括使用CDN
- 缓存（动态内容缓存、页面片段缓存）
-  优化单个服务器处理程序  缓存：缓存永远是最重要的
- 异步：能异步就异步
-如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果
- 多线程：
-如果是CPU吃重的应用，线程数过高不能解决问题
-I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题
-另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务
- 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表
- 还有一种预处理，是和缓存结合的预处理
-不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新
- 优化SQL，正确使用索引
- 尽量不要使用分布式事务
-2阶段提交不是万能药
- 各节点进入事务
- 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效）
- 各节点commit
-假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的
-  应用算法优化
-  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM）
- 合理设置索引
- 使用集群，读写分离
- 合理分表分库</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-17-high-concurrency/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-14-tomcat/">Tomcat笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 14, 2017
-    </p>
-    
-    <p>架构  Server: 整个容器
- Service: 关联Container和Connector的中间人，包含一个Container和多个Connector
- Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应
- 维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行
- Request, Response是在这里创建的，然后传递给Container
- 低版本Tomcat可以修改配置文件server.xml，为Connector使用protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot;
-  Container: 所有容器的父接口，下面4个重要的实现类/子接口
- Engine, Host, Context, Wrapper
- 4个之间不是并列关系，是父子包含关系
-  Engine: 是一个Service的根容器，处理请求的总管道 Pipeline
- Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动
- Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位
- Wrapper: Context的子容器，负责调用Filter和Servlet
- LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器
- Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline
- EngineValve1 -&gt; EngineValve2 -&gt; ... -&gt; StandardEngineValve -&gt; HostPipeline
-  Valve: Pipeline的切入点
- StandardEngineValve: Engine pipeline上最后一个valve，调用Host
- StandardHostValve: Host pipeline上最后一个valve，调用Context</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-14-tomcat/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-            <article class="well">
-    <h2><a href="https://feng1st.github.io/post/2017-06-12-jetty/">Jetty笔记</a></h2>
-    <p>
-        <i class="fa fa-clock-o"></i> Posted on June 12, 2017
-    </p>
-    
-    <p>核心组成部分 graph LR L(LifeCycle) C(Connector)---S(Server) H(Handler)---S S---P(ThreadPool)  LifeCycle start(); stop();   管理server对象的生命周期
- Connector, Handler, ThreadPool都实现了LifeCycle接口
- LifeCycle的监听使用了观察者模式
-  Connector  接受TCP连接
- 用配置的ConnectionFactory创建Connection，和连接绑定
- 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
- ProxyConnectionFactory：处理Proxy协议
- SslConnectionFactory：SSL加密解密
- HttpConnectionFactory：处理实际的HTTP请求
-   Handler    Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
- HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
- 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
- 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
-  HandlerContainer：组合模式 Composite，树形结构
- 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
- 门面模式 Facade：Context相关类，限制暴露方法的范围
-  Handler风格分类：
- 协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）</p>
-    <a class="btn btn-primary" href="https://feng1st.github.io/post/2017-06-12-jetty/">Read More <i class="fa fa-chevron-right"></i></a>
-</article>
-
-          
-      </div>
-
+<div id="article-list">
+  
+  <div id="articles-list-header">
+    <h1>Archive: <span id="archive-value">Posts</span></h1>
+  </div>
+  
+  
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/dubbo-in-docker/">Docker容器运行dubbo应用</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/27</span>
       
-<nav>
-    <ul class="pager">
-        
-        <li class="previous"><a href="/post/page/2"><i class="fa fa-chevron-left"></i> Older</a></li>
-        
-        
-    </ul>
-</nav>
-
-
-    </div>
-    <aside class="col-md-4">
-
+<div class="tags">
+  <ul>
     
-
+    <li>
+        <a href="/tags/docker">Docker</a>
+    </li>
     
-
+    <li>
+        <a href="/tags/dubbo">Dubbo</a>
+    </li>
     
-    
-    <div class="well">
-        <h3 class="text-capitalize">categories</h3>
-        <ul class="list-unstyled">
-        
-            <li><a href="/categories/java">Java</a></li>
-        
-            <li><a href="/categories/network">Network</a></li>
-        
-            <li><a href="/categories/service">Service</a></li>
-        
-            <li><a href="/categories/utility">Utility</a></li>
-        
-            <li><a href="/categories/web">Web</a></li>
-        
-        </ul>
-    </div>
-    
-    
-    
-    <div class="well">
-        <h3 class="text-capitalize">tags</h3>
-        <ul class="list-unstyled">
-        
-            <li><a href="/tags/dispatcherservlet">DispatcherServlet</a></li>
-        
-            <li><a href="/tags/docker">Docker</a></li>
-        
-            <li><a href="/tags/dubbo">Dubbo</a></li>
-        
-            <li><a href="/tags/gc">GC</a></li>
-        
-            <li><a href="/tags/http">HTTP</a></li>
-        
-            <li><a href="/tags/high-concurrency">High-Concurrency</a></li>
-        
-            <li><a href="/tags/jvm">JVM</a></li>
-        
-            <li><a href="/tags/java">Java</a></li>
-        
-            <li><a href="/tags/microservices">Microservices</a></li>
-        
-            <li><a href="/tags/nio">NIO</a></li>
-        
-            <li><a href="/tags/network">Network</a></li>
-        
-            <li><a href="/tags/restful">RESTful</a></li>
-        
-            <li><a href="/tags/soa">SOA</a></li>
-        
-            <li><a href="/tags/service">Service</a></li>
-        
-            <li><a href="/tags/servlet">Servlet</a></li>
-        
-            <li><a href="/tags/servlet-container">Servlet-Container</a></li>
-        
-            <li><a href="/tags/spring">Spring</a></li>
-        
-            <li><a href="/tags/tcp-ip">TCP-IP</a></li>
-        
-            <li><a href="/tags/uml">UML</a></li>
-        
-            <li><a href="/tags/utility">Utility</a></li>
-        
-            <li><a href="/tags/web">Web</a></li>
-        
-            <li><a href="/tags/web-server">Web-Server</a></li>
-        
-        </ul>
-    </div>
-    
-    
-
-</aside>
-
+  </ul>
 </div>
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p>
-                            <span id="copyright">&copy;</span>
-                            
-                                2017
-                            
-                            
-                                <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a> -
-                            
-                                nf_xp
-                                <br />
-                            
-                                Template by <a href="https://github.com/Fale/fale.io">fale.io</a> -
-                            
-                            
-                                Theme by <a href="https://github.com/Fale/bootstrap2hugo">bootstrap2hugo</a> -
-                            
-                            Powered by <a href="http://gohugo.io" target="_blank">Hugo</a><br />
-                        </p>
-                    </div>
-                </div>
-            
-            </footer>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/spring-rest/">Spring实现RESTful Service笔记</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/26</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/spring">Spring</a>
+    </li>
+    
+    <li>
+        <a href="/tags/restful">RESTful</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/25</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/spring">Spring</a>
+    </li>
+    
+    <li>
+        <a href="/tags/dispatcherservlet">DispatcherServlet</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/microservices/">微服务架构摘要</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/23</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/services">Services</a>
+    </li>
+    
+    <li>
+        <a href="/tags/microservices">Microservices</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/plantuml/">工具推荐：PlantUML，文本转UML图工具</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/22</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/utilities">Utilities</a>
+    </li>
+    
+    <li>
+        <a href="/tags/uml">UML</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/soa/">面向服务架构笔记</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/18</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/services">Services</a>
+    </li>
+    
+    <li>
+        <a href="/tags/soa">SOA</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/high-concurrency/">高并发解决思路</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/17</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/services">Services</a>
+    </li>
+    
+    <li>
+        <a href="/tags/high-concurrency">High-Concurrency</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/tomcat/">Tomcat笔记</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/14</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/jetty/">Jetty笔记</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/12</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+    <li>
+        <a href="/tags/servlet-container">Servlet-Container</a>
+    </li>
+    
+    <li>
+        <a href="/tags/web-server">Web-Server</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <div class="article">
+    <h2><a href="https://feng1st.github.io/post/2017/06/servlet/">Servlet笔记</a></h2>
+    <div class="article-meta">
+      <span class="posttime">2017/06/11</span>
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/servlet">Servlet</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+  
+  <nav>
+    <div id="pager">
+      
+      
+
+<ul class="pagination">
+    
+    <li>
+        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li
+    class="disabled">
+    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+     
+        
+        
+    
+    
+    <li
+    class="active"><a href="/post/">1</a></li>
+    
+    
+    
+    
+    
+     
+        
+        
+    
+    
+    <li
+    ><a href="/post/page/2/">2</a></li>
+    
+    
+    <li
+    >
+    <a href="/post/page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li>
+        <a href="/post/page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+    </div>
+  </nav>
+</div>
         </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/post/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
 
-        <script src="/js/jquery-3.1.1.min.js"></script>
-        <script src="/js/bootstrap-3.3.7.min.js"></script>
-        <script type="text/javascript">
-            (function() {
-                var css = document.createElement('link');
-                css.href = '/css/font-awesome-4.7.0.min.css';
-                css.rel = 'stylesheet';
-                css.type = 'text/css';
-                document.getElementsByTagName('head')[0].appendChild(css);
-            })();
-        </script>
-        <script src="/js/highlight-9.10.0.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-<script type="text/javascript" src="/js/mermaid/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
-
-    </body>
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
 

@@ -7,9 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
     <lastBuildDate>Sun, 25 Jun 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://feng1st.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/tags/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Dispatcherservlet</title>
@@ -143,60 +141,6 @@
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://feng1st.github.io/tags/servlet-container/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Soa</title>
-      <link>https://feng1st.github.io/tags/soa/</link>
-      <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/soa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
-      <link>https://feng1st.github.io/tags/spring/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/spring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tcp Ip</title>
-      <link>https://feng1st.github.io/tags/tcp-ip/</link>
-      <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/tcp-ip/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Uml</title>
-      <link>https://feng1st.github.io/tags/uml/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/uml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Utilities</title>
-      <link>https://feng1st.github.io/tags/utilities/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/utilities/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web Server</title>
-      <link>https://feng1st.github.io/tags/web-server/</link>
-      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/tags/web-server/</guid>
       <description></description>
     </item>
     

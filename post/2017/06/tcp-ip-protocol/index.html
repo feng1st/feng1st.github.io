@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+    
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>TCP/IP协议摘要 | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
+      
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
+        </div>
+      </header>
+      <div class="container">
+        <div id="main">
+
+<div class="article">
+  <header>
+    <div class="article-header">
+      <h1>TCP/IP协议摘要</h1>
+      <div class="article-meta">
+        <span class="posttime">2017/06/08</span>
+        
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/network">Network</a>
+    </li>
+    
+    <li>
+        <a href="/tags/tcp-ip">TCP-IP</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    
+
+  </header>
+  <div class="content">
+    
+
+<h2 id="协议分层">协议分层</h2>
+
+<ol>
+<li>应用层 Application
+
+<ul>
+<li>对应OSI协议Application、Presentation、Session三层</li>
+<li>常见上层协议：HTTP、FTP、SMTP、TELNET</li>
+</ul></li>
+<li>传输层 Transport
+
+<ul>
+<li>对应OSI协议Transport层</li>
+<li>协议：
+
+<ul>
+<li>TCP：（见下）</li>
+<li>UDP：不超时重传、不错误重传、不保证顺序</li>
+</ul></li>
+</ul></li>
+<li>网络层 Internet
+
+<ul>
+<li>对应OSI协议Network层</li>
+<li>协议：
+
+<ul>
+<li>IP：（见下）</li>
+<li>ARP：IP地址到MAC地址转换</li>
+<li>DARP：（略）</li>
+<li>ICMP：发生错误时，错误信息封包传给主机；IP重定向报文；路由发现报文
+
+<ul>
+<li>ping</li>
+<li>traceroute
+
+<ul>
+<li>利用IP协议的TTL实现</li>
+<li>利用主机不可达和端口不可达区分</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>网络接口层 Network Interface
+
+<ul>
+<li>对应OSI协议Data Link、Physical两层</li>
+<li>附加以太网部首</li>
+</ul></li>
+</ol>
+
+<h2 id="ip协议">IP协议</h2>
+
+<ul>
+<li>附加IP部首
+
+<ul>
+<li>TTL，生存周期，每路由一层减1，为0时丢弃
+
+<ul>
+<li>实现traceroute</li>
+</ul></li>
+</ul></li>
+<li>路由顺序：
+
+<ol>
+<li>TTL为0时丢弃</li>
+<li>匹配主机</li>
+<li>匹配同子网路由器</li>
+<li>匹配同网号路由器</li>
+<li>匹配默认路由器</li>
+</ol></li>
+<li>不保证可达，需配合ICMP由上层实现可靠性</li>
+</ul>
+
+<h2 id="tcp协议">TCP协议</h2>
+
+<p>流量控制的思想可以用于上层应用的开发</p>
+
+<ul>
+<li>附加TCP部首</li>
+<li>可靠协议
+
+<ol>
+<li>合理分块</li>
+<li>超时重发</li>
+<li>校验和校验</li>
+<li>发送确认</li>
+<li>组装时排序</li>
+<li>滑动窗口流控</li>
+</ol></li>
+<li>建立连接，三次握手：
+
+<ul>
+<li><img src="tcp-handshake-1.png" alt="" /></li>
+</ul></li>
+<li>断开连接，四次握手：
+
+<ul>
+<li><img src="tcp-handshake-2.png" alt="" /></li>
+</ul></li>
+<li>流量控制
+
+<ul>
+<li>延迟发送
+
+<ul>
+<li>捎带ACK：延迟发送ACK</li>
+<li>Nagle算法：延迟发送数据</li>
+</ul></li>
+<li>滑动窗口 rwnd：接收方缓冲区</li>
+<li>拥塞窗口 cwnd：探测带宽上限
+
+<ul>
+<li>慢启动阶段（未超过门限 ssthresh）
+
+<ul>
+<li><code>cwnd *= 2</code></li>
+</ul></li>
+<li>拥塞避免阶段（超过门限）
+
+<ul>
+<li><code>cwnd += 1</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>超时重传
+
+<ul>
+<li>超时时间调整：简单的说，是一个涉及旧超时时间、新传输时间、经验系数、方差的函数</li>
+<li>拥塞：某报文超时需要重传
+
+<ul>
+<li><code>ssthresh /= 2</code></li>
+<li><code>cwnd = 1</code></li>
+<li>进入慢启动阶段</li>
+</ul></li>
+<li>快速重传：当收到3个重复ACK时（<3个，乱序是大概率事件；>=3个，丢包是大概率事件）
+
+<ul>
+<li><code>ssthresh /= 2</code></li>
+<li><code>cwnd = ssthresh</code></li>
+<li>进入拥塞避免阶段</li>
+</ul></li>
+<li>快速恢复：（略）</li>
+</ul></li>
+<li>其它计时器
+
+<ul>
+<li>坚持定时器：双方滑动窗口为0时的试探间隔，避免互相等待死锁</li>
+<li>保活定时器：判断保持或断开半开放连接</li>
+<li>2MSL定时器：端口可再次使用的计时器，在此期间，服务端可以重启而不报端口占用错误，但不可以建立连接</li>
+</ul></li>
+</ul>
+
+  </div>
+  <footer>
+    <div class="article-footer">
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/network">Network</a>
+    </li>
+    
+    <li>
+        <a href="/tags/tcp-ip">TCP-IP</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      
+      
+
+      
+      
+      <div id="pagenavigation-next-prev">
+        
+        <div id="pagenavigation-next">
+          <span class="pagenav-label">Previous</span>
+          <a href="https://feng1st.github.io/post/2017/06/jvm-memory-gc/">Java内存模型和GC机制摘要</a>
+        </div>
+        
+        
+        <div id="pagenavigation-prev">
+          <span class="pagenav-label">Next</span>
+          <a href="https://feng1st.github.io/post/2017/06/http-protocol/">HTTP协议摘要</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </footer>
+</div>
+        </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+

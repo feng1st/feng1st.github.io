@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
+    
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Java NIO摘要 | 知不足而后进</title>
+  </head>
+  <body>
+    <div id="wrap">
+      
+      <header class="site-header">
+        <div class="site-header-left">
+          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
+        </div>
+      </header>
+      <div class="container">
+        <div id="main">
+
+<div class="article">
+  <header>
+    <div class="article-header">
+      <h1>Java NIO摘要</h1>
+      <div class="article-meta">
+        <span class="posttime">2017/06/10</span>
+        
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/java">Java</a>
+    </li>
+    
+    <li>
+        <a href="/tags/nio">NIO</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      </div>
+    </div>
+    
+
+  </header>
+  <div class="content">
+    
+
+<p>比较经典和精简的教程，先直接发链接：
+<a href="http://tutorials.jenkov.com/java-nio/">http://tutorials.jenkov.com/java-nio/</a></p>
+
+<p>NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想
+例如，换用消息队列，就可以扩展到分布式系统里去</p>
+
+<h2 id="一些思考点">一些思考点</h2>
+
+<ol>
+<li>Channel和Stream有什么不同？
+
+<ol>
+<li>Channel双向，Stream一般单向</li>
+<li>Channel支持异步</li>
+<li>Channel搭配Buffer使用</li>
+</ol></li>
+<li>ServerSocketChannel和SocketChannel有什么不同？
+
+<ol>
+<li>SocketChannel用于单个连接</li>
+<li>ServerSocketChannel用于监听端口，对每一个接受的连接创建一个SocketChannel</li>
+</ol></li>
+<li>FileChannel.transferTo(&hellip;, SocketChannel)有什么需要注意的？
+
+<ul>
+<li>SocketChannel非阻塞且发送缓冲已满，可能只传输部分</li>
+</ul></li>
+<li>SocketChannel的blocking和non-blocking模式有什么不同？
+
+<ol>
+<li>相对于阻塞，connect()直接返回，需要后继调用finishConnect()判断成功</li>
+<li>write()/read()可能未实际读写就返回</li>
+</ol></li>
+<li>ServerSocketChannel的blocking和non-blocking模式有什么不同？
+
+<ol>
+<li>相对于阻塞，accept()直接返回，如没有接受连接，返回null</li>
+<li>write()/read()可能未实际读写就返回</li>
+</ol></li>
+<li>Blocking模式Socket有什么问题？
+
+<ol>
+<li>一般会用一个线程处理一个连接，所以支撑的连接数非常有限</li>
+<li>如果使用连接池复用活动连接，一些慢速或者非活动连接可能会占满连接池</li>
+</ol></li>
+<li>Non-blocking模式Socket有哪些挑战？
+
+<ol>
+<li>读到的字节流拆分Message：文章提到了TLV，但最好用长度+内容+校验构成
+
+<ul>
+<li>长度：TLV中的L</li>
+<li>内容：类型是包含在这里面的，比如protobuf协议</li>
+<li>校验：用于验证数据错误，或者网络错误，通知重传</li>
+</ul></li>
+<li>读写的Message要有长度限制，否则一个伪造的字节流就能把服务器撑垮
+
+<ul>
+<li>一般会定义一种特定Message，专门用来拆分大的其它Message，长度和校验部分机制不变，内容部分构成如下
+
+<ul>
+<li>总段数</li>
+<li>本段序号</li>
+<li>本段内容</li>
+</ul></li>
+</ul></li>
+<li>发送方不能把所有的Channel都注册到Selector，因为Selector.select()时，可能大部分Channel都可写，全部返回，性能低下
+
+<ol>
+<li>当本Channel对应缓冲区有待发送数据时，才注册到Selector</li>
+<li>当缓冲区数据发送完毕时，从Selector取消注册</li>
+</ol></li>
+</ol></li>
+<li>Selector有哪两种底层实现？
+
+<ol>
+<li>Reactor：轮询Channel对应底层IO句柄。当连接数过多时，性能低下。这个可以算是多路复用，因为select()时还是有等待的过程</li>
+<li>e-poll：注册回调函数，只有当有对应事件发生时，才通知Selector。这个算是真正的异步。Linux直接支持</li>
+</ol></li>
+<li>阻塞/非阻塞，同步/异步
+
+<ul>
+<li>阻塞：调用io函数会一直等待，比如System.in.read()</li>
+<li>非阻塞：调用io函数，只读写可以读写的部分，然后立刻返回，比如NIO</li>
+<li>同步：用等待或者轮询的方式拿到结果，比如NIO</li>
+<li>异步：当时不用拿到结果，事后再获取结果，或者等到结果通知。使用Future或者Callback，比如AsynchronousFileChannel</li>
+</ul></li>
+<li>额外提一下Node.js的线程模型
+
+<ul>
+<li><img src="733213-20160306210005159-1364173213.png" alt="" /></li>
+</ul></li>
+</ol>
+
+  </div>
+  <footer>
+    <div class="article-footer">
+      
+<div class="tags">
+  <ul>
+    
+    <li>
+        <a href="/tags/java">Java</a>
+    </li>
+    
+    <li>
+        <a href="/tags/nio">NIO</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+      
+      
+
+      
+      
+      <div id="pagenavigation-next-prev">
+        
+        <div id="pagenavigation-next">
+          <span class="pagenav-label">Previous</span>
+          <a href="https://feng1st.github.io/post/2017/06/http-protocol/">HTTP协议摘要</a>
+        </div>
+        
+        
+        <div id="pagenavigation-prev">
+          <span class="pagenav-label">Next</span>
+          <a href="https://feng1st.github.io/post/2017/06/servlet/">Servlet笔记</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </footer>
+</div>
+        </div>
+        <div class="sidebar">
+  
+  
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>Categories</span>
+    </div>
+    <div class="categories">
+      <ul>
+        
+        <li>
+          <a href="/categories/docker"><span></span>docker (1)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/java"><span></span>java (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/network"><span></span>network (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/services"><span></span>services (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/servlet"><span></span>servlet (3)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/spring"><span></span>spring (2)</a>
+        </li>
+        
+        <li>
+          <a href="/categories/utilities"><span></span>utilities (1)</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span>RSS</span>
+    </div>
+    <div id="rss">
+      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
+        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <footer>
+        <div id="site-footer-wrap">
+          <div id="site-footer">
+            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
+            <span>
+              
+              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
+              
+            </span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
