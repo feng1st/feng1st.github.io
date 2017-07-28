@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 知不足而后进</title>
+    <link>https://feng1st.github.io/categories/</link>
+    <description>Recent content in Categories on 知不足而后进</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>utf-8</language>
+    
+	<atom:link href="https://feng1st.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker</title>
+      <link>https://feng1st.github.io/categories/docker/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://feng1st.github.io/categories/java/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network</title>
+      <link>https://feng1st.github.io/categories/network/</link>
+      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Services</title>
+      <link>https://feng1st.github.io/categories/services/</link>
+      <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/services/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Servlet</title>
+      <link>https://feng1st.github.io/categories/servlet/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/servlet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://feng1st.github.io/categories/spring/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Utilities</title>
+      <link>https://feng1st.github.io/categories/utilities/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/categories/utilities/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
