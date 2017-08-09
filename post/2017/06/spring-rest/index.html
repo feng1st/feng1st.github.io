@@ -1,63 +1,104 @@
 <!DOCTYPE html>
-<html lang="utf-8">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="generator" content="Hugo 0.25.1" />
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    
-    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
-    
-    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Spring实现RESTful Service笔记 | 知不足而后进</title>
-  </head>
-  <body>
-    <div id="wrap">
-      
-      <header class="site-header">
-        <div class="site-header-left">
-          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
-        </div>
-      </header>
-      <div class="container">
-        <div id="main">
+<html lang='en'>
 
-<div class="article">
-  <header>
-    <div class="article-header">
-      <h1>Spring实现RESTful Service笔记</h1>
-      <div class="article-meta">
-        <span class="posttime">2017/06/26</span>
-        
-<div class="tags">
-  <ul>
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='来源： https://spring.io/guides/gs/rest-service/
+本文采用代码及分析的形式
+GreetingController.java src/main/java/hello/GreetingController.java
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：'>
+
+<meta property='og:title' content='Spring实现RESTful Service笔记 • 技术随笔'>
+<meta property='og:description' content='来源： https://spring.io/guides/gs/rest-service/
+本文采用代码及分析的形式
+GreetingController.java src/main/java/hello/GreetingController.java
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：'>
+<meta property='og:url' content='https://feng1st.github.io/post/2017/06/spring-rest/'>
+<meta property='og:site_name' content='技术随笔'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Spring'><meta property='article:tag' content='RESTful'><meta property='article:published_time' content='2017-06-26T00:00:00Z'/><meta property='article:modified_time' content='2017-06-26T00:00:00Z'/>
+
+<meta name="generator" content="Hugo 0.26" />
+
+  <title>Spring实现RESTful Service笔记 • 技术随笔</title>
+  <link rel='canonical' href='https://feng1st.github.io/post/2017/06/spring-rest/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='技术随笔' />
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/css/main.d02777fd.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='site'>
+    <header id='header' class='header-container'>
+      <div class='site-header'>
+        <nav id='navmenu' aria-label='Main Menu'>
+  <ul class='main-menu'>
     
     <li>
-        <a href="/tags/spring">Spring</a>
+      <a href='/'>Home</a>
     </li>
     
     <li>
-        <a href="/tags/restful">RESTful</a>
+      <a href='/post/'>Posts</a>
+    </li>
+    
+    <li>
+      <a href='/categories/'>Categories</a>
+    </li>
+    
+    <li>
+      <a href='/tags/'>Tags</a>
     </li>
     
   </ul>
+</nav>
+
+        <div class='site-info'>
+          
+          <p class='site-title title'>技术随笔</p>
+          
+          <p class='site-description'></p>
+        </div>
+      </div>
+    </header>
+
+
+<main class='main'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'>Spring实现RESTful Service笔记</h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='2017-06-26T00:00:00Z'>2017, Jun 26</time>
+  </span>
+  
+  
 </div>
 
 
-      </div>
-    </div>
-    
+</header>
 
-  </header>
-  <div class="content">
-    
+    <div class='entry-content'>
+  
 
 <p>来源：
 <a href="https://spring.io/guides/gs/rest-service/">https://spring.io/guides/gs/rest-service/</a></p>
@@ -274,118 +315,112 @@ public class Application {
 <li><code>paraMethodResolver</code>指定的参数名为<code>whichMethod</code>，即能将<code>sample.do?whichMethod=insert</code>这样的请求，映射到<code>insert()</code>方法</li>
 </ul>
 
-  </div>
-  <footer>
-    <div class="article-footer">
-      
-<div class="tags">
-  <ul>
-    
-    <li>
-        <a href="/tags/spring">Spring</a>
-    </li>
-    
-    <li>
-        <a href="/tags/restful">RESTful</a>
-    </li>
-    
-  </ul>
 </div>
 
+    
+<footer class='entry-footer'>
+  
+    
+      
+      
 
+<div class='categories'>
+  <span class='category-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Categories: </span><a class='category' href='/categories/spring'>Spring</a></div>
+
+    
+  
+    
       
       
 
-      
-      
-      <div id="pagenavigation-next-prev">
-        
-        <div id="pagenavigation-next">
-          <span class="pagenav-label">Previous</span>
-          <a href="https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/">Spring DispatcherServlet相关知识点</a>
-        </div>
-        
-        
-        <div id="pagenavigation-prev">
-          <span class="pagenav-label">Next</span>
-          <a href="https://feng1st.github.io/post/2017/06/dubbo-in-docker/">Docker容器运行dubbo应用</a>
-        </div>
-        
-      </div>
-      
-    </div>
-  </footer>
-</div>
-        </div>
-        <div class="sidebar">
+<div class='tags'>
+  <span class='tag-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
   
+</svg>
+
+  </span>
+  <span class='screen-reader'>Tags: </span><a class='tag' href='/tags/spring'>Spring</a>, <a class='tag' href='/tags/restful'>RESTful</a></div>
+
+    
   
-  <div class="sidebar-content">
-    <div class="sidebar-header">
-      <span>Categories</span>
-    </div>
-    <div class="categories">
-      <ul>
-        
-        <li>
-          <a href="/categories/docker"><span></span>docker (1)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/java"><span></span>java (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/network"><span></span>network (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/services"><span></span>services (3)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/servlet"><span></span>servlet (3)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/spring"><span></span>spring (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/utilities"><span></span>utilities (1)</a>
-        </li>
-        
-      </ul>
-    </div>
-  </div>
+</footer>
+
+
+  </article>
+
   
-  <div class="sidebar-content">
-    <div class="sidebar-header">
-      <span>RSS</span>
-    </div>
-    <div id="rss">
-      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
-        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span>Spring DispatcherServlet相关知识点</a>
+    </div><div class='next-entry'>
+      <a href='https://feng1st.github.io/post/2017/06/dubbo-in-docker/'>
+        <span class='screen-reader'>Next post: </span>Docker容器运行dubbo应用<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
       </a>
-    </div>
-  </div>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
 </div>
 
-      </div>
-      <footer>
-        <div id="site-footer-wrap">
-          <div id="site-footer">
-            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
-            <span>
-              
-              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
-              
-            </span>
-          </div>
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'></ul>
+  </nav>
+</div>
+
+        <div class='copyright'>
+          <p>
+    
+  
+  &copy; 2017 feng1st</p>
+
         </div>
-      </footer>
-    </div>
-  </body>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/main.af838dd5.js'></script>
+  
+
+</body>
+
 </html>
 

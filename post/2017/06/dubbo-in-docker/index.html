@@ -1,63 +1,118 @@
 <!DOCTYPE html>
-<html lang="utf-8">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="generator" content="Hugo 0.25.1" />
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link href="https://feng1st.github.io/index.xml" rel="alternate" type="application/rss+xml" title="知不足而后进" />
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    
-    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ja'}</script>
-    
-    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Docker容器运行dubbo应用 | 知不足而后进</title>
-  </head>
-  <body>
-    <div id="wrap">
-      
-      <header class="site-header">
-        <div class="site-header-left">
-          <a class="site-header-title" href="https://feng1st.github.io/">知不足而后进</a>
-        </div>
-      </header>
-      <div class="container">
-        <div id="main">
+<html lang='en'>
 
-<div class="article">
-  <header>
-    <div class="article-header">
-      <h1>Docker容器运行dubbo应用</h1>
-      <div class="article-meta">
-        <span class="posttime">2017/06/27</span>
-        
-<div class="tags">
-  <ul>
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='参考了这篇文章： https://yq.aliyun.com/articles/60789
+大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。 它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
+但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。 为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
+application.properties
+server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
+services.xml
+ &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
+docker-compose.yml
+version: &#39;2&#39; services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口 zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
+更复杂的部署，应考虑使用Docker Swarm
+还有其它一些细节，可以参考源代码： https://github.com/feng1st/microservices-demo'>
+
+<meta property='og:title' content='Docker容器运行dubbo应用 • 技术随笔'>
+<meta property='og:description' content='参考了这篇文章： https://yq.aliyun.com/articles/60789
+大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。 它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
+但开发环境一般会分开部署，zookeeper、provider、consumer一般不在同一个网络。 为了让consumer能够通过provider注册到zookeeper里的ip进行访问，这里让provider直接使用host的网络，多个provider靠端口区分。
+application.properties
+server.port=${SERVER_PORT:0}  这个是用来区分spring-boot-starter-web里自带tomcat的端口
+services.xml
+ &lt;dubbo:registry protocol=&quot;zookeeper&quot; address=&quot;${ZOO_SERVERS}&quot;/&gt; &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;${DUBBO_PORT}&quot;/&gt;  这个是用来区分provider通过dubbo协议暴露服务的端口
+docker-compose.yml
+version: &#39;2&#39; services: provider1: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20880 SERVER_PORT: 8080 provider2: image: provider restart: always network_mode: host environment: ZOO_SERVERS: localhost:2181,localhost:2182,localhost:2183 DUBBO_PORT: 20881 SERVER_PORT: 8081  起了两个实例，分别占用主机网络的20880, 8080, 20881, 8081端口 zookeeper集群使用自己的网络，但是将端口映射到了主机的2181, 2182, 2183
+更复杂的部署，应考虑使用Docker Swarm
+还有其它一些细节，可以参考源代码： https://github.com/feng1st/microservices-demo'>
+<meta property='og:url' content='https://feng1st.github.io/post/2017/06/dubbo-in-docker/'>
+<meta property='og:site_name' content='技术随笔'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Docker'><meta property='article:tag' content='Dubbo'><meta property='article:published_time' content='2017-06-27T00:00:00Z'/><meta property='article:modified_time' content='2017-06-27T00:00:00Z'/>
+
+<meta name="generator" content="Hugo 0.26" />
+
+  <title>Docker容器运行dubbo应用 • 技术随笔</title>
+  <link rel='canonical' href='https://feng1st.github.io/post/2017/06/dubbo-in-docker/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='技术随笔' />
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/css/main.d02777fd.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='site'>
+    <header id='header' class='header-container'>
+      <div class='site-header'>
+        <nav id='navmenu' aria-label='Main Menu'>
+  <ul class='main-menu'>
     
     <li>
-        <a href="/tags/docker">Docker</a>
+      <a href='/'>Home</a>
     </li>
     
     <li>
-        <a href="/tags/dubbo">Dubbo</a>
+      <a href='/post/'>Posts</a>
+    </li>
+    
+    <li>
+      <a href='/categories/'>Categories</a>
+    </li>
+    
+    <li>
+      <a href='/tags/'>Tags</a>
     </li>
     
   </ul>
+</nav>
+
+        <div class='site-info'>
+          
+          <p class='site-title title'>技术随笔</p>
+          
+          <p class='site-description'></p>
+        </div>
+      </div>
+    </header>
+
+
+<main class='main'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'>Docker容器运行dubbo应用</h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='2017-06-27T00:00:00Z'>2017, Jun 27</time>
+  </span>
+  
+  
 </div>
 
 
-      </div>
-    </div>
-    
+</header>
 
-  </header>
-  <div class="content">
-    <p>参考了这篇文章： <a href="https://yq.aliyun.com/articles/60789">https://yq.aliyun.com/articles/60789</a></p>
+    <div class='entry-content'>
+  <p>参考了这篇文章： <a href="https://yq.aliyun.com/articles/60789">https://yq.aliyun.com/articles/60789</a></p>
 
 <p>大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
 它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。</p>
@@ -111,113 +166,102 @@ zookeeper集群使用自己的网络，但是将端口映射到了主机的2181,
 <p>还有其它一些细节，可以参考源代码：
 <a href="https://github.com/feng1st/microservices-demo">https://github.com/feng1st/microservices-demo</a></p>
 
-  </div>
-  <footer>
-    <div class="article-footer">
-      
-<div class="tags">
-  <ul>
-    
-    <li>
-        <a href="/tags/docker">Docker</a>
-    </li>
-    
-    <li>
-        <a href="/tags/dubbo">Dubbo</a>
-    </li>
-    
-  </ul>
 </div>
 
-
+    
+<footer class='entry-footer'>
+  
+    
       
       
 
+<div class='categories'>
+  <span class='category-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Categories: </span><a class='category' href='/categories/docker'>Docker</a></div>
+
+    
+  
+    
       
       
-      <div id="pagenavigation-next-prev">
-        
-        <div id="pagenavigation-next">
-          <span class="pagenav-label">Previous</span>
-          <a href="https://feng1st.github.io/post/2017/06/spring-rest/">Spring实现RESTful Service笔记</a>
+
+<div class='tags'>
+  <span class='tag-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Tags: </span><a class='tag' href='/tags/docker'>Docker</a>, <a class='tag' href='/tags/dubbo'>Dubbo</a></div>
+
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://feng1st.github.io/post/2017/06/spring-rest/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span>Spring实现RESTful Service笔记</a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'></ul>
+  </nav>
+</div>
+
+        <div class='copyright'>
+          <p>
+    
+  
+  &copy; 2017 feng1st</p>
+
         </div>
-        
-        
       </div>
-      
-    </div>
-  </footer>
-</div>
-        </div>
-        <div class="sidebar">
-  
-  
-  
-  <div class="sidebar-content">
-    <div class="sidebar-header">
-      <span>Categories</span>
-    </div>
-    <div class="categories">
-      <ul>
-        
-        <li>
-          <a href="/categories/docker"><span></span>docker (1)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/java"><span></span>java (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/network"><span></span>network (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/services"><span></span>services (3)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/servlet"><span></span>servlet (3)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/spring"><span></span>spring (2)</a>
-        </li>
-        
-        <li>
-          <a href="/categories/utilities"><span></span>utilities (1)</a>
-        </li>
-        
-      </ul>
-    </div>
-  </div>
-  
-  <div class="sidebar-content">
-    <div class="sidebar-header">
-      <span>RSS</span>
-    </div>
-    <div id="rss">
-      <a href="https://feng1st.github.io/index.xml" type="application/rss+xml" target="_blank">
-        <i class="fa fa-rss-square fa-2x" aria-hidden="true"></i>
-      </a>
-    </div>
-  </div>
-</div>
+    </footer>
 
-      </div>
-      <footer>
-        <div id="site-footer-wrap">
-          <div id="site-footer">
-            <span>Powered by <a href="https://gohugo.io/">Hugo</a>.</span>
-            <span>
-              
-              Copyright (c) 2017, <a href="https://feng1st.github.io/">知不足而后进</a>
-              
-            </span>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </body>
+  </div>
+
+  <script src='/js/main.af838dd5.js'></script>
+  
+
+</body>
+
 </html>
 

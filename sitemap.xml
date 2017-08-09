@@ -3,6 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://feng1st.github.io/</loc>
+    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/post/</loc>
+    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/tags/</loc>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/post/2017/06/dubbo-in-docker/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
   </url>
@@ -70,11 +88,6 @@
   <url>
     <loc>https://feng1st.github.io/post/2017/06/jvm-memory-gc/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://feng1st.github.io/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -162,12 +175,6 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/post/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://feng1st.github.io/tags/restful/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -222,12 +229,6 @@
   </url>
   
   <url>
-    <loc>https://feng1st.github.io/tags/</loc>
-    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://feng1st.github.io/tags/tcp-ip/</loc>
     <lastmod>2017-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -254,12 +255,6 @@
   <url>
     <loc>https://feng1st.github.io/tags/web-server/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://feng1st.github.io/</loc>
-    <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

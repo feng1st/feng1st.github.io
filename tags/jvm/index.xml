@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jvm on 知不足而后进</title>
+    <title>Jvm on 技术随笔</title>
     <link>https://feng1st.github.io/tags/jvm/</link>
-    <description>Recent content in Jvm on 知不足而后进</description>
+    <description>Recent content in Jvm on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>utf-8</language>
     <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/jvm/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://feng1st.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Java内存模型和GC机制摘要</title>
