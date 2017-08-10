@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='豆瓣链接: https://book.douban.com/subject/25867042/
+作者曾宪杰，淘宝花名华黎，现任淘宝技术部总监。 本书反映了淘宝网一路发展过来，技术架构演进的一个过程。书中的绝大多数内容，都已经落地为阿里内部广泛使用的基础设施、中间件。部分组件已经开源，比如Dubbo、RocketMQ，可以在网上下到。
+本文是读书过程中对部分重要知识点的一个记录，也可以当作回顾时的索引。
+第1章 分布式系统介绍 1.2.3.2 网络IO实现方式  BIO/NIO/AIO  1.2.4.3 控制器的变化  使用硬件/LVS负载均衡  增加网络开销（流量，延迟） 单点  使用名称服务的直接连接方式  服务提供方 &ndash;注册&ndash;&gt; 名称服务 &ndash;&gt; 请求方 (负载均衡) 代码升级比较复杂  使用规则服务器  规则服务器 &ndash;规则&ndash;&gt; 请求方 (规则计算)  Master&#43;Worker  Master (规则计算) &ndash;结果&ndash;&gt; 请求方   1.2.5 分布式系统的难点  缺乏全局时钟  单独集群管理时序  应对/解决故障独立性 处理单点故障 事务  第2章 大型网站及其架构演进过程 2.2.4.2 解决应用服务器变成集群后的Session问题  Session Sticky Session Replication Session 数据集中存储 Cookie Based (长度限制/安全性/带宽/性能)  2.'>
+
+<meta property='og:title' content='大型网站系统与Java中间件实践 读书笔记 • 技术随笔'>
+<meta property='og:description' content='豆瓣链接: https://book.douban.com/subject/25867042/
+作者曾宪杰，淘宝花名华黎，现任淘宝技术部总监。 本书反映了淘宝网一路发展过来，技术架构演进的一个过程。书中的绝大多数内容，都已经落地为阿里内部广泛使用的基础设施、中间件。部分组件已经开源，比如Dubbo、RocketMQ，可以在网上下到。
+本文是读书过程中对部分重要知识点的一个记录，也可以当作回顾时的索引。
+第1章 分布式系统介绍 1.2.3.2 网络IO实现方式  BIO/NIO/AIO  1.2.4.3 控制器的变化  使用硬件/LVS负载均衡  增加网络开销（流量，延迟） 单点  使用名称服务的直接连接方式  服务提供方 &ndash;注册&ndash;&gt; 名称服务 &ndash;&gt; 请求方 (负载均衡) 代码升级比较复杂  使用规则服务器  规则服务器 &ndash;规则&ndash;&gt; 请求方 (规则计算)  Master&#43;Worker  Master (规则计算) &ndash;结果&ndash;&gt; 请求方   1.2.5 分布式系统的难点  缺乏全局时钟  单独集群管理时序  应对/解决故障独立性 处理单点故障 事务  第2章 大型网站及其架构演进过程 2.2.4.2 解决应用服务器变成集群后的Session问题  Session Sticky Session Replication Session 数据集中存储 Cookie Based (长度限制/安全性/带宽/性能)  2.'>
+<meta property='og:url' content='https://feng1st.github.io/post/2017/05/large-website-system-and-java-middleware-practice/'>
+<meta property='og:site_name' content='技术随笔'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Service'><meta property='article:tag' content='Distributed'><meta property='article:published_time' content='2017-05-01T00:00:00Z'/><meta property='article:modified_time' content='2017-05-01T00:00:00Z'/>
+
+<meta name="generator" content="Hugo 0.26" />
+
+  <title>大型网站系统与Java中间件实践 读书笔记 • 技术随笔</title>
+  <link rel='canonical' href='https://feng1st.github.io/post/2017/05/large-website-system-and-java-middleware-practice/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='技术随笔' />
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/css/main.d02777fd.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='site'>
+    <header id='header' class='header-container'>
+      <div class='site-header'>
+        <nav id='navmenu' aria-label='Main Menu'>
+  <ul class='main-menu'>
+    
+    <li>
+      <a href='/'>Home</a>
+    </li>
+    
+    <li>
+      <a href='/post/'>Posts</a>
+    </li>
+    
+    <li>
+      <a href='/categories/'>Categories</a>
+    </li>
+    
+    <li>
+      <a href='/tags/'>Tags</a>
+    </li>
+    
+  </ul>
+</nav>
+
+        <div class='site-info'>
+          
+          <p class='site-title title'>技术随笔</p>
+          
+          <p class='site-description'></p>
+        </div>
+      </div>
+    </header>
+
+
+<main class='main'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'>大型网站系统与Java中间件实践 读书笔记</h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='2017-05-01T00:00:00Z'>2017, May 01</time>
+  </span>
+  
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  
+
+<p>豆瓣链接: <a href="https://book.douban.com/subject/25867042/">https://book.douban.com/subject/25867042/</a></p>
+
+<p>作者曾宪杰，淘宝花名华黎，现任淘宝技术部总监。
+本书反映了淘宝网一路发展过来，技术架构演进的一个过程。书中的绝大多数内容，都已经落地为阿里内部广泛使用的基础设施、中间件。部分组件已经开源，比如Dubbo、RocketMQ，可以在网上下到。</p>
+
+<p>本文是读书过程中对部分重要知识点的一个记录，也可以当作回顾时的索引。</p>
+
+<h2 id="第1章-分布式系统介绍">第1章 分布式系统介绍</h2>
+
+<h3 id="1-2-3-2-网络io实现方式">1.2.3.2 网络IO实现方式</h3>
+
+<ul>
+<li>BIO/NIO/AIO</li>
+</ul>
+
+<h3 id="1-2-4-3-控制器的变化">1.2.4.3 控制器的变化</h3>
+
+<ul>
+<li>使用硬件/LVS负载均衡
+
+<ul>
+<li>增加网络开销（流量，延迟）</li>
+<li>单点</li>
+</ul></li>
+<li>使用名称服务的直接连接方式
+
+<ul>
+<li>服务提供方 &ndash;注册&ndash;&gt; 名称服务 &ndash;&gt; 请求方 (负载均衡)</li>
+<li>代码升级比较复杂</li>
+</ul></li>
+<li>使用规则服务器
+
+<ul>
+<li>规则服务器 &ndash;规则&ndash;&gt; 请求方 (规则计算)</li>
+</ul></li>
+<li>Master+Worker
+
+<ul>
+<li>Master (规则计算) &ndash;结果&ndash;&gt; 请求方</li>
+</ul></li>
+</ul>
+
+<h3 id="1-2-5-分布式系统的难点">1.2.5 分布式系统的难点</h3>
+
+<ul>
+<li>缺乏全局时钟
+
+<ul>
+<li>单独集群管理时序</li>
+</ul></li>
+<li>应对/解决故障独立性</li>
+<li>处理单点故障</li>
+<li>事务</li>
+</ul>
+
+<h2 id="第2章-大型网站及其架构演进过程">第2章 大型网站及其架构演进过程</h2>
+
+<h3 id="2-2-4-2-解决应用服务器变成集群后的session问题">2.2.4.2 解决应用服务器变成集群后的Session问题</h3>
+
+<ul>
+<li>Session Sticky</li>
+<li>Session Replication</li>
+<li>Session 数据集中存储</li>
+<li>Cookie Based (长度限制/安全性/带宽/性能)</li>
+</ul>
+
+<h3 id="2-2-5-读写分离">2.2.5 读写分离</h3>
+
+<ul>
+<li>数据库读库</li>
+<li>搜索集群（构建索引过程）</li>
+<li>缓存
+
+<ul>
+<li>数据缓存</li>
+<li>页面缓存</li>
+<li>定时失效、数据变更时失效、数据变更时更新</li>
+</ul></li>
+</ul>
+
+<h3 id="2-2-6-分布式存储系统">2.2.6 分布式存储系统</h3>
+
+<ul>
+<li>分布式文件系统、分布式KV系统、分布式数据库</li>
+</ul>
+
+<h3 id="2-2-7-分库">2.2.7 分库</h3>
+
+<ul>
+<li>垂直拆分，专库专用
+
+<ul>
+<li>跨业务事务
+
+<ul>
+<li>分布式事务</li>
+<li>去掉事务或者不追求强事务</li>
+</ul></li>
+</ul></li>
+<li>水平拆分
+
+<ul>
+<li>SQL路由</li>
+<li>主键唯一</li>
+<li>多库分页</li>
+</ul></li>
+</ul>
+
+<h3 id="2-2-8-拆分应用">2.2.8 拆分应用</h3>
+
+<ul>
+<li>服务化
+
+<ul>
+<li>远程服务调用</li>
+<li>共享代码放到服务中心</li>
+<li>数据库交互放到服务中心</li>
+<li>便于单独维护</li>
+</ul></li>
+<li>服务治理</li>
+</ul>
+
+<h3 id="2-2-9-消息中间件">2.2.9 消息中间件</h3>
+
+<ul>
+<li>异步</li>
+<li>解耦</li>
+</ul>
+
+<h2 id="第3章-构建java中间件">第3章 构建Java中间件</h2>
+
+<ul>
+<li>远程过程调用和对象访问中间件</li>
+<li>消息中间件</li>
+
+<li><p>数据访问中间件</p></li>
+
+<li><p>服务框架（应用拆分、服务化）</p></li>
+
+<li><p>数据层（数据拆分、数据管理、扩容、迁移）</p></li>
+
+<li><p>消息中间件（应用解耦、分布式事务）</p></li>
+</ul>
+
+<h2 id="第4章-服务框架">第4章 服务框架</h2>
+
+<h3 id="4-2-3-1-确定服务框架的使用方式">4.2.3.1 确定服务框架的使用方式</h3>
+
+<ul>
+<li>部署
+
+<ul>
+<li>服务框架作为应用的一部分</li>
+<li>服务框架作为容器的一部分</li>
+<li>服务框架作为容器</li>
+</ul></li>
+<li>Jar包冲突
+
+<ul>
+<li>ClassLoader</li>
+</ul></li>
+</ul>
+
+<h3 id="4-2-3-2-通信方式的选择">4.2.3.2 通信方式的选择</h3>
+
+<ul>
+<li>基于接口、方法、参数的路由
+
+<ul>
+<li>隔离慢接口/方法，避免占满线程池</li>
+</ul></li>
+</ul>
+
+<h3 id="4-2-3-4-多机房场景">4.2.3.4 多机房场景</h3>
+
+<ul>
+<li>服务注册查找中心，尽量为不同机房的调用者提供本机房服务提供者</li>
+<li>路由方式：负载、可用性</li>
+</ul>
+
+<h3 id="4-2-3-5-服务调用端的流控处理">4.2.3.5 服务调用端的流控处理</h3>
+
+<ul>
+<li>根据服务端自身的接口/方法做控制</li>
+<li>根据来源做控制</li>
+</ul>
+
+<h3 id="4-2-3-8-支持多种异步服务调用方式">4.2.3.8 支持多种异步服务调用方式</h3>
+
+<ul>
+<li>Oneway
+
+<ul>
+<li>请求线程推给数据队列</li>
+</ul></li>
+<li>Callback
+
+<ul>
+<li>IO线程收到返回后执行回调</li>
+</ul></li>
+<li>Future
+
+<ul>
+<li>请求线程推给数据i队列，IO线程收到返回后set，请求线程get</li>
+<li>无依赖关系的多个请求可以并行调用</li>
+</ul></li>
+<li>可靠异步（通过消息中间件）</li>
+</ul>
+
+<h3 id="4-2-4-2-服务端对请求处理的流程">4.2.4.2 服务端对请求处理的流程</h3>
+
+<ul>
+<li>调用服务在工作线程</li>
+<li>反序列化看情况</li>
+<li>多个工作线程池，隔离</li>
+</ul>
+
+<h3 id="4-2-4-4-服务提供端的流控处理">4.2.4.4 服务提供端的流控处理</h3>
+
+<ul>
+<li>0-1开关、QPS</li>
+<li>不同来源调用者+不同服务，细化控制</li>
+</ul>
+
+<h3 id="4-2-5-服务升级">4.2.5 服务升级</h3>
+
+<ul>
+<li>接口不变化
+
+<ul>
+<li>灰度升级</li>
+</ul></li>
+<li>接口变化
+
+<ul>
+<li>版本号</li>
+</ul></li>
+</ul>
+
+<h3 id="4-3-实战中的优化">4.3 实战中的优化</h3>
+
+<ul>
+<li>服务的拆分
+
+<ul>
+<li>专用服务，不必远程</li>
+</ul></li>
+<li>服务的粒度</li>
+<li>优雅和实用的平衡
+
+<ul>
+<li>例：服务调用者直接访问缓存</li>
+</ul></li>
+<li>分布式环境中的请求合并
+
+<ul>
+<li>单机：guava.Cache</li>
+<li>分布式：redis (SET EX NX), 或者把特定请求发到同一服务提供者</li>
+</ul></li>
+</ul>
+
+<h3 id="4-4-为服务化护航的服务治理">4.4 为服务化护航的服务治理</h3>
+
+<ul>
+<li>管理服务
+
+<ul>
+<li>服务上下线
+
+<ul>
+<li>针对一个服务所有机器的上下线</li>
+<li>指定机器的</li>
+<li>Double Check控制</li>
+</ul></li>
+<li>服务路由
+
+<ul>
+<li>路由信息更改前后对比和验证</li>
+<li>路由配置多版本管理和回滚</li>
+<li>Double Check</li>
+</ul></li>
+<li>服务限流降级</li>
+<li>服务归组</li>
+<li>服务线程池管理</li>
+<li>机房规则</li>
+<li>服务授权</li>
+</ul></li>
+<li>查看服务
+
+<ul>
+<li>服务信息
+
+<ul>
+<li>服务编码</li>
+<li>编码注册</li>
+<li>根据编码定位服务</li>
+</ul></li>
+<li>服务质量</li>
+<li>服务容量</li>
+<li>服务依赖</li>
+<li>服务分布</li>
+<li>服务统计</li>
+<li>服务元数据
+
+<ul>
+<li>服务的方法和参数</li>
+</ul></li>
+<li>服务查询</li>
+<li>服务报表</li>
+<li>服务监视</li>
+</ul></li>
+</ul>
+
+<h2 id="第5章-数据访问层">第5章 数据访问层</h2>
+
+<h3 id="5-1-2-数据库垂直-水平拆分的困难">5.1.2 数据库垂直/水平拆分的困难</h3>
+
+<ul>
+<li>优化应用</li>
+<li>引入缓存，加搜索引擎等</li>
+<li>分库
+
+<ul>
+<li>垂直拆分
+
+<ul>
+<li>ACID（Atomicity、Consistency、Isolation、Durability）被打破，放弃事务或者使用分布式事务</li>
+<li>Join受影响</li>
+<li>外键受影响</li>
+</ul></li>
+<li>水平拆分
+
+<ul>
+<li>ACID被打破</li>
+<li>John受影响</li>
+<li>外键受影响</li>
+<li>自增唯一ID受影响</li>
+<li>查询跨库</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="5-1-3-1-了解分布式事务的知识">5.1.3.1 了解分布式事务的知识</h3>
+
+<ul>
+<li>XA
+
+<ul>
+<li>Application Program</li>
+<li>Resource Manager (资源必须实现XA定义的接口)</li>
+<li>Transaction Manager (事务分支标识XID，提交/回滚/再同步/手工干预时用)</li>
+</ul></li>
+<li>DTP (Distributed Transaction Processing)其它概念
+
+<ul>
+<li>事务：完整的工作单元，多个独立的计算任务构成</li>
+<li>全局事务：一次操作多个RM的事务</li>
+<li>分支事务：全局事务中，一个RM内的任务</li>
+<li>控制线程：联系AP、TM和RM的线程，事务上下文环境</li>
+</ul></li>
+<li>两阶段提交 2PC（Two Phase Commitment Protocal）
+
+<ul>
+<li>prepare, ok, commit, ok</li>
+</ul></li>
+</ul>
+
+<h3 id="5-1-3-2-大型网站一致性的基础理论-cap-base">5.1.3.2 大型网站一致性的基础理论 CAP/BASE</h3>
+
+<ul>
+<li>CAP
+
+<ul>
+<li>Consistency: 同一时刻一致</li>
+<li>Availability: 不管成功失败，有响应</li>
+<li>Partition-Tolerance: 允许部分丢失</li>
+</ul></li>
+<li>BASE
+
+<ul>
+<li>Basically Available: 基本可用，允许分区失败</li>
+<li>Soft state: 软状态，接受一段时间内不同步</li>
+<li>Eventually consistent: 最终一致</li>
+</ul></li>
+</ul>
+
+<h3 id="5-1-3-3-比两阶段提交更轻量一些的paxos协议">5.1.3.3 比两阶段提交更轻量一些的Paxos协议</h3>
+
+<ul>
+<li><a href="http://codemacro.com/2014/10/15/explain-poxos/">http://codemacro.com/2014/10/15/explain-poxos/</a></li>
+</ul>
+
+<h3 id="5-1-3-4-集群内数据一致性的算法实例">5.1.3.4 集群内数据一致性的算法实例</h3>
+
+<ul>
+<li>Vector Clock
+
+<ul>
+<li>{data=&lsquo;data&rsquo;, vclock=[Alice:1, Ben:1]}</li>
+<li>祖先：包含所有修改者，且版本号&gt;=</li>
+<li>合并冲突后，结果包含所有修改者及其最大版本号，且自己的版本号+1</li>
+</ul></li>
+</ul>
+
+<h3 id="5-1-4-多机的sequence问题与处理">5.1.4 多机的Sequence问题与处理</h3>
+
+<ul>
+<li>唯一性
+
+<ul>
+<li>UUID</li>
+</ul></li>
+<li>连续性
+
+<ul>
+<li>唯一生成器（redis？）</li>
+<li>各应用确定自己的范围，然后自己生成</li>
+</ul></li>
+</ul>
+
+<h3 id="5-1-5-应对多机的数据查询">5.1.5 应对多机的数据查询</h3>
+
+<ul>
+<li>跨机Join
+
+<ul>
+<li>一般：拆分查询</li>
+<li>数据冗余</li>
+</ul></li>
+<li>外键约束</li>
+</ul>
+
+<h3 id="5-1-5-3-跨库查询的问题及解决">5.1.5.3 跨库查询的问题及解决</h3>
+
+<ul>
+<li>结果合并
+
+<ul>
+<li>排序：对多路有序结果归并排序，对无序结果全排序</li>
+<li>函数处理，注意求平均值的变化</li>
+<li>非排序分页，要不要等比从各来源取</li>
+<li>排序后分页，要分别取足够多的数据，越往后，数据越大（可优化）</li>
+</ul></li>
+</ul>
+
+<h3 id="5-2-1-1-对外提供数据访问层的方式">5.2.1.1 对外提供数据访问层的方式</h3>
+
+<ul>
+<li>专有API（不通用）</li>
+<li>通用方式（推荐）</li>
+<li>基于ORM或类ORM接口方式（不灵活）</li>
+</ul>
+
+<h3 id="5-2-2-按照数据层流程的顺序看数据层设计">5.2.2 按照数据层流程的顺序看数据层设计</h3>
+
+<ul>
+<li>SQL解析-&gt;规则处理-&gt;SQL改写-&gt;数据源选择-&gt;SQL执行-&gt;结果集返回合并处理</li>
+<li>SQL解析
+
+<ul>
+<li>可带hint：辅助解析/显示指定分库条件</li>
+</ul></li>
+<li>规则处理
+
+<ul>
+<li>固定hash</li>
+<li>一致性hash：减少迁移</li>
+<li>虚拟节点对一致性hash改进：均衡压力</li>
+<li>映射表/规则自定义：热点特殊处理</li>
+</ul></li>
+<li>SQL改写
+
+<ul>
+<li>不同库中的表名是否一样：避免误操作，方便迁移</li>
+</ul></li>
+<li>选择数据源
+
+<ul>
+<li>选择具体的数据库（读库/写库）</li>
+</ul></li>
+</ul>
+
+<h3 id="5-2-2-6-实战经验分享">5.2.2.6 实战经验分享</h3>
+
+<ul>
+<li>复杂的连接管理
+
+<ul>
+<li>多个PreparedStatement要全面考虑各种异常</li>
+</ul></li>
+<li>三层数据源的支持和选择
+
+<ul>
+<li>配置复杂，最好集中管理</li>
+<li>自定义DataSource支持管理整个分库</li>
+<li>自定义GroupDataSource管理相同内容的一组主从库
+
+<ul>
+<li>不管具体规则，不进行SQL解析</li>
+<li>只根据事务、读写、权重选择具体库</li>
+</ul></li>
+<li>自定义AtomDataSource
+
+<ul>
+<li>基于BasicDataSource扩充</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="5-2-3-独立部署的数据访问层实现方式">5.2.3 独立部署的数据访问层实现方式</h3>
+
+<ul>
+<li>jar包部署</li>
+<li>Proxy方式
+
+<ul>
+<li>数据库协议：应用&ndash;数据库协议&ndash;Proxy&ndash;数据库协议&ndash;DB</li>
+<li>私有协议：应用（数据层客户端）&ndash;私有协议&ndash;Proxy&ndash;数据库协议&ndash;DB</li>
+</ul></li>
+</ul>
+
+<h3 id="5-2-4-读写分离的挑战和应对">5.2.4 读写分离的挑战和应对</h3>
+
+<ul>
+<li>主从库非对称（从库分库）
+
+<ul>
+<li>数据层 &ndash; 消息系统 &ndash; 数据同步服务器 分库规则配置，根据更改的主键行复制</li>
+</ul></li>
+<li>主从库分库方式不同
+
+<ul>
+<li>控制数据分发</li>
+</ul></li>
+<li>引入数据变更平台
+
+<ul>
+<li>用于搜索引擎索引构建、缓存失效等</li>
+<li>提取 &ndash; 分发 &ndash; 重建</li>
+</ul></li>
+</ul>
+
+<h3 id="5-2-4-2-如何做到数据平滑迁移">5.2.4.2 如何做到数据平滑迁移</h3>
+
+<ol>
+<li>记录关键点</li>
+<li>主体迁移</li>
+<li>迁移关键点后的增量，收敛</li>
+<li>暂停被迁移的写</li>
+<li>切换</li>
+</ol>
+
+<h2 id="第6章-消息中间件">第6章 消息中间件</h2>
+
+<ul>
+<li>异步</li>
+<li>解耦</li>
+<li>其它：顺序保证、扩展性、可靠性、业务操作与消息发送一致性</li>
+<li>例：登录系统 &ndash;发送消息&ndash;&gt; 消息中间件 &ndash;投递/轮询消息&ndash; 其他系统</li>
+<li>保证投递成功
+
+<ul>
+<li>数据库记录状态及原子更新？
+
+<ul>
+<li>增加了业务数据库负担</li>
+<li>依赖的复杂和不安全</li>
+<li>扩展性不好</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="6-2-1-如何解决消息发送一致性">6.2.1 如何解决消息发送一致性</h3>
+
+<ol>
+<li>应用 发消息，状态待处理</li>
+<li>消息中间件 存储消息</li>
+<li>消息中间件 返回存储状态</li>
+<li>应用 业务操作</li>
+<li>应用 发送业务处理结果</li>
+<li>消息中间件 更新消息状态为待发送 或 删除消息</li>
+</ol>
+
+<p>异常</p>
+
+<ol>
+<li>消息中间件 询问待处理消息对应业务操作结果</li>
+<li>应用 检查操作结果</li>
+<li>应用 发送业务处理结果</li>
+<li>消息中间件 更新消息状态为待发送 或 删除消息</li>
+</ol>
+
+<h3 id="6-2-2-如何解决消息中间件与使用者的强依赖问题">6.2.2 如何解决消息中间件与使用者的强依赖问题</h3>
+
+<p>应用（消息中间件客户端 &ndash;&gt; 本地磁盘） &ndash;&gt; 消息中间件</p>
+
+<h3 id="6-2-4-消息订阅者订阅消息的方式">6.2.4 消息订阅者订阅消息的方式</h3>
+
+<ul>
+<li>持久订阅</li>
+<li>非持久订阅</li>
+</ul>
+
+<h3 id="6-2-5-保证消息可靠性的做法">6.2.5 保证消息可靠性的做法</h3>
+
+<ul>
+<li>消息发送者 &ndash;&gt; 消息中间件（&ndash;&gt; 消息存储）&ndash;&gt; 消息接收者</li>
+<li>消息发送端可靠性的保证
+
+<ul>
+<li>消息中间件明确的返回</li>
+</ul></li>
+<li>消息存储的可靠性保证
+
+<ul>
+<li>基于文件的消息存储
+
+<ul>
+<li>如果需要检索，涉及到内存和磁盘文件交换</li>
+</ul></li>
+<li>基于数据库的消息存储
+
+<ul>
+<li>消息设计
+
+<ul>
+<li>Header、Body、投递对象</li>
+</ul></li>
+<li>独立投递表</li>
+<li>投递信息合并到信息表</li>
+</ul></li>
+<li>基于双机内存的消息存储
+
+<ul>
+<li>适用于消息很快被消耗掉的场景</li>
+<li>一旦出问题，停止接受写入，没有问题的机器内存数据落盘</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="6-2-5-3-消息系统的扩容处理">6.2.5.3 消息系统的扩容处理</h3>
+
+<ul>
+<li>通过软负载中心感知新的机器</li>
+<li>消息中间件和消息存储是多对多关系</li>
+</ul>
+
+<h3 id="6-2-5-4-消息投递的可靠性保证">6.2.5.4 消息投递的可靠性保证</h3>
+
+<ul>
+<li>显示收到接收者处理完毕信号，消息中间件才能删除消息</li>
+<li>投递和处理结果放到不同的线程，避免投递拥堵</li>
+<li>优化一个应用上多个订阅者订阅同一消息的场景
+
+<ul>
+<li>内部派发</li>
+</ul></li>
+</ul>
+
+<h3 id="6-2-6-2-jms的消息确认方式与消息重复的关系">6.2.6.2 JMS的消息确认方式与消息重复的关系</h3>
+
+<ul>
+<li>AUTO_ACKNOWLEDGE / CLIENT_ACKNOWLEDGE / DUPS_OK_ACKNOWLEDGE</li>
+<li>at least once / at most once</li>
+</ul>
+
+<h3 id="6-2-7-消息投递的其他属性支持">6.2.7 消息投递的其他属性支持</h3>
+
+<ul>
+<li>消息优先级</li>
+<li>订阅者消息处理顺序和分级订阅</li>
+<li>自定义属性</li>
+<li>局部顺序</li>
+</ul>
+
+<h3 id="6-2-8-保证顺序的消息队列的设计">6.2.8 保证顺序的消息队列的设计</h3>
+
+<ul>
+<li>push -&gt; pull</li>
+<li>多条数据队列 / 一条数据队列（物理队列） + 多条索引队列（逻辑队列）
+
+<ul>
+<li>随即读问题
+
+<ul>
+<li>命中PAGECACHE</li>
+<li>系统IO调度算法设为NOOP（顺序跳跃读）</li>
+</ul></li>
+<li>逻辑队列数据量小，顺序读，有PAGECACHE预读，性能接近内存</li>
+<li>物理队列有元信息，可以以此回复丢失的逻辑队列</li>
+</ul></li>
+</ul>
+
+<h3 id="6-2-8-2-解决本地消息存储的可靠性">6.2.8.2 解决本地消息存储的可靠性</h3>
+
+<ul>
+<li>Slave订阅Master，稍滞后</li>
+<li>Master推送Slave，成功后才给发送者响应（安全性要求更严格）</li>
+</ul>
+
+<h3 id="6-2-8-3-如何支持队列的扩容">6.2.8.3 如何支持队列的扩容</h3>
+
+<ul>
+<li>原队列在扩容开始后，有一个标志，不再接收新消息</li>
+<li>通知消息发送端新的队列的位置</li>
+<li>消息接收端，对原队列定位会收到新旧两个位置，直到旧队列收完</li>
+</ul>
+
+<h3 id="6-2-9-push和pull方式对比">6.2.9 Push和Pull方式对比</h3>
+
+<ul>
+<li>数据传输状态：Push（服务端），Pull（消费端）</li>
+<li>传输失败重试：Push（需要），Pull（不需要）</li>
+<li>实时性：Push（非常实时），Pull（短轮询看间隔，长轮询同Push）</li>
+<li>流控机制：Push（服务端依据订阅者消费能力做流控），Pull（消费者自身决定）</li>
+</ul>
+
+<h2 id="第7章-软负载中心与集中配置管理">第7章 软负载中心与集中配置管理</h2>
+
+<h3 id="7-1-初识软负载中心">7.1 初识软负载中心</h3>
+
+<ul>
+<li>功能
+
+<ul>
+<li>聚合地址信息</li>
+<li>生命周期感知</li>
+</ul></li>
+<li>数据
+
+<ul>
+<li>聚合数据：dataId, group: value</li>
+<li>订阅关系：dataId, group: consumerGroupId</li>
+<li>连接数据：groupId: connection</li>
+</ul></li>
+</ul>
+
+<h3 id="7-3-内容聚合功能的设计">7.3 内容聚合功能的设计</h3>
+
+<ul>
+<li>保证数据正确性
+
+<ul>
+<li>ConcurrentHashMap</li>
+<li>注意时序，比如更新和删除发生在两个线程</li>
+</ul></li>
+<li>高效聚合数据
+
+<ul>
+<li>多线程 -&gt; 同key任务队列单线程</li>
+</ul></li>
+</ul>
+
+<h3 id="7-4-解决服务上下线的感知">7.4 解决服务上下线的感知</h3>
+
+<ul>
+<li>通过客户端和服务端的连接感知（连接+心跳）</li>
+<li>通过对提供的地址端口进行连接的检查</li>
+</ul>
+
+<h3 id="7-5-1-数据分发与消息订阅的区别">7.5.1 数据分发与消息订阅的区别</h3>
+
+<ul>
+<li>软负载中心只需要保证最新数据送达即可</li>
+<li>软负载中心需要把数据分发给所有的机器</li>
+</ul>
+
+<h3 id="7-5-2-提升数据分发性能需要注意的问题">7.5.2 提升数据分发性能需要注意的问题</h3>
+
+<ul>
+<li>数据压缩</li>
+<li>全量和增量的选择</li>
+</ul>
+
+<h3 id="7-6-1-软负载数据分组">7.6.1 软负载数据分组</h3>
+
+<ul>
+<li>group相当于namespace，用于隔离</li>
+<li>根据环境（开发、测试、生产）</li>
+<li>根据优先级（重要服务专有）</li>
+</ul>
+
+<h3 id="7-6-2-提供自动感知以外的上下线开关">7.6.2 提供自动感知以外的上下线开关</h3>
+
+<ul>
+<li>优雅地停止应用</li>
+<li>保持应用场景，用于排错</li>
+</ul>
+
+<h3 id="7-7-从单机到集群">7.7 从单机到集群</h3>
+
+<ul>
+<li>数据管理问题</li>
+<li>连接管理问题
+
+<ul>
+<li>数据统一管理方案</li>
+<li>数据对等管理方案
+
+<ul>
+<li>实时同步</li>
+<li>批量同步</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="7-8-集中配置管理中心">7.8 集中配置管理中心</h3>
+
+<ul>
+<li>持久/非持久</li>
+<li>聚合/非聚合</li>
+<li>软负载中心：非持久数据</li>
+<li>集中配置管理中心：持久数据</li>
+<li>稳定性/容灾</li>
+<li>性能</li>
+</ul>
+
+<h3 id="7-8-1-客户端实现和容灾策略">7.8.1 客户端实现和容灾策略</h3>
+
+<ul>
+<li>长轮询（有：返回，无：超时等待）</li>
+<li>容灾
+
+<ul>
+<li>数据缓存</li>
+<li>数据快照（多版本）</li>
+<li>本地配置（优先级最高）</li>
+</ul></li>
+</ul>
+
+<h3 id="7-8-2-服务端实现和容灾策略">7.8.2 服务端实现和容灾策略</h3>
+
+<ul>
+<li>本地文件（静态化）
+
+<ul>
+<li>数据库 &ndash; 本地文件 &ndash; 内存（可选）</li>
+</ul></li>
+<li>数据库（应支持版本）</li>
+</ul>
+
+<h2 id="第8章-构建大型网站的其他要素">第8章 构建大型网站的其他要素</h2>
+
+<ul>
+<li>CDN (Content Delivery Network)
+
+<ul>
+<li>全局调度（地域、机房、负载等）</li>
+<li>缓存技术（合并请求、预加载）</li>
+</ul></li>
+<li>分布式文件系统（HDFS）</li>
+<li>NoSQL（Key-Value, Ordered Key-Value, HBase）</li>
+<li>缓存系统（Redis）</li>
+<li>搜索系统
+
+<ul>
+<li>爬虫
+
+<ul>
+<li>定时拉取（增量Dump），要求内容带时间戳</li>
+<li>实时通知（压力大，适用于实时要求高的场景）</li>
+</ul></li>
+<li>倒排索引</li>
+<li>查询预处理（分词、纠错等，影响搜索结果质量）</li>
+<li>相关度计算</li>
+</ul></li>
+<li>数据计算支撑
+
+<ul>
+<li>离线计算（MapReduce、Hadoop）</li>
+<li>在线计算（Spark）</li>
+</ul></li>
+<li>发布系统
+
+<ul>
+<li>分发应用（发布控制器&ndash;&gt;机房内发布服务器&ndash;&gt;服务器；P2P）</li>
+<li>启动校验</li>
+<li>灰度发布</li>
+</ul></li>
+<li>应用监控系统
+
+<ul>
+<li>数据监控维度</li>
+<li>数据记录方式（本地、采集服务器）</li>
+<li>数据采集方式（推、拉）</li>
+<li>展现与告警（网页、手机应用）</li>
+</ul></li>
+<li>依赖管理系统
+
+<ul>
+<li>静态检测（代码）/动态检测（模拟运行）</li>
+<li>traceId+index，生成跨系统时序图</li>
+</ul></li>
+<li>多机房问题分析（软负载中心/服务框架）
+
+<ul>
+<li>同机房：内部系统调用</li>
+<li>同城机房：容灾</li>
+<li>异地机房：优先处理只读、对数据延迟不敏感、最后处理其它</li>
+</ul></li>
+<li>系统容量规划
+
+<ul>
+<li>弄清楚当前系统高峰水位（监控）</li>
+<li>弄清楚当前各系统容量（排除所依赖系统的瓶颈，基于真实数据的压力测试）</li>
+<li>设置警戒值</li>
+</ul></li>
+<li>内部私有云</li>
+</ul>
+
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+      
+      
+
+<div class='categories'>
+  <span class='category-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Categories: </span><a class='category' href='/categories/service'>Service</a></div>
+
+    
+  
+    
+      
+      
+
+<div class='tags'>
+  <span class='tag-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Tags: </span><a class='tag' href='/tags/service'>Service</a>, <a class='tag' href='/tags/distributed'>Distributed</a></div>
+
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='next-entry'>
+      <a href='https://feng1st.github.io/post/2017/06/jvm-memory-gc/'>
+        <span class='screen-reader'>Next post: </span>Java内存模型和GC机制摘要<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'></ul>
+  </nav>
+</div>
+
+        <div class='copyright'>
+          <p>
+    
+  
+  &copy; 2017 feng1st</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/main.af838dd5.js'></script>
+  
+
+</body>
+
+</html>
+

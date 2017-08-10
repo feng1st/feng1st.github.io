@@ -91,8 +91,19 @@
   </url>
   
   <url>
+    <loc>https://feng1st.github.io/post/2017/05/large-website-system-and-java-middleware-practice/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://feng1st.github.io/tags/dispatcherservlet/</loc>
     <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/tags/distributed/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -177,6 +188,18 @@
   <url>
     <loc>https://feng1st.github.io/tags/restful/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/tags/service/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://feng1st.github.io/categories/service/</loc>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
