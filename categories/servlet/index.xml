@@ -16,7 +16,25 @@
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://feng1st.github.io/post/2017/06/tomcat/</guid>
-      <description> 架构  Server: 整个容器 Service: 关联Container和Connector的中间人，包含一个Container和多个Connector Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应  维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行 Request, Response是在这里创建的，然后传递给Container 低版本Tomcat可以修改配置文件server.xml，为Connector使用protocol=&amp;quot;org.apache.coyote.http11.Http11NioProtocol&amp;quot;  Container: 所有容器的父接口，下面4个重要的实现类/子接口  Engine, Host, Context, Wrapper 4个之间不是并列关系，是父子包含关系  Engine: 是一个Service的根容器，处理请求的总管道 Pipeline Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动 Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位 Wrapper: Context的子容器，负责调用Filter和Servlet LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器 Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline  EngineValve1 -&amp;gt; EngineValve2 -&amp;gt; ... -&amp;gt; StandardEngineValve -&amp;gt; HostPipeline  Valve: Pipeline的切入点  StandardEngineValve: Engine pipeline上最后一个valve，调用Host StandardHostValve: Host pipeline上最后一个valve，调用Context StandardContextValve: Context pipeline上最后一个valve，调用Wrapper StandardWrapperValve: Wrapper pipeline上最后一个valve，负责生成并调用filterChain，最后调用servlet   处理请求 时序图 ClassLoader  是典型的双亲委托模式 Parents Delegation Model 要求：  common目录下的类被Tomcat和应用使用 server目录下的类只被Tomcat使用 shared目录下的类可以被所有应用使用 应用目录下的类只可以被本应用使用  实现（ClassLoader层级关系）：     </description>
+      <description>架构  Server: 整个容器
+ Service: 关联Container和Connector的中间人，包含一个Container和多个Connector
+ Connector: 负责和客户端的网络通讯，接受/建立连接，接收请求，返回响应
+ 维持一个一定大小的线程池，创建多个Processor，当请求来的时候，将socket和processor绑定，然后运行
+ Request, Response是在这里创建的，然后传递给Container
+ 低版本Tomcat可以修改配置文件server.xml，为Connector使用protocol=&amp;quot;org.apache.coyote.http11.Http11NioProtocol&amp;quot;
+  Container: 所有容器的父接口，下面4个重要的实现类/子接口
+ Engine, Host, Context, Wrapper
+ 4个之间不是并列关系，是父子包含关系
+  Engine: 是一个Service的根容器，处理请求的总管道 Pipeline
+ Host: Engine的子容器，负责处理访问某特定host的请求。还实现了Deployer接口，实现应用程序的展开、部署、启动
+ Context: Host的子容器，负责处理访问某特定路径 path 的请求。也是我们的单个应用程序的单位
+ Wrapper: Context的子容器，负责调用Filter和Servlet
+ LifeCycle: 生命周期管理，包括父容器启动时，分别启动子容器。父容器结束前，分别结束子容器
+ Pipeline: Valve的容器，请求传递的责任链。Pipeline内的Valve依次调用，最后一个Valve调用下一层级的Pipeline
+ EngineValve1 -&amp;gt; EngineValve2 -&amp;gt; ... -&amp;gt; StandardEngineValve -&amp;gt; HostPipeline
+  Valve: Pipeline的切入点
+ StandardEngineValve: Engine pipeline上最后一个valve，调用Host
+ StandardHostValve: Host pipeline上最后一个valve，调用Context</description>
     </item>
     
     <item>
@@ -25,7 +43,28 @@
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://feng1st.github.io/post/2017/06/jetty/</guid>
-      <description>核心组成部分  Server Connector Handler ThreadPool LifeCycle  LifeCycle start(); stop();   管理server对象的生命周期 Connector, Handler, ThreadPool都实现了LifeCycle接口 LifeCycle的监听使用了观察者模式  Connector  接受TCP连接 用配置的ConnectionFactory创建Connection，和连接绑定 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：  ProxyConnectionFactory：处理Proxy协议 SslConnectionFactory：SSL加密解密 HttpConnectionFactory：处理实际的HTTP请求   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle() 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链  HandlerContainer：组合模式 Composite，树形结构 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责 门面模式 Facade：Context相关类，限制暴露方法的范围  Handler风格分类：  协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection） 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler） 处理型，处理请求，生成响应（StaticHandler, ServletHandler）  调用方式：  顺序调用，代表：HandlerCollection 嵌套调用，代表：HandlerWrapper   ServletHandler  ServletHandler持有多个FilterHolder和ServletHolder 作为Servlet容器，调用时先调用所有的Filter，再调用Servlet  Context  简单的说，分组环境变量  几个时序图  Jetty启动  先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。  Jetty建立连接  Jetty处理连接  注意Request/Response是在什么地方创建的   引用来源  http://www.</description>
+      <description>核心组成部分  Server
+ Connector
+ Handler
+ ThreadPool
+ LifeCycle
+  LifeCycle start(); stop();   管理server对象的生命周期
+ Connector, Handler, ThreadPool都实现了LifeCycle接口
+ LifeCycle的监听使用了观察者模式
+  Connector  接受TCP连接
+ 用配置的ConnectionFactory创建Connection，和连接绑定
+ 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+ ProxyConnectionFactory：处理Proxy协议
+ SslConnectionFactory：SSL加密解密
+ HttpConnectionFactory：处理实际的HTTP请求
+   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+ HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+ 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
+ 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
+  HandlerContainer：组合模式 Composite，树形结构
+ 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
+ 门面模式 Facade：Context相关类，限制暴露方法的范围
+  Handler风格分类：</description>
     </item>
     
     <item>
@@ -34,8 +73,31 @@
       <pubDate>Sun, 11 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://feng1st.github.io/post/2017/06/servlet/</guid>
-      <description> 教程： http://tutorials.jenkov.com/java-servlets/
-一些思考点  Servlet的生命周期是怎样被容器管理的？ Session是怎样被管理和传递的？ 分布式环境下Session是怎样被管理的？  统一Session中心 或者Session Sticky  ServletContext是怎样被管理和传递的，典型用途是什么？  request.getSession().getServletContext();  为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？ Filter和Servlet有什么异同？  接口  Servlet: init(), service(), destroy()  HttpServlet: doGet(), doPost(), &amp;hellip;  Filter: init(), doFilter(), destroy()  设计  Servlet: 面向事务 Filter: 面向切面   Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet  filterChain最后一个默认的filter调用servlet  怎样用Filter实现GZip，这个实现和AOP有什么区别？  判断请求头Accept-Encoding是否包括gzip 增加响应头Content-Encoding 用带GZip的Response封装原Response，并向后传递  Session和ServletContext是线程安全的吗？ 不安全  </description>
+      <description>教程：
+http://tutorials.jenkov.com/java-servlets/
+一些思考点  Servlet的生命周期是怎样被容器管理的？
+ Session是怎样被管理和传递的？
+ 分布式环境下Session是怎样被管理的？
+ 统一Session中心
+ 或者Session Sticky
+  ServletContext是怎样被管理和传递的，典型用途是什么？
+ request.getSession().getServletContext();
+  为什么要使用RequestDispatcher，而不是，比如直接调用其它Servlet？
+ Filter和Servlet有什么异同？
+ 接口
+ Servlet: init(), service(), destroy()
+ HttpServlet: doGet(), doPost(), &amp;hellip;
+  Filter: init(), doFilter(), destroy()
+  设计
+ Servlet: 面向事务
+ Filter: 面向切面
+   Filter和Servlet分属不同两个类，为什么filterChain.doFilter()能把请求传递给Servlet
+ filterChain最后一个默认的filter调用servlet
+  怎样用Filter实现GZip，这个实现和AOP有什么区别？
+ 判断请求头Accept-Encoding是否包括gzip
+ 增加响应头Content-Encoding
+ 用带GZip的Response封装原Response，并向后传递
+  Session和ServletContext是线程安全的吗？</description>
     </item>
     
   </channel>

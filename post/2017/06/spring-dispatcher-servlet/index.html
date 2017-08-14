@@ -4,12 +4,62 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='DispatcherServlet作用  作为Spring MVC的集中访问点 通过HandlerMapping，将请求映射到Handler  返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor  通过不同的HandlerAdaptor，支持不同的处理器 通过ViewResolver，支持到具体视图的解析 通过HandlerExceptionResolver，实现对异常的处理  每一部分都可以很方便的扩展
-DispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping  常见的handlerMapping：  RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法  内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置   handlerMapping构造一个HandlerExecutionChain  HandlerExecutionChain包含多个HandlerInterceptor和一个Handler  Handler是一个HandlerMethod，通过构造函数参数传入request Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换   用HandlerAdaptor封装chain里的handler  不同的handler接口不同，通过adaptor统一接口 DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor HandlerMethod对应的是RequestMappingHandlerAdaptor  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod  除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory  ServletInvocableHandlerMethod.invokeAndHandle()里  用argumentResolvers和dataBinderFactory转化参数  用argumentResolvers解析参数 用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参  调用用户在Controller的方法实现 用returnValueHandlers处理返回的结果  对于@ResponseBody类，直接转换成xml/json后写response，并返回null  使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter  否则返回一个ModelAndView   DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor  用来处理@RequestBody和@ResponseBody 同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口 内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据   Filter和HandlerInterceptor 总体来说，两者是类似的。不同点：'>
+<meta name='description' content='DispatcherServlet作用  作为Spring MVC的集中访问点
+ 通过HandlerMapping，将请求映射到Handler
+ 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
+  通过不同的HandlerAdaptor，支持不同的处理器
+ 通过ViewResolver，支持到具体视图的解析
+ 通过HandlerExceptionResolver，实现对异常的处理
+  每一部分都可以很方便的扩展
+DispatcherServlet流程  请求被DispatcherServlet截获
+ DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
+ 常见的handlerMapping：
+ RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
+ 内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理
+  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置
+   handlerMapping构造一个HandlerExecutionChain
+ HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
+ Handler是一个HandlerMethod，通过构造函数参数传入request
+ Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换
+   用HandlerAdaptor封装chain里的handler
+ 不同的handler接口不同，通过adaptor统一接口
+ DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
+ HandlerMethod对应的是RequestMappingHandlerAdaptor
+  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
+ HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
+ 除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
+  ServletInvocableHandlerMethod.invokeAndHandle()里
+ 用argumentResolvers和dataBinderFactory转化参数
+ 用argumentResolvers解析参数'>
 
 <meta property='og:title' content='Spring DispatcherServlet相关知识点 • 技术随笔'>
-<meta property='og:description' content='DispatcherServlet作用  作为Spring MVC的集中访问点 通过HandlerMapping，将请求映射到Handler  返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor  通过不同的HandlerAdaptor，支持不同的处理器 通过ViewResolver，支持到具体视图的解析 通过HandlerExceptionResolver，实现对异常的处理  每一部分都可以很方便的扩展
-DispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping  常见的handlerMapping：  RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法  内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置   handlerMapping构造一个HandlerExecutionChain  HandlerExecutionChain包含多个HandlerInterceptor和一个Handler  Handler是一个HandlerMethod，通过构造函数参数传入request Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换   用HandlerAdaptor封装chain里的handler  不同的handler接口不同，通过adaptor统一接口 DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor HandlerMethod对应的是RequestMappingHandlerAdaptor  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod  除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory  ServletInvocableHandlerMethod.invokeAndHandle()里  用argumentResolvers和dataBinderFactory转化参数  用argumentResolvers解析参数 用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参  调用用户在Controller的方法实现 用returnValueHandlers处理返回的结果  对于@ResponseBody类，直接转换成xml/json后写response，并返回null  使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter  否则返回一个ModelAndView   DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor  用来处理@RequestBody和@ResponseBody 同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口 内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据   Filter和HandlerInterceptor 总体来说，两者是类似的。不同点：'>
+<meta property='og:description' content='DispatcherServlet作用  作为Spring MVC的集中访问点
+ 通过HandlerMapping，将请求映射到Handler
+ 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
+  通过不同的HandlerAdaptor，支持不同的处理器
+ 通过ViewResolver，支持到具体视图的解析
+ 通过HandlerExceptionResolver，实现对异常的处理
+  每一部分都可以很方便的扩展
+DispatcherServlet流程  请求被DispatcherServlet截获
+ DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
+ 常见的handlerMapping：
+ RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
+ 内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理
+  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置
+   handlerMapping构造一个HandlerExecutionChain
+ HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
+ Handler是一个HandlerMethod，通过构造函数参数传入request
+ Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换
+   用HandlerAdaptor封装chain里的handler
+ 不同的handler接口不同，通过adaptor统一接口
+ DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
+ HandlerMethod对应的是RequestMappingHandlerAdaptor
+  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
+ HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
+ 除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
+  ServletInvocableHandlerMethod.invokeAndHandle()里
+ 用argumentResolvers和dataBinderFactory转化参数
+ 用argumentResolvers解析参数'>
 <meta property='og:url' content='https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/'>
 <meta property='og:site_name' content='技术随笔'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Spring'><meta property='article:tag' content='DispatcherServlet'><meta property='article:published_time' content='2017-06-25T00:00:00Z'/><meta property='article:modified_time' content='2017-06-25T00:00:00Z'/>
@@ -99,15 +149,16 @@ DispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在�
 <h2 id="dispatcherservlet作用">DispatcherServlet作用</h2>
 
 <ol>
-<li>作为Spring MVC的集中访问点</li>
-<li>通过HandlerMapping，将请求映射到Handler
+<li>作为Spring MVC的集中访问点<br /></li>
+<li>通过HandlerMapping，将请求映射到Handler<br />
 
 <ul>
-<li>返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor</li>
+<li>返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor<br /></li>
 </ul></li>
-<li>通过不同的HandlerAdaptor，支持不同的处理器</li>
-<li>通过ViewResolver，支持到具体视图的解析</li>
-<li>通过HandlerExceptionResolver，实现对异常的处理</li>
+<li>通过不同的HandlerAdaptor，支持不同的处理器<br /></li>
+<li>通过ViewResolver，支持到具体视图的解析<br /></li>
+<li>通过HandlerExceptionResolver，实现对异常的处理<br />
+<br /></li>
 </ol>
 
 <p>每一部分都可以很方便的扩展</p>
@@ -115,72 +166,73 @@ DispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在�
 <h2 id="dispatcherservlet流程">DispatcherServlet流程</h2>
 
 <ol>
-<li>请求被DispatcherServlet截获</li>
-<li>DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
+<li>请求被DispatcherServlet截获<br /></li>
+<li>DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping<br />
 
 <ul>
-<li>常见的handlerMapping：
+<li>常见的handlerMapping：<br />
 
 <ul>
-<li>RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
+<li>RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法<br />
 
 <ul>
-<li>内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理</li>
+<li>内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理<br /></li>
 </ul></li>
-<li>BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置</li>
+<li>BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置<br /></li>
 </ul></li>
 </ul></li>
-<li>handlerMapping构造一个HandlerExecutionChain
+<li>handlerMapping构造一个HandlerExecutionChain<br />
 
 <ul>
-<li>HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
+<li>HandlerExecutionChain包含多个HandlerInterceptor和一个Handler<br />
 
 <ul>
-<li>Handler是一个HandlerMethod，通过构造函数参数传入request</li>
-<li>Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换</li>
+<li>Handler是一个HandlerMethod，通过构造函数参数传入request<br /></li>
+<li>Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换<br /></li>
 </ul></li>
 </ul></li>
-<li>用HandlerAdaptor封装chain里的handler
+<li>用HandlerAdaptor封装chain里的handler<br />
 
 <ul>
-<li>不同的handler接口不同，通过adaptor统一接口</li>
-<li>DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor</li>
-<li>HandlerMethod对应的是RequestMappingHandlerAdaptor</li>
+<li>不同的handler接口不同，通过adaptor统一接口<br /></li>
+<li>DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor<br /></li>
+<li>HandlerMethod对应的是RequestMappingHandlerAdaptor<br /></li>
 </ul></li>
-<li>依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle</li>
-<li>HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
+<li>依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle<br /></li>
+<li>HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod<br />
 
 <ul>
-<li>除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory</li>
+<li>除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory<br /></li>
 </ul></li>
-<li>ServletInvocableHandlerMethod.invokeAndHandle()里
+<li>ServletInvocableHandlerMethod.invokeAndHandle()里<br />
 
 <ol>
-<li>用argumentResolvers和dataBinderFactory转化参数
+<li>用argumentResolvers和dataBinderFactory转化参数<br />
 
 <ul>
-<li>用argumentResolvers解析参数</li>
-<li>用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参</li>
+<li>用argumentResolvers解析参数<br /></li>
+<li>用dataBinder转化参数，包括：形参是vo，url参数是vo的属性，就会通过它来构建一个vo的实参<br /></li>
 </ul></li>
-<li>调用用户在Controller的方法实现</li>
-<li>用returnValueHandlers处理返回的结果
+<li>调用用户在Controller的方法实现<br /></li>
+<li>用returnValueHandlers处理返回的结果<br />
 
 <ul>
-<li>对于@ResponseBody类，直接转换成xml/json后写response，并返回null
+<li>对于@ResponseBody类，直接转换成xml/json后写response，并返回null<br />
 
 <ul>
-<li>使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter</li>
+<li>使用HttpMessageConverter转换，比如StringHttpMessageConverter, MappingJackson2HttpMessageConverter<br /></li>
 </ul></li>
-<li>否则返回一个ModelAndView</li>
+<li>否则返回一个ModelAndView<br /></li>
 </ul></li>
 </ol></li>
-<li>DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model</li>
-<li>HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor
+<li>DispatcherServlet如果拿到的是一个ModelAndView，会通过ViewREsolver找到对应的view，来渲染model<br /></li>
+<li>HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler的例子：RequestResponseBodyMethodProcessor<br />
 
 <ul>
-<li>用来处理<code>@RequestBody</code>和<code>@ResponseBody</code></li>
-<li>同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口</li>
-<li>内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据</li>
+<li>用来处理<code>@RequestBody</code>和<code>@ResponseBody</code><br /></li>
+<li>同时实现了HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler接口<br /></li>
+<li>内部实现主要是读写Request和Response的Body，和使用HttpMessageConverter转换数据<br />
+<br /></li>
 </ul></li>
 </ol>
 
@@ -189,10 +241,11 @@ DispatcherServlet流程  请求被DispatcherServlet截获 DispatcherServlet在�
 <p>总体来说，两者是类似的。不同点：</p>
 
 <ol>
-<li>Filter在web.xml定义，HandlerInterceptor在application context里定义</li>
-<li>HandlerInterceptor接口分得更细</li>
-<li>Filter一般用来处理请求内容和视图内容，比如压缩和分块</li>
-<li>HandlerInterceptor用来处理一般性面向切面逻辑，比如授权</li>
+<li>Filter在web.xml定义，HandlerInterceptor在application context里定义<br /></li>
+<li>HandlerInterceptor接口分得更细<br /></li>
+<li>Filter一般用来处理请求内容和视图内容，比如压缩和分块<br /></li>
+<li>HandlerInterceptor用来处理一般性面向切面逻辑，比如授权<br />
+<br /></li>
 </ol>
 
 <pre><code>public interface HandlerInterceptor {

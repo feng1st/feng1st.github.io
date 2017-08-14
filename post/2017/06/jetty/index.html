@@ -4,10 +4,52 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='核心组成部分  Server Connector Handler ThreadPool LifeCycle  LifeCycle start(); stop();   管理server对象的生命周期 Connector, Handler, ThreadPool都实现了LifeCycle接口 LifeCycle的监听使用了观察者模式  Connector  接受TCP连接 用配置的ConnectionFactory创建Connection，和连接绑定 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：  ProxyConnectionFactory：处理Proxy协议 SslConnectionFactory：SSL加密解密 HttpConnectionFactory：处理实际的HTTP请求   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle() 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链  HandlerContainer：组合模式 Composite，树形结构 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责 门面模式 Facade：Context相关类，限制暴露方法的范围  Handler风格分类：  协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection） 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler） 处理型，处理请求，生成响应（StaticHandler, ServletHandler）  调用方式：  顺序调用，代表：HandlerCollection 嵌套调用，代表：HandlerWrapper   ServletHandler  ServletHandler持有多个FilterHolder和ServletHolder 作为Servlet容器，调用时先调用所有的Filter，再调用Servlet  Context  简单的说，分组环境变量  几个时序图  Jetty启动  先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。  Jetty建立连接  Jetty处理连接  注意Request/Response是在什么地方创建的   引用来源  http://www.'>
+<meta name='description' content='核心组成部分  Server
+ Connector
+ Handler
+ ThreadPool
+ LifeCycle
+  LifeCycle start(); stop();   管理server对象的生命周期
+ Connector, Handler, ThreadPool都实现了LifeCycle接口
+ LifeCycle的监听使用了观察者模式
+  Connector  接受TCP连接
+ 用配置的ConnectionFactory创建Connection，和连接绑定
+ 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+ ProxyConnectionFactory：处理Proxy协议
+ SslConnectionFactory：SSL加密解密
+ HttpConnectionFactory：处理实际的HTTP请求
+   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+ HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+ 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
+ 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
+  HandlerContainer：组合模式 Composite，树形结构
+ 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
+ 门面模式 Facade：Context相关类，限制暴露方法的范围
+  Handler风格分类：'>
 
 <meta property='og:title' content='Jetty笔记 • 技术随笔'>
-<meta property='og:description' content='核心组成部分  Server Connector Handler ThreadPool LifeCycle  LifeCycle start(); stop();   管理server对象的生命周期 Connector, Handler, ThreadPool都实现了LifeCycle接口 LifeCycle的监听使用了观察者模式  Connector  接受TCP连接 用配置的ConnectionFactory创建Connection，和连接绑定 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：  ProxyConnectionFactory：处理Proxy协议 SslConnectionFactory：SSL加密解密 HttpConnectionFactory：处理实际的HTTP请求   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。  HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式  装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle() 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链  HandlerContainer：组合模式 Composite，树形结构 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责 门面模式 Facade：Context相关类，限制暴露方法的范围  Handler风格分类：  协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection） 过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler） 处理型，处理请求，生成响应（StaticHandler, ServletHandler）  调用方式：  顺序调用，代表：HandlerCollection 嵌套调用，代表：HandlerWrapper   ServletHandler  ServletHandler持有多个FilterHolder和ServletHolder 作为Servlet容器，调用时先调用所有的Filter，再调用Servlet  Context  简单的说，分组环境变量  几个时序图  Jetty启动  先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。  Jetty建立连接  Jetty处理连接  注意Request/Response是在什么地方创建的   引用来源  http://www.'>
+<meta property='og:description' content='核心组成部分  Server
+ Connector
+ Handler
+ ThreadPool
+ LifeCycle
+  LifeCycle start(); stop();   管理server对象的生命周期
+ Connector, Handler, ThreadPool都实现了LifeCycle接口
+ LifeCycle的监听使用了观察者模式
+  Connector  接受TCP连接
+ 用配置的ConnectionFactory创建Connection，和连接绑定
+ 可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+ ProxyConnectionFactory：处理Proxy协议
+ SslConnectionFactory：SSL加密解密
+ HttpConnectionFactory：处理实际的HTTP请求
+   Handler  Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+ HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+ 装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()
+ 责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链
+  HandlerContainer：组合模式 Composite，树形结构
+ 模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责
+ 门面模式 Facade：Context相关类，限制暴露方法的范围
+  Handler风格分类：'>
 <meta property='og:url' content='https://feng1st.github.io/post/2017/06/jetty/'>
 <meta property='og:site_name' content='技术随笔'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Servlet'><meta property='article:tag' content='Servlet-Container'><meta property='article:tag' content='Web-Server'><meta property='article:published_time' content='2017-06-12T00:00:00Z'/><meta property='article:modified_time' content='2017-06-12T00:00:00Z'/>
@@ -97,11 +139,12 @@
 <h2 id="核心组成部分">核心组成部分</h2>
 
 <ul>
-<li>Server</li>
-<li>Connector</li>
-<li>Handler</li>
-<li>ThreadPool</li>
-<li>LifeCycle</li>
+<li>Server<br /></li>
+<li>Connector<br /></li>
+<li>Handler<br /></li>
+<li>ThreadPool<br /></li>
+<li>LifeCycle<br />
+<br /></li>
 </ul>
 
 <h2 id="lifecycle">LifeCycle</h2>
@@ -111,22 +154,24 @@ stop();
 </code></pre>
 
 <ol>
-<li>管理server对象的生命周期</li>
-<li>Connector, Handler, ThreadPool都实现了LifeCycle接口</li>
-<li>LifeCycle的监听使用了观察者模式</li>
+<li>管理server对象的生命周期<br /></li>
+<li>Connector, Handler, ThreadPool都实现了LifeCycle接口<br /></li>
+<li>LifeCycle的监听使用了观察者模式<br />
+<br /></li>
 </ol>
 
 <h2 id="connector">Connector</h2>
 
 <ol>
-<li>接受TCP连接</li>
-<li>用配置的ConnectionFactory创建Connection，和连接绑定</li>
-<li>可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：
+<li>接受TCP连接<br /></li>
+<li>用配置的ConnectionFactory创建Connection，和连接绑定<br /></li>
+<li>可配置多个ConnectionFactory，链式调用，分别完成各自一层的工作，比如：<br />
 
 <ol>
-<li>ProxyConnectionFactory：处理Proxy协议</li>
-<li>SslConnectionFactory：SSL加密解密</li>
-<li>HttpConnectionFactory：处理实际的HTTP请求</li>
+<li>ProxyConnectionFactory：处理Proxy协议<br /></li>
+<li>SslConnectionFactory：SSL加密解密<br /></li>
+<li>HttpConnectionFactory：处理实际的HTTP请求<br />
+<br /></li>
 </ol></li>
 </ol>
 
@@ -135,32 +180,33 @@ stop();
 <p><img src="basic-architecture-handlers.png" alt="" /></p>
 
 <ol>
-<li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。
+<li>Jetty用一个Handler模型就完成了请求在整个server的不同层级的处理，这个是Jetty保持轻量和容易扩展的原因，这里说一下它的设计模式。<br />
 
 <ol>
-<li>HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式
+<li>HandlerWrapper：形式上是装饰者模式，使用方式上是责任链模式<br />
 
 <ul>
-<li>装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()</li>
-<li>责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链</li>
+<li>装饰者模式 Decorator：实现对所包装对象在本层级的拦截。比如，SessionHandler处理Session，SecurityHandler处理安全验证后，再调用被包装Handler的handle()<br /></li>
+<li>责任链模式 Chain of Responsibility：已经提到过，调用被包装Handler的handle()，实现责任链<br /></li>
 </ul></li>
-<li>HandlerContainer：组合模式 Composite，树形结构</li>
-<li>模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责</li>
-<li>门面模式 Facade：Context相关类，限制暴露方法的范围</li>
+<li>HandlerContainer：组合模式 Composite，树形结构<br /></li>
+<li>模板方法 Template Method：比如ScopedHandler.doScope()，更清晰的向使用者阐述类的职责<br /></li>
+<li>门面模式 Facade：Context相关类，限制暴露方法的范围<br /></li>
 </ol></li>
-<li>Handler风格分类：
+<li>Handler风格分类：<br />
 
 <ol>
-<li>协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）</li>
-<li>过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）</li>
-<li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）</li>
+<li>协调型，路由请求到其它Handler（HandlerCollection, ContextHandlerCollection）<br /></li>
+<li>过滤型，拦截修改到其它Handler的请求（HandlerWrapper, SessionHandler, ContextHandler）<br /></li>
+<li>处理型，处理请求，生成响应（StaticHandler, ServletHandler）<br /></li>
 </ol></li>
-<li>调用方式：
-<img src="basic-architecture-nested-handlers.png" alt="" />
+<li>调用方式：<br />
+<img src="basic-architecture-nested-handlers.png" alt="" /><br />
 
 <ol>
-<li>顺序调用，代表：HandlerCollection</li>
-<li>嵌套调用，代表：HandlerWrapper</li>
+<li>顺序调用，代表：HandlerCollection<br /></li>
+<li>嵌套调用，代表：HandlerWrapper<br />
+<br /></li>
 </ol></li>
 </ol>
 
@@ -169,40 +215,43 @@ stop();
 <p><img src="basic-architecture-servlet-handler.png" alt="" /></p>
 
 <ol>
-<li>ServletHandler持有多个FilterHolder和ServletHolder</li>
-<li>作为Servlet容器，调用时先调用所有的Filter，再调用Servlet</li>
+<li>ServletHandler持有多个FilterHolder和ServletHolder<br /></li>
+<li>作为Servlet容器，调用时先调用所有的Filter，再调用Servlet<br />
+<br /></li>
 </ol>
 
 <h2 id="context">Context</h2>
 
 <ol>
-<li>简单的说，分组环境变量</li>
+<li>简单的说，分组环境变量<br />
+<br /></li>
 </ol>
 
 <h2 id="几个时序图">几个时序图</h2>
 
 <ol>
-<li>Jetty启动
-<img src="image011.jpg" alt="" />
+<li>Jetty启动<br />
+<img src="image011.jpg" alt="" /><br />
 
 <ul>
-<li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。</li>
+<li>先启动线程池，再启动Handler，最后Connector。前者是处理后者的前提。<br /></li>
 </ul></li>
-<li>Jetty建立连接
-<img src="image013.jpg" alt="" /></li>
-<li>Jetty处理连接
-<img src="image015.jpg" alt="" />
+<li>Jetty建立连接<br />
+<img src="image013.jpg" alt="" /><br /></li>
+<li>Jetty处理连接<br />
+<img src="image015.jpg" alt="" /><br />
 
 <ul>
-<li>注意Request/Response是在什么地方创建的</li>
+<li>注意Request/Response是在什么地方创建的<br />
+<br /></li>
 </ul></li>
 </ol>
 
 <h2 id="引用来源">引用来源</h2>
 
 <ol>
-<li><a href="http://www.eclipse.org/jetty/documentation/current/architecture.html">http://www.eclipse.org/jetty/documentation/current/architecture.html</a></li>
-<li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/">https://www.ibm.com/developerworks/cn/java/j-lo-jetty/</a></li>
+<li><a href="http://www.eclipse.org/jetty/documentation/current/architecture.html">http://www.eclipse.org/jetty/documentation/current/architecture.html</a><br /></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jetty/">https://www.ibm.com/developerworks/cn/java/j-lo-jetty/</a><br /></li>
 </ol>
 
 </div>

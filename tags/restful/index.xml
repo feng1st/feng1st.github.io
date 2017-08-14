@@ -16,10 +16,18 @@
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://feng1st.github.io/post/2017/06/spring-rest/</guid>
-      <description>来源： https://spring.io/guides/gs/rest-service/
+      <description>来源：
+https://spring.io/guides/gs/rest-service/
 本文采用代码及分析的形式
 GreetingController.java src/main/java/hello/GreetingController.java
-package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &amp;quot;Hello, %s!&amp;quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&amp;quot;/greeting&amp;quot;) public Greeting greeting(@RequestParam(value=&amp;quot;name&amp;quot;, defaultValue=&amp;quot;World&amp;quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：</description>
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &amp;quot;Hello, %s!&amp;quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&amp;quot;/greeting&amp;quot;) public Greeting greeting(@RequestParam(value=&amp;quot;name&amp;quot;, defaultValue=&amp;quot;World&amp;quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
+ 整合@Controller, @ResponseBody
+ @Controller
+ MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
+  @ResponseBody
+ 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
+ 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
+   @RequestMapping</description>
     </item>
     
   </channel>

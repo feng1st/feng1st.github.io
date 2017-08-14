@@ -5,24 +5,34 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='官网：http://plantuml.com/
-为什么要用文本生成UML，而不直接画UML？ 这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样： 这属于强迫症，得治。
-安装 如果使用ubuntu，直接： sudo apt-get install graphviz plantuml
+为什么要用文本生成UML，而不直接画UML？
+这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：
+这属于强迫症，得治。
+安装 如果使用ubuntu，直接：
+sudo apt-get install graphviz plantuml
 其它平台或者安装方法请参考官网
 使用 plantuml src.txt
-如果是下载的jar： java -jar plantuml.jar src.txt
+如果是下载的jar：
+java -jar plantuml.jar src.txt
 会在当前目录下生成src.png
-示例 输入： jetty-handler.pu
+示例 输入：
+jetty-handler.pu
 @startuml interface Handler { &#43;handle(request) } abstract class AbstractHandler class HandlerWrapper class ServletHandler class HandlerContainer class Server class SessionHandler { &#43;SessionManager } class SecurityHandler { &#43;SecurityConstraint[] } class ContextHandler { &#43;contextPath &#43;resourceBase &#43;classLoader } class ContextHandlerContainer { -contexts: PathMap } class WebAppContext { &#43;descriptor } Handler &lt;|.'>
 
 <meta property='og:title' content='工具推荐：PlantUML，文本转UML图工具 • 技术随笔'>
 <meta property='og:description' content='官网：http://plantuml.com/
-为什么要用文本生成UML，而不直接画UML？ 这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样： 这属于强迫症，得治。
-安装 如果使用ubuntu，直接： sudo apt-get install graphviz plantuml
+为什么要用文本生成UML，而不直接画UML？
+这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：
+这属于强迫症，得治。
+安装 如果使用ubuntu，直接：
+sudo apt-get install graphviz plantuml
 其它平台或者安装方法请参考官网
 使用 plantuml src.txt
-如果是下载的jar： java -jar plantuml.jar src.txt
+如果是下载的jar：
+java -jar plantuml.jar src.txt
 会在当前目录下生成src.png
-示例 输入： jetty-handler.pu
+示例 输入：
+jetty-handler.pu
 @startuml interface Handler { &#43;handle(request) } abstract class AbstractHandler class HandlerWrapper class ServletHandler class HandlerContainer class Server class SessionHandler { &#43;SessionManager } class SecurityHandler { &#43;SecurityConstraint[] } class ContextHandler { &#43;contextPath &#43;resourceBase &#43;classLoader } class ContextHandlerContainer { -contexts: PathMap } class WebAppContext { &#43;descriptor } Handler &lt;|.'>
 <meta property='og:url' content='https://feng1st.github.io/post/2017/06/plantuml/'>
 <meta property='og:site_name' content='技术随笔'>
@@ -112,13 +122,13 @@
 
 <p>官网：<a href="http://plantuml.com/">http://plantuml.com/</a></p>
 
-<p>为什么要用文本生成UML，而不直接画UML？
-这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：
+<p>为什么要用文本生成UML，而不直接画UML？<br />
+这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：<br />
 这属于强迫症，得治。</p>
 
 <h2 id="安装">安装</h2>
 
-<p>如果使用ubuntu，直接：
+<p>如果使用ubuntu，直接：<br />
 <code>sudo apt-get install graphviz plantuml</code></p>
 
 <p>其它平台或者安装方法请参考官网</p>
@@ -127,14 +137,14 @@
 
 <p><code>plantuml src.txt</code></p>
 
-<p>如果是下载的jar：
+<p>如果是下载的jar：<br />
 <code>java -jar plantuml.jar src.txt</code></p>
 
 <p>会在当前目录下生成<code>src.png</code></p>
 
 <h2 id="示例">示例</h2>
 
-<p>输入：
+<p>输入：<br />
 <code>jetty-handler.pu</code></p>
 
 <pre><code>@startuml
@@ -184,8 +194,8 @@ ContextHandler &lt;|-- WebAppContext
 @enduml
 </code></pre>
 
-<p>输出：
-<code>jetty-handler.png</code>
+<p>输出：<br />
+<code>jetty-handler.png</code><br />
 <img src="jetty-handler.png" alt="" /></p>
 
 </div>

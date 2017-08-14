@@ -4,16 +4,32 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='来源： https://spring.io/guides/gs/rest-service/
+<meta name='description' content='来源：
+https://spring.io/guides/gs/rest-service/
 本文采用代码及分析的形式
 GreetingController.java src/main/java/hello/GreetingController.java
-package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：'>
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
+ 整合@Controller, @ResponseBody
+ @Controller
+ MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
+  @ResponseBody
+ 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
+ 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
+   @RequestMapping'>
 
 <meta property='og:title' content='Spring实现RESTful Service笔记 • 技术随笔'>
-<meta property='og:description' content='来源： https://spring.io/guides/gs/rest-service/
+<meta property='og:description' content='来源：
+https://spring.io/guides/gs/rest-service/
 本文采用代码及分析的形式
 GreetingController.java src/main/java/hello/GreetingController.java
-package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController  整合@Controller, @ResponseBody @Controller  MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理  @ResponseBody  将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象   @RequestMapping  URL到Controller类和方法的映射  @RequestParam  URL参数到方法参数的映射   RestController和一般的MVC Controller最主要的不同的地方：'>
+package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &quot;Hello, %s!&quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&quot;/greeting&quot;) public Greeting greeting(@RequestParam(value=&quot;name&quot;, defaultValue=&quot;World&quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
+ 整合@Controller, @ResponseBody
+ @Controller
+ MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
+  @ResponseBody
+ 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
+ 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
+   @RequestMapping'>
 <meta property='og:url' content='https://feng1st.github.io/post/2017/06/spring-rest/'>
 <meta property='og:site_name' content='技术随笔'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Spring'><meta property='article:tag' content='RESTful'><meta property='article:published_time' content='2017-06-26T00:00:00Z'/><meta property='article:modified_time' content='2017-06-26T00:00:00Z'/>
@@ -100,7 +116,7 @@ package hello; import java.util.concurrent.atomic.AtomicLong; import org.springf
     <div class='entry-content'>
   
 
-<p>来源：
+<p>来源：<br />
 <a href="https://spring.io/guides/gs/rest-service/">https://spring.io/guides/gs/rest-service/</a></p>
 
 <p>本文采用代码及分析的形式</p>
@@ -131,42 +147,44 @@ public class GreetingController {
 </code></pre>
 
 <ul>
-<li><code>@RestController</code>
+<li><code>@RestController</code><br />
 
 <ul>
-<li>整合<code>@Controller</code>, <code>@ResponseBody</code></li>
-<li><code>@Controller</code>
+<li>整合<code>@Controller</code>, <code>@ResponseBody</code><br /></li>
+<li><code>@Controller</code><br />
 
 <ul>
-<li>MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理</li>
+<li>MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理<br /></li>
 </ul></li>
-<li><code>@ResponseBody</code>
+<li><code>@ResponseBody</code><br />
 
 <ul>
-<li>将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里</li>
-<li>对应的是<code>@RequestBody</code>，通过Request header的Content-Type，将Request的body转换成对象</li>
+<li>将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里<br /></li>
+<li>对应的是<code>@RequestBody</code>，通过Request header的Content-Type，将Request的body转换成对象<br /></li>
 </ul></li>
 </ul></li>
-<li><code>@RequestMapping</code>
+<li><code>@RequestMapping</code><br />
 
 <ul>
-<li>URL到Controller类和方法的映射</li>
+<li>URL到Controller类和方法的映射<br /></li>
 </ul></li>
-<li><code>@RequestParam</code>
+<li><code>@RequestParam</code><br />
 
 <ul>
-<li>URL参数到方法参数的映射</li>
+<li>URL参数到方法参数的映射<br />
+<br /></li>
 </ul></li>
 </ul>
 
 <p>RestController和一般的MVC Controller最主要的不同的地方：</p>
 
 <ul>
-<li>RestController用Response Body返回json序列化后的对象</li>
-<li>MVC Controller使用视图模板，返回ModelAndView经渲染后的HTML视图</li>
+<li>RestController用Response Body返回json序列化后的对象<br /></li>
+<li>MVC Controller使用视图模板，返回ModelAndView经渲染后的HTML视图<br />
+<br /></li>
 </ul>
 
-<p><img src="1353059506_5137.jpg" alt="" />
+<p><img src="1353059506_5137.jpg" alt="" /><br />
 图片来源：<a href="http://blog.csdn.net/cswhale/article/details/16941281">http://blog.csdn.net/cswhale/article/details/16941281</a></p>
 
 <h2 id="application-java">Application.java</h2>
@@ -188,29 +206,30 @@ public class Application {
 </code></pre>
 
 <ul>
-<li><code>@SpringBootApplication</code>, 整合下列注解:
+<li><code>@SpringBootApplication</code>, 整合下列注解:<br />
 
 <ul>
-<li><code>@Configuration</code>
+<li><code>@Configuration</code><br />
 
 <ul>
-<li>类作为Bean定义的来源，参考<code>AnnotationConfigApplicationContext</code></li>
+<li>类作为Bean定义的来源，参考<code>AnnotationConfigApplicationContext</code><br /></li>
 </ul></li>
-<li><code>@EnableAutoConfiguration</code>
+<li><code>@EnableAutoConfiguration</code><br />
 
 <ul>
-<li>指示Spring Boot根据classpath、其它Bean和一些属性自动配置</li>
+<li>指示Spring Boot根据classpath、其它Bean和一些属性自动配置<br /></li>
 </ul></li>
-<li><code>@EnableWebMvc</code>
+<li><code>@EnableWebMvc</code><br />
 
 <ul>
-<li>如果在classpath发现<strong>spring-webmvc</strong>，自动启用</li>
-<li>视应用为web application，并启用DispatcherServlet等关键行为</li>
+<li>如果在classpath发现<strong>spring-webmvc</strong>，自动启用<br /></li>
+<li>视应用为web application，并启用DispatcherServlet等关键行为<br /></li>
 </ul></li>
-<li><code>@ComponentScan</code>
+<li><code>@ComponentScan</code><br />
 
 <ul>
-<li>从类所在包下扫描其它组件、配置、服务，找到其它controller</li>
+<li>从类所在包下扫描其它组件、配置、服务，找到其它controller<br />
+<br /></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -219,7 +238,7 @@ public class Application {
 
 <h2 id="依靠配置实现mvc">依靠配置实现MVC</h2>
 
-<p>如果不使用SpringBoot，而是通过配置来实现，应该怎样做呢？
+<p>如果不使用SpringBoot，而是通过配置来实现，应该怎样做呢？<br />
 这个不是完全RESTful相关的，但有助于我们了解Spring的内部机制</p>
 
 <p>Controller接口，注意不是@Controller注解：</p>
@@ -234,8 +253,9 @@ public class Application {
 <p>重要的实现类：</p>
 
 <ul>
-<li>AbstractController：检查HTTP方法，检查Session等</li>
-<li>MultiActionController：在一个Controller里处理多个动作，比如对同一资源的增删改查，通过MethodNameResolver映射请求到方法</li>
+<li>AbstractController：检查HTTP方法，检查Session等<br /></li>
+<li>MultiActionController：在一个Controller里处理多个动作，比如对同一资源的增删改查，通过MethodNameResolver映射请求到方法<br />
+<br /></li>
 </ul>
 
 <p><code>web.xml</code></p>
@@ -262,7 +282,8 @@ public class Application {
 </code></pre>
 
 <ul>
-<li>所有以.do结尾的请求，都将被DispatcherServlet处理</li>
+<li>所有以.do结尾的请求，都将被DispatcherServlet处理<br />
+<br /></li>
 </ul>
 
 <p><code>dispatcherServlet-servlet.xml</code></p>
@@ -308,11 +329,11 @@ public class Application {
 </code></pre>
 
 <ul>
-<li><code>sample.do</code>会被<code>SampleMultiActionController</code>处理</li>
-<li><code>viewName</code>即<code>showme</code>，被依赖注入传入Controller，通过<code>return new ModelAndView(getViewName(), ...)</code>指定视图名称</li>
-<li><code>viewResolver</code>解析视图为<code>/WEB-INF/jsp/showme.jsp</code></li>
-<li><code>methodNameResolver</code>指定<code>ParameterMethodNameResolver</code></li>
-<li><code>paraMethodResolver</code>指定的参数名为<code>whichMethod</code>，即能将<code>sample.do?whichMethod=insert</code>这样的请求，映射到<code>insert()</code>方法</li>
+<li><code>sample.do</code>会被<code>SampleMultiActionController</code>处理<br /></li>
+<li><code>viewName</code>即<code>showme</code>，被依赖注入传入Controller，通过<code>return new ModelAndView(getViewName(), ...)</code>指定视图名称<br /></li>
+<li><code>viewResolver</code>解析视图为<code>/WEB-INF/jsp/showme.jsp</code><br /></li>
+<li><code>methodNameResolver</code>指定<code>ParameterMethodNameResolver</code><br /></li>
+<li><code>paraMethodResolver</code>指定的参数名为<code>whichMethod</code>，即能将<code>sample.do?whichMethod=insert</code>这样的请求，映射到<code>insert()</code>方法<br /></li>
 </ul>
 
 </div>
