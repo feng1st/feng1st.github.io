@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='原文（英文）
+翻译：Feng
+Spring Cloud Config在分布式系统里为使用外部配置提供了服务端和客户端支持。使用Config Server，你可以在一个地方，为跨环境的各种应用集中管理外部参数。不管是在客户端还是服务端，这个概念和Spring Environment、PropertySource抽象都是等价的，所以它们可以被Spring应用无缝使用，但不妨碍它们被任何语言任何应用使用。当一个应用在部署管道（deployment pipeline）里，从dev环境迁移到test再到production时，你可以管理在这些环境上的配置并确保应用能拿到它所需的一切参数。服务端存储后台默认实现为git，所以配置天然支持标签和版本，并且有大量的工具可用于内容的管理。你也可以很容易利用Spring配置添加和插入其它实现。
+快速开始 启动服务端：
+$ cd spring-cloud-config-server $ ../mvnw spring-boot:run  服务端是一个Spring Boot应用，所以你也可以从IDE里面直接启动（main类是ConfigServerApplication）。然后试运行客户端：
+$ curl localhost:8888/foo/development {&quot;name&quot;:&quot;development&quot;,&quot;label&quot;:&quot;master&quot;,&quot;propertySources&quot;:[ {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo-development.properties&quot;,&quot;source&quot;:{&quot;bar&quot;:&quot;spam&quot;}}, {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo.properties&quot;,&quot;source&quot;:{&quot;foo&quot;:&quot;bar&quot;}} ]}  定位属性源（property source）的默认策略是克隆一个git仓库（在spring.cloud.config.server.git.uri）然后用它来初始化一个迷你SpringApplication。这个迷你应用的Environment被用来枚举属性源并通过一个JSON端点（endpoint）发布它们。
+这个HTTP服务有这些形式的资源：
+/{application}/{profile}[/{label}] /{application}-{profile}.yml /{label}/{application}-{profile}.yml /{application}-{profile}.properties /{label}/{application}-{profile}.properties  这里，&rdquo;application&rdquo;以spring.config.name被注入SpringApplication（即标准Spring Boot应用），&rdquo;profile&rdquo;是一个活动配置文件（或者逗号分隔的属性列表），&rdquo;label&rdquo;是一个可选的git标签（默认为&rdquo;master&rdquo;）。
+Spring Cloud Config服务端从一个git仓库（必须提供）为远程客户端拉取配置：
+spring: cloud: config: server: git: uri: https://github.com/spring-cloud-samples/config-repo  客户端用法 要在应用中使用这些功能，你只需要创建一个依赖spring-cloud-config-client的Spring Boot应用（参见config-client的测试案例，或者sample app）。添加依赖最方便的方式是通过Spring Boot starter org.springframework.cloud:spring-cloud-starter-config。对Maven用户，这里有一个父pom和BOM（spring-cloud-starter-parent）；对Gradle和Spring CLI用户，这里也有一个Spring IO版本管理属性文件。示例Maven配置：
+pom.xml
+&lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;1.3.5.RELEASE&lt;/version&gt; &lt;relativePath /&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;dependencyManagement&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.'>
+
+<meta property='og:title' content='Spring Cloud Config • 技术随笔'>
+<meta property='og:description' content='原文（英文）
+翻译：Feng
+Spring Cloud Config在分布式系统里为使用外部配置提供了服务端和客户端支持。使用Config Server，你可以在一个地方，为跨环境的各种应用集中管理外部参数。不管是在客户端还是服务端，这个概念和Spring Environment、PropertySource抽象都是等价的，所以它们可以被Spring应用无缝使用，但不妨碍它们被任何语言任何应用使用。当一个应用在部署管道（deployment pipeline）里，从dev环境迁移到test再到production时，你可以管理在这些环境上的配置并确保应用能拿到它所需的一切参数。服务端存储后台默认实现为git，所以配置天然支持标签和版本，并且有大量的工具可用于内容的管理。你也可以很容易利用Spring配置添加和插入其它实现。
+快速开始 启动服务端：
+$ cd spring-cloud-config-server $ ../mvnw spring-boot:run  服务端是一个Spring Boot应用，所以你也可以从IDE里面直接启动（main类是ConfigServerApplication）。然后试运行客户端：
+$ curl localhost:8888/foo/development {&quot;name&quot;:&quot;development&quot;,&quot;label&quot;:&quot;master&quot;,&quot;propertySources&quot;:[ {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo-development.properties&quot;,&quot;source&quot;:{&quot;bar&quot;:&quot;spam&quot;}}, {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo.properties&quot;,&quot;source&quot;:{&quot;foo&quot;:&quot;bar&quot;}} ]}  定位属性源（property source）的默认策略是克隆一个git仓库（在spring.cloud.config.server.git.uri）然后用它来初始化一个迷你SpringApplication。这个迷你应用的Environment被用来枚举属性源并通过一个JSON端点（endpoint）发布它们。
+这个HTTP服务有这些形式的资源：
+/{application}/{profile}[/{label}] /{application}-{profile}.yml /{label}/{application}-{profile}.yml /{application}-{profile}.properties /{label}/{application}-{profile}.properties  这里，&rdquo;application&rdquo;以spring.config.name被注入SpringApplication（即标准Spring Boot应用），&rdquo;profile&rdquo;是一个活动配置文件（或者逗号分隔的属性列表），&rdquo;label&rdquo;是一个可选的git标签（默认为&rdquo;master&rdquo;）。
+Spring Cloud Config服务端从一个git仓库（必须提供）为远程客户端拉取配置：
+spring: cloud: config: server: git: uri: https://github.com/spring-cloud-samples/config-repo  客户端用法 要在应用中使用这些功能，你只需要创建一个依赖spring-cloud-config-client的Spring Boot应用（参见config-client的测试案例，或者sample app）。添加依赖最方便的方式是通过Spring Boot starter org.springframework.cloud:spring-cloud-starter-config。对Maven用户，这里有一个父pom和BOM（spring-cloud-starter-parent）；对Gradle和Spring CLI用户，这里也有一个Spring IO版本管理属性文件。示例Maven配置：
+pom.xml
+&lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;1.3.5.RELEASE&lt;/version&gt; &lt;relativePath /&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;dependencyManagement&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.'>
+<meta property='og:url' content='https://feng1st.github.io/post/2017/08/spring-cloud-config-docs/'>
+<meta property='og:site_name' content='技术随笔'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Spring'><meta property='article:tag' content='Spring-Cloud'><meta property='article:tag' content='Spring-Cloud-Config'><meta property='article:published_time' content='2017-08-14T00:00:00Z'/><meta property='article:modified_time' content='2017-08-14T00:00:00Z'/>
+
+<meta name="generator" content="Hugo 0.26" />
+
+  <title>Spring Cloud Config • 技术随笔</title>
+  <link rel='canonical' href='https://feng1st.github.io/post/2017/08/spring-cloud-config-docs/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='技术随笔' />
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/css/main.d02777fd.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='site'>
+    <header id='header' class='header-container'>
+      <div class='site-header'>
+        <nav id='navmenu' aria-label='Main Menu'>
+  <ul class='main-menu'>
+    
+    <li>
+      <a href='/'>Home</a>
+    </li>
+    
+    <li>
+      <a href='/post/'>Posts</a>
+    </li>
+    
+    <li>
+      <a href='/categories/'>Categories</a>
+    </li>
+    
+    <li>
+      <a href='/tags/'>Tags</a>
+    </li>
+    
+  </ul>
+</nav>
+
+        <div class='site-info'>
+          
+          <p class='site-title title'>技术随笔</p>
+          
+          <p class='site-description'></p>
+        </div>
+      </div>
+    </header>
+
+
+<main class='main'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'>Spring Cloud Config</h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='2017-08-14T00:00:00Z'>2017, Aug 14</time>
+  </span>
+  
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  
+
+<p><a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/">原文（英文）</a><br />
+翻译：<a href="https://feng1st.github.io/">Feng</a></p>
+
+<p>Spring Cloud Config在分布式系统里为使用外部配置提供了服务端和客户端支持。使用Config Server，你可以在一个地方，为跨环境的各种应用集中管理外部参数。不管是在客户端还是服务端，这个概念和Spring <code>Environment</code>、<code>PropertySource</code>抽象都是等价的，所以它们可以被Spring应用无缝使用，但不妨碍它们被任何语言任何应用使用。当一个应用在部署管道（deployment pipeline）里，从dev环境迁移到test再到production时，你可以管理在这些环境上的配置并确保应用能拿到它所需的一切参数。服务端存储后台默认实现为git，所以配置天然支持标签和版本，并且有大量的工具可用于内容的管理。你也可以很容易利用Spring配置添加和插入其它实现。</p>
+
+<h2 id="快速开始">快速开始</h2>
+
+<p>启动服务端：</p>
+
+<pre><code>$ cd spring-cloud-config-server
+$ ../mvnw spring-boot:run
+</code></pre>
+
+<p>服务端是一个Spring Boot应用，所以你也可以从IDE里面直接启动（main类是<code>ConfigServerApplication</code>）。然后试运行客户端：</p>
+
+<pre><code>$ curl localhost:8888/foo/development
+{&quot;name&quot;:&quot;development&quot;,&quot;label&quot;:&quot;master&quot;,&quot;propertySources&quot;:[
+  {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo-development.properties&quot;,&quot;source&quot;:{&quot;bar&quot;:&quot;spam&quot;}},
+  {&quot;name&quot;:&quot;https://github.com/scratches/config-repo/foo.properties&quot;,&quot;source&quot;:{&quot;foo&quot;:&quot;bar&quot;}}
+]}
+</code></pre>
+
+<p>定位属性源（property source）的默认策略是克隆一个git仓库（在<code>spring.cloud.config.server.git.uri</code>）然后用它来初始化一个迷你<code>SpringApplication</code>。这个迷你应用的<code>Environment</code>被用来枚举属性源并通过一个JSON端点（endpoint）发布它们。</p>
+
+<p>这个HTTP服务有这些形式的资源：</p>
+
+<pre><code>/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+</code></pre>
+
+<p>这里，&rdquo;application&rdquo;以<code>spring.config.name</code>被注入<code>SpringApplication</code>（即标准Spring Boot应用），&rdquo;profile&rdquo;是一个活动配置文件（或者逗号分隔的属性列表），&rdquo;label&rdquo;是一个可选的git标签（默认为&rdquo;master&rdquo;）。</p>
+
+<p>Spring Cloud Config服务端从一个git仓库（必须提供）为远程客户端拉取配置：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+</code></pre>
+
+<h3 id="客户端用法">客户端用法</h3>
+
+<p>要在应用中使用这些功能，你只需要创建一个依赖spring-cloud-config-client的Spring Boot应用（参见config-client的测试案例，或者sample app）。添加依赖最方便的方式是通过Spring Boot starter <code>org.springframework.cloud:spring-cloud-starter-config</code>。对Maven用户，这里有一个父pom和BOM（<code>spring-cloud-starter-parent</code>）；对Gradle和Spring CLI用户，这里也有一个Spring IO版本管理属性文件。示例Maven配置：</p>
+
+<p><em><code>pom.xml</code></em></p>
+
+<pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.3.5.RELEASE&lt;/version&gt;
+    &lt;relativePath /&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;
+
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;Brixton.RELEASE&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+
+&lt;!-- repositories also needed for snapshots and milestones --&gt;
+</code></pre>
+
+<p>然后你可以创建一个标准Spring Boot应用，像这个简单HTTP服务端：</p>
+
+<pre><code>@SpringBootApplication
+@RestController
+public class Application {
+    @RequestMapping(&quot;/&quot;)
+    public String home() {
+        return &quot;Hello World!&quot;;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+</code></pre>
+
+<p>当它运行时，它会从运行在8888端口的默认本地配置服务端（config server）读取外部配置。要修改这一行为，你可以通过<code>bootstrap.properties</code>（同<code>application.properties</code>，但用于应用上下文（application context）的引导阶段（bootstrap phase））修改配置服务端的位置，例如：</p>
+
+<pre><code>spring.cloud.config.uri: http://myconfigserver.com
+</code></pre>
+
+<p>这个引导属性会作为高优先级属性源显示在<code>/dev</code>端点上，例如：</p>
+
+<pre><code>$ curl localhost:8080/env
+{
+  &quot;profiles&quot;:[],
+  &quot;configService:https://github.com/spring-cloud-samples/config-repo/bar.properties&quot;:{&quot;foo&quot;:&quot;bar&quot;},
+  &quot;servletContextInitParams&quot;:{},
+  &quot;systemProperties&quot;:{...},
+  ...
+}
+</code></pre>
+
+<p>（这个叫&rdquo;configService:<URL of remote repository>/<file name>&ldquo;的属性源包含属性键值对&rdquo;foo&rdquo;:&ldquo;bar&rdquo;，并且优先级为高）。</p>
+
+<blockquote>
+<p><strong>注意</strong> 属性源名称里的URL是git仓库的URL，不是配置服务端的。</p>
+</blockquote>
+
+<h2 id="spring-cloud-配置服务端">Spring Cloud 配置服务端</h2>
+
+<p>服务端为外部配置（键值对、或等价的YAML内容）提供了一个HTTP、基于资源（resource-based）的API。服务端可以很容易的用<code>@EnableConfigServer</code>注解嵌入一个Spring Boot应用。就像下面这样：</p>
+
+<p><em><code>ConfigServer.java</code></em></p>
+
+<pre><code>@SpringBootApplication
+@EnableConfigServer
+public class ConfigServer {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServer.class, args);
+    }
+}
+</code></pre>
+
+<p>它默认运行在8080端口上（和其它Spring Boot应用一样），但你可以通过几种方式将它切换到惯例的8888端口。最简单的，用<code>spring.config.name=configserver</code>参数启动（Config Server jar里有一个<code>configserver.yml</code>），这种方式同时会设置一个默认的配置仓库。另一种方式是使用自定义的<code>application.properties</code>，例如：</p>
+
+<p><em><code>application.properties</code></em></p>
+
+<pre><code>server.port: 8888
+spring.cloud.config.server.git.uri: file://${user.home}/config-repo
+</code></pre>
+
+<p>这里<code>${user.name}/config-repo</code>是包含YAML和配置文件的git仓库。</p>
+
+<blockquote>
+<p><strong>注意</strong> Windows环境下，如果文件URL是以盘符开始的绝对路径，你需要增加一个额外的&rdquo;/&ldquo;，像这样：<code>file:///${user.home}/config-repo</code>。</p>
+
+<p><strong>提示</strong> 下面是一个创建上述git仓库的例子：</p>
+
+<pre><code>$ cd $HOME
+$ mkdir config-repo
+$ cd config-repo
+$ git init .
+$ echo info.foo: bar &gt; application.properties
+$ git add -A .
+$ git commit -m &quot;Add application.properties&quot;
+</code></pre>
+
+<p><strong>警告</strong> 本地文件系统git仓库只可用于测试用途。生产环境应使用服务器存放你的配置仓库。</p>
+
+<p><strong>警告</strong> 如果你的配置仓库只用来保存文本文件，其初始克隆会是快速和高效的。但如果你用它来存储二进制文件，特别是大的二进制文件，第一次请求配置时可能会存在延迟，或者发生服务端内存溢出错误。</p>
+</blockquote>
+
+<h3 id="environment仓库">Environment仓库</h3>
+
+<p><code>EnvironmentRepository</code>决定了Config Server的配置数据存放在什么地方——通过提供<code>Environment</code>对象。该<code>Environment</code>对象是Spring <code>Environment</code>（主要功能为包含<code>propertySources</code>）域的一份浅拷贝。<code>Environment</code>的资源由3个参数限定：</p>
+
+<ul>
+<li><code>{application}</code>对应客户端的&rdquo;spring.application.name&rdquo;；<br /></li>
+<li><code>{profile}</code>对应客户端的&rdquo;spring.profiles.active&rdquo;（逗号分隔）；<br /></li>
+<li><code>{label}</code>是服务端功能，用于标记带版本的配置文件集。<br />
+<br /></li>
+</ul>
+
+<p>仓库的实现看起来像是一个Spring Boot应用从&rdquo;spring.config.name&rdquo;等于<code>{application}</code>参数，&rdquo;spring.profiles.active&rdquo;等于<code>{profiles}</code>参数的配置文件里加载配置一样。配置文件的优先顺序也和常规Boot应用一样：活动配置文件优先级高于默认配置，如果有多个配置文件，以后加载的为准（就像添加条目到<code>Map</code>一样）。</p>
+
+<p>例子：一个有着下列引导配置的客户端应用：</p>
+
+<p><em><code>bootstrap.yml</code></em></p>
+
+<pre><code>spring:
+  application:
+    name: foo
+  profiles:
+    active: dev,mysql
+</code></pre>
+
+<p>（和通常的Spring Boot应用一样，这些属性也可以通过环境变量或者命令行参数设置）。</p>
+
+<p>如果仓库是基于文件的，则服务端会基于<code>application.yml</code>（在所有客户端间共享）和<code>foo.yml</code>（更优先）创建一个<code>Environment</code>。如果YAML文件里存在指向Spring配置文件的文档（documents），这些文档更优先（按配置文件列出的顺序），如果存在指定配置文件（profile-specific）的YAML（或properties），它们也比默认优先。高优先级意味着一个<code>PropertySource</code>列在<code>Environment</code>的靠前部位（这点和单机Spring Boot应用一样）。</p>
+
+<h4 id="git后端">Git后端</h4>
+
+<p><code>EnvironmentRepository</code>的默认实现为Git后端，管理升级和物理环境，审核更改非常方便。要改变仓库位置，你可以设置Config Server的&rdquo;spring.cloud.config.server.git.uri&rdquo;配置属性（例如，在<code>application.yml</code>里）。如果你将其设置为<code>file:</code>前缀，它将以本地仓库的方式工作，这样你依然能在没有服务器的情况下快速开始，但这也意味着服务端不克隆，直接操作本地仓库（至于仓库是不是裸库（bare）无关紧要，因为Config Server永远不会去改动“远端”仓库）。要水平扩展Config Server和支持高可用，你需要让所有的服务端实例指向同一个仓库，所以只能选用一个共享的文件系统。并且最好使用<code>ssh:</code>协议，这样服务端就可以将仓库克隆到本地作为缓存。</p>
+
+<p>Git仓库实现映射HTTP资源中的<code>{label}</code>参数到一个git标签（提交id，分支名，标签）。如果git分支或者标签名包含斜杠&rdquo;/&ldquo;，则标签应在HTTP URL中用特殊字符串&rdquo;(_)&ldquo;替代（避免和其他URL路径混淆）。例如，如果标签是<code>foo/bar</code>，替换斜杠后应该为<code>foo(_)bar</code>。注意，在命令行客户端比如curl里使用这些带括号的URL要小心（用单引号&rdquo;括起来转意）。</p>
+
+<h5 id="git-uri中的占位符">Git URI中的占位符</h5>
+
+<p>Spring Cloud Config Server支持git仓库URL中带占位符<code>{application}</code>、<code>{profile}</code>（或<code>{label}</code>，如果需要的话，但它主要用作git标签）。所以你可以轻易的支持“每应用一个仓库”策略（如下例）：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/myorg/{application}
+</code></pre>
+
+<p>或者“每配置文件一个仓库”策略（和上面类似，使用<code>{profile}</code>）。</p>
+
+<h5 id="模式匹配和多仓库">模式匹配和多仓库</h5>
+
+<p>服务端也支持基于应用和配置文件名模式匹配的更复杂的需求。模式格式为逗号分隔的带通配符的<code>{application}/{profile}</code>列表（如果模式以通配符开头，需要用引号括起来）。例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          repos:
+            simple: https://github.com/simple/config-repo
+            special:
+              pattern: special*/dev*,*special*/dev*
+              uri: https://github.com/special/config-repo
+            local:
+              pattern: local*
+              uri: file:/home/configsvc/config-repo
+</code></pre>
+
+<p>如果<code>{application}/{profile}</code>未匹配到任何模式，它会使用默认uri &ldquo;spring.cloud.config.server.git.uri&rdquo;。上面的例子里，&rdquo;simple&rdquo;仓库对应的模式为<code>simple/*</code>（即，匹配&rdquo;simple&rdquo;应用下的所有配置文件）。&rdquo;local&rdquo;仓库匹配所有名称以&rdquo;local&rdquo;打头的应用的所有配置文件（如果模式未指定配置文件部分，则自动添加<code>/*</code>）。</p>
+
+<blockquote>
+<p><strong>注意</strong> 上例中的&rdquo;simple&rdquo;，只有在只有唯一一个URI属性需要设置时，才能使用“单行”格式。如果你还要设置其它属性（验证、模式等），你需要使用完整格式。</p>
+</blockquote>
+
+<p>仓库的<code>pattern</code>属性实际上是一个数组，所以你可以使用YAML数组（或者properties文件里的<code>[0]</code>、<code>[1]</code>下标）来绑定多个模式。如果需要指定多个配置文件，你可能需要这样做：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          repos:
+            development:
+              pattern:
+                - */development
+                - */staging
+              uri: https://github.com/development/config-repo
+            staging:
+              pattern:
+                - */qa
+                - */production
+              uri: https://github.com/staging/config-repo
+</code></pre>
+
+<blockquote>
+<p><strong>注意</strong> 如果模式包含配置文件且不以<code>*</code>结尾，Spring Cloud会假设你实际上希望匹配以此模式开头的一系列配置文件（这样<code>*/staging</code>是<code>[&quot;*/staging&quot;,&quot;*/staging,*&quot;]</code>的简写）。这在比如你需要应用在本地以&rdquo;development&rdquo;配置文件而在远端以&rdquo;cloud&rdquo;配置文件运行时很常见。（<em>译者注</em> 这段没明白）</p>
+</blockquote>
+
+<p>可选的，每个仓库也可以把配置文件保存在子目录，然后模式里指定<code>searchPaths</code>去搜索这些目录。例如，最上层配置：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          searchPaths: foo,bar*
+</code></pre>
+
+<p>这个例子里服务端会从根目录、&rdquo;foo/&ldquo;子目录、以&rdquo;bar&rdquo;打头的子目录里搜索配置文件。</p>
+
+<p>服务端默认会在第一次接收配置请求时去克隆远端仓库。但也可以配置为启动时克隆。例如，最上层配置：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git/common/config-repo.git
+          repos:
+            team-a:
+              pattern: team-a-*
+              cloneOnStart: true
+              uri: http://git/team-a/config-repo.git
+            team-b:
+              pattern: team-b-*
+              cloneOnStart: false
+              uri: http://git/team-b/config-repo.git
+            team-c:
+              pattern: team-c-*
+              uri: http://git/team-a/config-repo.git
+</code></pre>
+
+<p>这个例子里，服务端在启动时、接收任何请求前克隆team-a的配置仓库。其它的直到配置被请求时才会克隆。</p>
+
+<blockquote>
+<p><strong>注意</strong> 设置启动时克隆可以在Config Server启动时快速发现错误的配置源（比如，无效的仓库URI）。如果某错误或无效的配置源的<code>cloneOnStart</code>未开启，Config Server可能会成功启动，但会在应用从该配置源请求配置时出错。</p>
+</blockquote>
+
+<h5 id="验证">验证</h5>
+
+<p>要在访问远程仓库时使用HTTP基础验证，单独添加&rdquo;username&rdquo;和&rdquo;password&rdquo;属性（不要加在URI里），例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          username: trolley
+          password: strongpassword
+</code></pre>
+
+<p>如果你不使用HTTPS和用户凭据，也可以使用SSH：确保密钥存放在默认路径（<code>~/.ssh</code>），uri指向SSH格式地址，例如&rdquo;git@github.com:configuration/cloud-configuration&rdquo;。注意，<code>~/.ssh/known_hosts</code>里必须存在一条<code>ssh-rsa</code>格式的Git服务器的条目。其它格式（比如<code>ecdsa-sha2-nistp256</code>）不被支持。为了避免意外，你应该确保<code>known_hosts</code>文件里只存在一条关于这个Git服务器的条目，且和你提供给配置服务端的URL匹配。如果你在URL中使用了域名，<code>known_hosts</code>文件里也要使用域名，而不是IP。服务端使用JGit访问仓库，所以任意JGit的文档都是适用的。HTTPS代理设置可以放在<code>~/.git/config</code>里，或者跟其它JVM一样通过系统属性（<code>-Dhttps.proxyHost</code>和<code>-Dhttps.proxyPort</code>）。</p>
+
+<blockquote>
+<p><strong>提示</strong> 如果你不知道<code>~/.git</code>目录在哪，可以使用<code>git config --global</code>去操作这些设置（例如，<code>git config --global http.sslVerify false</code>）。</p>
+</blockquote>
+
+<h5 id="使用aws-codecommit验证">使用AWS CodeCommit验证</h5>
+
+<p>（<em>译者注</em> 国内AWS用得少，这段就不翻译了，感兴趣可以查看<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_authentication_with_aws_codecommit">原文</a>）</p>
+
+<h5 id="git搜索路径中的占位符">Git搜索路径中的占位符</h5>
+
+<p>Spring Cloud Config Server在搜索路径上也支持<code>{application}</code>、<code>{profile}</code>（或<code>{label}</code>，如果需要的话）占位符。例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          searchPaths: '{application}'
+</code></pre>
+
+<p>会从仓库的同应用名子目录下搜索配置文件（除根目录外）。搜索路径可以同时使用占位符和通配符（会搜索任何匹配到的子目录）。</p>
+
+<h5 id="强制拉取git仓库">强制拉取Git仓库</h5>
+
+<p>前面提到过，Spring Cloud Config Server会克隆远端git仓库，但如果本地副本脏了（比如，文件夹内容被操作系统进程修改了），Spring Cloud Config Server就无法继续从远端仓库更新本地副本。</p>
+
+<p><code>force-pull</code>属性可以解决这个问题，如果本地副本脏了，Spring Cloud Config Server会强制从远端仓库拉取。例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          force-pull: true
+</code></pre>
+
+<p>如果你有多个配置仓库，你可以分别为它们设置<code>force-pull</code>属性。例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git/common/config-repo.git
+          force-pull: true
+          repos:
+            team-a:
+                pattern: team-a-*
+                uri: http://git/team-a/config-repo.git
+                force-pull: true
+            team-b:
+                pattern: team-b-*
+                uri: http://git/team-b/config-repo.git
+                force-pull: true
+            team-c:
+                pattern: team-c-*
+                uri: http://git/team-a/config-repo.git
+</code></pre>
+
+<blockquote>
+<p><strong>注意</strong> <code>force-pull</code>属性默认值为<code>false</code>。</p>
+</blockquote>
+
+<h4 id="版本控制后端对文件系统的使用">版本控制后端对文件系统的使用</h4>
+
+<blockquote>
+<p><strong>警告</strong> 使用基于VCS的后端（git，svn）时，文件被克隆、检出到本地文件系统。它们默认被放到了系统临时文件夹，以<code>config-repo-</code>作为前缀。以linux为例：<code>/tmp/config-repo-&lt;randomid&gt;</code>。一些操作系统会<a href="https://serverfault.com/questions/377348/when-does-tmp-get-cleared/377349#377349">周期性的清空</a>临时文件夹。这会导致诸如丢失属性等不可预见的行为。要避免这一问题，通过<code>spring.cloud.config.server.git.basedir</code>或<code>spring.cloud.config.server.svn.basedir</code>修改Config Server使用的目录到系统临时文件夹以外的地方。</p>
+</blockquote>
+
+<h4 id="文件系统后端">文件系统后端</h4>
+
+<p>这里也存在一个“本地（native）”配置文件：Config Server不使用Git，直接从本地classpath或文件系统（用&rdquo;spring.cloud.config.server.native.searchLocations&rdquo;指明的任意静态URL）加载配置文件。要使用本地配置文件，只需用&rdquo;spring.profiles.active=native&rdquo;启动Config Server。</p>
+
+<blockquote>
+<p><strong>注意</strong> 记住要为文件资源使用<code>file:</code>前缀（不带前缀（默认）一般为classpath）。和其它Spring Boot配置一样，你可以嵌入<code>${}</code>风格的环境占位符，另外记住Windows下绝对路径需要一个额外的&rdquo;/&ldquo;，例如<code>file:///${user.home}/config-repo</code>。</p>
+
+<p><strong>警告</strong> <code>searchLocations</code>默认值和本地Spring Boot应用的一样（即<code>[classpath:/,classpath:/config,file:./,file:./config]</code>）。但不会将服务端的<code>application.properties</code>暴露给所有客户端，因为在发送给客户端前，所有用于服务端的属性源都会被移除。</p>
+
+<p><strong>提示</strong> 文件系统后端对快速开始和测试很有用。但要用于生产环境，你需要确保这个文件系统可靠，并且能够被所有Config Server实例访问。</p>
+</blockquote>
+
+<p>搜索位置可以包含<code>{application}</code>、<code>{profile}</code>和<code>{label}</code>占位符。这样你可以区分路径里的文件夹，选择最合适的策略（例如，每应用一个子目录，或每配置文件一个子目录）。</p>
+
+<p>即便你不在搜索位置上使用占位符，仓库也会附加HTTP资源的<code>{label}</code>参数到搜索路径的尾部，即属性文件实际上是从搜索位置和同标签名的子目录两个位置加载的（其中带标签的属性在Spring Environment中优先级更高）。这样，不带占位符的默认行为和增加一个以<code>/{label}/</code>结尾的搜索位置一样。例如，<code>file:/tmp/config</code>和<code>file:/tmp/config,file:/tmp/config/{label}</code>一样。</p>
+
+<h4 id="vault后端">Vault后端</h4>
+
+<p>（<em>译者注</em> 不常用，感兴趣请阅读<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_vault_backend">原文</a>）</p>
+
+<h4 id="所有应用共享配置">所有应用共享配置</h4>
+
+<h5 id="基于文件的仓库">基于文件的仓库</h5>
+
+<p>在基于文件（例如git、svn和本地）的仓库里，名为<code>application*</code>的资源（<code>application.properties</code>、<code>application.yml</code>、<code>application-*.properties</code>等）会在所有的客户端应用间共享。你可以用这些资源来配置全局默认值，然后按需用应用指定（application-specific）文件去覆盖这些值。</p>
+
+<p><code>#_property_overrides</code><code>[property overrides]</code>功能也能用来设置全局默认值，然后应用可以用占位符在本地覆盖它们。</p>
+
+<blockquote>
+<p><strong>提示</strong> 使用“本地”配置文件（本地文件系统后端）时，推荐你使用一个显式指定的、非服务端自身配置的搜索位置。否则的话默认搜索位置的<code>application*</code>资源会被移除因为它们属于服务端的一部分。</p>
+</blockquote>
+
+<h5 id="vault服务器">Vault服务器</h5>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_vault_server">略</a>）</p>
+
+<h4 id="组合环境仓库">组合环境仓库</h4>
+
+<p>某些场景下你可能希望从多个环境仓库拉取配置数据。要这样做你只需要在你配置服务端的application properties或YAML文件里启用多个配置文件（profile）即可。例如，如果你希望同时从一个Git仓库和一个SVN仓库拉取配置数据你只需要这样设置你的配置服务端：</p>
+
+<pre><code>spring:
+  profiles:
+    active: git, svn
+  cloud:
+    config:
+      server:
+        svn:
+          uri: file:///path/to/svn/repo
+          order: 2
+        git:
+          uri: file:///path/to/git/repo
+          order: 1
+</code></pre>
+
+<p>除了为每个仓库指定一个URI，你还可以指定一个<code>order</code>属性。<code>order</code>属性允许你指定仓库们的优先顺序。<code>order</code>属性的数字越小，仓库的优先级越高。仓库的优先顺序用来解决可能的不同仓库同名属性间的冲突。</p>
+
+<blockquote>
+<p><strong>注意</strong> 从任一环境仓库获取值时，任何类型的失败都会导致从整个组合环境获取失败。</p>
+
+<p><strong>注意</strong> 当使用组合环境时，确保所有的仓库都包含相同的标签是很重要的。如果你从类似上例的组合环境请求标签为<code>master</code>的配置数据，但是SVN仓库又不包含名为<code>master</code>的分支，这整个请求会失败。</p>
+</blockquote>
+
+<h5 id="自定义组合环境仓库">自定义组合环境仓库</h5>
+
+<p>除了Spring Cloud自带的环境仓库外，你还可以在组合环境里包含你自己实现的<code>EnvironmentRepository</code>bean。你的bean需要实现<code>EnvironmentRepository</code>接口。如果你希望控制它在组合环境里的优先级，你还需要实现<code>Ordered</code>接口和覆盖<code>getOrdered</code>方法。如果你不实现<code>Ordered</code>接口，则你的<code>EnvironmentRepository</code>优先级最低。</p>
+
+<h4 id="属性覆盖">属性覆盖</h4>
+
+<p>Config Server支持“覆盖”功能（全局覆盖自定义）：允许操作者提供供所有应用使用的、不会被使用普通Spring Boot钩子技术的应用意外覆盖的配置属性。要定义这样的覆盖，只需要在<code>spring.cloud.config.server.overrides</code>下添加键值对即可。例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        overrides:
+          foo: bar
+</code></pre>
+
+<p>会导致所有配置客户端的应用，不管自己的配置是什么，都会读到<code>foo=bar</code>。（当然，一个应用可以用任何它喜欢的方式去使用Config Server的数据，所以覆盖并不是强制的，但它确实为使用Spring Cloud Config的客户端提供了一个方便的默认行为。）</p>
+
+<blockquote>
+<p><strong>提示</strong> 一般的&rdquo;${}&ldquo;格式的Spring环境占位符可以被转义（并被放到客户端解析）：靠在&rdquo;$&ldquo;或&rdquo;{&ldquo;前面加上反斜杠(&rdquo;\&rdquo;)，例如，<code>\${app.foo:bar}</code>会被解析为&rdquo;bar&rdquo;，或者客户端应用提供的它自己的&rdquo;app.foo&rdquo;。（<em>译者注</em> 即：<code>${app.foo}</code>会直接被服务端解析成对应的内容，但<code>\${app.foo}</code>会被服务端解析成占位符表达式<code>${app.foo}</code>，客户端看到的是这个表达式，而不是对应的内容，客户端自己去解析成内容）注意，当你配置这些覆盖时，如果是properties文件，你需要转义反斜杠本身，如果是YAML则没必要。</p>
+</blockquote>
+
+<p>你可以在远端仓库里设置标识<code>spring.cloud.config.overrideNone=true</code>（默认为false），将这些覆盖在客户端的优先级设为，在环境变量和系统属性之下，其它属性源之上的默认值。</p>
+
+<h3 id="健康指示器">健康指示器</h3>
+
+<p>Config Server有一个用于检查配置的<code>EnvironmentRepository</code>是否工作的Health Indicator。它默认请求<code>EnvironmentRepository</code>实现提供的，名为<code>app</code>的应用、名为<code>default</code>的配置文件、默认标签对应的<code>EnvironmentRepository</code>。</p>
+
+<p>你可以配置让Health Indicator检查更多的应用、自定义配置文件、自定义标签，例如：</p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      server:
+        health:
+          repositories:
+            myservice:
+              label: mylabel
+            myservice-dev:
+              name: myservice
+              profiles: development
+</code></pre>
+
+<p>你也可以靠设置<code>spring.cloud.config.server.health.enabled=false</code>来完全禁用Health Indicator。</p>
+
+<h3 id="安全">安全</h3>
+
+<p>你可以使用任何合理的手段（从物理网络安全到OAuth2 bearer tokens）来确保你Config Server的安全性，并且这些用Spring Security和Spring Boot非常容易就能实现。</p>
+
+<p>要使用默认的Spring Boot配置的HTTP Basic安全，只需要在classpath里包含Spring Security（例如，通过<code>spring-boot-starter-security</code>）就可以了。默认的用户名是&rdquo;user&rdquo;，密码为随机生成，这在实践中不是非常有用，所以我们建议你要配置（通过<code>security.user.password</code>）并加密（见后面的介绍）密码。</p>
+
+<h3 id="加密和解密">加密和解密</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_encryption_and_decryption">略</a>）</p>
+
+<h3 id="密钥管理">密钥管理</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_key_management">略</a>）</p>
+
+<h3 id="为测试创建密钥存储">为测试创建密钥存储</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_creating_a_key_store_for_testing">略</a>）</p>
+
+<h3 id="使用多个密钥和密钥交替">使用多个密钥和密钥交替</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_using_multiple_keys_and_key_rotation">略</a>）</p>
+
+<h3 id="提供加密的属性">提供加密的属性</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_serving_encrypted_properties">略</a>）</p>
+
+<h2 id="提供其它格式">提供其它格式</h2>
+
+<p>环境提供端（environment endpoint）提供的默认格式，JSON，可以被Spring应用完美的消费，因为它可以被直接映射到<code>Environment</code>抽象。如果你愿意的话，你可以通过为资源路径添加后缀（&rdquo;.yml&rdquo;、&rdquo;.yaml&rdquo;或&rdquo;.properties&rdquo;）的方式，以YAML或Java properties的格式来请求消费这同一份数据。这对那些不关心提供端提供的JSON结构或额外的元数据的消费端来说很有用，例如，那些不使用Spring的应用，可能会从这种方式带来的简化中获益。</p>
+
+<p>YAML和properties表现层有一个额外的标识（以boolean请求参数<code>resolvePlaceholders</code>提供）用来指出，源文档中标准Spring <code>${...}</code>格式的占位符，在呈现前应尽可能的被解析。该功能对不知道Spring占位符约定的消费端很有用。</p>
+
+<blockquote>
+<p><strong>注意</strong> 使用YAML和properties格式具有局限性，主要和元数据的丢失有关。JSON的结构为属性源的有序列表，带有对应的源的名字。YAML和properties格式则汇合成一个单一的map，就算原始值有多个来源，这些源文件的名字也丢了。就算后端仓库也是YAML源，YAML表现层也没有原封不动的呈现，而是由一系列扁平化后的属性源构建，并且假定它们都是键值对的格式。</p>
+</blockquote>
+
+<h2 id="提供纯文本">提供纯文本</h2>
+
+<p>除了使用<code>Environment</code>抽象（或者使用替代的YAML或properties格式表现层），你的应用可能需要针对环境定制的一般纯文本配置文件。配置服务端通过<code>/{name}/{profile}/{label}/{path}</code>额外端点提供，其中&rdquo;name&rdquo;、&rdquo;profile&rdquo;、&rdquo;label&rdquo;和一般环境提供端含义相同，但&rdquo;path&rdquo;是一个文件名（例如，<code>log.xml</code>）。这个端点源文件的定位和环境提供端一样：使用和properties或YAML文件一样的搜索路径，但是只返回第一个匹配的资源，而不是聚合所有匹配的资源。</p>
+
+<p>资源被定位后，普通格式（<code>${...}</code>）的占位符将被所提供应用名、配置文件和标签对应的<code>Environment</code>所解析。这种方式下，资源提供端和环境提供端紧密的集成在一起。例如，你有这样布局的GIT（或SVN）仓库：</p>
+
+<pre><code>application.yml
+nginx.conf
+</code></pre>
+
+<p>其中，<code>nginx.conf</code>看起来像这样：</p>
+
+<pre><code>server {
+    listen              80;
+    server_name         ${nginx.server.name};
+}
+</code></pre>
+
+<p><code>application.yml</code>像这样：</p>
+
+<pre><code>nginx:
+  server:
+    name: example.com
+---
+spring:
+  profiles: development
+nginx:
+  server:
+    name: develop.com
+</code></pre>
+
+<p>则，<code>/foo/default/master/nginx.conf</code>资源看起来像这样：</p>
+
+<pre><code>server {
+    listen              80;
+    server_name         example.com;
+}
+</code></pre>
+
+<p>而<code>/foo/development/master/nginx.conf</code>像这样：</p>
+
+<pre><code>server {
+    listen              80;
+    server_name         develop.com;
+}
+</code></pre>
+
+<blockquote>
+<p><strong>注意</strong> 和环境配置里的源文件一样，&rdquo;profile&rdquo;会被用来解析文件名，所以如果你想要一个指定配置文件，则<code>/*/development/*/logback.xml</code>会被解析为一个叫<code>logback-development.xml</code>的文件（对<code>logback.xml</code>的引用）。</p>
+</blockquote>
+
+<h2 id="内嵌配置服务端">内嵌配置服务端</h2>
+
+<p>配置服务端最好以独立应用的形式运行，但如果你愿意的话，你也可以把它嵌入到其它应用里去。只要使用<code>@EnableConfigServer</code>注解即可。在这种情况下，一个有用的可选属性是<code>spring.cloud.config.server.bootstrap</code>，它指出服务端是否应该从它自己的远端仓库来配置它自己。这个标识默认是关闭的因为这会延长启动时间，但如果内嵌到其它应用，则用和其它应用一样的方式初始化也是合理的。</p>
+
+<blockquote>
+<p><strong>注意</strong> 可能很显而易见，但请记得一旦你使用了引导标识，配置服务端则需要在<code>bootstrap.yml</code>里配置它的名字和仓库URI。</p>
+</blockquote>
+
+<p>要改变服务端点的位置，你可以（可选的）设置<code>spring.cloud.config.server.prefix</code>，例如&rdquo;/config&rdquo;，来提供前缀下的资源。这个前缀应以&rdquo;/&ldquo;开头，不能以&rdquo;/&ldquo;结尾。它将应用到配置服务端的<code>@RequestMappings</code>（即，在Spring Boot前缀<code>server.servletPath</code>和<code>server.contextPath</code>之后）。</p>
+
+<p>如果你希望应用直接从后端仓库（而不是从配置服务端）读取配置，这基本上就是一个无端（no endpoints）的内嵌配置服务端。如果你不使用<code>@EnableConfigServer</code>注解（只设置<code>spring.cloud.config.server.bootstrap=true</code>），你可以将端点完全关掉。</p>
+
+<h2 id="推送通知和spring-cloud总线">推送通知和Spring Cloud总线</h2>
+
+<p>很多源代码仓库提供者（像Github、Gitlab或Bitbucket）会通过一个webhook通知你仓库的更改。你可以通过提过者的用户界面来配置这个webhook，设置URL和你感兴趣的事件。例如，<a href="https://developer.github.com/v3/activity/events/types/#pushevent">Github</a>会POST一个请求体为包括一个提交列表的JSON，请求头&rdquo;X-Github-Event&rdquo;等于&rdquo;push&rdquo;的请求，到这个webhook。如果你添加<code>spring-cloud-config-monitor</code>依赖，且在配置服务端激活Spring Cloud Bus，则会启用一个&rdquo;/monitor&rdquo;的端点。</p>
+
+<p>当这个webhook被激活时，配置服务端会发送一个<code>RefreshRemoteApplicationEvent</code>到它认为有变化的应用那去。变化探测可以配置不同的策略，但默认只是简单查找和改动文件名匹配的应用名（例如，&rdquo;foo.properties&rdquo;被定位到&rdquo;foo&rdquo;应用，&rdquo;application.properties&rdquo;定位到所有应用）。如果你希望修改这个策略，覆盖<code>PropertyPathNotificationExtractor</code>，它接受请求头和请求体为参数，返回一个有变化的文件路径列表。</p>
+
+<p>默认配置在Github、Gitlab和Bitbucket下直接可用。除了Github、Gitlab或Bitbucket的JSON通知外，你还可以通过POST一个form格式的请求体参数<code>path={name}</code>到&rdquo;/monitor&rdquo;，来激发一个改动通知。这会广播到所有名称匹配&rdquo;{name}&ldquo;的应用（可以包含通配符）。</p>
+
+<blockquote>
+<p><strong>注意</strong> 只有在配置服务端和客户端应用都激活<code>spring-cloud-bus</code>的情况下，<code>RefreshRemoteApplicationEvent</code>才会被发送。</p>
+
+<p><strong>注意</strong> 默认配置同时也会侦测本地git仓库文件系统的改动（这种情况下webhook不会被使用，但一旦你编辑了一个配置文件，一个刷新事件就会被广播）。</p>
+</blockquote>
+
+<h2 id="spring-cloud配置客户端">Spring Cloud配置客户端</h2>
+
+<p>一个Spring Boot应用可以从Spring Config服务端（或应用开发者提供的其它外部属性源）获得直接的好处，还可以使用更多<code>Environment</code>更改事件相关的有用功能。</p>
+
+<h3 id="配置优先的引导程序">配置优先的引导程序</h3>
+
+<p>这是classpath里存在Spring Config Config Client的应用默认的行为。当客户端启动时，它绑定到配置服务端（通过引导配置属性<code>spring.cloud.config.uri</code>）上并用远端属性源初始化Spring <code>Environment</code>。</p>
+
+<p>结果就是，所有要消费配置服务端的客户端应用，都需要一个<code>bootstrap.yml</code>（或环境变量），里面<code>spring.cloud.config.uri</code>配置着服务器地址（默认为&rdquo;<a href="http://localhost:8888&quot;）。">http://localhost:8888&quot;）。</a></p>
+
+<h3 id="发现优先的引导程序">发现优先的引导程序</h3>
+
+<p>如果你使用的是<code>DiscoveryClient</code>的实现，例如Spring Cloud Netflix和Eureka Service Discovery或Spring Cloud Consul（Spring Cloud Zookeeper还不支持这个）,那么你可以将配置服务端注册到发现服务（Discovery Service）上，但对于使用默认的&rdquo;配置优先&rdquo;模式的客户端，这个注册作用不大。</p>
+
+<p>如果你倾向于使用<code>DiscoveryClient</code>来定位配置服务端，你可以设置<code>spring.cloud.config.discovery.enabled=true</code>（默认为&rdquo;false&rdquo;）。结果就是，所有客户端应用的<code>bootstrap.yml</code>（或环境变量）里，要有注册发现相关的配置。例如，要使用Spring Cloud Netflix，你需要用比如<code>eureka.client.serviceUrl.defaultZone</code>来定义Eureka服务器地址。使用这个选项的代价是，程序启动时会有一个额外的双向网络通讯来定位服务注册。好处则是，在发现服务端点不变的前提下，配置服务端可以更改部署的位置。默认的服务id是&rdquo;configserver&rdquo;，但客户端可以通过<code>spring.cloud.config.discovery.serviceId</code>修改（而服务在服务端可以通过<code>spring.application.name</code>修改）。</p>
+
+<p>所有的发现客户端实现都支持某种元数据映射（例如，Eureka有<code>eureka.instance.metadataMap</code>）。关于配置服务端的一些额外属性也需要配置在服务注册元数据里，以便客户端能够正确建立连接。如果配置服务端使用了HTTP Basic加密，你可以配置&rdquo;username&rdquo;和&rdquo;password&rdquo;凭据。如果配置服务端有上下文路径你可以设置&rdquo;configPath&rdquo;。例如，对于Eureka客户端：</p>
+
+<p><em><code>bootstrap.yml</code></em></p>
+
+<pre><code>eureka:
+  instance:
+    ...
+    metadataMap:
+      user: osufhalskjrtl
+      password: lviuhlszvaorhvlo5847
+      configPath: /config
+</code></pre>
+
+<h3 id="配置客户端的快速失败">配置客户端的快速失败</h3>
+
+<p>某些情况下，我们期望如果无法连接上配置服务器，服务就不要启动。如果是这样，可以设置引导配置属性<code>spring.cloud.config.failFast=true</code>，这样客户端会抛出异常并中止。</p>
+
+<h3 id="配置客户端的重试">配置客户端的重试</h3>
+
+<p>如果你预期在你的应用启动时，配置服务端可能偶尔不可用，你可以要求客户端在遇到失败后重试。首先你需要设置<code>spring.cloud.config.failFast=true</code>，然后你需要添加<code>spring-retry</code>和<code>spring-boot-starter-aop</code>到你的classpath。默认行为是重试6次，初始重试间隔是1000ms，以后每次乘以1.1。你可以通过<code>spring.cloud.config.retry.*</code>来配置这些属性。</p>
+
+<blockquote>
+<p><strong>提示</strong> 要完全控制重试的行为你可以添加一个类型为<code>RetryOperationsInterceptor</code>、id为<code>configServerRetryInterceptor</code>的<code>@Bean</code>。Spring Retry的<code>RetryInterceptorBuilder</code>可以用来很容易的创建这样一个。</p>
+</blockquote>
+
+<h3 id="定位远端配置资源">定位远端配置资源</h3>
+
+<p>配置服务从<code>/{name}/{profile}/{label}</code>提供属性源，客户端应用默认的绑定为</p>
+
+<ul>
+<li>&ldquo;name&rdquo; = <code>${spring.application.name}</code><br /></li>
+<li>&ldquo;profile&rdquo; = <code>${spring.profiles.active}</code>（实际上是<code>Environment.getActiveProfiles()</code>）<br /></li>
+<li>&ldquo;label&rdquo; = &ldquo;master&rdquo;<br />
+<br /></li>
+</ul>
+
+<p>所有的这些都可以被覆盖，只需设置<code>spring.cloud.config.*</code>（<code>*</code>可以是&rdquo;name&rdquo;、&rdquo;profile&rdquo;或&rdquo;label&rdquo;）。&rdquo;label&rdquo;对于回滚到以前版本的配置非常有用；在配置服务端默认的实现里，它可以是一个git标签、分支名或者提交id。标签还可以是逗号分隔的列表，这样的话列表项会被依次尝试直到其中一个成功为止。这对于工作在功能分支上时非常有用，例如，你可能希望以你的分支为主，但是又完全可选（例如，<code>spring.cloud.config.label=myfeature,develop</code>）。</p>
+
+<h3 id="安全-1">安全</h3>
+
+<p>如果服务端使用HTTP Basic安全，客户端只需要知道密码（和密码，如果不是默认的话）即可。你可以通过配置服务端URI或者单独的用户名密码属性来设置，例如：</p>
+
+<p><em><code>bootstrap.yml</code></em></p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      uri: https://user:secret@myconfig.mycompany.com
+</code></pre>
+
+<p>或</p>
+
+<p><em><code>bootstrap.yml</code></em></p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      uri: https://myconfig.mycompany.com
+      username: user
+      password: secret
+</code></pre>
+
+<p><code>spring.cloud.config.password</code>和<code>spring.cloud.config.username</code>的值会覆盖URI中提供的值。</p>
+
+<p>如果你在Cloud Foundry上部署你的应用，则提供密码最好的方式是通过服务凭据（比如通过URI），这样你都不用把密码写入配置文件。下面是一个可以同时在本地和Cloud Foundry上（用户提供的名为&rdquo;configserver&rdquo;的服务）工作的例子：</p>
+
+<p><em><code>bootstrap.yml</code></em></p>
+
+<pre><code>spring:
+  cloud:
+    config:
+      uri: ${vcap.services.configserver.credentials.uri:http://user:password@localhost:8888}
+</code></pre>
+
+<p>如果你使用其它形式的安全机制，你可能需要为<code>ConfigServicePropertySourceLocator</code>提供一个<code>RestTemplate</code>（例如，注入到引导上下文）。</p>
+
+<h4 id="健康指示器-1">健康指示器</h4>
+
+<p>配置客户端提供了一个Spring Boot健康指示器，尝试从配置服务端加载配置。这个健康指示器可以通过设置<code>health.config.enabled=false</code>关闭。因为性能原因，响应的结果也会被缓存起来。默认的缓存时间是5分钟。要改变这个时间可以设置<code>health.config.time-to-live</code>属性（单位毫秒）。</p>
+
+<h4 id="提供自定义resttemplate">提供自定义RestTemplate</h4>
+
+<p>某些情况下，你可能需要自定义客户端发给配置服务端的请求。例如，提供特殊的<code>Authorization</code>请求头。用下面的步骤提供一个自定义的<code>RestTemplate</code>。</p>
+
+<ol>
+<li><p>设置<code>spring.cloud.config.enabled=false</code>来禁用已存在的配置服务端属性源。</p></li>
+
+<li><p>创建一个新的<code>PropertySourceLocator</code>的实现的bean。</p>
+
+<p><em><code>CustomConfigServiceBootstrapConfiguration.java</code></em></p>
+
+<pre><code>@Configuration
+public class CustomConfigServiceBootstrapConfiguration {
+    @Bean
+    public ConfigClientProperties configClientProperties() {
+        ConfigClientProperties client = new ConfigClientProperties(this.environment);
+        client.setEnabled(false);
+        return client;
+    }
+
+    @Bean
+    public ConfigServicePropertySourceLocator configServicePropertySourceLocator() {
+        ConfigClientProperties clientProperties = configClientProperties();
+        ConfigServicePropertySourceLocator configServicePropertySourceLocator = new ConfigServicePropertySourceLocator(clientProperties);
+        configServicePropertySourceLocator.setRestTemplate(customRestTemplate(clientProperties));
+        return configServicePropertySourceLocator;
+    }
+}
+</code></pre></li>
+
+<li><p>在<code>resource/META-INF</code>下创建一个名为<code>spring.factories</code>的文件，并添加你的自定义配置。</p>
+
+<p><em><code>spring.factories</code></em></p>
+
+<pre><code>org.springframework.cloud.bootstrap.BootstrapConfiguration =
+com.my.config.client.CustomConfigServiceBootstrapConfiguration
+</code></pre></li>
+</ol>
+
+<h4 id="vault">Vault</h4>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_vault">略</a>）</p>
+
+<h3 id="vault-1">Vault</h3>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_vault_2">略</a>）</p>
+
+<h4 id="vault中的嵌套键">Vault中的嵌套键</h4>
+
+<p>（<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.1.RELEASE/#_nested_keys_in_vault">略</a>）</p>
+
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+      
+      
+
+<div class='categories'>
+  <span class='category-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Categories: </span><a class='category' href='/categories/spring'>Spring</a></div>
+
+    
+  
+    
+      
+      
+
+<div class='tags'>
+  <span class='tag-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Tags: </span><a class='tag' href='/tags/spring'>Spring</a>, <a class='tag' href='/tags/spring-cloud'>Spring-Cloud</a>, <a class='tag' href='/tags/spring-cloud-config'>Spring-Cloud-Config</a></div>
+
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://feng1st.github.io/post/2017/06/dubbo-in-docker/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span>Docker容器运行dubbo应用</a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'></ul>
+  </nav>
+</div>
+
+        <div class='copyright'>
+          <p>
+    
+  
+  &copy; 2017 feng1st</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/main.af838dd5.js'></script>
+  
+
+</body>
+
+</html>
+

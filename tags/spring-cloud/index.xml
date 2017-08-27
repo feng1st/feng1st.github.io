@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring on 技术随笔</title>
-    <link>https://feng1st.github.io/categories/spring/</link>
-    <description>Recent content in Spring on 技术随笔</description>
+    <title>Spring Cloud on 技术随笔</title>
+    <link>https://feng1st.github.io/tags/spring-cloud/</link>
+    <description>Recent content in Spring Cloud on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 14 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/categories/spring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://feng1st.github.io/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -28,61 +28,6 @@ Spring Cloud Config服务端从一个git仓库（必须提供）为远程客户�
 spring: cloud: config: server: git: uri: https://github.com/spring-cloud-samples/config-repo  客户端用法 要在应用中使用这些功能，你只需要创建一个依赖spring-cloud-config-client的Spring Boot应用（参见config-client的测试案例，或者sample app）。添加依赖最方便的方式是通过Spring Boot starter org.springframework.cloud:spring-cloud-starter-config。对Maven用户，这里有一个父pom和BOM（spring-cloud-starter-parent）；对Gradle和Spring CLI用户，这里也有一个Spring IO版本管理属性文件。示例Maven配置：
 pom.xml
 &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.5.RELEASE&amp;lt;/version&amp;gt; &amp;lt;relativePath /&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; &amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
-    </item>
-    
-    <item>
-      <title>Spring实现RESTful Service笔记</title>
-      <link>https://feng1st.github.io/post/2017/06/spring-rest/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/post/2017/06/spring-rest/</guid>
-      <description>来源：
-https://spring.io/guides/gs/rest-service/
-本文采用代码及分析的形式
-GreetingController.java src/main/java/hello/GreetingController.java
-package hello; import java.util.concurrent.atomic.AtomicLong; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.RestController; @RestController public class GreetingController { private static final String template = &amp;quot;Hello, %s!&amp;quot;; private final AtomicLong counter = new AtomicLong(); @RequestMapping(&amp;quot;/greeting&amp;quot;) public Greeting greeting(@RequestParam(value=&amp;quot;name&amp;quot;, defaultValue=&amp;quot;World&amp;quot;) String name) { return new Greeting(counter.incrementAndGet(), String.format(template, name)); } }   @RestController
- 整合@Controller, @ResponseBody
- @Controller
- MVC里的Controller，Spring的DispatcherServlet，通过HandlerMapping，找到Controller后，将请求发送过来进行处理
-  @ResponseBody
- 将返回的对象，通过注册的HttpMessageConverter，转换成字符串，写入Response的body里
- 对应的是@RequestBody，通过Request header的Content-Type，将Request的body转换成对象
-   @RequestMapping</description>
-    </item>
-    
-    <item>
-      <title>Spring DispatcherServlet相关知识点</title>
-      <link>https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/</link>
-      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://feng1st.github.io/post/2017/06/spring-dispatcher-servlet/</guid>
-      <description>DispatcherServlet作用  作为Spring MVC的集中访问点
- 通过HandlerMapping，将请求映射到Handler
- 返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
-  通过不同的HandlerAdaptor，支持不同的处理器
- 通过ViewResolver，支持到具体视图的解析
- 通过HandlerExceptionResolver，实现对异常的处理
-  每一部分都可以很方便的扩展
-DispatcherServlet流程  请求被DispatcherServlet截获
- DispatcherServlet在候选handlerMappings里面，找到第一个能够处理request的handlerMapping
- 常见的handlerMapping：
- RequestMappingHandlerMapping: 通过@RequestMapping注解的Controller的方法
- 内部有一个url到HandlerMethod的映射，通过这个映射来判断是否能处理
-  BeanNameUrlHandlerMapping: 通过web.xml配置的，从URL映射到bean。DispatcherServlet本身就是通过这种方式配置
-   handlerMapping构造一个HandlerExecutionChain
- HandlerExecutionChain包含多个HandlerInterceptor和一个Handler
- Handler是一个HandlerMethod，通过构造函数参数传入request
- Spring MVC默认会注入一个ConversionServiceExposingInterceptor，用来处理日期、时间等格式转换
-   用HandlerAdaptor封装chain里的handler
- 不同的handler接口不同，通过adaptor统一接口
- DispatcherServlet有一个HandlerAdaptor的列表，采用第一个.supports(handler)的HandlerAdaptor
- HandlerMethod对应的是RequestMappingHandlerAdaptor
-  依次执行各interceptor的preHandle，handlerAdaptor的handle和各interceptor的postHandle
- HandlerAdaptor内部实例化一个ServletInvocableHandlerMethod
- 除了handler，还注入了HandlerMethodArgumentResolver列表、HandlerMethodReturnValueHandler列表以及DataBinderFactory
-  ServletInvocableHandlerMethod.invokeAndHandle()里
- 用argumentResolvers和dataBinderFactory转化参数
- 用argumentResolvers解析参数</description>
     </item>
     
   </channel>

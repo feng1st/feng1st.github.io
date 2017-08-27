@@ -5,10 +5,30 @@
     <link>https://feng1st.github.io/tags/spring/</link>
     <description>Recent content in Spring on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://feng1st.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring Cloud Config</title>
+      <link>https://feng1st.github.io/post/2017/08/spring-cloud-config-docs/</link>
+      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://feng1st.github.io/post/2017/08/spring-cloud-config-docs/</guid>
+      <description>原文（英文）
+翻译：Feng
+Spring Cloud Config在分布式系统里为使用外部配置提供了服务端和客户端支持。使用Config Server，你可以在一个地方，为跨环境的各种应用集中管理外部参数。不管是在客户端还是服务端，这个概念和Spring Environment、PropertySource抽象都是等价的，所以它们可以被Spring应用无缝使用，但不妨碍它们被任何语言任何应用使用。当一个应用在部署管道（deployment pipeline）里，从dev环境迁移到test再到production时，你可以管理在这些环境上的配置并确保应用能拿到它所需的一切参数。服务端存储后台默认实现为git，所以配置天然支持标签和版本，并且有大量的工具可用于内容的管理。你也可以很容易利用Spring配置添加和插入其它实现。
+快速开始 启动服务端：
+$ cd spring-cloud-config-server $ ../mvnw spring-boot:run  服务端是一个Spring Boot应用，所以你也可以从IDE里面直接启动（main类是ConfigServerApplication）。然后试运行客户端：
+$ curl localhost:8888/foo/development {&amp;quot;name&amp;quot;:&amp;quot;development&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;master&amp;quot;,&amp;quot;propertySources&amp;quot;:[ {&amp;quot;name&amp;quot;:&amp;quot;https://github.com/scratches/config-repo/foo-development.properties&amp;quot;,&amp;quot;source&amp;quot;:{&amp;quot;bar&amp;quot;:&amp;quot;spam&amp;quot;}}, {&amp;quot;name&amp;quot;:&amp;quot;https://github.com/scratches/config-repo/foo.properties&amp;quot;,&amp;quot;source&amp;quot;:{&amp;quot;foo&amp;quot;:&amp;quot;bar&amp;quot;}} ]}  定位属性源（property source）的默认策略是克隆一个git仓库（在spring.cloud.config.server.git.uri）然后用它来初始化一个迷你SpringApplication。这个迷你应用的Environment被用来枚举属性源并通过一个JSON端点（endpoint）发布它们。
+这个HTTP服务有这些形式的资源：
+/{application}/{profile}[/{label}] /{application}-{profile}.yml /{label}/{application}-{profile}.yml /{application}-{profile}.properties /{label}/{application}-{profile}.properties  这里，&amp;rdquo;application&amp;rdquo;以spring.config.name被注入SpringApplication（即标准Spring Boot应用），&amp;rdquo;profile&amp;rdquo;是一个活动配置文件（或者逗号分隔的属性列表），&amp;rdquo;label&amp;rdquo;是一个可选的git标签（默认为&amp;rdquo;master&amp;rdquo;）。
+Spring Cloud Config服务端从一个git仓库（必须提供）为远程客户端拉取配置：
+spring: cloud: config: server: git: uri: https://github.com/spring-cloud-samples/config-repo  客户端用法 要在应用中使用这些功能，你只需要创建一个依赖spring-cloud-config-client的Spring Boot应用（参见config-client的测试案例，或者sample app）。添加依赖最方便的方式是通过Spring Boot starter org.springframework.cloud:spring-cloud-starter-config。对Maven用户，这里有一个父pom和BOM（spring-cloud-starter-parent）；对Gradle和Spring CLI用户，这里也有一个Spring IO版本管理属性文件。示例Maven配置：
+pom.xml
+&amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.5.RELEASE&amp;lt;/version&amp;gt; &amp;lt;relativePath /&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; &amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
+    </item>
     
     <item>
       <title>Spring实现RESTful Service笔记</title>
