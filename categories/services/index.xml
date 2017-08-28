@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Services on 技术随笔</title>
-    <link>https://feng1st.github.io/categories/services/</link>
+    <link>https://codeone.io/categories/services/</link>
     <description>Recent content in Services on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 23 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/categories/services/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/categories/services/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>微服务架构摘要</title>
-      <link>https://feng1st.github.io/post/2017/06/microservices/</link>
+      <link>https://codeone.io/post/2017/06/microservices/</link>
       <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/microservices/</guid>
+      <guid>https://codeone.io/post/2017/06/microservices/</guid>
       <description>原文: https://www.nginx.com/blog/introduction-to-microservices/
 单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
  过于复杂，难于理解和修改。修改容易引入bug
@@ -53,10 +53,10 @@ z轴：数据分区，靠拆分相似的事物伸缩
     
     <item>
       <title>面向服务架构笔记</title>
-      <link>https://feng1st.github.io/post/2017/06/soa/</link>
+      <link>https://codeone.io/post/2017/06/soa/</link>
       <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/soa/</guid>
+      <guid>https://codeone.io/post/2017/06/soa/</guid>
       <description>分布式应用架构的演化  DOA 分布式对象架构
  主要特征：
  对象是可以在服务器/容器间自由“移动”的
@@ -90,10 +90,10 @@ z轴：数据分区，靠拆分相似的事物伸缩
     
     <item>
       <title>高并发解决思路</title>
-      <link>https://feng1st.github.io/post/2017/06/high-concurrency/</link>
+      <link>https://codeone.io/post/2017/06/high-concurrency/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/high-concurrency/</guid>
+      <guid>https://codeone.io/post/2017/06/high-concurrency/</guid>
       <description>解决高并发，无非两个方向：
  分而治之：分流
  优化单个服务器处理能力

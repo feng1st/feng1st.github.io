@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on 技术随笔</title>
-    <link>https://feng1st.github.io/categories/java/</link>
+    <link>https://codeone.io/categories/java/</link>
     <description>Recent content in Java on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java NIO摘要</title>
-      <link>https://feng1st.github.io/post/2017/06/java-nio/</link>
+      <link>https://codeone.io/post/2017/06/java-nio/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/java-nio/</guid>
+      <guid>https://codeone.io/post/2017/06/java-nio/</guid>
       <description>比较经典和精简的教程，先直接发链接：
 http://tutorials.jenkov.com/java-nio/
 NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数据/信息流的设计思想
@@ -52,10 +52,10 @@ NIO的实现不复杂，但是其体现了一个统一、可伸缩的面向数�
     
     <item>
       <title>Java内存模型和GC机制摘要</title>
-      <link>https://feng1st.github.io/post/2017/06/jvm-memory-gc/</link>
+      <link>https://codeone.io/post/2017/06/jvm-memory-gc/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/jvm-memory-gc/</guid>
+      <guid>https://codeone.io/post/2017/06/jvm-memory-gc/</guid>
       <description>Java对象  对象位置
  对象实例在堆中分配
  实例对应的类信息在方法区分配

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Network on 技术随笔</title>
-    <link>https://feng1st.github.io/tags/network/</link>
+    <link>https://codeone.io/tags/network/</link>
     <description>Recent content in Network on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 09 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTTP协议摘要</title>
-      <link>https://feng1st.github.io/post/2017/06/http-protocol/</link>
+      <link>https://codeone.io/post/2017/06/http-protocol/</link>
       <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/http-protocol/</guid>
+      <guid>https://codeone.io/post/2017/06/http-protocol/</guid>
       <description>HTTP协议概述  基于服务器/客户端，请求/响应
  无连接（1.1开始支持长连接Web Socket）
  无状态（需要依赖会话维持状态）
@@ -38,10 +38,10 @@
     
     <item>
       <title>TCP/IP协议摘要</title>
-      <link>https://feng1st.github.io/post/2017/06/tcp-ip-protocol/</link>
+      <link>https://codeone.io/post/2017/06/tcp-ip-protocol/</link>
       <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/tcp-ip-protocol/</guid>
+      <guid>https://codeone.io/post/2017/06/tcp-ip-protocol/</guid>
       <description>协议分层  应用层 Application
  对应OSI协议Application、Presentation、Session三层
  常见上层协议：HTTP、FTP、SMTP、TELNET

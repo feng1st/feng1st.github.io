@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Service on 技术随笔</title>
-    <link>https://feng1st.github.io/tags/service/</link>
+    <link>https://codeone.io/tags/service/</link>
     <description>Recent content in Service on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 01 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/tags/service/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/tags/service/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>大型网站系统与Java中间件实践 读书笔记</title>
-      <link>https://feng1st.github.io/post/2017/05/large-website-system-and-java-middleware-practice/</link>
+      <link>https://codeone.io/post/2017/05/large-website-system-and-java-middleware-practice/</link>
       <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/05/large-website-system-and-java-middleware-practice/</guid>
+      <guid>https://codeone.io/post/2017/05/large-website-system-and-java-middleware-practice/</guid>
       <description>豆瓣链接: https://book.douban.com/subject/25867042/
 作者曾宪杰，淘宝花名华黎，现任淘宝技术部总监。
 本书反映了淘宝网一路发展过来，技术架构演进的一个过程。书中的绝大多数内容，都已经落地为阿里内部广泛使用的基础设施、中间件。部分组件已经开源，比如Dubbo、RocketMQ，可以在网上下到。

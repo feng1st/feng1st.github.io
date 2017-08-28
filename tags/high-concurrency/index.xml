@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>High Concurrency on 技术随笔</title>
-    <link>https://feng1st.github.io/tags/high-concurrency/</link>
+    <link>https://codeone.io/tags/high-concurrency/</link>
     <description>Recent content in High Concurrency on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/tags/high-concurrency/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/tags/high-concurrency/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>高并发解决思路</title>
-      <link>https://feng1st.github.io/post/2017/06/high-concurrency/</link>
+      <link>https://codeone.io/post/2017/06/high-concurrency/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/high-concurrency/</guid>
+      <guid>https://codeone.io/post/2017/06/high-concurrency/</guid>
       <description>解决高并发，无非两个方向：
  分而治之：分流
  优化单个服务器处理能力

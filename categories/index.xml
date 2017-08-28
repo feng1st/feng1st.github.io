@@ -2,82 +2,82 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 技术随笔</title>
-    <link>https://feng1st.github.io/categories/</link>
+    <link>https://codeone.io/categories/</link>
     <description>Recent content in Categories on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	<atom:link href="https://feng1st.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker</title>
-      <link>https://feng1st.github.io/categories/docker/</link>
+      <link>https://codeone.io/categories/docker/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/docker/</guid>
+      <guid>https://codeone.io/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://feng1st.github.io/categories/java/</link>
+      <link>https://codeone.io/categories/java/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/java/</guid>
+      <guid>https://codeone.io/categories/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Network</title>
-      <link>https://feng1st.github.io/categories/network/</link>
+      <link>https://codeone.io/categories/network/</link>
       <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/network/</guid>
+      <guid>https://codeone.io/categories/network/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Service</title>
-      <link>https://feng1st.github.io/categories/service/</link>
+      <link>https://codeone.io/categories/service/</link>
       <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/service/</guid>
+      <guid>https://codeone.io/categories/service/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Services</title>
-      <link>https://feng1st.github.io/categories/services/</link>
+      <link>https://codeone.io/categories/services/</link>
       <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/services/</guid>
+      <guid>https://codeone.io/categories/services/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Servlet</title>
-      <link>https://feng1st.github.io/categories/servlet/</link>
+      <link>https://codeone.io/categories/servlet/</link>
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/servlet/</guid>
+      <guid>https://codeone.io/categories/servlet/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Spring</title>
-      <link>https://feng1st.github.io/categories/spring/</link>
+      <link>https://codeone.io/categories/spring/</link>
       <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/spring/</guid>
+      <guid>https://codeone.io/categories/spring/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Utilities</title>
-      <link>https://feng1st.github.io/categories/utilities/</link>
+      <link>https://codeone.io/categories/utilities/</link>
       <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/categories/utilities/</guid>
+      <guid>https://codeone.io/categories/utilities/</guid>
       <description></description>
     </item>
     

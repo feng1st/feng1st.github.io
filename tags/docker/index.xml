@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on 技术随笔</title>
-    <link>https://feng1st.github.io/tags/docker/</link>
+    <link>https://codeone.io/tags/docker/</link>
     <description>Recent content in Docker on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 27 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://feng1st.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeone.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker容器运行dubbo应用</title>
-      <link>https://feng1st.github.io/post/2017/06/dubbo-in-docker/</link>
+      <link>https://codeone.io/post/2017/06/dubbo-in-docker/</link>
       <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://feng1st.github.io/post/2017/06/dubbo-in-docker/</guid>
+      <guid>https://codeone.io/post/2017/06/dubbo-in-docker/</guid>
       <description>参考了这篇文章： https://yq.aliyun.com/articles/60789
 大致步骤是一样的。但是，文章中的部署方式是，使用docker-compose，将zookeeper、provider、consumer编排在一起了。
 它们使用的是同一个虚拟网络，provider将自己在虚拟网络里的ip注册到zookeeper，consumer能顺利访问到。
