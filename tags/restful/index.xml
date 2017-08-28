@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Restful on 技术随笔</title>
-    <link>https://codeone.io/tags/restful/</link>
+    <link>http://codeone.io/tags/restful/</link>
     <description>Recent content in Restful on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/restful/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/restful/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring实现RESTful Service笔记</title>
-      <link>https://codeone.io/post/2017/06/spring-rest/</link>
+      <link>http://codeone.io/post/2017/06/spring-rest/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/06/spring-rest/</guid>
+      <guid>http://codeone.io/post/2017/06/spring-rest/</guid>
       <description>来源：
 https://spring.io/guides/gs/rest-service/
 本文采用代码及分析的形式

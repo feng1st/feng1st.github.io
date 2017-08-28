@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring Cloud Config on 技术随笔</title>
-    <link>https://codeone.io/tags/spring-cloud-config/</link>
+    <link>http://codeone.io/tags/spring-cloud-config/</link>
     <description>Recent content in Spring Cloud Config on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 14 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/spring-cloud-config/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/spring-cloud-config/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring Cloud Config</title>
-      <link>https://codeone.io/post/2017/08/spring-cloud-config-docs/</link>
+      <link>http://codeone.io/post/2017/08/spring-cloud-config-docs/</link>
       <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/08/spring-cloud-config-docs/</guid>
+      <guid>http://codeone.io/post/2017/08/spring-cloud-config-docs/</guid>
       <description>原文（英文）
 翻译：Feng
 Spring Cloud Config在分布式系统里为使用外部配置提供了服务端和客户端支持。使用Config Server，你可以在一个地方，为跨环境的各种应用集中管理外部参数。不管是在客户端还是服务端，这个概念和Spring Environment、PropertySource抽象都是等价的，所以它们可以被Spring应用无缝使用，但不妨碍它们被任何语言任何应用使用。当一个应用在部署管道（deployment pipeline）里，从dev环境迁移到test再到production时，你可以管理在这些环境上的配置并确保应用能拿到它所需的一切参数。服务端存储后台默认实现为git，所以配置天然支持标签和版本，并且有大量的工具可用于内容的管理。你也可以很容易利用Spring配置添加和插入其它实现。

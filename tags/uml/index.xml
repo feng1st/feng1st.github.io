@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Uml on 技术随笔</title>
-    <link>https://codeone.io/tags/uml/</link>
+    <link>http://codeone.io/tags/uml/</link>
     <description>Recent content in Uml on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/uml/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/uml/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>工具推荐：PlantUML，文本转UML图工具</title>
-      <link>https://codeone.io/post/2017/06/plantuml/</link>
+      <link>http://codeone.io/post/2017/06/plantuml/</link>
       <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/06/plantuml/</guid>
+      <guid>http://codeone.io/post/2017/06/plantuml/</guid>
       <description>官网：http://plantuml.com/
 为什么要用文本生成UML，而不直接画UML？
 这就好像问为什么要用markdown，而不直接使用.odt或者.docx格式。答案一样：

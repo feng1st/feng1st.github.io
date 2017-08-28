@@ -3,297 +3,297 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://codeone.io/</loc>
+    <loc>http://codeone.io/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/</loc>
+    <loc>http://codeone.io/post/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/</loc>
+    <loc>http://codeone.io/categories/</loc>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/</loc>
+    <loc>http://codeone.io/tags/</loc>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/08/spring-cloud-config-docs/</loc>
+    <loc>http://codeone.io/post/2017/08/spring-cloud-config-docs/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/dubbo-in-docker/</loc>
+    <loc>http://codeone.io/post/2017/06/dubbo-in-docker/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/spring-rest/</loc>
+    <loc>http://codeone.io/post/2017/06/spring-rest/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/spring-dispatcher-servlet/</loc>
+    <loc>http://codeone.io/post/2017/06/spring-dispatcher-servlet/</loc>
     <lastmod>2017-06-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/microservices/</loc>
+    <loc>http://codeone.io/post/2017/06/microservices/</loc>
     <lastmod>2017-06-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/plantuml/</loc>
+    <loc>http://codeone.io/post/2017/06/plantuml/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/soa/</loc>
+    <loc>http://codeone.io/post/2017/06/soa/</loc>
     <lastmod>2017-06-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/high-concurrency/</loc>
+    <loc>http://codeone.io/post/2017/06/high-concurrency/</loc>
     <lastmod>2017-06-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/tomcat/</loc>
+    <loc>http://codeone.io/post/2017/06/tomcat/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/jetty/</loc>
+    <loc>http://codeone.io/post/2017/06/jetty/</loc>
     <lastmod>2017-06-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/servlet/</loc>
+    <loc>http://codeone.io/post/2017/06/servlet/</loc>
     <lastmod>2017-06-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/java-nio/</loc>
+    <loc>http://codeone.io/post/2017/06/java-nio/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/http-protocol/</loc>
+    <loc>http://codeone.io/post/2017/06/http-protocol/</loc>
     <lastmod>2017-06-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/tcp-ip-protocol/</loc>
+    <loc>http://codeone.io/post/2017/06/tcp-ip-protocol/</loc>
     <lastmod>2017-06-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/06/jvm-memory-gc/</loc>
+    <loc>http://codeone.io/post/2017/06/jvm-memory-gc/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/post/2017/05/large-website-system-and-java-middleware-practice/</loc>
+    <loc>http://codeone.io/post/2017/05/large-website-system-and-java-middleware-practice/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/dispatcherservlet/</loc>
+    <loc>http://codeone.io/tags/dispatcherservlet/</loc>
     <lastmod>2017-06-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/distributed/</loc>
+    <loc>http://codeone.io/tags/distributed/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/docker/</loc>
+    <loc>http://codeone.io/categories/docker/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/docker/</loc>
+    <loc>http://codeone.io/tags/docker/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/dubbo/</loc>
+    <loc>http://codeone.io/tags/dubbo/</loc>
     <lastmod>2017-06-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/gc/</loc>
+    <loc>http://codeone.io/tags/gc/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/high-concurrency/</loc>
+    <loc>http://codeone.io/tags/high-concurrency/</loc>
     <lastmod>2017-06-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/http/</loc>
+    <loc>http://codeone.io/tags/http/</loc>
     <lastmod>2017-06-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/java/</loc>
+    <loc>http://codeone.io/categories/java/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/java/</loc>
+    <loc>http://codeone.io/tags/java/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/jvm/</loc>
+    <loc>http://codeone.io/tags/jvm/</loc>
     <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/microservices/</loc>
+    <loc>http://codeone.io/tags/microservices/</loc>
     <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/network/</loc>
+    <loc>http://codeone.io/categories/network/</loc>
     <lastmod>2017-06-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/network/</loc>
+    <loc>http://codeone.io/tags/network/</loc>
     <lastmod>2017-06-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/nio/</loc>
+    <loc>http://codeone.io/tags/nio/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/restful/</loc>
+    <loc>http://codeone.io/tags/restful/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/service/</loc>
+    <loc>http://codeone.io/categories/service/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/service/</loc>
+    <loc>http://codeone.io/tags/service/</loc>
     <lastmod>2017-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/services/</loc>
+    <loc>http://codeone.io/categories/services/</loc>
     <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/services/</loc>
+    <loc>http://codeone.io/tags/services/</loc>
     <lastmod>2017-06-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/servlet/</loc>
+    <loc>http://codeone.io/categories/servlet/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/servlet/</loc>
+    <loc>http://codeone.io/tags/servlet/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/servlet-container/</loc>
+    <loc>http://codeone.io/tags/servlet-container/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/soa/</loc>
+    <loc>http://codeone.io/tags/soa/</loc>
     <lastmod>2017-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/spring/</loc>
+    <loc>http://codeone.io/categories/spring/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/spring/</loc>
+    <loc>http://codeone.io/tags/spring/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/spring-cloud/</loc>
+    <loc>http://codeone.io/tags/spring-cloud/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/spring-cloud-config/</loc>
+    <loc>http://codeone.io/tags/spring-cloud-config/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/tcp-ip/</loc>
+    <loc>http://codeone.io/tags/tcp-ip/</loc>
     <lastmod>2017-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/uml/</loc>
+    <loc>http://codeone.io/tags/uml/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/utilities/</loc>
+    <loc>http://codeone.io/categories/utilities/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/categories/utilities/</loc>
+    <loc>http://codeone.io/tags/utilities/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeone.io/tags/web-server/</loc>
+    <loc>http://codeone.io/tags/web-server/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

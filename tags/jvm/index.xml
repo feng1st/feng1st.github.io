@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jvm on 技术随笔</title>
-    <link>https://codeone.io/tags/jvm/</link>
+    <link>http://codeone.io/tags/jvm/</link>
     <description>Recent content in Jvm on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java内存模型和GC机制摘要</title>
-      <link>https://codeone.io/post/2017/06/jvm-memory-gc/</link>
+      <link>http://codeone.io/post/2017/06/jvm-memory-gc/</link>
       <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/06/jvm-memory-gc/</guid>
+      <guid>http://codeone.io/post/2017/06/jvm-memory-gc/</guid>
       <description>Java对象  对象位置
  对象实例在堆中分配
  实例对应的类信息在方法区分配

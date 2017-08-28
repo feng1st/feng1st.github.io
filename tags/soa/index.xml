@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Soa on 技术随笔</title>
-    <link>https://codeone.io/tags/soa/</link>
+    <link>http://codeone.io/tags/soa/</link>
     <description>Recent content in Soa on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 18 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/soa/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/soa/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>面向服务架构笔记</title>
-      <link>https://codeone.io/post/2017/06/soa/</link>
+      <link>http://codeone.io/post/2017/06/soa/</link>
       <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/06/soa/</guid>
+      <guid>http://codeone.io/post/2017/06/soa/</guid>
       <description>分布式应用架构的演化  DOA 分布式对象架构
  主要特征：
  对象是可以在服务器/容器间自由“移动”的

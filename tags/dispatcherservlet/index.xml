@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dispatcherservlet on 技术随笔</title>
-    <link>https://codeone.io/tags/dispatcherservlet/</link>
+    <link>http://codeone.io/tags/dispatcherservlet/</link>
     <description>Recent content in Dispatcherservlet on 技术随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 25 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://codeone.io/tags/dispatcherservlet/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeone.io/tags/dispatcherservlet/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring DispatcherServlet相关知识点</title>
-      <link>https://codeone.io/post/2017/06/spring-dispatcher-servlet/</link>
+      <link>http://codeone.io/post/2017/06/spring-dispatcher-servlet/</link>
       <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://codeone.io/post/2017/06/spring-dispatcher-servlet/</guid>
+      <guid>http://codeone.io/post/2017/06/spring-dispatcher-servlet/</guid>
       <description>DispatcherServlet作用  作为Spring MVC的集中访问点
  通过HandlerMapping，将请求映射到Handler
  返回一个HandlerExecutionChain，包含一个HandlerAdaptor和多个HandlerInterceptor
