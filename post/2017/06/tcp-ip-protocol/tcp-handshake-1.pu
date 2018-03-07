@@ -1,5 +1,0 @@
-@startuml
-Client -> Server: SYN
-Server --> Client: SYN-ACK
-Client --> Server: ACK
-@enduml

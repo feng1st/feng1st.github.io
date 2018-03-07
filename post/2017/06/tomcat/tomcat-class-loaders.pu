@@ -1,8 +1,0 @@
-@startuml
-object systemLoader
-
-systemLoader <-- commonLoader
-commonLoader <-- catalinaLoader
-commonLoader <-- sharedLoader
-sharedLoader <-- webAppLoader
-@enduml
