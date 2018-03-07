@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>High Concurrency on 技术随笔</title>
+    <title>High concurrency on Code One</title>
     <link>http://codeone.io/tags/high-concurrency/</link>
-    <description>Recent content in High Concurrency on 技术随笔</description>
+    <description>Recent content in High concurrency on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate>
     
@@ -11,19 +11,18 @@
     
     
     <item>
-      <title>高并发解决思路</title>
-      <link>http://codeone.io/post/2017/06/high-concurrency/</link>
+      <title>【笔记】高并发思路</title>
+      <link>http://codeone.io/notes/2017/2017-06-17-high-concurrency/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://codeone.io/post/2017/06/high-concurrency/</guid>
+      <guid>http://codeone.io/notes/2017/2017-06-17-high-concurrency/</guid>
       <description>解决高并发，无非两个方向：
  分而治之：分流
  优化单个服务器处理能力
   客户端  尽量使用缓存
  尽量本地处理
  尽量减少不必要的访问
-  分流 LVS、Nginx、Varnish放到一块说
- 负载均衡
+  分流  负载均衡
  业务拆分
  静态内容直接返回，包括使用CDN
  缓存（动态内容缓存、页面片段缓存）

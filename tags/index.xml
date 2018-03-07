@@ -1,61 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 技术随笔</title>
+    <title>Tags on Code One</title>
     <link>http://codeone.io/tags/</link>
-    <description>Recent content in Tags on 技术随笔</description>
+    <description>Recent content in Tags on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 01 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Dispatcherservlet</title>
-      <link>http://codeone.io/tags/dispatcherservlet/</link>
-      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/dispatcherservlet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Distributed</title>
-      <link>http://codeone.io/tags/distributed/</link>
+      <title>Distributed systems</title>
+      <link>http://codeone.io/tags/distributed-systems/</link>
       <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://codeone.io/tags/distributed/</guid>
+      <guid>http://codeone.io/tags/distributed-systems/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Docker</title>
-      <link>http://codeone.io/tags/docker/</link>
-      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dubbo</title>
-      <link>http://codeone.io/tags/dubbo/</link>
-      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/dubbo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gc</title>
-      <link>http://codeone.io/tags/gc/</link>
-      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/gc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>High Concurrency</title>
+      <title>High concurrency</title>
       <link>http://codeone.io/tags/high-concurrency/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
@@ -64,29 +29,11 @@
     </item>
     
     <item>
-      <title>Http</title>
-      <link>http://codeone.io/tags/http/</link>
-      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Leetcode</title>
+      <link>http://codeone.io/tags/leetcode/</link>
+      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://codeone.io/tags/http/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>http://codeone.io/tags/java/</link>
-      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jvm</title>
-      <link>http://codeone.io/tags/jvm/</link>
-      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/jvm/</guid>
+      <guid>http://codeone.io/tags/leetcode/</guid>
       <description></description>
     </item>
     
@@ -100,137 +47,20 @@
     </item>
     
     <item>
-      <title>Network</title>
-      <link>http://codeone.io/tags/network/</link>
-      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nio</title>
-      <link>http://codeone.io/tags/nio/</link>
-      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/nio/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Restful</title>
-      <link>http://codeone.io/tags/restful/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/restful/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Service</title>
-      <link>http://codeone.io/tags/service/</link>
+      <title>Middleware</title>
+      <link>http://codeone.io/tags/middleware/</link>
       <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://codeone.io/tags/service/</guid>
+      <guid>http://codeone.io/tags/middleware/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Services</title>
-      <link>http://codeone.io/tags/services/</link>
-      <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Nim-lang</title>
+      <link>http://codeone.io/tags/nim-lang/</link>
+      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://codeone.io/tags/services/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Servlet</title>
-      <link>http://codeone.io/tags/servlet/</link>
-      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/servlet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Servlet Container</title>
-      <link>http://codeone.io/tags/servlet-container/</link>
-      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/servlet-container/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Soa</title>
-      <link>http://codeone.io/tags/soa/</link>
-      <pubDate>Sun, 18 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/soa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
-      <link>http://codeone.io/tags/spring/</link>
-      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/spring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring Cloud</title>
-      <link>http://codeone.io/tags/spring-cloud/</link>
-      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/spring-cloud/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring Cloud Config</title>
-      <link>http://codeone.io/tags/spring-cloud-config/</link>
-      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/spring-cloud-config/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tcp Ip</title>
-      <link>http://codeone.io/tags/tcp-ip/</link>
-      <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/tcp-ip/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Uml</title>
-      <link>http://codeone.io/tags/uml/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/uml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Utilities</title>
-      <link>http://codeone.io/tags/utilities/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/utilities/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web Server</title>
-      <link>http://codeone.io/tags/web-server/</link>
-      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/web-server/</guid>
+      <guid>http://codeone.io/tags/nim-lang/</guid>
       <description></description>
     </item>
     
