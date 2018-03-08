@@ -174,10 +174,9 @@ Explanation: 342 + 465 = 807.
 
 <h2 id="solution">Solution</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">type</span>
-  ListNodeObj <span style="color:#f92672">=</span> <span style="color:#66d9ef">object</span>
+  ListNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">ref</span> <span style="color:#66d9ef">object</span>
     val: <span style="color:#66d9ef">int</span>
-    next: <span style="color:#66d9ef">ref</span> ListNodeObj
-  ListNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">ref</span> ListNodeObj
+    next: ListNode
 
 <span style="color:#66d9ef">proc </span><span style="color:#a6e22e">newListNode</span>(val: <span style="color:#66d9ef">int</span>, next: ListNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>): ListNode <span style="color:#f92672">=</span>
   result <span style="color:#f92672">=</span> ListNode(val: val, next: next)
