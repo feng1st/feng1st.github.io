@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://codeone.io/</loc>
-    <lastmod>2018-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -14,7 +14,12 @@
   
   <url>
     <loc>http://codeone.io/nim-lang/</loc>
-    <lastmod>2018-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://codeone.io/nim-lang/leetcode/0002-add-two-numbers/</loc>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -61,7 +66,7 @@
   
   <url>
     <loc>http://codeone.io/tags/leetcode/</loc>
-    <lastmod>2018-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,7 +84,7 @@
   
   <url>
     <loc>http://codeone.io/tags/nim-lang/</loc>
-    <lastmod>2018-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
