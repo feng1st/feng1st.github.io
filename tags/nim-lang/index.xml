@@ -5,10 +5,22 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 10 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 5. Longest Palindromic Substring</title>
+      <link>http://codeone.io/nim-lang/leetcode/0005-longest-palindromic-substring/</link>
+      <pubDate>Sun, 11 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0005-longest-palindromic-substring/</guid>
+      <description>Problem Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+Example:
+Input: &amp;quot;babad&amp;quot; Output: &amp;quot;bab&amp;quot; Note: &amp;quot;aba&amp;quot; is also a valid answer.  Example:
+Input: &amp;quot;cbbd&amp;quot; Output: &amp;quot;bb&amp;quot;  Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &amp;gt;= 0 and r &amp;lt; s.len and s[l] == s[r]: l -= 1 r += 1 result = (l + 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 4. Median of Two Sorted Arrays</title>
