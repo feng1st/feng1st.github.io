@@ -191,9 +191,9 @@ Explanation: 342 + 465 = 807.
   <span style="color:#66d9ef">while</span> p <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">or</span> q <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>:
     <span style="color:#66d9ef">let</span>
       x <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> p <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>: p.val
-          <span style="color:#66d9ef">else</span>: <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">else</span>: <span style="color:#ae81ff">0</span>
       y <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> q <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>: q.val
-          <span style="color:#66d9ef">else</span>: <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">else</span>: <span style="color:#ae81ff">0</span>
       sum <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> y <span style="color:#f92672">+</span> carry
     carry <span style="color:#f92672">=</span> sum <span style="color:#f92672">div</span> <span style="color:#ae81ff">10</span>
     curr.next <span style="color:#f92672">=</span> newListNode(sum <span style="color:#f92672">mod</span> <span style="color:#ae81ff">10</span>)
@@ -205,33 +205,14 @@ Explanation: 342 + 465 = 807.
   result <span style="color:#f92672">=</span> dummyHead.next
 
 <span style="color:#66d9ef">when</span> isMainModule:
-  <span style="color:#66d9ef">block</span>:
-    <span style="color:#66d9ef">let</span>
-      l1 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">2</span>, newListNode(<span style="color:#ae81ff">4</span>, newListNode(<span style="color:#ae81ff">3</span>)))
-      l2 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">5</span>, newListNode(<span style="color:#ae81ff">6</span>, newListNode(<span style="color:#ae81ff">4</span>)))
-      ls <span style="color:#f92672">=</span> addTwoNumbers(l1, l2)
-    assert ls.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">and</span>
-        ls.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span>
-        ls.next.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">and</span>
-        ls.next.next.next <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span>
-  <span style="color:#66d9ef">block</span>:
-    <span style="color:#66d9ef">let</span>
-      l1 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">2</span>, newListNode(<span style="color:#ae81ff">4</span>))
-      l2 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">5</span>, newListNode(<span style="color:#ae81ff">6</span>))
-      ls <span style="color:#f92672">=</span> addTwoNumbers(l1, l2)
-    assert ls.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">and</span>
-        ls.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span>
-        ls.next.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span>
-        ls.next.next.next <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span>
-  <span style="color:#66d9ef">block</span>:
-    <span style="color:#66d9ef">let</span>
-      l1 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">2</span>)
-      l2 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">5</span>, newListNode(<span style="color:#ae81ff">6</span>, newListNode(<span style="color:#ae81ff">4</span>)))
-      ls <span style="color:#f92672">=</span> addTwoNumbers(l1, l2)
-    assert ls.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">and</span>
-        ls.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">and</span>
-        ls.next.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">and</span>
-        ls.next.next.next <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span></code></pre></div>
+  <span style="color:#66d9ef">let</span>
+    l1 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">2</span>, newListNode(<span style="color:#ae81ff">4</span>, newListNode(<span style="color:#ae81ff">3</span>)))
+    l2 <span style="color:#f92672">=</span> newListNode(<span style="color:#ae81ff">5</span>, newListNode(<span style="color:#ae81ff">6</span>, newListNode(<span style="color:#ae81ff">4</span>)))
+    ls <span style="color:#f92672">=</span> addTwoNumbers(l1, l2)
+  assert ls.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">and</span>
+    ls.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span>
+    ls.next.next.val <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">and</span>
+    ls.next.next.next <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span></code></pre></div>
 </div>
 
   
