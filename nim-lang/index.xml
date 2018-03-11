@@ -5,10 +5,21 @@
     <link>http://codeone.io/nim-lang/</link>
     <description>Recent content in Nim Language on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 11 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 6. ZigZag Conversion</title>
+      <link>http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/</guid>
+      <description>Problem The string &amp;quot;PAYPALISHIRING&amp;quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+P A H N A P L S I I G Y I R  And then read line by line: &amp;quot;PAHNAPLSIIGYIR&amp;quot;
+Write the code that will take a string and make this conversion given a number of rows:</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 5. Longest Palindromic Substring</title>
