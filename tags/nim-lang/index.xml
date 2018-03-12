@@ -5,10 +5,46 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 13 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 10. Regular Expression Matching</title>
+      <link>http://codeone.io/nim-lang/leetcode/0010-regular-expression-matching/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0010-regular-expression-matching/</guid>
+      <description>Problem Implement regular expression matching with support for &#39;.&#39; and &#39;*&#39;.
+&#39;.&#39; Matches any single character. &#39;*&#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&amp;quot;aa&amp;quot;,&amp;quot;a&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;,&amp;quot;aa&amp;quot;) → true isMatch(&amp;quot;aaa&amp;quot;,&amp;quot;aa&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;, &amp;quot;a*&amp;quot;) → true isMatch(&amp;quot;aa&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;ab&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;aab&amp;quot;, &amp;quot;c*a*b&amp;quot;) → true  Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.</description>
+    </item>
+    
+    <item>
+      <title>[Nim4LeetCode] 9. Palindrome Number</title>
+      <link>http://codeone.io/nim-lang/leetcode/0009-palindrome-number/</link>
+      <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0009-palindrome-number/</guid>
+      <description>Problem Determine whether an integer is a palindrome. Do this without extra space.
+Some hints:
+Could negative integers be palindromes? (ie, -1)
+If you are thinking of converting the integer to string, note the restriction of using extra space.
+You could also try reversing an integer. However, if you have solved the problem &amp;ldquo;Reverse Integer&amp;rdquo;, you know that the reversed integer might overflow. How would you handle such case?</description>
+    </item>
+    
+    <item>
+      <title>[Nim4LeetCode] 8. String to Integer (atoi)</title>
+      <link>http://codeone.io/nim-lang/leetcode/0008-string-to-integer-atoi/</link>
+      <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0008-string-to-integer-atoi/</guid>
+      <description>Problem Implement atoi to convert a string to an integer.
+Hint: Carefully consider all possible input cases. If you want a challenge, please do not see below and ask yourself what are the possible input cases.
+Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
+Requirements for atoi:
+The function first discards as many whitespace characters as necessary until the first non-whitespace character is found.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 7. Reverse Integer</title>

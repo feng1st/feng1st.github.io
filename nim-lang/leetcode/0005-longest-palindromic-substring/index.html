@@ -193,7 +193,7 @@ Output: &quot;bb&quot;
   <span style="color:#66d9ef">var</span>
     left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
     right <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> <span style="color:#ae81ff">0</span> .. <span style="color:#f92672">&lt;</span>s.len:
+  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> <span style="color:#ae81ff">0</span> ..<span style="color:#f92672">&lt;</span> s.len:
     <span style="color:#66d9ef">let</span> (l, r) <span style="color:#f92672">=</span> expandAroundCenter(s, i, i)
     <span style="color:#66d9ef">if</span> r <span style="color:#f92672">-</span> l <span style="color:#f92672">&gt;</span> right <span style="color:#f92672">-</span> left:
       (left, right) <span style="color:#f92672">=</span> (l, r)
