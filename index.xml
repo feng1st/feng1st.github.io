@@ -108,7 +108,7 @@ Examples:
 Given &amp;quot;abcabcbb&amp;quot;, the answer is &amp;quot;abc&amp;quot;, which the length is 3.
 Given &amp;quot;bbbbb&amp;quot;, the answer is &amp;quot;b&amp;quot;, with the length of 1.
 Given &amp;quot;pwwkew&amp;quot;, the answer is &amp;quot;wke&amp;quot;, with the length of 3. Note that the answer must be a substring, &amp;quot;pwke&amp;quot; is a subsequence and not a substring.
-Solution import tables proc lengthOfLongestSubstring(s: string): int = var map = initTable[char, int]() n: int = 0 for i in 0 .</description>
+Solution import tables proc lengthOfLongestSubstring(s: string): int = var map = initTable[char, int]() n = 0 for i in 0 .</description>
     </item>
     
     <item>
