@@ -5,10 +5,20 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 16 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 11. Container With Most Water</title>
+      <link>http://codeone.io/nim-lang/leetcode/0011-container-with-most-water/</link>
+      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0011-container-with-most-water/</guid>
+      <description>Problem Given n non-negative integers a1, a2, &amp;hellip;, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+Note: You may not slant the container and n is at least 2.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 10. Regular Expression Matching</title>
@@ -132,7 +142,7 @@ Input: (2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) Output: 7 -&amp
       <description>Problem Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 Example:
-Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].  Solution import tables proc twoSum(nums: seq[int], target: int): (int, int) = var idxMap = initTable[int, int]() for i in 0 .</description>
+Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].  Solution import tables proc twoSum(nums: openArray[int], target: int): (int, int) = var idxMap = initTable[int, int]() for i in 0 .</description>
     </item>
     
   </channel>
