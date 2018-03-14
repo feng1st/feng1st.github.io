@@ -5,10 +5,21 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 17 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 12. Integer to Roman</title>
+      <link>http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/</link>
+      <pubDate>Sun, 18 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/</guid>
+      <description> Problem Given an integer, convert it to a roman numeral.
+Input is guaranteed to be within the range from 1 to 3999.
+Solution const M = [&amp;#34;&amp;#34;, &amp;#34;M&amp;#34;, &amp;#34;MM&amp;#34;, &amp;#34;MMM&amp;#34;] C = [&amp;#34;&amp;#34;, &amp;#34;C&amp;#34;, &amp;#34;CC&amp;#34;, &amp;#34;CCC&amp;#34;, &amp;#34;CD&amp;#34;, &amp;#34;D&amp;#34;, &amp;#34;DC&amp;#34;, &amp;#34;DCC&amp;#34;, &amp;#34;DCCC&amp;#34;, &amp;#34;CM&amp;#34;] X = [&amp;#34;&amp;#34;, &amp;#34;X&amp;#34;, &amp;#34;XX&amp;#34;, &amp;#34;XXX&amp;#34;, &amp;#34;XL&amp;#34;, &amp;#34;L&amp;#34;, &amp;#34;LX&amp;#34;, &amp;#34;LXX&amp;#34;, &amp;#34;LXXX&amp;#34;, &amp;#34;XC&amp;#34;] I = [&amp;#34;&amp;#34;, &amp;#34;I&amp;#34;, &amp;#34;II&amp;#34;, &amp;#34;III&amp;#34;, &amp;#34;IV&amp;#34;, &amp;#34;V&amp;#34;, &amp;#34;VI&amp;#34;, &amp;#34;VII&amp;#34;, &amp;#34;VIII&amp;#34;, &amp;#34;IX&amp;#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp;amp; C[(num mod 1000) div 100] &amp;amp; X[(num mod 100) div 10] &amp;amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &amp;#34;I&amp;#34; assert intToRoman(3999) == &amp;#34;MMMCMXCIX&amp;#34;</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 11. Container With Most Water</title>
