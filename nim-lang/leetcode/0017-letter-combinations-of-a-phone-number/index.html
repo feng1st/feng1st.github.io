@@ -196,14 +196,19 @@ Although the above answer is in lexicographical order, your answer could be in a
     <span style="color:#66d9ef">return</span> newSeq<span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>()
   result <span style="color:#f92672">=</span> newSeqWith(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;&#34;</span>)
   <span style="color:#66d9ef">for</span> digit <span style="color:#f92672">in</span> digits:
-    <span style="color:#66d9ef">var</span> newSeq <span style="color:#f92672">=</span> newSeq<span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>()
-    <span style="color:#66d9ef">for</span> last <span style="color:#f92672">in</span> result:
-      <span style="color:#66d9ef">for</span> curr <span style="color:#f92672">in</span> MAP<span style="color:#f92672">[</span>ord(digit) <span style="color:#f92672">-</span> ORD_0<span style="color:#f92672">]</span>:
-        newSeq.add(last <span style="color:#f92672">&amp;</span> curr)
-    result <span style="color:#f92672">=</span> newSeq
+    <span style="color:#66d9ef">let</span> letters <span style="color:#f92672">=</span> MAP<span style="color:#f92672">[</span>ord(digit) <span style="color:#f92672">-</span> ORD_0<span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">if</span> letters.len <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+      <span style="color:#66d9ef">continue</span>
+    <span style="color:#66d9ef">var</span> newRes <span style="color:#f92672">=</span> newSeq<span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>()
+    <span style="color:#66d9ef">for</span> str <span style="color:#f92672">in</span> result:
+      <span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> letters:
+        newRes.add(str <span style="color:#f92672">&amp;</span> letter)
+    result <span style="color:#f92672">=</span> newRes
 
 <span style="color:#66d9ef">when</span> isMainModule:
-  assert letterCombinations(<span style="color:#e6db74">&#34;23&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">@[</span><span style="color:#e6db74">&#34;ad&#34;</span>, <span style="color:#e6db74">&#34;ae&#34;</span>, <span style="color:#e6db74">&#34;af&#34;</span>, <span style="color:#e6db74">&#34;bd&#34;</span>, <span style="color:#e6db74">&#34;be&#34;</span>, <span style="color:#e6db74">&#34;bf&#34;</span>, <span style="color:#e6db74">&#34;cd&#34;</span>, <span style="color:#e6db74">&#34;ce&#34;</span>, <span style="color:#e6db74">&#34;cf&#34;</span><span style="color:#f92672">]</span></code></pre></div>
+  assert letterCombinations(<span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">@[]</span>
+  assert letterCombinations(<span style="color:#e6db74">&#34;23&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">@[</span><span style="color:#e6db74">&#34;ad&#34;</span>, <span style="color:#e6db74">&#34;ae&#34;</span>, <span style="color:#e6db74">&#34;af&#34;</span>, <span style="color:#e6db74">&#34;bd&#34;</span>, <span style="color:#e6db74">&#34;be&#34;</span>, <span style="color:#e6db74">&#34;bf&#34;</span>, <span style="color:#e6db74">&#34;cd&#34;</span>, <span style="color:#e6db74">&#34;ce&#34;</span>, <span style="color:#e6db74">&#34;cf&#34;</span><span style="color:#f92672">]</span>
+  assert letterCombinations(<span style="color:#e6db74">&#34;02030&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">@[</span><span style="color:#e6db74">&#34;ad&#34;</span>, <span style="color:#e6db74">&#34;ae&#34;</span>, <span style="color:#e6db74">&#34;af&#34;</span>, <span style="color:#e6db74">&#34;bd&#34;</span>, <span style="color:#e6db74">&#34;be&#34;</span>, <span style="color:#e6db74">&#34;bf&#34;</span>, <span style="color:#e6db74">&#34;cd&#34;</span>, <span style="color:#e6db74">&#34;ce&#34;</span>, <span style="color:#e6db74">&#34;cf&#34;</span><span style="color:#f92672">]</span></code></pre></div>
 </div>
 
   
