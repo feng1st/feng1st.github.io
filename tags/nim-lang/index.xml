@@ -5,10 +5,24 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 19. Remove Nth Node From End of List</title>
+      <link>http://codeone.io/nim-lang/leetcode/0019-remove-nth-node-from-end-of-list/</link>
+      <pubDate>Sun, 25 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0019-remove-nth-node-from-end-of-list/</guid>
+      <description>Problem Given a linked list, remove the nth node from the end of list and return its head.
+For example,
+ Given linked list: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, and n = 2. After removing the second node from the end, the linked list becomes 1-&amp;gt;2-&amp;gt;3-&amp;gt;5.  Note:
+Given n will always be valid.
+Try to do this in one pass.
+Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref ListNodeObj proc newListNode(val: int, next: ListNode = nil): ListNode = result = ListNode(val: val, next: next) proc removeNthFromEnd(head: ListNode, n: int): ListNode = let dummyHead = newListNode(0, head) var p, q = dummyHead for i in 0 .</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 18. 4Sum</title>
