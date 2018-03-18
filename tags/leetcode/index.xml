@@ -5,10 +5,20 @@
     <link>http://codeone.io/tags/leetcode/</link>
     <description>Recent content in Leetcode on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 19 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 14. Longest Common Prefix</title>
+      <link>http://codeone.io/nim-lang/leetcode/0014-longest-common-prefix/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0014-longest-common-prefix/</guid>
+      <description> Problem Write a function to find the longest common prefix string amongst an array of strings.
+Solution proc longestCommonPrefix(strs: openArray[string]): string = if strs.len == 0: return &amp;#34;&amp;#34; let str0 = strs[0] if str0.len == 0: return &amp;#34;&amp;#34; for j in 0 .. str0.len - 1: for i in 1 .. strs.len - 1: let strI = strs[i] if strI.len &amp;lt;= j or strI[j] != str0[j]: return str0.substr(0, j - 1) result = str0 when isMainModule: assert longestCommonPrefix([]) == &amp;#34;&amp;#34; assert longestCommonPrefix([&amp;#34;&amp;#34;]) == &amp;#34;&amp;#34; assert longestCommonPrefix([&amp;#34;&amp;#34;, &amp;#34;abc&amp;#34;]) == &amp;#34;&amp;#34; assert longestCommonPrefix([&amp;#34;abc&amp;#34;, &amp;#34;&amp;#34;]) == &amp;#34;&amp;#34; assert longestCommonPrefix([&amp;#34;abc&amp;#34;, &amp;#34;123&amp;#34;]) == &amp;#34;&amp;#34; assert longestCommonPrefix([&amp;#34;abc&amp;#34;, &amp;#34;ab&amp;#34;, &amp;#34;a&amp;#34;]) == &amp;#34;a&amp;#34; assert longestCommonPrefix([&amp;#34;a&amp;#34;, &amp;#34;ab&amp;#34;, &amp;#34;abc&amp;#34;]) == &amp;#34;a&amp;#34;</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 13. Roman to Integer</title>
