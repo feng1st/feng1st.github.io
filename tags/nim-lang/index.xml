@@ -5,10 +5,23 @@
     <link>http://codeone.io/tags/nim-lang/</link>
     <description>Recent content in Nim-lang on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 22 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 17. Letter Combinations of a Phone Number</title>
+      <link>http://codeone.io/nim-lang/leetcode/0017-letter-combinations-of-a-phone-number/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0017-letter-combinations-of-a-phone-number/</guid>
+      <description>Problem Given a digit string, return all possible letter combinations that the number could represent.
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+Input:Digit string &amp;quot;23&amp;quot; Output: [&amp;quot;ad&amp;quot;, &amp;quot;ae&amp;quot;, &amp;quot;af&amp;quot;, &amp;quot;bd&amp;quot;, &amp;quot;be&amp;quot;, &amp;quot;bf&amp;quot;, &amp;quot;cd&amp;quot;, &amp;quot;ce&amp;quot;, &amp;quot;cf&amp;quot;].  Note:
+Although the above answer is in lexicographical order, your answer could be in any order you want.
+Solution import sequtils const MAP = [&amp;#34;&amp;#34;, # 0 &amp;#34;&amp;#34;, # 1 &amp;#34;abc&amp;#34;, # 2 &amp;#34;def&amp;#34;, # 3 &amp;#34;ghi&amp;#34;, # 4 &amp;#34;jkl&amp;#34;, # 5 &amp;#34;mno&amp;#34;, # 6 &amp;#34;pqrs&amp;#34;, # 7 &amp;#34;tuv&amp;#34;, # 8 &amp;#34;wxyz&amp;#34;] # 9 ORD_0 = ord(&amp;#39;0&amp;#39;) proc letterCombinations(digits: string): seq[string] = if digits == nil or digits.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 16. 3Sum Closest</title>
