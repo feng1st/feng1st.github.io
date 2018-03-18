@@ -5,10 +5,20 @@
     <link>http://codeone.io/tags/leetcode/</link>
     <description>Recent content in Leetcode on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 21 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 16. 3Sum Closest</title>
+      <link>http://codeone.io/nim-lang/leetcode/0016-3sum-closest/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0016-3sum-closest/</guid>
+      <description>Problem Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+ For example, given array S = {-1 2 1 -4}, and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 15. 3Sum</title>
