@@ -5,10 +5,21 @@
     <link>http://codeone.io/nim-lang/</link>
     <description>Recent content in Nim Language on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 25 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 19. Remove Nth Node From End of List</title>
+      <link>http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/</guid>
+      <description>Problem Given a string containing just the characters &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;]&#39;, determine if the input string is valid.
+The brackets must close in the correct order, &amp;quot;()&amp;quot; and &amp;quot;()[]{}&amp;quot; are all valid but &amp;quot;(]&amp;quot; and &amp;quot;([)]&amp;quot; are not.
+Solution import deques proc isValid(s: string): bool = var stack = initDeque[char]() for c in s: case c: of &amp;#39;(&amp;#39;: stack.addLast(&amp;#39;)&amp;#39;) of &amp;#39;[&amp;#39;: stack.addLast(&amp;#39;]&amp;#39;) of &amp;#39;{&amp;#39;: stack.addLast(&amp;#39;}&amp;#39;) of &amp;#39;)&amp;#39;, &amp;#39;]&amp;#39;, &amp;#39;}&amp;#39;: if stack.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 19. Remove Nth Node From End of List</title>

@@ -4,26 +4,22 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Problem Determine whether an integer is a palindrome. Do this without extra space.
-Some hints:
-Could negative integers be palindromes? (ie, -1)
-If you are thinking of converting the integer to string, note the restriction of using extra space.
-You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?'>
+<meta name='description' content='Problem Given a string containing just the characters &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;]&#39;, determine if the input string is valid.
+The brackets must close in the correct order, &quot;()&quot; and &quot;()[]{}&quot; are all valid but &quot;(]&quot; and &quot;([)]&quot; are not.
+Solution import deques proc isValid(s: string): bool = var stack = initDeque[char]() for c in s: case c: of &#39;(&#39;: stack.addLast(&#39;)&#39;) of &#39;[&#39;: stack.addLast(&#39;]&#39;) of &#39;{&#39;: stack.addLast(&#39;}&#39;) of &#39;)&#39;, &#39;]&#39;, &#39;}&#39;: if stack.'>
 
-<meta property='og:title' content='[Nim4LeetCode] 9. Palindrome Number • Code One'>
-<meta property='og:description' content='Problem Determine whether an integer is a palindrome. Do this without extra space.
-Some hints:
-Could negative integers be palindromes? (ie, -1)
-If you are thinking of converting the integer to string, note the restriction of using extra space.
-You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?'>
-<meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/'>
+<meta property='og:title' content='[Nim4LeetCode] 19. Remove Nth Node From End of List • Code One'>
+<meta property='og:description' content='Problem Given a string containing just the characters &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;]&#39;, determine if the input string is valid.
+The brackets must close in the correct order, &quot;()&quot; and &quot;()[]{}&quot; are all valid but &quot;(]&quot; and &quot;([)]&quot; are not.
+Solution import deques proc isValid(s: string): bool = var stack = initDeque[char]() for c in s: case c: of &#39;(&#39;: stack.addLast(&#39;)&#39;) of &#39;[&#39;: stack.addLast(&#39;]&#39;) of &#39;{&#39;: stack.addLast(&#39;}&#39;) of &#39;)&#39;, &#39;]&#39;, &#39;}&#39;: if stack.'>
+<meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/'>
 <meta property='og:site_name' content='Code One'>
-<meta property='og:type' content='article'><meta property='article:section' content='Nim-Lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-15T00:00:00Z'/><meta property='article:modified_time' content='2018-03-15T00:00:00Z'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='Nim-Lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-26T00:00:00Z'/><meta property='article:modified_time' content='2018-03-26T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>[Nim4LeetCode] 9. Palindrome Number • Code One</title>
-  <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/'>
+  <title>[Nim4LeetCode] 19. Remove Nth Node From End of List • Code One</title>
+  <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -119,7 +115,7 @@ You could also try reversing an integer. However, if you have solved the problem
   <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'>[Nim4LeetCode] 9. Palindrome Number</h1>
+      <h1 class='title'>[Nim4LeetCode] 19. Remove Nth Node From End of List</h1>
       
 
     </div>
@@ -134,7 +130,7 @@ You could also try reversing an integer. However, if you have solved the problem
   
 </svg>
 <span class='screen-reader-text'>Posted on </span>
-  <time class='entry-date' datetime='2018-03-15T00:00:00Z'>2018, Mar 15</time>
+  <time class='entry-date' datetime='2018-03-26T00:00:00Z'>2018, Mar 26</time>
 </span>
 
   
@@ -163,40 +159,39 @@ One min read
 
 <h2 id="problem">Problem</h2>
 
-<p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>Given a string containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
 
-<p><strong>Some hints:</strong><br />
-Could negative integers be palindromes? (ie, -1)</p>
-
-<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
-
-<p>You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?</p>
-
-<p>There is a more generic way of solving this problem.</p>
+<p>The brackets must close in the correct order, <code>&quot;()&quot;</code> and <code>&quot;()[]{}&quot;</code> are all valid but <code>&quot;(]&quot;</code> and <code>&quot;([)]&quot;</code> are not.</p>
 
 <h2 id="solution">Solution</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">isPalindrome</span>(x: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span>
-  <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-  <span style="color:#66d9ef">elif</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> x <span style="color:#f92672">mod</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#f92672">import</span> deques
 
-  <span style="color:#66d9ef">var</span>
-    m <span style="color:#f92672">=</span> x
-    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-  <span style="color:#66d9ef">while</span> m <span style="color:#f92672">&gt;</span> n:
-    n <span style="color:#f92672">=</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> m <span style="color:#f92672">mod</span> <span style="color:#ae81ff">10</span>
-    m <span style="color:#f92672">=</span> m <span style="color:#f92672">div</span> <span style="color:#ae81ff">10</span>
-
-  <span style="color:#66d9ef">return</span> m <span style="color:#f92672">==</span> n <span style="color:#f92672">or</span> m <span style="color:#f92672">==</span> n <span style="color:#f92672">div</span> <span style="color:#ae81ff">10</span>
+<span style="color:#66d9ef">proc </span><span style="color:#a6e22e">isValid</span>(s: <span style="color:#66d9ef">string</span>): <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">var</span> stack <span style="color:#f92672">=</span> initDeque<span style="color:#f92672">[</span><span style="color:#66d9ef">char</span><span style="color:#f92672">]</span>()
+  <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> s:
+    <span style="color:#66d9ef">case</span> c:
+      <span style="color:#66d9ef">of</span> <span style="color:#e6db74">&#39;(&#39;</span>:
+        stack.addLast(<span style="color:#e6db74">&#39;)&#39;</span>)
+      <span style="color:#66d9ef">of</span> <span style="color:#e6db74">&#39;[&#39;</span>:
+        stack.addLast(<span style="color:#e6db74">&#39;]&#39;</span>)
+      <span style="color:#66d9ef">of</span> <span style="color:#e6db74">&#39;{&#39;</span>:
+        stack.addLast(<span style="color:#e6db74">&#39;}&#39;</span>)
+      <span style="color:#66d9ef">of</span> <span style="color:#e6db74">&#39;)&#39;</span>, <span style="color:#e6db74">&#39;]&#39;</span>, <span style="color:#e6db74">&#39;}&#39;</span>:
+        <span style="color:#66d9ef">if</span> stack.len <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> stack.popLast() <span style="color:#f92672">!=</span> c:
+          <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+      <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">discard</span>
+  <span style="color:#66d9ef">return</span> stack.len <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>
 
 <span style="color:#66d9ef">when</span> isMainModule:
-  assert isPalindrome(<span style="color:#ae81ff">0</span>)
-  assert isPalindrome(<span style="color:#ae81ff">121</span>)
-  assert isPalindrome(<span style="color:#ae81ff">1221</span>)
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">1210</span>))
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">123</span>))
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">1111111119</span>))</code></pre></div>
+  assert isValid(<span style="color:#e6db74">&#34;&#34;</span>)
+  assert isValid(<span style="color:#e6db74">&#34;()&#34;</span>)
+  assert isValid(<span style="color:#e6db74">&#34;()[]{}&#34;</span>)
+  assert isValid(<span style="color:#e6db74">&#34;a((b)[c])[{d}]e&#34;</span>)
+  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;(]&#34;</span>))
+  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;([)]&#34;</span>))
+  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;(&#34;</span>))
+  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;)&#34;</span>))</code></pre></div>
 </div>
 
   
@@ -220,7 +215,7 @@ Could negative integers be palindromes? (ie, -1)</p>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='/nim-lang/leetcode/0008-string-to-integer-atoi/'>
+      <a href='/nim-lang/leetcode/0019-remove-nth-node-from-end-of-list/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -228,17 +223,7 @@ Could negative integers be palindromes? (ie, -1)</p>
   
 </svg>
  Previous</span>
-        <span class='screen-reader-text'>Previous post: </span>[Nim4LeetCode] 8. String to Integer (atoi)</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/nim-lang/leetcode/0010-regular-expression-matching/'>
-        <span class='screen-reader-text'>Next post: </span>[Nim4LeetCode] 10. Regular Expression Matching<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
+        <span class='screen-reader-text'>Previous post: </span>[Nim4LeetCode] 19. Remove Nth Node From End of List</a>
     </div></div>
 </nav>
 
