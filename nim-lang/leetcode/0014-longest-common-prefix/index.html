@@ -6,6 +6,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content=' Problem Write a function to find the longest common prefix string amongst an array of strings.
 Solution proc longestCommonPrefix(strs: openArray[string]): string = if strs.len == 0: return &#34;&#34; let str0 = strs[0] if str0.len == 0: return &#34;&#34; for j in 0 .. str0.len - 1: for i in 1 .. strs.len - 1: let strI = strs[i] if strI.len &lt;= j or strI[j] != str0[j]: return str0.substr(0, j - 1) result = str0 when isMainModule: assert longestCommonPrefix([]) == &#34;&#34; assert longestCommonPrefix([&#34;&#34;]) == &#34;&#34; assert longestCommonPrefix([&#34;&#34;, &#34;abc&#34;]) == &#34;&#34; assert longestCommonPrefix([&#34;abc&#34;, &#34;&#34;]) == &#34;&#34; assert longestCommonPrefix([&#34;abc&#34;, &#34;123&#34;]) == &#34;&#34; assert longestCommonPrefix([&#34;abc&#34;, &#34;ab&#34;, &#34;a&#34;]) == &#34;a&#34; assert longestCommonPrefix([&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;]) == &#34;a&#34;'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='[Nim4LeetCode] 14. Longest Common Prefix • Code One'>
 <meta property='og:description' content=' Problem Write a function to find the longest common prefix string amongst an array of strings.
@@ -21,7 +22,10 @@ Solution proc longestCommonPrefix(strs: openArray[string]): string = if strs.len
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.87a4f4a2.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='/assets/css/main.045169bd.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
 </head>
 
 
@@ -245,7 +249,6 @@ One min read
       </li></ul>
   </nav>
 </section>
-
           <div class='copyright'>
   <p> &copy; 2017-2018 feng1st </p>
 </div>

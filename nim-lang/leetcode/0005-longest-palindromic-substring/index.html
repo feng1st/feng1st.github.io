@@ -8,6 +8,7 @@
 Example:
 Input: &quot;babad&quot; Output: &quot;bab&quot; Note: &quot;aba&quot; is also a valid answer.  Example:
 Input: &quot;cbbd&quot; Output: &quot;bb&quot;  Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &gt;= 0 and r &lt; s.len and s[l] == s[r]: l -= 1 r &#43;= 1 result = (l &#43; 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='[Nim4LeetCode] 5. Longest Palindromic Substring • Code One'>
 <meta property='og:description' content='Problem Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
@@ -25,7 +26,10 @@ Input: &quot;cbbd&quot; Output: &quot;bb&quot;  Solution proc expandAroundCenter
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.87a4f4a2.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='/assets/css/main.045169bd.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
 </head>
 
 
@@ -270,7 +274,6 @@ Output: &quot;bb&quot;
       </li></ul>
   </nav>
 </section>
-
           <div class='copyright'>
   <p> &copy; 2017-2018 feng1st </p>
 </div>

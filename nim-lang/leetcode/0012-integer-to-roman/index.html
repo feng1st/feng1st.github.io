@@ -7,6 +7,7 @@
 <meta name='description' content=' Problem Given an integer, convert it to a roman numeral.
 Input is guaranteed to be within the range from 1 to 3999.
 Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&#34;&#34;, &#34;C&#34;, &#34;CC&#34;, &#34;CCC&#34;, &#34;CD&#34;, &#34;D&#34;, &#34;DC&#34;, &#34;DCC&#34;, &#34;DCCC&#34;, &#34;CM&#34;] X = [&#34;&#34;, &#34;X&#34;, &#34;XX&#34;, &#34;XXX&#34;, &#34;XL&#34;, &#34;L&#34;, &#34;LX&#34;, &#34;LXX&#34;, &#34;LXXX&#34;, &#34;XC&#34;] I = [&#34;&#34;, &#34;I&#34;, &#34;II&#34;, &#34;III&#34;, &#34;IV&#34;, &#34;V&#34;, &#34;VI&#34;, &#34;VII&#34;, &#34;VIII&#34;, &#34;IX&#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp; C[(num mod 1000) div 100] &amp; X[(num mod 100) div 10] &amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &#34;I&#34; assert intToRoman(3999) == &#34;MMMCMXCIX&#34;'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='[Nim4LeetCode] 12. Integer to Roman • Code One'>
 <meta property='og:description' content=' Problem Given an integer, convert it to a roman numeral.
@@ -23,7 +24,10 @@ Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.87a4f4a2.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='/assets/css/main.045169bd.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
 </head>
 
 
@@ -242,7 +246,6 @@ One min read
       </li></ul>
   </nav>
 </section>
-
           <div class='copyright'>
   <p> &copy; 2017-2018 feng1st </p>
 </div>

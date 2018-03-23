@@ -6,6 +6,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='Problem Implement regular expression matching with support for &#39;.&#39; and &#39;*&#39;.
 &#39;.&#39; Matches any single character. &#39;*&#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&quot;aa&quot;,&quot;a&quot;) → false isMatch(&quot;aa&quot;,&quot;aa&quot;) → true isMatch(&quot;aaa&quot;,&quot;aa&quot;) → false isMatch(&quot;aa&quot;, &quot;a*&quot;) → true isMatch(&quot;aa&quot;, &quot;.*&quot;) → true isMatch(&quot;ab&quot;, &quot;.*&quot;) → true isMatch(&quot;aab&quot;, &quot;c*a*b&quot;) → true  Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='[Nim4LeetCode] 10. Regular Expression Matching • Code One'>
 <meta property='og:description' content='Problem Implement regular expression matching with support for &#39;.&#39; and &#39;*&#39;.
@@ -21,7 +22,10 @@
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.87a4f4a2.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='/assets/css/main.045169bd.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
 </head>
 
 
@@ -264,7 +268,6 @@ isMatch(&quot;aab&quot;, &quot;c*a*b&quot;) → true
       </li></ul>
   </nav>
 </section>
-
           <div class='copyright'>
   <p> &copy; 2017-2018 feng1st </p>
 </div>
