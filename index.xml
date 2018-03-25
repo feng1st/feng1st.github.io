@@ -5,10 +5,20 @@
     <link>http://codeone.io/</link>
     <description>Recent content in Home on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 23. Merge k Sorted Lists</title>
+      <link>http://codeone.io/nim-lang/leetcode/0023-merge-k-sorted-lists/</link>
+      <pubDate>Thu, 29 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0023-merge-k-sorted-lists/</guid>
+      <description>Problem Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref ListNodeObj proc newListNode(val: int, next: ListNode = nil): ListNode = result = ListNode(val: val, next: next) proc mergeTwoLists(l1: ListNode, l2: ListNode): ListNode = let dummy = newListNode(0) var p = dummy p1 = l1 p2 = l2 while p1 !</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 22. Generate Parentheses</title>
