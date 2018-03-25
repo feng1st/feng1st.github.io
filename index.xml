@@ -18,7 +18,7 @@
       <guid>http://codeone.io/nim-lang/leetcode/0022-generate-parentheses/</guid>
       <description> Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
-[ &amp;quot;((()))&amp;quot;, &amp;quot;(()())&amp;quot;, &amp;quot;(())()&amp;quot;, &amp;quot;()(())&amp;quot;, &amp;quot;()()()&amp;quot; ]  Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: echo generateParenthesis(3)</description>
+[ &amp;quot;((()))&amp;quot;, &amp;quot;(()())&amp;quot;, &amp;quot;(())()&amp;quot;, &amp;quot;()(())&amp;quot;, &amp;quot;()()()&amp;quot; ]  Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34;]</description>
     </item>
     
     <item>
