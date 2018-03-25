@@ -5,10 +5,23 @@
     <link>http://codeone.io/</link>
     <description>Recent content in Home on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 29 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 24. Swap Nodes in Pairs</title>
+      <link>http://codeone.io/nim-lang/leetcode/0024-swap-nodes-in-pairs/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0024-swap-nodes-in-pairs/</guid>
+      <description>Problem Given a linked list, swap every two adjacent nodes and return its head.
+For example,
+Given 1-&amp;gt;2-&amp;gt;3-&amp;gt;4, you should return the list as 2-&amp;gt;1-&amp;gt;4-&amp;gt;3.
+Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref ListNodeObj proc newListNode(val: int, next: ListNode = nil): ListNode = result = ListNode(val: val, next: next) proc swapPairs(head: ListNode): ListNode = if head == nil or head.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 23. Merge k Sorted Lists</title>
