@@ -5,10 +5,22 @@
     <link>http://codeone.io/nim-lang/</link>
     <description>Recent content in Nim Language on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 31 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://codeone.io/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Nim4LeetCode] 26. Remove Duplicates from Sorted Array</title>
+      <link>http://codeone.io/nim-lang/leetcode/0026-remove-duplicates-from-sorted-array/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/nim-lang/leetcode/0026-remove-duplicates-from-sorted-array/</guid>
+      <description>Problem Given a sorted array, remove the duplicates in-place such that each element appear only once and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+Example:
+Given nums = [1,1,2], Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn&#39;t matter what you leave beyond the new length.</description>
+    </item>
     
     <item>
       <title>[Nim4LeetCode] 25. Reverse Nodes in k-Group</title>
