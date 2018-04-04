@@ -4,27 +4,27 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Problem Determine whether an integer is a palindrome. Do this without extra space.
-Some hints:
-Could negative integers be palindromes? (ie, -1)
-If you are thinking of converting the integer to string, note the restriction of using extra space.
-You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?'>
+<meta name='description' content='Problem Given an array and a value, remove all instances of that value in-place and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+The order of elements can be changed. It doesn&rsquo;t matter what you leave beyond the new length.
+Example:
+Given nums = [3,2,2,3], val = 3, Your function should return length = 2, with the first two elements of nums being 2.'>
 <meta name='theme-color' content='#ffcd00'>
 
-<meta property='og:title' content='[Nim4LeetCode] 9. Palindrome Number • Code One'>
-<meta property='og:description' content='Problem Determine whether an integer is a palindrome. Do this without extra space.
-Some hints:
-Could negative integers be palindromes? (ie, -1)
-If you are thinking of converting the integer to string, note the restriction of using extra space.
-You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?'>
-<meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/'>
+<meta property='og:title' content='[Nim4LeetCode] 27. Remove Element • Code One'>
+<meta property='og:description' content='Problem Given an array and a value, remove all instances of that value in-place and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+The order of elements can be changed. It doesn&rsquo;t matter what you leave beyond the new length.
+Example:
+Given nums = [3,2,2,3], val = 3, Your function should return length = 2, with the first two elements of nums being 2.'>
+<meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0027-remove-element/'>
 <meta property='og:site_name' content='Code One'>
-<meta property='og:type' content='article'><meta property='article:section' content='Nim-Lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-15T00:00:00Z'/><meta property='article:modified_time' content='2018-03-15T00:00:00Z'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='Nim-Lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-04-02T00:00:00Z'/><meta property='article:modified_time' content='2018-04-02T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>[Nim4LeetCode] 9. Palindrome Number • Code One</title>
-  <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/'>
+  <title>[Nim4LeetCode] 27. Remove Element • Code One</title>
+  <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0027-remove-element/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -137,7 +137,7 @@ You could also try reversing an integer. However, if you have solved the problem
   <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'>[Nim4LeetCode] 9. Palindrome Number</h1>
+      <h1 class='title'>[Nim4LeetCode] 27. Remove Element</h1>
       
 
     </div>
@@ -152,7 +152,7 @@ You could also try reversing an integer. However, if you have solved the problem
   
 </svg>
 <span class='screen-reader-text'>Posted on </span>
-  <time class='entry-date' datetime='2018-03-15T00:00:00Z'>2018, Mar 15</time>
+  <time class='entry-date' datetime='2018-04-02T00:00:00Z'>2018, Apr 02</time>
 </span>
 
   
@@ -181,40 +181,32 @@ One min read
 
 <h2 id="problem">Problem</h2>
 
-<p>Determine whether an integer is a palindrome. Do this without extra space.</p>
+<p>Given an array and a value, remove all instances of that value <strong>in-place</strong> and return the new length.</p>
 
-<p><strong>Some hints:</strong><br />
-Could negative integers be palindromes? (ie, -1)</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with O(1) extra memory.</p>
 
-<p>If you are thinking of converting the integer to string, note the restriction of using extra space.</p>
+<p>The order of elements can be changed. It doesn&rsquo;t matter what you leave beyond the new length.</p>
 
-<p>You could also try reversing an integer. However, if you have solved the problem &ldquo;Reverse Integer&rdquo;, you know that the reversed integer might overflow. How would you handle such case?</p>
+<p><strong>Example:</strong></p>
 
-<p>There is a more generic way of solving this problem.</p>
+<pre><code>Given nums = [3,2,2,3], val = 3,
+
+Your function should return length = 2, with the first two elements of nums being 2.
+</code></pre>
 
 <h2 id="solution">Solution</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">isPalindrome</span>(x: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span>
-  <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-  <span style="color:#66d9ef">elif</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> x <span style="color:#f92672">mod</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-
-  <span style="color:#66d9ef">var</span>
-    m <span style="color:#f92672">=</span> x
-    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-  <span style="color:#66d9ef">while</span> m <span style="color:#f92672">&gt;</span> n:
-    n <span style="color:#f92672">=</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> m <span style="color:#f92672">mod</span> <span style="color:#ae81ff">10</span>
-    m <span style="color:#f92672">=</span> m <span style="color:#f92672">div</span> <span style="color:#ae81ff">10</span>
-
-  <span style="color:#66d9ef">return</span> m <span style="color:#f92672">==</span> n <span style="color:#f92672">or</span> m <span style="color:#f92672">==</span> n <span style="color:#f92672">div</span> <span style="color:#ae81ff">10</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">removeElement</span>(nums: <span style="color:#66d9ef">var</span> <span style="color:#66d9ef">seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">int</span><span style="color:#f92672">]</span>, val: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">int</span> <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">var</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> <span style="color:#ae81ff">0</span> ..<span style="color:#f92672">&lt;</span> nums.len:
+    <span style="color:#66d9ef">if</span> nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> val:
+      nums<span style="color:#f92672">[</span>n<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>
+      n <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+  result <span style="color:#f92672">=</span> n
 
 <span style="color:#66d9ef">when</span> isMainModule:
-  assert isPalindrome(<span style="color:#ae81ff">0</span>)
-  assert isPalindrome(<span style="color:#ae81ff">121</span>)
-  assert isPalindrome(<span style="color:#ae81ff">1221</span>)
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">1210</span>))
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">123</span>))
-  assert(<span style="color:#f92672">not</span> isPalindrome(<span style="color:#ae81ff">1111111119</span>))</code></pre></div>
+  <span style="color:#66d9ef">var</span> nums <span style="color:#f92672">=</span> <span style="color:#f92672">@[</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">]</span>
+  assert removeElement(nums, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>
+  assert nums<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">and</span> nums<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span></code></pre></div>
 </div>
 
   
@@ -238,7 +230,7 @@ Could negative integers be palindromes? (ie, -1)</p>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='/nim-lang/leetcode/0008-string-to-integer-atoi/'>
+      <a href='/nim-lang/leetcode/0026-remove-duplicates-from-sorted-array/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -246,17 +238,7 @@ Could negative integers be palindromes? (ie, -1)</p>
   
 </svg>
  Previous</span>
-        <span class='screen-reader-text'>Previous post: </span>[Nim4LeetCode] 8. String to Integer (atoi)</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/nim-lang/leetcode/0010-regular-expression-matching/'>
-        <span class='screen-reader-text'>Next post: </span>[Nim4LeetCode] 10. Regular Expression Matching<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
+        <span class='screen-reader-text'>Previous post: </span>[Nim4LeetCode] 26. Remove Duplicates from Sorted Array</a>
     </div></div>
 </nav>
 
@@ -285,12 +267,12 @@ Could negative integers be palindromes? (ie, -1)</p>
   </h4>
   <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
     <input type='hidden' name='options[parent]' value=''>
-    <input type='hidden' name='options[postId]' value='2ccd7d71e47b6b7338019433d8658521'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0009-palindrome-number/#submission-failure'>
+    <input type='hidden' name='options[postId]' value='2c90e739300fe3152a30c6a7c6467617'>
+    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0027-remove-element/#submission-success'>
+    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0027-remove-element/#submission-failure'>
 
     <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0009-palindrome-number/'>
+    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0027-remove-element/'>
 
     <div>
       <label for='comment'>Comment*</label>
