@@ -7,7 +7,7 @@
 <meta name='description' content=' Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
 [ &quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot; ]  Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &lt; n: backtrack(res, str &amp; &#39;(&#39;, n, open &#43; 1, close) if close &lt; open: backtrack(res, str &amp; &#39;)&#39;, n, open, close &#43; 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &#34;&#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34;]'>
-<meta name='theme-color' content='#ffcd00'>
+<meta name='theme-color' content='#c9d6e0'>
 
 <meta property='og:title' content='[Nim4LeetCode] 22. Generate Parentheses • Code One'>
 <meta property='og:description' content=' Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
@@ -25,7 +25,7 @@ For example, given n = 3, a solution set is:
   
   <link rel='icon' href='/favicon.ico'>
 <link rel='stylesheet' href='/assets/css/main.b8f9eb89.css'><link rel='stylesheet' href='/css/custom.css'><style>
-:root{--color-accent:#ffcd00;}
+:root{--color-accent:#c9d6e0;}
 </style>
 
 </head>
