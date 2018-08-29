@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust-lang on Code One</title>
+    <link>http://codeone.io/tags/rust-lang/</link>
+    <description>Recent content in Rust-lang on Code One</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 25 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeone.io/tags/rust-lang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【学习笔记】关于The Rust Programming Language的一些问题</title>
+      <link>http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/</link>
+      <pubDate>Sat, 25 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/</guid>
+      <description>问题1 16.3. Shared State
+let counter = Arc::new(Mutex::new(0)); let mut handles = vec![]; for _ in 0..10 { let counter = Arc::clone(&amp;amp;counter); let handle = thread::spawn(move || { let mut num = counter.lock().unwrap(); *num += 1; }); handles.push(handle); }  循环体内，为什么counter被move到了线程里，下次循环还能被使用（Arc::clone(&amp;amp;counter)）？
+回答1 Arc::clone(&amp;amp;counter)里的counter（简称c1）没有被move，被move的是循环体内开头定义的同名变量（简称c2），c2 shadow了c1。
+c2在循环体开始时shadow了c1，在循环体结束时被drop，解除了对c1的shadow。所以下次循环，c1重新可见，可以被使用。
+问题2 20.3. Graceful Shutdown and Cleanup
+fn new(id: usize, receiver: Arc&amp;lt;Mutex&amp;lt;mpsc::Receiver&amp;lt;Message&amp;gt;&amp;gt;&amp;gt;) -&amp;gt; Worker { let thread = thread::spawn(move ||{ loop { let message = receiver.</description>
+    </item>
+    
+  </channel>
+</rss>

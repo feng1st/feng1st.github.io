@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='问题1 16.3. Shared State
+let counter = Arc::new(Mutex::new(0)); let mut handles = vec![]; for _ in 0..10 { let counter = Arc::clone(&amp;counter); let handle = thread::spawn(move || { let mut num = counter.lock().unwrap(); *num &#43;= 1; }); handles.push(handle); }  循环体内，为什么counter被move到了线程里，下次循环还能被使用（Arc::clone(&amp;counter)）？
+回答1 Arc::clone(&amp;counter)里的counter（简称c1）没有被move，被move的是循环体内开头定义的同名变量（简称c2），c2 shadow了c1。
+c2在循环体开始时shadow了c1，在循环体结束时被drop，解除了对c1的shadow。所以下次循环，c1重新可见，可以被使用。
+问题2 20.3. Graceful Shutdown and Cleanup
+fn new(id: usize, receiver: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;&gt;) -&gt; Worker { let thread = thread::spawn(move ||{ loop { let message = receiver.'>
+<meta name='theme-color' content='#c9d6e0'>
+
+<meta property='og:title' content='【学习笔记】关于The Rust Programming Language的一些问题 • Code One'>
+<meta property='og:description' content='问题1 16.3. Shared State
+let counter = Arc::new(Mutex::new(0)); let mut handles = vec![]; for _ in 0..10 { let counter = Arc::clone(&amp;counter); let handle = thread::spawn(move || { let mut num = counter.lock().unwrap(); *num &#43;= 1; }); handles.push(handle); }  循环体内，为什么counter被move到了线程里，下次循环还能被使用（Arc::clone(&amp;counter)）？
+回答1 Arc::clone(&amp;counter)里的counter（简称c1）没有被move，被move的是循环体内开头定义的同名变量（简称c2），c2 shadow了c1。
+c2在循环体开始时shadow了c1，在循环体结束时被drop，解除了对c1的shadow。所以下次循环，c1重新可见，可以被使用。
+问题2 20.3. Graceful Shutdown and Cleanup
+fn new(id: usize, receiver: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;&gt;) -&gt; Worker { let thread = thread::spawn(move ||{ loop { let message = receiver.'>
+<meta property='og:url' content='http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/'>
+<meta property='og:site_name' content='Code One'>
+<meta property='og:type' content='article'><meta property='article:section' content='rust-lang'><meta property='article:tag' content='rust-lang'><meta property='article:published_time' content='2018-08-25T00:00:00Z'/><meta property='article:modified_time' content='2018-08-25T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.46" />
+
+  <title>【学习笔记】关于The Rust Programming Language的一些问题 • Code One</title>
+  <link rel='canonical' href='http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.4267b3fa.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#c9d6e0;}
+</style>
+
+  
+
+</head>
+
+
+<body class='page type-rust-lang has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Code One
+    </h2>
+    <div class='desc'>
+    Happy coding
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+      </li><li>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+      </li><li>
+        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+      </li><li>
+        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+      </li><li>
+        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+      </li><li>
+        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+      </li><li>
+        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Home</a>
+      </li><li class='item'>
+        <a href='/notes/'>Notes</a>
+      </li><li class='item'>
+        <a href='/rust-lang/'>Rust Language</a>
+      </li><li class='item'>
+        <a href='/nim-lang/'>Nim Language</a>
+      </li></ul>
+  </div>
+</nav>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>Code One</p><p class='desc site-desc'>Happy coding</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>【学习笔记】关于The Rust Programming Language的一些问题</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-08-25T00:00:00Z'>2018, Aug 25</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+One min read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="问题1">问题1</h2>
+
+<p><code>16.3. Shared State</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">    <span style="color:#66d9ef">let</span> counter <span style="color:#f92672">=</span> Arc::new(Mutex::new(<span style="color:#ae81ff">0</span>));
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> handles <span style="color:#f92672">=</span> vec<span style="color:#f92672">!</span>[];
+
+    <span style="color:#66d9ef">for</span> _ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span>..<span style="color:#ae81ff">10</span> {
+        <span style="color:#66d9ef">let</span> counter <span style="color:#f92672">=</span> Arc::clone(<span style="color:#f92672">&amp;</span>counter);
+        <span style="color:#66d9ef">let</span> handle <span style="color:#f92672">=</span> thread::spawn(<span style="color:#66d9ef">move</span> <span style="color:#f92672">||</span> {
+            <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> num <span style="color:#f92672">=</span> counter.lock().unwrap();
+
+            <span style="color:#f92672">*</span>num <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        });
+        handles.push(handle);
+    }
+</code></pre></div>
+<p>循环体内，为什么counter被move到了线程里，下次循环还能被使用（<code>Arc::clone(&amp;counter)</code>）？</p>
+
+<h2 id="回答1">回答1</h2>
+
+<p><code>Arc::clone(&amp;counter)</code>里的counter（简称c1）没有被move，被move的是循环体内开头定义的同名变量（简称c2），c2 shadow了c1。<br />
+c2在循环体开始时shadow了c1，在循环体结束时被drop，解除了对c1的shadow。所以下次循环，c1重新可见，可以被使用。</p>
+
+<h2 id="问题2">问题2</h2>
+
+<p><code>20.3. Graceful Shutdown and Cleanup</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>(id: <span style="color:#66d9ef">usize</span>, receiver: <span style="color:#a6e22e">Arc</span><span style="color:#f92672">&lt;</span>Mutex<span style="color:#f92672">&lt;</span>mpsc::Receiver<span style="color:#f92672">&lt;</span>Message<span style="color:#f92672">&gt;&gt;&gt;</span>) -&gt;
+        <span style="color:#a6e22e">Worker</span> {
+
+        <span style="color:#66d9ef">let</span> thread <span style="color:#f92672">=</span> thread::spawn(<span style="color:#66d9ef">move</span> <span style="color:#f92672">||</span>{
+            <span style="color:#66d9ef">loop</span> {
+                <span style="color:#66d9ef">let</span> message <span style="color:#f92672">=</span> receiver.lock().unwrap().recv().unwrap();
+
+                <span style="color:#66d9ef">match</span> message {
+                    Message::NewJob(job) <span style="color:#f92672">=&gt;</span> {
+                        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Worker {} got a job; executing.&#34;</span>, id);
+
+                        job.call_box();
+                    },
+                    Message::Terminate <span style="color:#f92672">=&gt;</span> {
+                        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;Worker {} was told to terminate.&#34;</span>, id);
+
+                        <span style="color:#66d9ef">break</span>;
+                    },
+                }
+            }
+        });
+</code></pre></div>
+<p>mutex的<code>lock()</code>在什么地方被释放？是在循环体结束的地方吗？如果是那样的话，线程间互相等锁，相当于串行在操作，失去了使用多线程的意义。</p>
+
+<h2 id="回答2">回答2</h2>
+
+<p>实际上，<code>lock()</code>在<code>receiver.lock().unwrap().recv().unwrap();</code>语句后就被释放了。原因：<br />
+<code>receiver.lock().unwrap()</code>返回一个类型为MutexGuard的匿名变量，而这个匿名变量将在<code>.recv().unwrap();</code>后被drop，释放掉持有的锁。</p>
+
+<p>如果这样写：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">            <span style="color:#66d9ef">loop</span> {
+                <span style="color:#66d9ef">let</span> mutex_guard <span style="color:#f92672">=</span> receiver.lock().unwrap();
+                <span style="color:#66d9ef">let</span> message <span style="color:#f92672">=</span> mutex_guard.recv().unwrap();
+
+                ...
+            }
+</code></pre></div>
+<p>那么锁会在循环体结束的地方才会被释放，因为mutex_guard到那时才会被drop。</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/rust-lang/'>Rust-lang</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+
+<section id='comments' class='comments'>
+  <div class='container sep-before'>
+    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
+  <h4>Thank You!</h4>
+  <span>Your comment has been submitted. It will appear on this page shortly!</span>
+  <a href='#comments' class='button'>OK</a>
+</div>
+
+<div id='submission-failure' class='comment-submission-feedback'>
+  <h4>Yikes, Sorry!</h4>
+  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
+  <a href='#comments' class='button'>OK</a>
+</div>
+
+
+
+
+<div id='respond' class='comment-respond'>
+  <h4 class='comment-reply-title'>Leave a comment<small>
+      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
+    </small>
+  </h4>
+  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
+    <input type='hidden' name='options[postId]' value='a247eeb927f059476a30503847236054'>
+    <input type='hidden' name='options[redirect]' value='http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/#submission-success'>
+    <input type='hidden' name='options[redirectError]' value='http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/#submission-failure'>
+
+    <input type='address' name='fields[honeypot]' style='display:none'>
+    <input type='hidden' name='fields[permalink]' value='/rust-lang/2018-08-25-questions-about-the-book/'>
+    <input type='hidden' name='fields[parent_id]' value=''>
+
+    <div>
+      <label for='comment'>Comment*</label>
+      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
+    </div>
+    <div>
+      <label for='name'>Name*</label>
+      <input id='name' name='fields[author]' type='text' required>
+    </div>
+    <div>
+      <label for='email'>Email*</label>
+      <input id='email' name='fields[email]' type='email' required>
+    </div>
+    <div>
+      <label for='url'>Website</label>
+      <input id='url' name='fields[site]' type='url'>
+    </div>
+    <div>
+      <button type='submit'>Comment!</button>
+    </div>
+  </form>
+</div>
+
+</div>
+  </div>
+</section>
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p> &copy; 2017-2018 feng1st </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.59f76c44.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+
