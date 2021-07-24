@@ -17,7 +17,7 @@ Solution import deques proc isValid(s: string): bool = var stack = initDeque[cha
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='nim-lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-26T00:00:00Z'/><meta property='article:modified_time' content='2018-03-26T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <title>[Nim4LeetCode] 20. Valid Parentheses • Code One</title>
   <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/'>
@@ -65,19 +65,19 @@ Solution import deques proc isValid(s: string): bool = var stack = initDeque[cha
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
       </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
       </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
       </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
       </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
       </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
       </li></ul>
 </div>
 
@@ -178,14 +178,9 @@ One min read
   
 
   <div class='container entry-content'>
-  
-
-<h2 id="problem">Problem</h2>
-
+  <h2 id="problem">Problem</h2>
 <p>Given a string containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
-
 <p>The brackets must close in the correct order, <code>&quot;()&quot;</code> and <code>&quot;()[]{}&quot;</code> are all valid but <code>&quot;(]&quot;</code> and <code>&quot;([)]&quot;</code> are not.</p>
-
 <h2 id="solution">Solution</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#f92672">import</span> deques
 
@@ -214,7 +209,8 @@ One min read
   assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;(]&#34;</span>))
   assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;([)]&#34;</span>))
   assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;(&#34;</span>))
-  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;)&#34;</span>))</code></pre></div>
+  assert(<span style="color:#f92672">not</span> isValid(<span style="color:#e6db74">&#34;)&#34;</span>))
+</code></pre></div>
 </div>
 
   
@@ -225,7 +221,7 @@ One min read
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>Nim-lang</a>, <a class='tag' href='/tags/leetcode/'>Leetcode</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>nim-lang</a>, <a class='tag' href='/tags/leetcode/'>leetcode</a></div>
 
   </div>
 </footer>
@@ -258,68 +254,13 @@ One min read
 </nav>
 
 
-<section id='comments' class='comments'>
-  <div class='container sep-before'>
-    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
-  <h4>Thank You!</h4>
-  <span>Your comment has been submitted. It will appear on this page shortly!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
 
-<div id='submission-failure' class='comment-submission-feedback'>
-  <h4>Yikes, Sorry!</h4>
-  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
-
-
-
-
-<div id='respond' class='comment-respond'>
-  <h4 class='comment-reply-title'>Leave a comment<small>
-      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
-    </small>
-  </h4>
-  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
-    <input type='hidden' name='options[postId]' value='7f5cc4bab89cdccb4c429f6d43bc9873'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0020-valid-parentheses/#submission-failure'>
-
-    <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0020-valid-parentheses/'>
-    <input type='hidden' name='fields[parent_id]' value=''>
-
-    <div>
-      <label for='comment'>Comment*</label>
-      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
-    </div>
-    <div>
-      <label for='name'>Name*</label>
-      <input id='name' name='fields[author]' type='text' required>
-    </div>
-    <div>
-      <label for='email'>Email*</label>
-      <input id='email' name='fields[email]' type='email' required>
-    </div>
-    <div>
-      <label for='url'>Website</label>
-      <input id='url' name='fields[site]' type='url'>
-    </div>
-    <div>
-      <button type='submit'>Comment!</button>
-    </div>
-  </form>
-</div>
-
-</div>
-  </div>
-</section>
 
       </main>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2018 feng1st </p>
+  <p> &copy; 2017-2021 feng1st </p>
 </div>
 
         </div>

@@ -5,19 +5,19 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='Problem The string &quot;PAYPALISHIRING&quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
-P A H N A P L S I I G Y I R  And then read line by line: &quot;PAHNAPLSIIGYIR&quot;
+P A H N A P L S I I G Y I R And then read line by line: &quot;PAHNAPLSIIGYIR&quot;
 Write the code that will take a string and make this conversion given a number of rows:'>
 <meta name='theme-color' content='#c9d6e0'>
 
 <meta property='og:title' content='[Nim4LeetCode] 6. ZigZag Conversion • Code One'>
 <meta property='og:description' content='Problem The string &quot;PAYPALISHIRING&quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
-P A H N A P L S I I G Y I R  And then read line by line: &quot;PAHNAPLSIIGYIR&quot;
+P A H N A P L S I I G Y I R And then read line by line: &quot;PAHNAPLSIIGYIR&quot;
 Write the code that will take a string and make this conversion given a number of rows:'>
 <meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/'>
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='nim-lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-12T00:00:00Z'/><meta property='article:modified_time' content='2018-03-12T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <title>[Nim4LeetCode] 6. ZigZag Conversion • Code One</title>
   <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/'>
@@ -65,19 +65,19 @@ Write the code that will take a string and make this conversion given a number o
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
       </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
       </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
       </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
       </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
       </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
       </li></ul>
 </div>
 
@@ -178,26 +178,15 @@ One min read
   
 
   <div class='container entry-content'>
-  
-
-<h2 id="problem">Problem</h2>
-
+  <h2 id="problem">Problem</h2>
 <p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
-
 <pre><code>P   A   H   N
 A P L S I I G
 Y   I   R
-</code></pre>
-
-<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
-
+</code></pre><p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
 <p>Write the code that will take a string and make this conversion given a number of rows:</p>
-
 <pre><code>string convert(string text, int nRows);
-</code></pre>
-
-<p><code>convert(&quot;PAYPALISHIRING&quot;, 3)</code> should return <code>&quot;PAHNAPLSIIGYIR&quot;</code>.</p>
-
+</code></pre><p><code>convert(&quot;PAYPALISHIRING&quot;, 3)</code> should return <code>&quot;PAHNAPLSIIGYIR&quot;</code>.</p>
 <h2 id="solution">Solution</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">convert</span>(s: <span style="color:#66d9ef">string</span>, numRows: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">string</span> <span style="color:#f92672">=</span>
   <span style="color:#66d9ef">let</span>
@@ -216,7 +205,8 @@ Y   I   R
   result <span style="color:#f92672">=</span> buf
 
 <span style="color:#66d9ef">when</span> isMainModule:
-  assert convert(<span style="color:#e6db74">&#34;PAYPALISHIRING&#34;</span>, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;PAHNAPLSIIGYIR&#34;</span></code></pre></div>
+  assert convert(<span style="color:#e6db74">&#34;PAYPALISHIRING&#34;</span>, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;PAHNAPLSIIGYIR&#34;</span>
+</code></pre></div>
 </div>
 
   
@@ -227,7 +217,7 @@ Y   I   R
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>Nim-lang</a>, <a class='tag' href='/tags/leetcode/'>Leetcode</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>nim-lang</a>, <a class='tag' href='/tags/leetcode/'>leetcode</a></div>
 
   </div>
 </footer>
@@ -260,68 +250,13 @@ Y   I   R
 </nav>
 
 
-<section id='comments' class='comments'>
-  <div class='container sep-before'>
-    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
-  <h4>Thank You!</h4>
-  <span>Your comment has been submitted. It will appear on this page shortly!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
 
-<div id='submission-failure' class='comment-submission-feedback'>
-  <h4>Yikes, Sorry!</h4>
-  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
-
-
-
-
-<div id='respond' class='comment-respond'>
-  <h4 class='comment-reply-title'>Leave a comment<small>
-      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
-    </small>
-  </h4>
-  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
-    <input type='hidden' name='options[postId]' value='bbc582dc0bee58546d5d97e972741334'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0006-zigzag-conversion/#submission-failure'>
-
-    <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0006-zigzag-conversion/'>
-    <input type='hidden' name='fields[parent_id]' value=''>
-
-    <div>
-      <label for='comment'>Comment*</label>
-      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
-    </div>
-    <div>
-      <label for='name'>Name*</label>
-      <input id='name' name='fields[author]' type='text' required>
-    </div>
-    <div>
-      <label for='email'>Email*</label>
-      <input id='email' name='fields[email]' type='email' required>
-    </div>
-    <div>
-      <label for='url'>Website</label>
-      <input id='url' name='fields[site]' type='url'>
-    </div>
-    <div>
-      <button type='submit'>Comment!</button>
-    </div>
-  </form>
-</div>
-
-</div>
-  </div>
-</section>
 
       </main>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2018 feng1st </p>
+  <p> &copy; 2017-2021 feng1st </p>
 </div>
 
         </div>

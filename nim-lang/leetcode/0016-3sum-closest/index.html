@@ -15,7 +15,7 @@
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='nim-lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-22T00:00:00Z'/><meta property='article:modified_time' content='2018-03-22T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <title>[Nim4LeetCode] 16. 3Sum Closest • Code One</title>
   <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0016-3sum-closest/'>
@@ -63,19 +63,19 @@
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
       </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
       </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
       </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
       </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
       </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
       </li></ul>
 </div>
 
@@ -176,18 +176,12 @@
   
 
   <div class='container entry-content'>
-  
-
-<h2 id="problem">Problem</h2>
-
+  <h2 id="problem">Problem</h2>
 <p>Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
-
 <pre><code>    For example, given array S = {-1 2 1 -4}, and target = 1.
 
     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
-</code></pre>
-
-<h2 id="solution">Solution</h2>
+</code></pre><h2 id="solution">Solution</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#f92672">import</span> algorithm
 
 <span style="color:#66d9ef">proc </span><span style="color:#a6e22e">threeSumClosest</span>(nums: openArray<span style="color:#f92672">[</span><span style="color:#66d9ef">int</span><span style="color:#f92672">]</span>, target: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">int</span> <span style="color:#f92672">=</span>
@@ -223,7 +217,8 @@
   assert threeSumClosest(<span style="color:#f92672">[-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span><span style="color:#f92672">]</span>, <span style="color:#ae81ff">46</span>) <span style="color:#f92672">==</span>
     <span style="color:#ae81ff">50</span>
   assert threeSumClosest(<span style="color:#f92672">[-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span><span style="color:#f92672">]</span>, <span style="color:#ae81ff">44</span>) <span style="color:#f92672">==</span>
-    <span style="color:#ae81ff">40</span></code></pre></div>
+    <span style="color:#ae81ff">40</span>
+</code></pre></div>
 </div>
 
   
@@ -234,7 +229,7 @@
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>Nim-lang</a>, <a class='tag' href='/tags/leetcode/'>Leetcode</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>nim-lang</a>, <a class='tag' href='/tags/leetcode/'>leetcode</a></div>
 
   </div>
 </footer>
@@ -267,68 +262,13 @@
 </nav>
 
 
-<section id='comments' class='comments'>
-  <div class='container sep-before'>
-    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
-  <h4>Thank You!</h4>
-  <span>Your comment has been submitted. It will appear on this page shortly!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
 
-<div id='submission-failure' class='comment-submission-feedback'>
-  <h4>Yikes, Sorry!</h4>
-  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
-
-
-
-
-<div id='respond' class='comment-respond'>
-  <h4 class='comment-reply-title'>Leave a comment<small>
-      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
-    </small>
-  </h4>
-  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
-    <input type='hidden' name='options[postId]' value='d7c8522722c823157cefec3652e6f33e'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0016-3sum-closest/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0016-3sum-closest/#submission-failure'>
-
-    <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0016-3sum-closest/'>
-    <input type='hidden' name='fields[parent_id]' value=''>
-
-    <div>
-      <label for='comment'>Comment*</label>
-      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
-    </div>
-    <div>
-      <label for='name'>Name*</label>
-      <input id='name' name='fields[author]' type='text' required>
-    </div>
-    <div>
-      <label for='email'>Email*</label>
-      <input id='email' name='fields[email]' type='email' required>
-    </div>
-    <div>
-      <label for='url'>Website</label>
-      <input id='url' name='fields[site]' type='url'>
-    </div>
-    <div>
-      <button type='submit'>Comment!</button>
-    </div>
-  </form>
-</div>
-
-</div>
-  </div>
-</section>
 
       </main>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2018 feng1st </p>
+  <p> &copy; 2017-2021 feng1st </p>
 </div>
 
         </div>

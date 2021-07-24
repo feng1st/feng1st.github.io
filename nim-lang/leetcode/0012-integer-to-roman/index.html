@@ -4,20 +4,20 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content=' Problem Given an integer, convert it to a roman numeral.
+<meta name='description' content='Problem Given an integer, convert it to a roman numeral.
 Input is guaranteed to be within the range from 1 to 3999.
-Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&#34;&#34;, &#34;C&#34;, &#34;CC&#34;, &#34;CCC&#34;, &#34;CD&#34;, &#34;D&#34;, &#34;DC&#34;, &#34;DCC&#34;, &#34;DCCC&#34;, &#34;CM&#34;] X = [&#34;&#34;, &#34;X&#34;, &#34;XX&#34;, &#34;XXX&#34;, &#34;XL&#34;, &#34;L&#34;, &#34;LX&#34;, &#34;LXX&#34;, &#34;LXXX&#34;, &#34;XC&#34;] I = [&#34;&#34;, &#34;I&#34;, &#34;II&#34;, &#34;III&#34;, &#34;IV&#34;, &#34;V&#34;, &#34;VI&#34;, &#34;VII&#34;, &#34;VIII&#34;, &#34;IX&#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp; C[(num mod 1000) div 100] &amp; X[(num mod 100) div 10] &amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &#34;I&#34; assert intToRoman(3999) == &#34;MMMCMXCIX&#34;'>
+Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&#34;&#34;, &#34;C&#34;, &#34;CC&#34;, &#34;CCC&#34;, &#34;CD&#34;, &#34;D&#34;, &#34;DC&#34;, &#34;DCC&#34;, &#34;DCCC&#34;, &#34;CM&#34;] X = [&#34;&#34;, &#34;X&#34;, &#34;XX&#34;, &#34;XXX&#34;, &#34;XL&#34;, &#34;L&#34;, &#34;LX&#34;, &#34;LXX&#34;, &#34;LXXX&#34;, &#34;XC&#34;] I = [&#34;&#34;, &#34;I&#34;, &#34;II&#34;, &#34;III&#34;, &#34;IV&#34;, &#34;V&#34;, &#34;VI&#34;, &#34;VII&#34;, &#34;VIII&#34;, &#34;IX&#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp; C[(num mod 1000) div 100] &amp; X[(num mod 100) div 10] &amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &#34;I&#34; assert intToRoman(3999) == &#34;MMMCMXCIX&#34; '>
 <meta name='theme-color' content='#c9d6e0'>
 
 <meta property='og:title' content='[Nim4LeetCode] 12. Integer to Roman • Code One'>
-<meta property='og:description' content=' Problem Given an integer, convert it to a roman numeral.
+<meta property='og:description' content='Problem Given an integer, convert it to a roman numeral.
 Input is guaranteed to be within the range from 1 to 3999.
-Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&#34;&#34;, &#34;C&#34;, &#34;CC&#34;, &#34;CCC&#34;, &#34;CD&#34;, &#34;D&#34;, &#34;DC&#34;, &#34;DCC&#34;, &#34;DCCC&#34;, &#34;CM&#34;] X = [&#34;&#34;, &#34;X&#34;, &#34;XX&#34;, &#34;XXX&#34;, &#34;XL&#34;, &#34;L&#34;, &#34;LX&#34;, &#34;LXX&#34;, &#34;LXXX&#34;, &#34;XC&#34;] I = [&#34;&#34;, &#34;I&#34;, &#34;II&#34;, &#34;III&#34;, &#34;IV&#34;, &#34;V&#34;, &#34;VI&#34;, &#34;VII&#34;, &#34;VIII&#34;, &#34;IX&#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp; C[(num mod 1000) div 100] &amp; X[(num mod 100) div 10] &amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &#34;I&#34; assert intToRoman(3999) == &#34;MMMCMXCIX&#34;'>
+Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&#34;&#34;, &#34;C&#34;, &#34;CC&#34;, &#34;CCC&#34;, &#34;CD&#34;, &#34;D&#34;, &#34;DC&#34;, &#34;DCC&#34;, &#34;DCCC&#34;, &#34;CM&#34;] X = [&#34;&#34;, &#34;X&#34;, &#34;XX&#34;, &#34;XXX&#34;, &#34;XL&#34;, &#34;L&#34;, &#34;LX&#34;, &#34;LXX&#34;, &#34;LXXX&#34;, &#34;XC&#34;] I = [&#34;&#34;, &#34;I&#34;, &#34;II&#34;, &#34;III&#34;, &#34;IV&#34;, &#34;V&#34;, &#34;VI&#34;, &#34;VII&#34;, &#34;VIII&#34;, &#34;IX&#34;] proc intToRoman(num: int): string = result = M[num div 1000] &amp; C[(num mod 1000) div 100] &amp; X[(num mod 100) div 10] &amp; I[num mod 10] when isMainModule: assert intToRoman(1) == &#34;I&#34; assert intToRoman(3999) == &#34;MMMCMXCIX&#34; '>
 <meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/'>
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='nim-lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-18T00:00:00Z'/><meta property='article:modified_time' content='2018-03-18T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <title>[Nim4LeetCode] 12. Integer to Roman • Code One</title>
   <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/'>
@@ -65,19 +65,19 @@ Solution const M = [&#34;&#34;, &#34;M&#34;, &#34;MM&#34;, &#34;MMM&#34;] C = [&
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
       </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
       </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
       </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
       </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
       </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
       </li></ul>
 </div>
 
@@ -178,14 +178,9 @@ One min read
   
 
   <div class='container entry-content'>
-  
-
-<h2 id="problem">Problem</h2>
-
+  <h2 id="problem">Problem</h2>
 <p>Given an integer, convert it to a roman numeral.</p>
-
 <p>Input is guaranteed to be within the range from 1 to 3999.</p>
-
 <h2 id="solution">Solution</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">const</span>
   M <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;M&#34;</span>, <span style="color:#e6db74">&#34;MM&#34;</span>, <span style="color:#e6db74">&#34;MMM&#34;</span><span style="color:#f92672">]</span>
@@ -201,7 +196,8 @@ One min read
 
 <span style="color:#66d9ef">when</span> isMainModule:
   assert intToRoman(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;I&#34;</span>
-  assert intToRoman(<span style="color:#ae81ff">3999</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;MMMCMXCIX&#34;</span></code></pre></div>
+  assert intToRoman(<span style="color:#ae81ff">3999</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;MMMCMXCIX&#34;</span>
+</code></pre></div>
 </div>
 
   
@@ -212,7 +208,7 @@ One min read
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>Nim-lang</a>, <a class='tag' href='/tags/leetcode/'>Leetcode</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/nim-lang/'>nim-lang</a>, <a class='tag' href='/tags/leetcode/'>leetcode</a></div>
 
   </div>
 </footer>
@@ -245,68 +241,13 @@ One min read
 </nav>
 
 
-<section id='comments' class='comments'>
-  <div class='container sep-before'>
-    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
-  <h4>Thank You!</h4>
-  <span>Your comment has been submitted. It will appear on this page shortly!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
 
-<div id='submission-failure' class='comment-submission-feedback'>
-  <h4>Yikes, Sorry!</h4>
-  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
-
-
-
-
-<div id='respond' class='comment-respond'>
-  <h4 class='comment-reply-title'>Leave a comment<small>
-      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
-    </small>
-  </h4>
-  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
-    <input type='hidden' name='options[postId]' value='42b835226111cf53621a88b6258cabfc'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/nim-lang/leetcode/0012-integer-to-roman/#submission-failure'>
-
-    <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/nim-lang/leetcode/0012-integer-to-roman/'>
-    <input type='hidden' name='fields[parent_id]' value=''>
-
-    <div>
-      <label for='comment'>Comment*</label>
-      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
-    </div>
-    <div>
-      <label for='name'>Name*</label>
-      <input id='name' name='fields[author]' type='text' required>
-    </div>
-    <div>
-      <label for='email'>Email*</label>
-      <input id='email' name='fields[email]' type='email' required>
-    </div>
-    <div>
-      <label for='url'>Website</label>
-      <input id='url' name='fields[site]' type='url'>
-    </div>
-    <div>
-      <button type='submit'>Comment!</button>
-    </div>
-  </form>
-</div>
-
-</div>
-  </div>
-</section>
 
       </main>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2018 feng1st </p>
+  <p> &copy; 2017-2021 feng1st </p>
 </div>
 
         </div>

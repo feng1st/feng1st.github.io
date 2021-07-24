@@ -6,78 +6,30 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='原文: https://www.nginx.com/blog/introduction-to-microservices/
 单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
- 过于复杂，难于理解和修改。修改容易引入bug
- 启动变慢，降低调试和开发速度
- 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试
- 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求
- 可靠性，组件异常（比如内存泄露），导致整个应用异常
- 难于升级到新的技术和框架
-  微服务框架  按功能划分，比如订单管理、客户端管理
- 每个微服务是一个单独的小应用
- 微服务对外暴露API，比如REST API
-微服务之间可以通过暴露的API互相调用
-微服务间还可以通过消息系统实现异步调用
-外界一般不直接范围后端服务，而是通过API网关
- 微服务通常通过虚拟机或Docker部署
-  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题
-y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务
-z轴：数据分区，靠拆分相似的事物伸缩
-微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema
-这是为了更彻底的解耦
-但是不可避免的，多个微服务数据库间存在重复数据
-微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成
-区别：
-1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST
-2. 微服务架构弃用了ESB
-微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护
- 开发方面：可以选用自己的技术，可以使用较新的技术
- 部署方面：可以单独部署，更容易部署和测试
- 伸缩方面：更容易按需扩展多实例
-  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
- 分布式架构下调用的开销，以及服务不可用的处理
- 数据库拆分后，分布式事务基本不采用，需要最终一致方案
- 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）'>
+ 过于复杂，难于理解和修改。修改容易引入bug 启动变慢，降低调试和开发速度 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求 可靠性，组件异常（比如内存泄露），导致整个应用异常 难于升级到新的技术和框架  微服务框架  按功能划分，比如订单管理、客户端管理 每个微服务是一个单独的小应用 微服务对外暴露API，比如REST API 微服务之间可以通过暴露的API互相调用 微服务间还可以通过消息系统实现异步调用 外界一般不直接范围后端服务，而是通过API网关 微服务通常通过虚拟机或Docker部署  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题 y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务 z轴：数据分区，靠拆分相似的事物伸缩
+微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema 这是为了更彻底的解耦 但是不可避免的，多个微服务数据库间存在重复数据
+微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成 区别：
+ 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST 微服务架构弃用了ESB  微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护 开发方面：可以选用自己的技术，可以使用较新的技术 部署方面：可以单独部署，更容易部署和测试 伸缩方面：更容易按需扩展多实例  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
+ 分布式架构下调用的开销，以及服务不可用的处理 数据库拆分后，分布式事务基本不采用，需要最终一致方案 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务） 升级链，如果A依赖于B，需要先升级B，再升级A 部署，需要自动化工具  API网关 门面模式 Facade
+客户端直接和后端服务通讯的问题 / API网关要解决的问题  客户端需要调用多个后端服务，走广域网，非常慢 客户端代码复杂 客户端需要支持后端服务API所使用的通讯协议 后端服务接口无法自由变更，服务之间无法合并和拆分  API网关除了解决上诉问题，还能：
+ 提供负载均衡、缓存、安全/权限控制，监控等 为不同的客户端提供不同的接口  挑战：  需要额外实现和维护一个高可用的组件 可能成为开发瓶颈  实现API网关  性能和高伸缩性  要支持异步、非阻塞通讯 技术选型：Netty, Spring Reactor, &hellip;   使用反应式编程模型 Reactive Programming Model  需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果 需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用 不推荐使用回调实现异步（不直观、不容易理解、容易出错） 推荐使用Reactive 技术选型：CompletableFuture, RxJava   服务调用  同步调用：HTTP、Thrift 异步、消息机制：JMS、AMQP、Zeromq API网关需要这些服务通讯，也应支持上诉通讯机制   服务发现  客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端 服务端发现：注册总心选好后发给客户端，负载均衡在服务端 （这里的客户端指API网关）   处理部分失败  面对服务慢或者不可用的处理。核心是不能阻塞API网关 要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等   技术选型：Netflix Hystrix    进程间通讯 IPC 交互风格     一对一 一对多     同步 Request/Response &ndash;   异步 Notification Publish/Subscribe    Request/Async response Public/Async responses     Request/Response: 发送请求，等待响应。应有超时。线程阻塞 Notification (单向请求): 发送请求，不期待有响应 Request/Async response: 发送请求，不期待有即时响应。线程不阻塞 Publish/Subscribe: 发布请求，多个消费者消费 Publish/Async responses: 发布请求，等待多个响应。有超时  接口设计  基于消息：定义消息channel和消息类型 基于HTTP：定义URL、请求和响应格式  接口升级  向前兼容的小升级，比如增加/删除请求/响应字段：  缺失的字段采用默认值，忽略额外的字段 消息格式要支持，比如Protobuf，Json   大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口  处理部分失败  一定要有超时，不能无限阻塞 要限制客户端向同一服务的请求的数量，如果超限，直接失败 船舱隔离模式：  不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池   电路熔断器模式：  连续超时：断开 等待一段时间：半开放  又有超时：再断开 或不再超时：恢复     要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等    IPC技术 异步、基于消息的通讯 关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、…… 这里不展开'>
 <meta name='theme-color' content='#c9d6e0'>
 
 <meta property='og:title' content='【笔记】微服务介绍 • Code One'>
 <meta property='og:description' content='原文: https://www.nginx.com/blog/introduction-to-microservices/
 单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
- 过于复杂，难于理解和修改。修改容易引入bug
- 启动变慢，降低调试和开发速度
- 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试
- 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求
- 可靠性，组件异常（比如内存泄露），导致整个应用异常
- 难于升级到新的技术和框架
-  微服务框架  按功能划分，比如订单管理、客户端管理
- 每个微服务是一个单独的小应用
- 微服务对外暴露API，比如REST API
-微服务之间可以通过暴露的API互相调用
-微服务间还可以通过消息系统实现异步调用
-外界一般不直接范围后端服务，而是通过API网关
- 微服务通常通过虚拟机或Docker部署
-  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题
-y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务
-z轴：数据分区，靠拆分相似的事物伸缩
-微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema
-这是为了更彻底的解耦
-但是不可避免的，多个微服务数据库间存在重复数据
-微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成
-区别：
-1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST
-2. 微服务架构弃用了ESB
-微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护
- 开发方面：可以选用自己的技术，可以使用较新的技术
- 部署方面：可以单独部署，更容易部署和测试
- 伸缩方面：更容易按需扩展多实例
-  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
- 分布式架构下调用的开销，以及服务不可用的处理
- 数据库拆分后，分布式事务基本不采用，需要最终一致方案
- 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）'>
+ 过于复杂，难于理解和修改。修改容易引入bug 启动变慢，降低调试和开发速度 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求 可靠性，组件异常（比如内存泄露），导致整个应用异常 难于升级到新的技术和框架  微服务框架  按功能划分，比如订单管理、客户端管理 每个微服务是一个单独的小应用 微服务对外暴露API，比如REST API 微服务之间可以通过暴露的API互相调用 微服务间还可以通过消息系统实现异步调用 外界一般不直接范围后端服务，而是通过API网关 微服务通常通过虚拟机或Docker部署  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题 y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务 z轴：数据分区，靠拆分相似的事物伸缩
+微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema 这是为了更彻底的解耦 但是不可避免的，多个微服务数据库间存在重复数据
+微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成 区别：
+ 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST 微服务架构弃用了ESB  微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护 开发方面：可以选用自己的技术，可以使用较新的技术 部署方面：可以单独部署，更容易部署和测试 伸缩方面：更容易按需扩展多实例  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
+ 分布式架构下调用的开销，以及服务不可用的处理 数据库拆分后，分布式事务基本不采用，需要最终一致方案 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务） 升级链，如果A依赖于B，需要先升级B，再升级A 部署，需要自动化工具  API网关 门面模式 Facade
+客户端直接和后端服务通讯的问题 / API网关要解决的问题  客户端需要调用多个后端服务，走广域网，非常慢 客户端代码复杂 客户端需要支持后端服务API所使用的通讯协议 后端服务接口无法自由变更，服务之间无法合并和拆分  API网关除了解决上诉问题，还能：
+ 提供负载均衡、缓存、安全/权限控制，监控等 为不同的客户端提供不同的接口  挑战：  需要额外实现和维护一个高可用的组件 可能成为开发瓶颈  实现API网关  性能和高伸缩性  要支持异步、非阻塞通讯 技术选型：Netty, Spring Reactor, &hellip;   使用反应式编程模型 Reactive Programming Model  需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果 需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用 不推荐使用回调实现异步（不直观、不容易理解、容易出错） 推荐使用Reactive 技术选型：CompletableFuture, RxJava   服务调用  同步调用：HTTP、Thrift 异步、消息机制：JMS、AMQP、Zeromq API网关需要这些服务通讯，也应支持上诉通讯机制   服务发现  客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端 服务端发现：注册总心选好后发给客户端，负载均衡在服务端 （这里的客户端指API网关）   处理部分失败  面对服务慢或者不可用的处理。核心是不能阻塞API网关 要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等   技术选型：Netflix Hystrix    进程间通讯 IPC 交互风格     一对一 一对多     同步 Request/Response &ndash;   异步 Notification Publish/Subscribe    Request/Async response Public/Async responses     Request/Response: 发送请求，等待响应。应有超时。线程阻塞 Notification (单向请求): 发送请求，不期待有响应 Request/Async response: 发送请求，不期待有即时响应。线程不阻塞 Publish/Subscribe: 发布请求，多个消费者消费 Publish/Async responses: 发布请求，等待多个响应。有超时  接口设计  基于消息：定义消息channel和消息类型 基于HTTP：定义URL、请求和响应格式  接口升级  向前兼容的小升级，比如增加/删除请求/响应字段：  缺失的字段采用默认值，忽略额外的字段 消息格式要支持，比如Protobuf，Json   大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口  处理部分失败  一定要有超时，不能无限阻塞 要限制客户端向同一服务的请求的数量，如果超限，直接失败 船舱隔离模式：  不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池   电路熔断器模式：  连续超时：断开 等待一段时间：半开放  又有超时：再断开 或不再超时：恢复     要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等    IPC技术 异步、基于消息的通讯 关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、…… 这里不展开'>
 <meta property='og:url' content='http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/'>
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='notes'><meta property='article:tag' content='microservices'><meta property='article:published_time' content='2017-06-23T00:00:00Z'/><meta property='article:modified_time' content='2017-06-23T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <title>【笔记】微服务介绍 • Code One</title>
   <link rel='canonical' href='http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/'>
@@ -125,19 +77,19 @@ z轴：数据分区，靠拆分相似的事物伸缩
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>Distributed systems</a>
+        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>High concurrency</a>
+        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
       </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>Leetcode</a>
+        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
       </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>Microservices</a>
+        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
       </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>Middleware</a>
+        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
       </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>Nim-lang</a>
+        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
       </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>Rust-lang</a>
+        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
       </li></ul>
 </div>
 
@@ -238,156 +190,123 @@ z轴：数据分区，靠拆分相似的事物伸缩
   
 
   <div class='container entry-content'>
-  
-
-<p>原文: <a href="https://www.nginx.com/blog/introduction-to-microservices/" target="_blank">https://www.nginx.com/blog/introduction-to-microservices/</a></p>
-
-<h2 id="单一框架有什么问题-微服务框架解决什么问题">单一框架有什么问题 / 微服务框架解决什么问题？</h2>
-
+  <p>原文: <a href="https://www.nginx.com/blog/introduction-to-microservices/">https://www.nginx.com/blog/introduction-to-microservices/</a></p>
+<h2 id="单一框架有什么问题--微服务框架解决什么问题">单一框架有什么问题 / 微服务框架解决什么问题？</h2>
 <p>单一框架经过常年发展，扩充之后：</p>
-
 <ol>
-<li>过于复杂，难于理解和修改。修改容易引入bug<br /></li>
-<li>启动变慢，降低调试和开发速度<br /></li>
-<li>无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试<br /></li>
-<li>无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求<br /></li>
-<li>可靠性，组件异常（比如内存泄露），导致整个应用异常<br /></li>
-<li>难于升级到新的技术和框架<br />
-<br /></li>
+<li>过于复杂，难于理解和修改。修改容易引入bug</li>
+<li>启动变慢，降低调试和开发速度</li>
+<li>无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试</li>
+<li>无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求</li>
+<li>可靠性，组件异常（比如内存泄露），导致整个应用异常</li>
+<li>难于升级到新的技术和框架</li>
 </ol>
-
 <h2 id="微服务框架">微服务框架</h2>
-
 <ol>
-<li>按功能划分，比如订单管理、客户端管理<br /></li>
-<li>每个微服务是一个单独的小应用<br /></li>
-<li>微服务对外暴露API，比如REST API<br />
-微服务之间可以通过暴露的API互相调用<br />
-微服务间还可以通过消息系统实现异步调用<br />
-外界一般不直接范围后端服务，而是通过API网关<br /></li>
-<li>微服务通常通过虚拟机或Docker部署<br />
-<br /></li>
+<li>按功能划分，比如订单管理、客户端管理</li>
+<li>每个微服务是一个单独的小应用</li>
+<li>微服务对外暴露API，比如REST API
+微服务之间可以通过暴露的API互相调用
+微服务间还可以通过消息系统实现异步调用
+外界一般不直接范围后端服务，而是通过API网关</li>
+<li>微服务通常通过虚拟机或Docker部署</li>
 </ol>
-
 <h3 id="伸缩模型">伸缩模型</h3>
-
-<p>x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题<br />
-y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务<br />
+<p>x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题
+y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务
 z轴：数据分区，靠拆分相似的事物伸缩</p>
-
 <h3 id="微服务架构对数据库schema的影响">微服务架构对数据库schema的影响</h3>
-
-<p>微服务架构要求每个微服务有自己单独的数据库schema<br />
-这是为了更彻底的解耦<br />
+<p>微服务架构要求每个微服务有自己单独的数据库schema
+这是为了更彻底的解耦
 但是不可避免的，多个微服务数据库间存在重复数据</p>
-
 <h3 id="微服务架构和soa的异同">微服务架构和SOA的异同</h3>
-
-<p>微服务架构和SOA在表现层有相似性：都是由多个服务构成<br />
-区别：<br />
-1. 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST<br />
-2. 微服务架构弃用了ESB</p>
-
+<p>微服务架构和SOA在表现层有相似性：都是由多个服务构成
+区别：</p>
+<ol>
+<li>微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST</li>
+<li>微服务架构弃用了ESB</li>
+</ol>
 <h3 id="微服务的好处">微服务的好处</h3>
-
 <ol>
-<li>将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护<br /></li>
-<li>开发方面：可以选用自己的技术，可以使用较新的技术<br /></li>
-<li>部署方面：可以单独部署，更容易部署和测试<br /></li>
-<li>伸缩方面：更容易按需扩展多实例<br />
-<br /></li>
+<li>将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护</li>
+<li>开发方面：可以选用自己的技术，可以使用较新的技术</li>
+<li>部署方面：可以单独部署，更容易部署和测试</li>
+<li>伸缩方面：更容易按需扩展多实例</li>
 </ol>
-
 <h3 id="微服务的问题">微服务的问题</h3>
-
 <p>下面这些问题都不难解决，但是需要清楚存在这些问题</p>
-
 <ol>
-<li>分布式架构下调用的开销，以及服务不可用的处理<br /></li>
-<li>数据库拆分后，分布式事务基本不采用，需要最终一致方案<br /></li>
-<li>测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）<br /></li>
-<li>升级链，如果A依赖于B，需要先升级B，再升级A<br /></li>
-<li>部署，需要自动化工具<br />
-<br /></li>
+<li>分布式架构下调用的开销，以及服务不可用的处理</li>
+<li>数据库拆分后，分布式事务基本不采用，需要最终一致方案</li>
+<li>测试更困难，可能需要启动服务本身和依赖服务（或者伪服务）</li>
+<li>升级链，如果A依赖于B，需要先升级B，再升级A</li>
+<li>部署，需要自动化工具</li>
 </ol>
-
 <h2 id="api网关">API网关</h2>
-
 <p>门面模式 Facade</p>
-
-<h3 id="客户端直接和后端服务通讯的问题-api网关要解决的问题">客户端直接和后端服务通讯的问题 / API网关要解决的问题</h3>
-
+<h3 id="客户端直接和后端服务通讯的问题--api网关要解决的问题">客户端直接和后端服务通讯的问题 / API网关要解决的问题</h3>
 <ol>
-<li>客户端需要调用多个后端服务，走广域网，非常慢<br /></li>
-<li>客户端代码复杂<br /></li>
-<li>客户端需要支持后端服务API所使用的通讯协议<br /></li>
-<li>后端服务接口无法自由变更，服务之间无法合并和拆分<br />
-<br /></li>
+<li>客户端需要调用多个后端服务，走广域网，非常慢</li>
+<li>客户端代码复杂</li>
+<li>客户端需要支持后端服务API所使用的通讯协议</li>
+<li>后端服务接口无法自由变更，服务之间无法合并和拆分</li>
 </ol>
-
-<p>API网关除了解决上诉问题，还能：<br />
-1. 提供负载均衡、缓存、安全/权限控制，监控等<br />
-2. 为不同的客户端提供不同的接口</p>
-
+<p>API网关除了解决上诉问题，还能：</p>
+<ol>
+<li>提供负载均衡、缓存、安全/权限控制，监控等</li>
+<li>为不同的客户端提供不同的接口</li>
+</ol>
 <h3 id="挑战">挑战：</h3>
-
 <ol>
-<li>需要额外实现和维护一个高可用的组件<br /></li>
-<li>可能成为开发瓶颈<br />
-<br /></li>
+<li>需要额外实现和维护一个高可用的组件</li>
+<li>可能成为开发瓶颈</li>
 </ol>
-
 <h3 id="实现api网关">实现API网关</h3>
-
 <ol>
-<li>性能和高伸缩性<br />
-
+<li>性能和高伸缩性
 <ul>
-<li>要支持异步、非阻塞通讯<br /></li>
-<li>技术选型：Netty, Spring Reactor, &hellip;<br /></li>
-</ul></li>
-<li>使用反应式编程模型 Reactive Programming Model<br />
-
+<li>要支持异步、非阻塞通讯</li>
+<li>技术选型：Netty, Spring Reactor, &hellip;</li>
+</ul>
+</li>
+<li>使用反应式编程模型 Reactive Programming Model
 <ul>
-<li>需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果<br /></li>
-<li>需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用<br /></li>
-<li>不推荐使用回调实现异步（不直观、不容易理解、容易出错）<br /></li>
-<li>推荐使用Reactive<br /></li>
-<li>技术选型：CompletableFuture, RxJava<br /></li>
-</ul></li>
-<li>服务调用<br />
-
+<li>需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果</li>
+<li>需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用</li>
+<li>不推荐使用回调实现异步（不直观、不容易理解、容易出错）</li>
+<li>推荐使用Reactive</li>
+<li>技术选型：CompletableFuture, RxJava</li>
+</ul>
+</li>
+<li>服务调用
 <ul>
-<li>同步调用：HTTP、Thrift<br /></li>
-<li>异步、消息机制：JMS、AMQP、Zeromq<br /></li>
-<li>API网关需要这些服务通讯，也应支持上诉通讯机制<br /></li>
-</ul></li>
-<li>服务发现<br />
-
+<li>同步调用：HTTP、Thrift</li>
+<li>异步、消息机制：JMS、AMQP、Zeromq</li>
+<li>API网关需要这些服务通讯，也应支持上诉通讯机制</li>
+</ul>
+</li>
+<li>服务发现
 <ul>
-<li>客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端<br /></li>
-<li>服务端发现：注册总心选好后发给客户端，负载均衡在服务端<br /></li>
-<li>（这里的客户端指API网关）<br /></li>
-</ul></li>
-<li>处理部分失败<br />
-
+<li>客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端</li>
+<li>服务端发现：注册总心选好后发给客户端，负载均衡在服务端</li>
+<li>（这里的客户端指API网关）</li>
+</ul>
+</li>
+<li>处理部分失败
 <ul>
-<li>面对服务慢或者不可用的处理。核心是不能阻塞API网关<br /></li>
-<li>要根据服务是否重要，选择：<br />
-
+<li>面对服务慢或者不可用的处理。核心是不能阻塞API网关</li>
+<li>要根据服务是否重要，选择：
 <ul>
-<li>直接返回给客户端错误<br /></li>
-<li>返回空、默认值、缓存值、备份数据等<br /></li>
-</ul></li>
-<li>技术选型：Netflix Hystrix<br />
-<br /></li>
-</ul></li>
+<li>直接返回给客户端错误</li>
+<li>返回空、默认值、缓存值、备份数据等</li>
+</ul>
+</li>
+<li>技术选型：Netflix Hystrix</li>
+</ul>
+</li>
 </ol>
-
 <h2 id="进程间通讯-ipc">进程间通讯 IPC</h2>
-
 <h3 id="交互风格">交互风格</h3>
-
 <table>
 <thead>
 <tr>
@@ -396,20 +315,17 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
 <th>一对多</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>同步</td>
 <td>Request/Response</td>
 <td>&ndash;</td>
 </tr>
-
 <tr>
 <td>异步</td>
 <td>Notification</td>
 <td>Publish/Subscribe</td>
 </tr>
-
 <tr>
 <td></td>
 <td>Request/Async response</td>
@@ -417,287 +333,264 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
 </tr>
 </tbody>
 </table>
-
 <ol>
-<li>Request/Response: 发送请求，等待响应。应有超时。线程阻塞<br /></li>
-<li>Notification (单向请求): 发送请求，不期待有响应<br /></li>
-<li>Request/Async response: 发送请求，不期待有即时响应。线程不阻塞<br /></li>
-<li>Publish/Subscribe: 发布请求，多个消费者消费<br /></li>
-<li>Publish/Async responses: 发布请求，等待多个响应。有超时<br />
-<br /></li>
+<li>Request/Response: 发送请求，等待响应。应有超时。线程阻塞</li>
+<li>Notification (单向请求): 发送请求，不期待有响应</li>
+<li>Request/Async response: 发送请求，不期待有即时响应。线程不阻塞</li>
+<li>Publish/Subscribe: 发布请求，多个消费者消费</li>
+<li>Publish/Async responses: 发布请求，等待多个响应。有超时</li>
 </ol>
-
 <h3 id="接口设计">接口设计</h3>
-
 <ol>
-<li>基于消息：定义消息channel和消息类型<br /></li>
-<li>基于HTTP：定义URL、请求和响应格式<br />
-<br /></li>
+<li>基于消息：定义消息channel和消息类型</li>
+<li>基于HTTP：定义URL、请求和响应格式</li>
 </ol>
-
 <h3 id="接口升级">接口升级</h3>
-
 <ol>
-<li>向前兼容的小升级，比如增加/删除请求/响应字段：<br />
-
+<li>向前兼容的小升级，比如增加/删除请求/响应字段：
 <ul>
-<li>缺失的字段采用默认值，忽略额外的字段<br /></li>
-<li>消息格式要支持，比如Protobuf，Json<br /></li>
-</ul></li>
-<li>大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口<br />
-<br /></li>
+<li>缺失的字段采用默认值，忽略额外的字段</li>
+<li>消息格式要支持，比如Protobuf，Json</li>
+</ul>
+</li>
+<li>大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口</li>
 </ol>
-
 <h3 id="处理部分失败">处理部分失败</h3>
-
 <ul>
-<li>一定要有超时，不能无限阻塞<br /></li>
-<li>要限制客户端向同一服务的请求的数量，如果超限，直接失败<br /></li>
-<li>船舱隔离模式：<br />
-
+<li>一定要有超时，不能无限阻塞</li>
+<li>要限制客户端向同一服务的请求的数量，如果超限，直接失败</li>
+<li>船舱隔离模式：
 <ul>
-<li>不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池<br /></li>
-</ul></li>
-<li>电路熔断器模式：<br />
-
-<ul>
-<li>连续超时：断开<br /></li>
-<li>等待一段时间：半开放<br />
-
-<ul>
-<li>又有超时：再断开<br /></li>
-<li>或不再超时：恢复<br /></li>
-</ul></li>
-</ul></li>
-<li>要根据服务是否重要，选择：<br />
-
-<ul>
-<li>直接返回给客户端错误<br /></li>
-<li>返回空、默认值、缓存值、备份数据等<br />
-<br /></li>
-</ul></li>
+<li>不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池</li>
 </ul>
-
+</li>
+<li>电路熔断器模式：
+<ul>
+<li>连续超时：断开</li>
+<li>等待一段时间：半开放
+<ul>
+<li>又有超时：再断开</li>
+<li>或不再超时：恢复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>要根据服务是否重要，选择：
+<ul>
+<li>直接返回给客户端错误</li>
+<li>返回空、默认值、缓存值、备份数据等</li>
+</ul>
+</li>
+</ul>
 <h3 id="ipc技术">IPC技术</h3>
-
-<h4 id="异步-基于消息的通讯">异步、基于消息的通讯</h4>
-
-<p>关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、……<br />
+<h4 id="异步基于消息的通讯">异步、基于消息的通讯</h4>
+<p>关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、……
 这里不展开</p>
-
 <ul>
-<li>好处<br />
-
+<li>好处
 <ol>
-<li>客户端和服务解耦。客户端也不需要使用服务发现机制<br /></li>
-<li>消息缓存。支持消费者不实时在线<br /></li>
-<li>支持上面提到的所有交互风格<br /></li>
-<li>是显式IPC，不像有些RPC机制，尝试屏蔽是远程调用的事实。开发者有更好的意识和控制权<br /></li>
-</ol></li>
-<li>缺点<br />
-
+<li>客户端和服务解耦。客户端也不需要使用服务发现机制</li>
+<li>消息缓存。支持消费者不实时在线</li>
+<li>支持上面提到的所有交互风格</li>
+<li>是显式IPC，不像有些RPC机制，尝试屏蔽是远程调用的事实。开发者有更好的意识和控制权</li>
+</ol>
+</li>
+<li>缺点
 <ol>
-<li>额外的操作复杂性，需要引入一个高可用的消息中间件（这个应该不是问题）<br /></li>
-<li>用来实现Request/Response比较复杂：<br />
-
+<li>额外的操作复杂性，需要引入一个高可用的消息中间件（这个应该不是问题）</li>
+<li>用来实现Request/Response比较复杂：
 <ul>
-<li>客户端的请求消息要带上响应的channel和唯一id<br /></li>
-<li>服务的响应消息要带上这个唯一id，发送到响应channel<br /></li>
-<li>客户端要用唯一id，从响应channel找到匹配响应消息<br /></li>
-<li>不难理解，但是确实比直接基于请求/响应的机制更复杂<br />
-<br /></li>
-</ul></li>
-</ol></li>
+<li>客户端的请求消息要带上响应的channel和唯一id</li>
+<li>服务的响应消息要带上这个唯一id，发送到响应channel</li>
+<li>客户端要用唯一id，从响应channel找到匹配响应消息</li>
+<li>不难理解，但是确实比直接基于请求/响应的机制更复杂</li>
 </ul>
-
-<h4 id="同步-基于请求-响应的通讯">同步、基于请求/响应的通讯</h4>
-
-<ul>
-<li>REST<br />
-
-<ul>
-<li>核心是“资源”，基于HTTP请求类型和参数，实现资源的“增删改查”<br /></li>
-<li>REST定义也有不同的级别，从POST到同一URL，靠参数指定操作和对象，到靠HTTP请求类型指定操作，不同URL指定操作对象。不绝对<br /></li>
-<li>优势<br />
-
-<ul>
-<li>基于HTTP，简单熟悉<br /></li>
-<li>构造请求简单，测试方便<br /></li>
-<li>天然支持请求/响应模式<br /></li>
-<li>防火墙友好<br /></li>
-<li>无中间层，系统结构简单<br /></li>
-</ul></li>
-<li>缺点<br />
-
-<ul>
-<li>对逻辑上的单向请求（Notification），服务端也要发响应<br /></li>
-<li>服务端必须实时在线<br /></li>
-<li>客户端和服务端耦合。需要有服务发现机制<br /></li>
-</ul></li>
-<li>IDL：RAML和Swagger<br /></li>
-</ul></li>
-<li>Thrift<br />
-
-<ul>
-<li>支持请求/响应和通知（单向）<br /></li>
-<li>支持Json、二进制和压缩二进制。取舍是人工可读和占空间大小<br /></li>
-<li>支持HTTP和TCP。取舍是是否防火墙友好和效率<br />
-<br /></li>
-</ul></li>
+</li>
+</ol>
+</li>
 </ul>
-
+<h4 id="同步基于请求响应的通讯">同步、基于请求/响应的通讯</h4>
+<ul>
+<li>REST
+<ul>
+<li>核心是“资源”，基于HTTP请求类型和参数，实现资源的“增删改查”</li>
+<li>REST定义也有不同的级别，从POST到同一URL，靠参数指定操作和对象，到靠HTTP请求类型指定操作，不同URL指定操作对象。不绝对</li>
+<li>优势
+<ul>
+<li>基于HTTP，简单熟悉</li>
+<li>构造请求简单，测试方便</li>
+<li>天然支持请求/响应模式</li>
+<li>防火墙友好</li>
+<li>无中间层，系统结构简单</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>对逻辑上的单向请求（Notification），服务端也要发响应</li>
+<li>服务端必须实时在线</li>
+<li>客户端和服务端耦合。需要有服务发现机制</li>
+</ul>
+</li>
+<li>IDL：RAML和Swagger</li>
+</ul>
+</li>
+<li>Thrift
+<ul>
+<li>支持请求/响应和通知（单向）</li>
+<li>支持Json、二进制和压缩二进制。取舍是人工可读和占空间大小</li>
+<li>支持HTTP和TCP。取舍是是否防火墙友好和效率</li>
+</ul>
+</li>
+</ul>
 <h2 id="服务发现">服务发现</h2>
-
 <h3 id="为什么需要服务发现">为什么需要服务发现</h3>
-
 <ol>
-<li>集群动态伸缩<br /></li>
-<li>基于Container的部署方式，IP和端口也是动态分配的<br />
-<br /></li>
+<li>集群动态伸缩</li>
+<li>基于Container的部署方式，IP和端口也是动态分配的</li>
 </ol>
-
 <h3 id="服务发现方式">服务发现方式</h3>
-
 <ol>
-<li>客户端发现模式<br />
-
+<li>客户端发现模式
 <ol>
-<li>服务端在启动时向注册中心注册、停止时取消注册、靠心跳刷新<br /></li>
-<li>客户端向注册中心获取服务端列表<br /></li>
-<li>客户端主动负载均衡，比如采用一致性hash<br /></li>
-<li>优点：直接<br /></li>
-<li>优点：可根据业务灵活选用负载均衡策略<br /></li>
-<li>缺点：客户端和注册中心耦合<br /></li>
-<li>实现技巧：客户端和服务端均在注册中心注册，便于服务端变更时，注册中心主动推送。参考dubbo<br /></li>
-</ol></li>
-<li>服务端发现模式<br />
-
-<ol>
-<li>客户端请求发给负载均衡服务器<br /></li>
-<li>负载均衡服务器负责和注册中心通讯<br /></li>
-<li>优点：客户端和服务发现逻辑解耦<br /></li>
-<li>缺点：需要高可用的负载均衡服务器<br />
-<br /></li>
-</ol></li>
+<li>服务端在启动时向注册中心注册、停止时取消注册、靠心跳刷新</li>
+<li>客户端向注册中心获取服务端列表</li>
+<li>客户端主动负载均衡，比如采用一致性hash</li>
+<li>优点：直接</li>
+<li>优点：可根据业务灵活选用负载均衡策略</li>
+<li>缺点：客户端和注册中心耦合</li>
+<li>实现技巧：客户端和服务端均在注册中心注册，便于服务端变更时，注册中心主动推送。参考dubbo</li>
 </ol>
-
+</li>
+<li>服务端发现模式
+<ol>
+<li>客户端请求发给负载均衡服务器</li>
+<li>负载均衡服务器负责和注册中心通讯</li>
+<li>优点：客户端和服务发现逻辑解耦</li>
+<li>缺点：需要高可用的负载均衡服务器</li>
+</ol>
+</li>
+</ol>
 <h3 id="注册中心">注册中心</h3>
-
-<p>参考：Zookeeper<br />
-注册方式：<br />
-1. 自注册：优点：直接；缺点：服务和注册中心耦合<br />
-2. 第三方组件注册：优点：解耦；缺点：额外高可用组件</p>
-
+<p>参考：Zookeeper
+注册方式：</p>
+<ol>
+<li>自注册：优点：直接；缺点：服务和注册中心耦合</li>
+<li>第三方组件注册：优点：解耦；缺点：额外高可用组件</li>
+</ol>
 <h2 id="事件驱动数据模型">事件驱动数据模型</h2>
-
-<p>数据随着微服务拆分，带来下面的挑战：<br />
-1. 跨服务事务的一致性<br />
-    - 2PC 两阶段提交在此情况下不可用，CAP要优先满足A，或者BASE<br />
-2. 怎样从多个服务请求数据</p>
-
+<p>数据随着微服务拆分，带来下面的挑战：</p>
+<ol>
+<li>跨服务事务的一致性
+<ul>
+<li>2PC 两阶段提交在此情况下不可用，CAP要优先满足A，或者BASE</li>
+</ul>
+</li>
+<li>怎样从多个服务请求数据</li>
+</ol>
 <h3 id="事件驱动架构">事件驱动架构</h3>
-
 <ol>
-<li>将跨服务的事务划分为多步<br /></li>
-<li>每一步，一个微服务更新业务对象（本地事务），同时产生一个事件以激发下一步<br /></li>
-<li>事件通过消息系统传递<br />
-<br /></li>
+<li>将跨服务的事务划分为多步</li>
+<li>每一步，一个微服务更新业务对象（本地事务），同时产生一个事件以激发下一步</li>
+<li>事件通过消息系统传递</li>
 </ol>
-
-<p>例子：创建订单<br />
-1. 订单服务创建订单，状态为NEW，然后发布订单创建消息到消息系统<br />
-2. 客户服务收到订单创建消息，预留订单费用，发布预留订单费用消息<br />
-    - 预留费用至少涉及到两个表，是一个本地事务。要能想到<br />
-    - 1. <code>customer.credit_limit - sum(reserved_credit.amount) &gt;= order_total</code><br />
-    - 2. <code>insert into reserved_credit (... amount) values (... order_total)</code><br />
-    - 如果要保证事务发送成功，事务里还要包括第3个表，事务表（见下）<br />
-    - <img src="Richardson-microservices-part5-credit-check-2-e1449727579423.png" alt="" /><br />
-3. 订单服务收到预留订单费用消息，将订单状态更新为OPEN</p>
-
+<p>例子：创建订单</p>
+<ol>
+<li>订单服务创建订单，状态为NEW，然后发布订单创建消息到消息系统</li>
+<li>客户服务收到订单创建消息，预留订单费用，发布预留订单费用消息
+<ul>
+<li>预留费用至少涉及到两个表，是一个本地事务。要能想到</li>
+<li>
+<ol>
+<li><code>customer.credit_limit - sum(reserved_credit.amount) &gt;= order_total</code></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><code>insert into reserved_credit (... amount) values (... order_total)</code></li>
+</ol>
+</li>
+<li>如果要保证事务发送成功，事务里还要包括第3个表，事务表（见下）</li>
+<li><img src="Richardson-microservices-part5-credit-check-2-e1449727579423.png" alt=""></li>
+</ul>
+</li>
+<li>订单服务收到预留订单费用消息，将订单状态更新为OPEN</li>
+</ol>
 <p>因为服务统一向消息系统发事务，可以有一个视图服务，订阅这些事务，更新事务，实现跨服务查询</p>
-
 <h3 id="原子性">原子性</h3>
-
 <ol>
-<li>使用本地事务发布事件<br />
-
+<li>使用本地事务发布事件
 <ul>
-<li>将操作业务对象和插入事件表放到一个事务里面<br /></li>
-<li><img src="Richardson-microservices-part5-local-transaction-e1449727484579.png" alt="" /><br /></li>
-<li>事件发布者轮询事件表，确保事件发送成功 at least once<br /></li>
-</ul></li>
-<li>挖掘数据库事务日志<br />
-
+<li>将操作业务对象和插入事件表放到一个事务里面</li>
+<li><img src="Richardson-microservices-part5-local-transaction-e1449727484579.png" alt=""></li>
+<li>事件发布者轮询事件表，确保事件发送成功 at least once</li>
+</ul>
+</li>
+<li>挖掘数据库事务日志
 <ul>
-<li>实现较复杂<br /></li>
-</ul></li>
-<li>使用事件源<br />
-
+<li>实现较复杂</li>
+</ul>
+</li>
+<li>使用事件源
 <ul>
-<li>保存的不是结果，而是操作步骤<br /></li>
-<li>逻辑较复杂<br />
-<br /></li>
-</ul></li>
+<li>保存的不是结果，而是操作步骤</li>
+<li>逻辑较复杂</li>
+</ul>
+</li>
 </ol>
-
 <h2 id="部署">部署</h2>
-
 <ol>
-<li>每微服务一虚拟机<br />
-
+<li>每微服务一虚拟机
 <ul>
-<li>隔离性高<br /></li>
-<li>开销大<br /></li>
-</ul></li>
-<li>每微服务一容器<br />
-
+<li>隔离性高</li>
+<li>开销大</li>
+</ul>
+</li>
+<li>每微服务一容器
 <ul>
-<li>隔离性低<br /></li>
-<li>开销小<br /></li>
-<li>实现：Docker<br />
-<br /></li>
-</ul></li>
+<li>隔离性低</li>
+<li>开销小</li>
+<li>实现：Docker</li>
+</ul>
+</li>
 </ol>
-
 <h2 id="重构单一架构到微服务架构">重构单一架构到微服务架构</h2>
-
 <ol>
-<li>新功能直接使用微服务实现<br />
-
+<li>新功能直接使用微服务实现
 <ul>
-<li>前端路由请求到旧单一应用和新微服务<br /></li>
-<li>新微服务使用“胶水代码”访问旧单一应用<br /></li>
-<li>访问旧单一应用的数据<br />
-
+<li>前端路由请求到旧单一应用和新微服务</li>
+<li>新微服务使用“胶水代码”访问旧单一应用</li>
+<li>访问旧单一应用的数据
 <ul>
-<li>远程调用旧单一应用接口<br /></li>
-<li>直接访问旧单一应用数据库<br /></li>
-<li>维护独立数据，和旧数据库同步<br /></li>
-</ul></li>
-</ul></li>
-<li>拆分前后端<br />
-
+<li>远程调用旧单一应用接口</li>
+<li>直接访问旧单一应用数据库</li>
+<li>维护独立数据，和旧数据库同步</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拆分前后端
 <ul>
-<li>最容易拆的是表现层和逻辑层。逻辑层和数据层稍难<br /></li>
-<li>表现层拆出来后便于独立开发和A/B测试<br /></li>
-</ul></li>
-<li>拆模块<br />
-
+<li>最容易拆的是表现层和逻辑层。逻辑层和数据层稍难</li>
+<li>表现层拆出来后便于独立开发和A/B测试</li>
+</ul>
+</li>
+<li>拆模块
 <ul>
-<li>优先级<br />
-
+<li>优先级
 <ul>
-<li>先拆变化频繁的，便于加速后继开发<br /></li>
-<li>再拆资源要求不一样的，便于分开部署和伸缩<br /></li>
-<li>再拆和其它模块交互较粗的，比如通过消息系统交互的<br /></li>
-</ul></li>
-<li>步骤<br />
-
+<li>先拆变化频繁的，便于加速后继开发</li>
+<li>再拆资源要求不一样的，便于分开部署和伸缩</li>
+<li>再拆和其它模块交互较粗的，比如通过消息系统交互的</li>
+</ul>
+</li>
+<li>步骤
 <ol>
-<li>模块和剩余部分改成IPC通讯<br /></li>
-<li>将模块独立成微服务<br /></li>
-</ol></li>
-</ul></li>
+<li>模块和剩余部分改成IPC通讯</li>
+<li>将模块独立成微服务</li>
+</ol>
+</li>
+</ul>
+</li>
 </ol>
 
 </div>
@@ -710,7 +603,7 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/microservices/'>Microservices</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/microservices/'>microservices</a></div>
 
   </div>
 </footer>
@@ -733,68 +626,13 @@ z轴：数据分区，靠拆分相似的事物伸缩</p>
 </nav>
 
 
-<section id='comments' class='comments'>
-  <div class='container sep-before'>
-    <div class='comments-area'><div id='submission-success' class='comment-submission-feedback'>
-  <h4>Thank You!</h4>
-  <span>Your comment has been submitted. It will appear on this page shortly!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
 
-<div id='submission-failure' class='comment-submission-feedback'>
-  <h4>Yikes, Sorry!</h4>
-  <span>Error occured. Couldn&#39;t submit your comment. Please try again. Thank You!</span>
-  <a href='#comments' class='button'>OK</a>
-</div>
-
-
-
-
-<div id='respond' class='comment-respond'>
-  <h4 class='comment-reply-title'>Leave a comment<small>
-      <a rel='nofollow' id='cancel-comment-reply-link' href='#respond' class='button' style='display:none' aria-label='Cancel comment'>Cancel</a>
-    </small>
-  </h4>
-  <form action='https://api.staticman.net/v2/entry/feng1st/feng1st.github.io-src/master/comments' method='post' id='comment-form' class='comment-form'>
-    <input type='hidden' name='options[postId]' value='0cd3dcccdf62ea120ff8aced55398e9d'>
-    <input type='hidden' name='options[redirect]' value='http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/#submission-success'>
-    <input type='hidden' name='options[redirectError]' value='http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/#submission-failure'>
-
-    <input type='address' name='fields[honeypot]' style='display:none'>
-    <input type='hidden' name='fields[permalink]' value='/notes/2017/2017-06-23-introduction-to-microservices/'>
-    <input type='hidden' name='fields[parent_id]' value=''>
-
-    <div>
-      <label for='comment'>Comment*</label>
-      <textarea id='comment' name='fields[content]' required rows='3'></textarea>
-    </div>
-    <div>
-      <label for='name'>Name*</label>
-      <input id='name' name='fields[author]' type='text' required>
-    </div>
-    <div>
-      <label for='email'>Email*</label>
-      <input id='email' name='fields[email]' type='email' required>
-    </div>
-    <div>
-      <label for='url'>Website</label>
-      <input id='url' name='fields[site]' type='url'>
-    </div>
-    <div>
-      <button type='submit'>Comment!</button>
-    </div>
-  </form>
-</div>
-
-</div>
-  </div>
-</section>
 
       </main>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2018 feng1st </p>
+  <p> &copy; 2017-2021 feng1st </p>
 </div>
 
         </div>
