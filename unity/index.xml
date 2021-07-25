@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unity on Code One</title>
+    <link>http://codeone.io/unity/</link>
+    <description>Recent content in Unity on Code One</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Solutions to Unity LEGO Microgame tutorial build issues under Ubuntu</title>
+      <link>http://codeone.io/unity/2021-07-24-solutions-to-unity-lego-microgame-tutorial-build-issues-under-ubuntu/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/unity/2021-07-24-solutions-to-unity-lego-microgame-tutorial-build-issues-under-ubuntu/</guid>
+      <description>The Unity LEGO Microgame tutorial failed at the step &amp;ldquo;Build, publish, &amp;amp; BONUS&amp;rdquo; due to some WebGL build issues. The system is Ubuntu 21.04 and the Unity is 2020.3.14f1. Here are the issues and solutions：
+ System.ComponentModel.Win32Exception (2): No such file or directory
+ sudo apt install python2
+ Exception: Unity.IL2CPP.Building.BuilderFailedException: /home/user/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/Emscripten_FastComp_Linux/clang++: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+ sudo apt install libtinfo5</description>
+    </item>
+    
+  </channel>
+</rss>

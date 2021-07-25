@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>thoughts on Code One</title>
+    <link>http://codeone.io/tags/thoughts/</link>
+    <description>Recent content in thoughts on Code One</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/thoughts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不是能做什么，不是想做什么，而是需要什么</title>
+      <link>http://codeone.io/thoughts/2021/2021-07-22-about-how-to-design-games/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/thoughts/2021/2021-07-22-about-how-to-design-games/</guid>
+      <description>游戏开发第一不是你能实现什么，包括别人已经实现的，和还没实现的。否则就会变成技术自嗨。 第二不（完全）是你喜欢什么，你喜欢的东西有很多回忆因素在里面，可能已经过时。 而是玩家需要什么，再强调一遍，玩家需要什么。
+这里面的折中点是，尽量发掘新的个人爱好，尽量贴近玩家的需求，这需要更开放的心态。</description>
+    </item>
+    
+  </channel>
+</rss>
