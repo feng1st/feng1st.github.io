@@ -5,11 +5,20 @@
     <link>http://codeone.io/tags/</link>
     <description>Recent content in Tags on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>scripting</title>
+      <link>http://codeone.io/tags/scripting/</link>
+      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/tags/scripting/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>unity</title>
       <link>http://codeone.io/tags/unity/</link>
-      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>http://codeone.io/tags/unity/</guid>
       <description></description>

@@ -5,7 +5,16 @@
     <link>http://codeone.io/unity/</link>
     <description>Recent content in Unity on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity with VS Code and IntelliSense on Ubuntu</title>
+      <link>http://codeone.io/unity/2021-07-31-unity-scripting-intellisense-on-linux/</link>
+      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeone.io/unity/2021-07-31-unity-scripting-intellisense-on-linux/</guid>
+      <description>Install latest Mono release: https://www.mono-project.com/download/stable/. Add [arch=amd64] as following if your architecture is amd64:  echo &amp;quot;deb [arch=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main&amp;quot; | sudo tee /etc/apt/sources.list.d/mono-official-stable.list Install .NET SDK from here: https://docs.microsoft.com/en-us/dotnet/core/install/linux. Install VS Code from .deb file https://code.visualstudio.com/docs/setup/linux. Open VS Code and install the C# extension (ms-dotnettools.csharp). Open VS Code, go to menu File &amp;gt; Preferences &amp;gt; Settings &amp;gt; Extension &amp;gt; C# configuration. Look for &amp;ldquo;Omnisharp: Use Global Mono&amp;rdquo;, and set it to &amp;ldquo;always&amp;rdquo;.</description>
+    </item>
+    
     <item>
       <title>Solutions to Unity LEGO Microgame tutorial build issues under Ubuntu</title>
       <link>http://codeone.io/unity/2021-07-24-solutions-to-unity-lego-microgame-tutorial-build-issues-under-ubuntu/</link>
