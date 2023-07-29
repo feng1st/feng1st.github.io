@@ -5,52 +5,8 @@
     <link>http://codeone.io/tags/</link>
     <description>Recent content in Tags on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>scripting</title>
-      <link>http://codeone.io/tags/scripting/</link>
-      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/scripting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>unity</title>
-      <link>http://codeone.io/tags/unity/</link>
-      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/unity/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>webgl</title>
-      <link>http://codeone.io/tags/webgl/</link>
-      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/webgl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>thoughts</title>
-      <link>http://codeone.io/tags/thoughts/</link>
-      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/thoughts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rust-lang</title>
-      <link>http://codeone.io/tags/rust-lang/</link>
-      <pubDate>Sat, 25 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/rust-lang/</guid>
-      <description></description>
-    </item>
-    
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>leetcode</title>
       <link>http://codeone.io/tags/leetcode/</link>
@@ -66,42 +22,6 @@
       <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://codeone.io/tags/nim-lang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>microservices</title>
-      <link>http://codeone.io/tags/microservices/</link>
-      <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/microservices/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>high concurrency</title>
-      <link>http://codeone.io/tags/high-concurrency/</link>
-      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/high-concurrency/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>distributed systems</title>
-      <link>http://codeone.io/tags/distributed-systems/</link>
-      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/distributed-systems/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>middleware</title>
-      <link>http://codeone.io/tags/middleware/</link>
-      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/middleware/</guid>
       <description></description>
     </item>
     

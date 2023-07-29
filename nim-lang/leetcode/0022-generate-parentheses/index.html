@@ -4,18 +4,18 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
-[ &quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &lt; n: backtrack(res, str &amp; &#39;(&#39;, n, open &#43; 1, close) if close &lt; open: backtrack(res, str &amp; &#39;)&#39;, n, open, close &#43; 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &#34;&#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34;] '>
+[ &#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &lt; n: backtrack(res, str &amp; &#39;(&#39;, n, open &#43; 1, close) if close &lt; open: backtrack(res, str &amp; &#39;)&#39;, n, open, close &#43; 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &#34;&#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34;] '>
 <meta name='theme-color' content='#c9d6e0'>
 
 <meta property='og:title' content='[Nim4LeetCode] 22. Generate Parentheses • Code One'>
 <meta property='og:description' content='Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
-[ &quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &lt; n: backtrack(res, str &amp; &#39;(&#39;, n, open &#43; 1, close) if close &lt; open: backtrack(res, str &amp; &#39;)&#39;, n, open, close &#43; 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &#34;&#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34;] '>
+[ &#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &lt; n: backtrack(res, str &amp; &#39;(&#39;, n, open &#43; 1, close) if close &lt; open: backtrack(res, str &amp; &#39;)&#39;, n, open, close &#43; 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &#34;&#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&#34;((()))&#34;, &#34;(()())&#34;, &#34;(())()&#34;, &#34;()(())&#34;, &#34;()()()&#34;] '>
 <meta property='og:url' content='http://codeone.io/nim-lang/leetcode/0022-generate-parentheses/'>
 <meta property='og:site_name' content='Code One'>
 <meta property='og:type' content='article'><meta property='article:section' content='nim-lang'><meta property='article:tag' content='nim-lang'><meta property='article:tag' content='leetcode'><meta property='article:published_time' content='2018-03-28T00:00:00Z'/><meta property='article:modified_time' content='2018-03-28T00:00:00Z'/><meta name='twitter:card' content='summary'>
 
-<meta name="generator" content="Hugo 0.80.0" />
+<meta name="generator" content="Hugo 0.115.4">
 
   <title>[Nim4LeetCode] 22. Generate Parentheses • Code One</title>
   <link rel='canonical' href='http://codeone.io/nim-lang/leetcode/0022-generate-parentheses/'>
@@ -61,27 +61,9 @@ For example, given n = 3, a solution set is:
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/distributed-systems/' style='font-size:1em'>distributed systems</a>
+        <a href='/tags/leetcode/' style='font-size:1em'>leetcode</a>
       </li><li>
-        <a href='/tags/high-concurrency/' style='font-size:1em'>high concurrency</a>
-      </li><li>
-        <a href='/tags/leetcode/' style='font-size:2em'>leetcode</a>
-      </li><li>
-        <a href='/tags/microservices/' style='font-size:1em'>microservices</a>
-      </li><li>
-        <a href='/tags/middleware/' style='font-size:1em'>middleware</a>
-      </li><li>
-        <a href='/tags/nim-lang/' style='font-size:2em'>nim-lang</a>
-      </li><li>
-        <a href='/tags/rust-lang/' style='font-size:1em'>rust-lang</a>
-      </li><li>
-        <a href='/tags/scripting/' style='font-size:1em'>scripting</a>
-      </li><li>
-        <a href='/tags/thoughts/' style='font-size:1em'>thoughts</a>
-      </li><li>
-        <a href='/tags/unity/' style='font-size:1.0384615384615385em'>unity</a>
-      </li><li>
-        <a href='/tags/webgl/' style='font-size:1em'>webgl</a>
+        <a href='/tags/nim-lang/' style='font-size:1em'>nim-lang</a>
       </li></ul>
 </div>
 
@@ -124,16 +106,8 @@ For example, given n = 3, a solution set is:
 </button>
     <ul><li class='item'>
         <a href='/'>Home</a>
-      </li><li class='item'>
-        <a href='/thoughts/'>Thoughts</a>
-      </li><li class='item'>
-        <a href='/notes/'>Notes</a>
-      </li><li class='item'>
-        <a href='/unity/'>Unity</a>
-      </li><li class='item'>
-        <a href='/rust-lang/'>Rust Language</a>
-      </li><li class='item'>
-        <a href='/nim-lang/'>Nim Language</a>
+      </li><li class='item current'>
+        <a aria-current='page' href='/nim-lang/'>Nim Language</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -206,31 +180,31 @@ One min read
   <h2 id="problem">Problem</h2>
 <p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
 <p>For example, given n = 3, a solution set is:</p>
-<pre><code>[
-  &quot;((()))&quot;,
-  &quot;(()())&quot;,
-  &quot;(())()&quot;,
-  &quot;()(())&quot;,
-  &quot;()()()&quot;
+<pre tabindex="0"><code>[
+  &#34;((()))&#34;,
+  &#34;(()())&#34;,
+  &#34;(())()&#34;,
+  &#34;()(())&#34;,
+  &#34;()()()&#34;
 ]
 </code></pre><h2 id="solution">Solution</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nim" data-lang="nim"><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">backtrack</span>(res: <span style="color:#66d9ef">var</span> <span style="color:#66d9ef">seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>, str: <span style="color:#66d9ef">string</span>, n, open, close: <span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span>
-  <span style="color:#66d9ef">if</span> open <span style="color:#f92672">==</span> n <span style="color:#f92672">and</span> close <span style="color:#f92672">==</span> n:
-    res.add(str)
-    <span style="color:#66d9ef">return</span>
-  <span style="color:#66d9ef">if</span> open <span style="color:#f92672">&lt;</span> n:
-    backtrack(res, str <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;(&#39;</span>, n, open <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, close)
-  <span style="color:#66d9ef">if</span> close <span style="color:#f92672">&lt;</span> open:
-    backtrack(res, str <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;)&#39;</span>, n, open, close <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-
-<span style="color:#66d9ef">proc </span><span style="color:#a6e22e">generateParenthesis</span>(n: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span>
-  result <span style="color:#f92672">=</span> newSeq<span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>()
-  backtrack(result, <span style="color:#e6db74">&#34;&#34;</span>, n, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
-
-<span style="color:#66d9ef">when</span> isMainModule:
-  assert generateParenthesis(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span>
-    <span style="color:#f92672">@[</span><span style="color:#e6db74">&#34;((()))&#34;</span>, <span style="color:#e6db74">&#34;(()())&#34;</span>, <span style="color:#e6db74">&#34;(())()&#34;</span>, <span style="color:#e6db74">&#34;()(())&#34;</span>, <span style="color:#e6db74">&#34;()()()&#34;</span><span style="color:#f92672">]</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nim" data-lang="nim"><span style="display:flex;"><span><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">backtrack</span>(res: <span style="color:#66d9ef">var</span> <span style="color:#66d9ef">seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>, str: <span style="color:#66d9ef">string</span>, n, open, close: <span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> open <span style="color:#f92672">==</span> n <span style="color:#f92672">and</span> close <span style="color:#f92672">==</span> n:
+</span></span><span style="display:flex;"><span>    res.add(str)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> open <span style="color:#f92672">&lt;</span> n:
+</span></span><span style="display:flex;"><span>    backtrack(res, str <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;(&#39;</span>, n, open <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, close)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> close <span style="color:#f92672">&lt;</span> open:
+</span></span><span style="display:flex;"><span>    backtrack(res, str <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;)&#39;</span>, n, open, close <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">proc </span><span style="color:#a6e22e">generateParenthesis</span>(n: <span style="color:#66d9ef">int</span>): <span style="color:#66d9ef">seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> newSeq<span style="color:#f92672">[</span><span style="color:#66d9ef">string</span><span style="color:#f92672">]</span>()
+</span></span><span style="display:flex;"><span>  backtrack(result, <span style="color:#e6db74">&#34;&#34;</span>, n, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">when</span> isMainModule:
+</span></span><span style="display:flex;"><span>  assert generateParenthesis(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@[</span><span style="color:#e6db74">&#34;((()))&#34;</span>, <span style="color:#e6db74">&#34;(()())&#34;</span>, <span style="color:#e6db74">&#34;(())()&#34;</span>, <span style="color:#e6db74">&#34;()(())&#34;</span>, <span style="color:#e6db74">&#34;()()()&#34;</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div>
 </div>
 
   
@@ -295,7 +269,7 @@ One min read
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p> &copy; 2017-2021 feng1st </p>
+  <p> &copy; 2017-2023 feng1st </p>
 </div>
 
         </div>

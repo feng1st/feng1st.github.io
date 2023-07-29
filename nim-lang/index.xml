@@ -5,6 +5,7 @@
     <link>http://codeone.io/nim-lang/</link>
     <description>Recent content in Nim Language on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/nim-lang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Nim4LeetCode] 27. Remove Element</title>
@@ -28,7 +29,7 @@ Given nums = [3,2,2,3], val = 3, Your function should return length = 2, with th
       <description>Problem Given a sorted array, remove the duplicates in-place such that each element appear only once and return the new length.
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 Example:
-Given nums = [1,1,2], Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn&#39;t matter what you leave beyond the new length.</description>
+Given nums = [1,1,2], Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn&amp;#39;t matter what you leave beyond the new length.</description>
     </item>
     
     <item>
@@ -72,7 +73,7 @@ Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref
       <guid>http://codeone.io/nim-lang/leetcode/0022-generate-parentheses/</guid>
       <description>Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
-[ &amp;quot;((()))&amp;quot;, &amp;quot;(()())&amp;quot;, &amp;quot;(())()&amp;quot;, &amp;quot;()(())&amp;quot;, &amp;quot;()()()&amp;quot; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34;] </description>
+[ &amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34;] </description>
     </item>
     
     <item>
@@ -105,7 +106,7 @@ Solution import deques proc isValid(s: string): bool = var stack = initDeque[cha
       <guid>http://codeone.io/nim-lang/leetcode/0019-remove-nth-node-from-end-of-list/</guid>
       <description>Problem Given a linked list, remove the nth node from the end of list and return its head.
 For example,
- Given linked list: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, and n = 2. After removing the second node from the end, the linked list becomes 1-&amp;gt;2-&amp;gt;3-&amp;gt;5. Note: Given n will always be valid. Try to do this in one pass.
+Given linked list: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, and n = 2. After removing the second node from the end, the linked list becomes 1-&amp;gt;2-&amp;gt;3-&amp;gt;5. Note: Given n will always be valid. Try to do this in one pass.
 Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref ListNodeObj proc newListNode(val: int, next: ListNode = nil): ListNode = result = ListNode(val: val, next: next) proc removeNthFromEnd(head: ListNode, n: int): ListNode = let dummyHead = newListNode(0, head) var p, q = dummyHead for i in 0 .</description>
     </item>
     
@@ -127,7 +128,7 @@ For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0. A solution se
       
       <guid>http://codeone.io/nim-lang/leetcode/0017-letter-combinations-of-a-phone-number/</guid>
       <description>Problem Given a digit string, return all possible letter combinations that the number could represent.
-A mapping of digit to letters (just like on the telephone buttons) is given below. Input:Digit string &amp;quot;23&amp;quot; Output: [&amp;quot;ad&amp;quot;, &amp;quot;ae&amp;quot;, &amp;quot;af&amp;quot;, &amp;quot;bd&amp;quot;, &amp;quot;be&amp;quot;, &amp;quot;bf&amp;quot;, &amp;quot;cd&amp;quot;, &amp;quot;ce&amp;quot;, &amp;quot;cf&amp;quot;]. Note: Although the above answer is in lexicographical order, your answer could be in any order you want.
+A mapping of digit to letters (just like on the telephone buttons) is given below. Input:Digit string &amp;#34;23&amp;#34; Output: [&amp;#34;ad&amp;#34;, &amp;#34;ae&amp;#34;, &amp;#34;af&amp;#34;, &amp;#34;bd&amp;#34;, &amp;#34;be&amp;#34;, &amp;#34;bf&amp;#34;, &amp;#34;cd&amp;#34;, &amp;#34;ce&amp;#34;, &amp;#34;cf&amp;#34;]. Note: Although the above answer is in lexicographical order, your answer could be in any order you want.
 Solution import sequtils const MAP = [&amp;#34;&amp;#34;, # 0 &amp;#34;&amp;#34;, # 1 &amp;#34;abc&amp;#34;, # 2 &amp;#34;def&amp;#34;, # 3 &amp;#34;ghi&amp;#34;, # 4 &amp;#34;jkl&amp;#34;, # 5 &amp;#34;mno&amp;#34;, # 6 &amp;#34;pqrs&amp;#34;, # 7 &amp;#34;tuv&amp;#34;, # 8 &amp;#34;wxyz&amp;#34;] # 9 ORD_0 = ord(&amp;#39;0&amp;#39;) proc letterCombinations(digits: string): seq[string] = if digits == nil or digits.</description>
     </item>
     
@@ -138,7 +139,7 @@ Solution import sequtils const MAP = [&amp;#34;&amp;#34;, # 0 &amp;#34;&amp;#34;
       
       <guid>http://codeone.io/nim-lang/leetcode/0016-3sum-closest/</guid>
       <description>Problem Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
- For example, given array S = {-1 2 1 -4}, and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</description>
+For example, given array S = {-1 2 1 -4}, and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</description>
     </item>
     
     <item>
@@ -202,7 +203,7 @@ Solution proc maxArea(height: openArray[int]): int = var l = 0 r = height.</desc
       
       <guid>http://codeone.io/nim-lang/leetcode/0010-regular-expression-matching/</guid>
       <description>Problem Implement regular expression matching with support for &#39;.&#39; and &#39;*&#39;.
-&#39;.&#39; Matches any single character. &#39;*&#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&amp;quot;aa&amp;quot;,&amp;quot;a&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;,&amp;quot;aa&amp;quot;) → true isMatch(&amp;quot;aaa&amp;quot;,&amp;quot;aa&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;, &amp;quot;a*&amp;quot;) → true isMatch(&amp;quot;aa&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;ab&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;aab&amp;quot;, &amp;quot;c*a*b&amp;quot;) → true Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.</description>
+&amp;#39;.&amp;#39; Matches any single character. &amp;#39;*&amp;#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&amp;#34;aa&amp;#34;,&amp;#34;a&amp;#34;) → false isMatch(&amp;#34;aa&amp;#34;,&amp;#34;aa&amp;#34;) → true isMatch(&amp;#34;aaa&amp;#34;,&amp;#34;aa&amp;#34;) → false isMatch(&amp;#34;aa&amp;#34;, &amp;#34;a*&amp;#34;) → true isMatch(&amp;#34;aa&amp;#34;, &amp;#34;.*&amp;#34;) → true isMatch(&amp;#34;ab&amp;#34;, &amp;#34;.*&amp;#34;) → true isMatch(&amp;#34;aab&amp;#34;, &amp;#34;c*a*b&amp;#34;) → true Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.</description>
     </item>
     
     <item>
@@ -264,8 +265,8 @@ Write the code that will take a string and make this conversion given a number o
       <guid>http://codeone.io/nim-lang/leetcode/0005-longest-palindromic-substring/</guid>
       <description>Problem Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 Example:
-Input: &amp;quot;babad&amp;quot; Output: &amp;quot;bab&amp;quot; Note: &amp;quot;aba&amp;quot; is also a valid answer. Example:
-Input: &amp;quot;cbbd&amp;quot; Output: &amp;quot;bb&amp;quot; Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &amp;gt;= 0 and r &amp;lt; s.len and s[l] == s[r]: l -= 1 r += 1 result = (l + 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .</description>
+Input: &amp;#34;babad&amp;#34; Output: &amp;#34;bab&amp;#34; Note: &amp;#34;aba&amp;#34; is also a valid answer. Example:
+Input: &amp;#34;cbbd&amp;#34; Output: &amp;#34;bb&amp;#34; Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &amp;gt;= 0 and r &amp;lt; s.len and s[l] == s[r]: l -= 1 r += 1 result = (l + 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .</description>
     </item>
     
     <item>

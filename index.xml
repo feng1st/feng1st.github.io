@@ -5,52 +5,8 @@
     <link>http://codeone.io/</link>
     <description>Recent content in Home on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Unity with VS Code and IntelliSense on Ubuntu</title>
-      <link>http://codeone.io/unity/2021-07-31-unity-scripting-intellisense-on-linux/</link>
-      <pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/unity/2021-07-31-unity-scripting-intellisense-on-linux/</guid>
-      <description>Install latest Mono release: https://www.mono-project.com/download/stable/. Add [arch=amd64] as following if your architecture is amd64:  echo &amp;quot;deb [arch=amd64] https://download.mono-project.com/repo/ubuntu stable-focal main&amp;quot; | sudo tee /etc/apt/sources.list.d/mono-official-stable.list Install .NET SDK from here: https://docs.microsoft.com/en-us/dotnet/core/install/linux. Install VS Code from .deb file https://code.visualstudio.com/docs/setup/linux. Open VS Code and install the C# extension (ms-dotnettools.csharp). Open VS Code, go to menu File &amp;gt; Preferences &amp;gt; Settings &amp;gt; Extension &amp;gt; C# configuration. Look for &amp;ldquo;Omnisharp: Use Global Mono&amp;rdquo;, and set it to &amp;ldquo;always&amp;rdquo;.</description>
-    </item>
-    
-    <item>
-      <title>Solutions to Unity LEGO Microgame tutorial build issues under Ubuntu</title>
-      <link>http://codeone.io/unity/2021-07-24-solutions-to-unity-lego-microgame-tutorial-build-issues-under-ubuntu/</link>
-      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/unity/2021-07-24-solutions-to-unity-lego-microgame-tutorial-build-issues-under-ubuntu/</guid>
-      <description>The Unity LEGO Microgame tutorial failed at the step &amp;ldquo;Build, publish, &amp;amp; BONUS&amp;rdquo; due to some WebGL build issues. The system is Ubuntu 21.04 and the Unity is 2020.3.14f1. Here are the issues and solutions：
- System.ComponentModel.Win32Exception (2): No such file or directory
- sudo apt install python2
- Exception: Unity.IL2CPP.Building.BuilderFailedException: /home/user/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/Emscripten_FastComp_Linux/clang++: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
- sudo apt install libtinfo5</description>
-    </item>
-    
-    <item>
-      <title>不是能做什么，不是想做什么，而是需要什么</title>
-      <link>http://codeone.io/thoughts/2021/2021-07-22-about-how-to-design-games/</link>
-      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/thoughts/2021/2021-07-22-about-how-to-design-games/</guid>
-      <description>游戏开发第一不是你能实现什么，包括别人已经实现的，和还没实现的。否则就会变成技术自嗨。 第二不（完全）是你喜欢什么，你喜欢的东西有很多回忆因素在里面，可能已经过时。 而是玩家需要什么，再强调一遍，玩家需要什么。
-这里面的折中点是，尽量发掘新的个人爱好，尽量贴近玩家的需求，这需要更开放的心态。</description>
-    </item>
-    
-    <item>
-      <title>【学习笔记】关于The Rust Programming Language的一些问题</title>
-      <link>http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/</link>
-      <pubDate>Sat, 25 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/rust-lang/2018-08-25-questions-about-the-book/</guid>
-      <description>问题1 16.3. Shared State
-let counter = Arc::new(Mutex::new(0)); let mut handles = vec![]; for _ in 0..10 { let counter = Arc::clone(&amp;amp;counter); let handle = thread::spawn(move || { let mut num = counter.lock().unwrap(); *num += 1; }); handles.push(handle); } 循环体内，为什么counter被move到了线程里，下次循环还能被使用（Arc::clone(&amp;amp;counter)）？
-回答1 Arc::clone(&amp;amp;counter)里的counter（简称c1）没有被move，被move的是循环体内开头定义的同名变量（简称c2），c2 shadow了c1。 c2在循环体开始时shadow了c1，在循环体结束时被drop，解除了对c1的shadow。所以下次循环，c1重新可见，可以被使用。
-问题2 20.3. Graceful Shutdown and Cleanup
-fn new(id: usize, receiver: Arc&amp;lt;Mutex&amp;lt;mpsc::Receiver&amp;lt;Message&amp;gt;&amp;gt;&amp;gt;) -&amp;gt; Worker { let thread = thread::spawn(move ||{ loop { let message = receiver.lock().unwrap().recv().unwrap(); match message { Message::NewJob(job) =&amp;gt; { println!</description>
-    </item>
-    
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Nim4LeetCode] 27. Remove Element</title>
       <link>http://codeone.io/nim-lang/leetcode/0027-remove-element/</link>
@@ -73,7 +29,7 @@ Given nums = [3,2,2,3], val = 3, Your function should return length = 2, with th
       <description>Problem Given a sorted array, remove the duplicates in-place such that each element appear only once and return the new length.
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 Example:
-Given nums = [1,1,2], Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn&#39;t matter what you leave beyond the new length.</description>
+Given nums = [1,1,2], Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn&amp;#39;t matter what you leave beyond the new length.</description>
     </item>
     
     <item>
@@ -117,7 +73,7 @@ Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref
       <guid>http://codeone.io/nim-lang/leetcode/0022-generate-parentheses/</guid>
       <description>Problem Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 For example, given n = 3, a solution set is:
-[ &amp;quot;((()))&amp;quot;, &amp;quot;(()())&amp;quot;, &amp;quot;(())()&amp;quot;, &amp;quot;()(())&amp;quot;, &amp;quot;()()()&amp;quot; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34;] </description>
+[ &amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34; ] Solution proc backtrack(res: var seq[string], str: string, n, open, close: int) = if open == n and close == n: res.add(str) return if open &amp;lt; n: backtrack(res, str &amp;amp; &amp;#39;(&amp;#39;, n, open + 1, close) if close &amp;lt; open: backtrack(res, str &amp;amp; &amp;#39;)&amp;#39;, n, open, close + 1) proc generateParenthesis(n: int): seq[string] = result = newSeq[string]() backtrack(result, &amp;#34;&amp;#34;, n, 0, 0) when isMainModule: assert generateParenthesis(3) == @[&amp;#34;((()))&amp;#34;, &amp;#34;(()())&amp;#34;, &amp;#34;(())()&amp;#34;, &amp;#34;()(())&amp;#34;, &amp;#34;()()()&amp;#34;] </description>
     </item>
     
     <item>
@@ -150,7 +106,7 @@ Solution import deques proc isValid(s: string): bool = var stack = initDeque[cha
       <guid>http://codeone.io/nim-lang/leetcode/0019-remove-nth-node-from-end-of-list/</guid>
       <description>Problem Given a linked list, remove the nth node from the end of list and return its head.
 For example,
- Given linked list: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, and n = 2. After removing the second node from the end, the linked list becomes 1-&amp;gt;2-&amp;gt;3-&amp;gt;5. Note: Given n will always be valid. Try to do this in one pass.
+Given linked list: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, and n = 2. After removing the second node from the end, the linked list becomes 1-&amp;gt;2-&amp;gt;3-&amp;gt;5. Note: Given n will always be valid. Try to do this in one pass.
 Solution type ListNodeObj = object val: int next: ref ListNodeObj ListNode = ref ListNodeObj proc newListNode(val: int, next: ListNode = nil): ListNode = result = ListNode(val: val, next: next) proc removeNthFromEnd(head: ListNode, n: int): ListNode = let dummyHead = newListNode(0, head) var p, q = dummyHead for i in 0 .</description>
     </item>
     
@@ -172,7 +128,7 @@ For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0. A solution se
       
       <guid>http://codeone.io/nim-lang/leetcode/0017-letter-combinations-of-a-phone-number/</guid>
       <description>Problem Given a digit string, return all possible letter combinations that the number could represent.
-A mapping of digit to letters (just like on the telephone buttons) is given below. Input:Digit string &amp;quot;23&amp;quot; Output: [&amp;quot;ad&amp;quot;, &amp;quot;ae&amp;quot;, &amp;quot;af&amp;quot;, &amp;quot;bd&amp;quot;, &amp;quot;be&amp;quot;, &amp;quot;bf&amp;quot;, &amp;quot;cd&amp;quot;, &amp;quot;ce&amp;quot;, &amp;quot;cf&amp;quot;]. Note: Although the above answer is in lexicographical order, your answer could be in any order you want.
+A mapping of digit to letters (just like on the telephone buttons) is given below. Input:Digit string &amp;#34;23&amp;#34; Output: [&amp;#34;ad&amp;#34;, &amp;#34;ae&amp;#34;, &amp;#34;af&amp;#34;, &amp;#34;bd&amp;#34;, &amp;#34;be&amp;#34;, &amp;#34;bf&amp;#34;, &amp;#34;cd&amp;#34;, &amp;#34;ce&amp;#34;, &amp;#34;cf&amp;#34;]. Note: Although the above answer is in lexicographical order, your answer could be in any order you want.
 Solution import sequtils const MAP = [&amp;#34;&amp;#34;, # 0 &amp;#34;&amp;#34;, # 1 &amp;#34;abc&amp;#34;, # 2 &amp;#34;def&amp;#34;, # 3 &amp;#34;ghi&amp;#34;, # 4 &amp;#34;jkl&amp;#34;, # 5 &amp;#34;mno&amp;#34;, # 6 &amp;#34;pqrs&amp;#34;, # 7 &amp;#34;tuv&amp;#34;, # 8 &amp;#34;wxyz&amp;#34;] # 9 ORD_0 = ord(&amp;#39;0&amp;#39;) proc letterCombinations(digits: string): seq[string] = if digits == nil or digits.</description>
     </item>
     
@@ -183,7 +139,7 @@ Solution import sequtils const MAP = [&amp;#34;&amp;#34;, # 0 &amp;#34;&amp;#34;
       
       <guid>http://codeone.io/nim-lang/leetcode/0016-3sum-closest/</guid>
       <description>Problem Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
- For example, given array S = {-1 2 1 -4}, and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</description>
+For example, given array S = {-1 2 1 -4}, and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</description>
     </item>
     
     <item>
@@ -247,7 +203,7 @@ Solution proc maxArea(height: openArray[int]): int = var l = 0 r = height.</desc
       
       <guid>http://codeone.io/nim-lang/leetcode/0010-regular-expression-matching/</guid>
       <description>Problem Implement regular expression matching with support for &#39;.&#39; and &#39;*&#39;.
-&#39;.&#39; Matches any single character. &#39;*&#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&amp;quot;aa&amp;quot;,&amp;quot;a&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;,&amp;quot;aa&amp;quot;) → true isMatch(&amp;quot;aaa&amp;quot;,&amp;quot;aa&amp;quot;) → false isMatch(&amp;quot;aa&amp;quot;, &amp;quot;a*&amp;quot;) → true isMatch(&amp;quot;aa&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;ab&amp;quot;, &amp;quot;.*&amp;quot;) → true isMatch(&amp;quot;aab&amp;quot;, &amp;quot;c*a*b&amp;quot;) → true Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.</description>
+&amp;#39;.&amp;#39; Matches any single character. &amp;#39;*&amp;#39; Matches zero or more of the preceding element. The matching should cover the entire input string (not partial). The function prototype should be: bool isMatch(const char *s, const char *p) Some examples: isMatch(&amp;#34;aa&amp;#34;,&amp;#34;a&amp;#34;) → false isMatch(&amp;#34;aa&amp;#34;,&amp;#34;aa&amp;#34;) → true isMatch(&amp;#34;aaa&amp;#34;,&amp;#34;aa&amp;#34;) → false isMatch(&amp;#34;aa&amp;#34;, &amp;#34;a*&amp;#34;) → true isMatch(&amp;#34;aa&amp;#34;, &amp;#34;.*&amp;#34;) → true isMatch(&amp;#34;ab&amp;#34;, &amp;#34;.*&amp;#34;) → true isMatch(&amp;#34;aab&amp;#34;, &amp;#34;c*a*b&amp;#34;) → true Solution import sequtils proc isMatch(s: string, p: string): bool = var dp = newSeqWith(s.</description>
     </item>
     
     <item>
@@ -309,8 +265,8 @@ Write the code that will take a string and make this conversion given a number o
       <guid>http://codeone.io/nim-lang/leetcode/0005-longest-palindromic-substring/</guid>
       <description>Problem Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 Example:
-Input: &amp;quot;babad&amp;quot; Output: &amp;quot;bab&amp;quot; Note: &amp;quot;aba&amp;quot; is also a valid answer. Example:
-Input: &amp;quot;cbbd&amp;quot; Output: &amp;quot;bb&amp;quot; Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &amp;gt;= 0 and r &amp;lt; s.len and s[l] == s[r]: l -= 1 r += 1 result = (l + 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .</description>
+Input: &amp;#34;babad&amp;#34; Output: &amp;#34;bab&amp;#34; Note: &amp;#34;aba&amp;#34; is also a valid answer. Example:
+Input: &amp;#34;cbbd&amp;#34; Output: &amp;#34;bb&amp;#34; Solution proc expandAroundCenter(s: string, left: int, right: int): (int, int) = var l = left r = right while l &amp;gt;= 0 and r &amp;lt; s.len and s[l] == s[r]: l -= 1 r += 1 result = (l + 1, r - 1) proc longestPalindrome(s: string): string = var left = 0 right = 0 for i in 0 .</description>
     </item>
     
     <item>
@@ -362,45 +318,6 @@ Input: (2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) Output: 7 -&amp
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 Example:
 Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1]. Solution import tables proc twoSum(nums: openArray[int], target: int): (int, int) = var idxMap = initTable[int, int]() for i in 0 .</description>
-    </item>
-    
-    <item>
-      <title>【笔记】微服务介绍</title>
-      <link>http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/</link>
-      <pubDate>Fri, 23 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/notes/2017/2017-06-23-introduction-to-microservices/</guid>
-      <description>原文: https://www.nginx.com/blog/introduction-to-microservices/
-单一框架有什么问题 / 微服务框架解决什么问题？ 单一框架经过常年发展，扩充之后：
- 过于复杂，难于理解和修改。修改容易引入bug 启动变慢，降低调试和开发速度 无法持续部署，无法快速升级。一个组件需要升级，整个应用都需要重新部署。部署后，因为受影响部分不明，需要更多的人工测试 无法根据不同组件的需求进行伸缩扩展。比如，部分组件是CPU密集型，部分组件是内存密集型；部分组件压力小，单个实例可以应付，部分组件压力大，有部署多个实例的需求 可靠性，组件异常（比如内存泄露），导致整个应用异常 难于升级到新的技术和框架  微服务框架  按功能划分，比如订单管理、客户端管理 每个微服务是一个单独的小应用 微服务对外暴露API，比如REST API 微服务之间可以通过暴露的API互相调用 微服务间还可以通过消息系统实现异步调用 外界一般不直接范围后端服务，而是通过API网关 微服务通常通过虚拟机或Docker部署  伸缩模型 x轴：水平复制，靠克隆伸缩。通过在负载均衡后部署多个实例，解决可用性和吞吐量的问题 y轴：功能解耦，靠拆分不同的事物伸缩。将单一应用通过功能/业务拆分成多个微服务 z轴：数据分区，靠拆分相似的事物伸缩
-微服务架构对数据库schema的影响 微服务架构要求每个微服务有自己单独的数据库schema 这是为了更彻底的解耦 但是不可避免的，多个微服务数据库间存在重复数据
-微服务架构和SOA的异同 微服务架构和SOA在表现层有相似性：都是由多个服务构成 区别：
- 微服务架构弃用了比较重的WS规范，采用轻量的协议，比如REST 微服务架构弃用了ESB  微服务的好处  将单一应用解构成多个服务，让每一个服务面临的复杂度降低，变得可管理、可控制、可维护 开发方面：可以选用自己的技术，可以使用较新的技术 部署方面：可以单独部署，更容易部署和测试 伸缩方面：更容易按需扩展多实例  微服务的问题 下面这些问题都不难解决，但是需要清楚存在这些问题
- 分布式架构下调用的开销，以及服务不可用的处理 数据库拆分后，分布式事务基本不采用，需要最终一致方案 测试更困难，可能需要启动服务本身和依赖服务（或者伪服务） 升级链，如果A依赖于B，需要先升级B，再升级A 部署，需要自动化工具  API网关 门面模式 Facade
-客户端直接和后端服务通讯的问题 / API网关要解决的问题  客户端需要调用多个后端服务，走广域网，非常慢 客户端代码复杂 客户端需要支持后端服务API所使用的通讯协议 后端服务接口无法自由变更，服务之间无法合并和拆分  API网关除了解决上诉问题，还能：
- 提供负载均衡、缓存、安全/权限控制，监控等 为不同的客户端提供不同的接口  挑战：  需要额外实现和维护一个高可用的组件 可能成为开发瓶颈  实现API网关  性能和高伸缩性  要支持异步、非阻塞通讯 技术选型：Netty, Spring Reactor, &amp;hellip;   使用反应式编程模型 Reactive Programming Model  需求：要支持直接转发单个请求；要支持调用多个请求，并聚合结果 需求：要支持彼此无关服务的并发调用；要支持有依赖关系服务的先后调用 不推荐使用回调实现异步（不直观、不容易理解、容易出错） 推荐使用Reactive 技术选型：CompletableFuture, RxJava   服务调用  同步调用：HTTP、Thrift 异步、消息机制：JMS、AMQP、Zeromq API网关需要这些服务通讯，也应支持上诉通讯机制   服务发现  客户端发现：先请求服务地址列表，然后选择调用，负载均衡在客户端 服务端发现：注册总心选好后发给客户端，负载均衡在服务端 （这里的客户端指API网关）   处理部分失败  面对服务慢或者不可用的处理。核心是不能阻塞API网关 要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等   技术选型：Netflix Hystrix    进程间通讯 IPC 交互风格     一对一 一对多     同步 Request/Response &amp;ndash;   异步 Notification Publish/Subscribe    Request/Async response Public/Async responses     Request/Response: 发送请求，等待响应。应有超时。线程阻塞 Notification (单向请求): 发送请求，不期待有响应 Request/Async response: 发送请求，不期待有即时响应。线程不阻塞 Publish/Subscribe: 发布请求，多个消费者消费 Publish/Async responses: 发布请求，等待多个响应。有超时  接口设计  基于消息：定义消息channel和消息类型 基于HTTP：定义URL、请求和响应格式  接口升级  向前兼容的小升级，比如增加/删除请求/响应字段：  缺失的字段采用默认值，忽略额外的字段 消息格式要支持，比如Protobuf，Json   大的升级：要使用版本区分，服务要在一段时间内同时支持新旧版本接口  处理部分失败  一定要有超时，不能无限阻塞 要限制客户端向同一服务的请求的数量，如果超限，直接失败 船舱隔离模式：  不同的调用分配到不同的线程池，不能因为慢速调用占满快速调用的线程池   电路熔断器模式：  连续超时：断开 等待一段时间：半开放  又有超时：再断开 或不再超时：恢复     要根据服务是否重要，选择：  直接返回给客户端错误 返回空、默认值、缓存值、备份数据等    IPC技术 异步、基于消息的通讯 关键字：消息头、消息体、频道、生产者、消费者、broker、点对点、发布/订阅、…… 这里不展开</description>
-    </item>
-    
-    <item>
-      <title>【笔记】高并发思路</title>
-      <link>http://codeone.io/notes/2017/2017-06-17-high-concurrency/</link>
-      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/notes/2017/2017-06-17-high-concurrency/</guid>
-      <description>解决高并发，无非两个方向：
- 分而治之：分流 优化单个服务器处理能力  客户端  尽量使用缓存 尽量本地处理 尽量减少不必要的访问  分流  负载均衡 业务拆分 静态内容直接返回，包括使用CDN 缓存（动态内容缓存、页面片段缓存）  优化单个服务器处理程序  缓存：缓存永远是最重要的 异步：能异步就异步 如果有多个异步调用没有依赖关系，可以并行调用，然后在最后一起等结果 多线程： 如果是CPU吃重的应用，线程数过高不能解决问题 I/O吃重要分成两种：1种是因为传输数据量过大，导致I/O重，这种线程数高不解决问题 另一种是传输数据不大，但是等待远端处理的时间很长，这种可以提升线程数，并发处理后面的任务 预处理：预先算出局部结果，要获取整体结果时，只需要基于局部结果计算。比如月报表可以基于天报表 还有一种预处理，是和缓存结合的预处理 不是等到缓存失效时，再穿透后端。而是缓存快要失效时，就起线程向后端请求数据更新缓存。在线程处理期间，缓存里的数据依然是有效的。线程处理完毕，缓存里的数据已更新 优化SQL，正确使用索引 尽量不要使用分布式事务 2阶段提交不是万能药  各节点进入事务 各节点事务执行完毕，prepare（意味着，接下来出了问题，比如重启，事务也能生效） 各节点commit 假设最后一个节点，commit前离线了，并且永远不再上线，事务状态依然是错误的   应用算法优化  优化数据层  合理选用数据库（OLTP、OLAP）和引擎（InnoDB、MyISAM） 合理设置索引 使用集群，读写分离 合理分表分库 分表我看来最大的好处是，是索引变小，能够加载到内存  </description>
-    </item>
-    
-    <item>
-      <title>【读书笔记】大型网站系统与Java中间件实践</title>
-      <link>http://codeone.io/notes/2017/2017-05-01-large-web-systems-and-java-middleware-practice/</link>
-      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/notes/2017/2017-05-01-large-web-systems-and-java-middleware-practice/</guid>
-      <description>豆瓣链接: https://book.douban.com/subject/25867042/
-作者曾宪杰，淘宝花名华黎，现任淘宝技术部总监。 本书反映了淘宝网一路发展过来，技术架构演进的一个过程。书中的绝大多数内容，都已经落地为阿里内部广泛使用的基础设施、中间件。部分组件已经开源，比如Dubbo、RocketMQ，可以在网上下到。
-本文是读书过程中对部分重要知识点的一个记录，也可以当作回顾时的索引。
-第1章 分布式系统介绍 1.2.3.2 网络IO实现方式  BIO/NIO/AIO  1.2.4.3 控制器的变化  使用硬件/LVS负载均衡  增加网络开销（流量，延迟） 单点   使用名称服务的直接连接方式  服务提供方 &amp;ndash;注册&amp;ndash;&amp;gt; 名称服务 &amp;ndash;&amp;gt; 请求方 (负载均衡) 代码升级比较复杂   使用规则服务器  规则服务器 &amp;ndash;规则&amp;ndash;&amp;gt; 请求方 (规则计算)   Master+Worker  Master (规则计算) &amp;ndash;结果&amp;ndash;&amp;gt; 请求方    1.2.5 分布式系统的难点  缺乏全局时钟  单独集群管理时序   应对/解决故障独立性 处理单点故障 事务  第2章 大型网站及其架构演进过程 2.2.4.2 解决应用服务器变成集群后的Session问题  Session Sticky Session Replication Session 数据集中存储 Cookie Based (长度限制/安全性/带宽/性能)  2.</description>
     </item>
     
   </channel>
