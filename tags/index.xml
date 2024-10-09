@@ -6,24 +6,21 @@
     <description>Recent content in Tags on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Oct 2024 17:46:47 +0800</lastBuildDate>
+    <atom:link href="http://codeone.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>leetcode</title>
-      <link>http://codeone.io/tags/leetcode/</link>
-      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/leetcode/</guid>
+      <title>book</title>
+      <link>http://codeone.io/tags/book/</link>
+      <pubDate>Wed, 09 Oct 2024 17:46:47 +0800</pubDate>
+      <guid>http://codeone.io/tags/book/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nim-lang</title>
-      <link>http://codeone.io/tags/nim-lang/</link>
-      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeone.io/tags/nim-lang/</guid>
+      <title>wealth</title>
+      <link>http://codeone.io/tags/wealth/</link>
+      <pubDate>Wed, 09 Oct 2024 17:46:47 +0800</pubDate>
+      <guid>http://codeone.io/tags/wealth/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

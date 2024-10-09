@@ -5,6 +5,7 @@
     <link>http://codeone.io/authors/</link>
     <description>Recent content in Authors on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://codeone.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <atom:link href="http://codeone.io/authors/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

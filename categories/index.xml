@@ -5,6 +5,7 @@
     <link>http://codeone.io/categories/</link>
     <description>Recent content in Categories on Code One</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://codeone.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <atom:link href="http://codeone.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
