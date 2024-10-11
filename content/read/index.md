@@ -1,6 +1,5 @@
 ---
 title: Read
-layout: wide
 ---
 
 {{< cards >}}
