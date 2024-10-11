@@ -5,3 +5,9 @@ tags:
   - book
   - wealth
 ---
+
+ALMANACK OF NAVAL RAVIKANT
+
+A GUIDE TO WEALTH AND HAPPINESS
+
+Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/table-of-contents>
