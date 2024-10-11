@@ -1,7 +1,5 @@
 ---
 title: Read
-sidebar:
-  exclude: true
 ---
 
 {{< cards >}}
