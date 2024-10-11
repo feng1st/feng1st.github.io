@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:07+08:00"
 title: "Get Paid for Your Judgment"
+date: "2024-10-09T00:00:00+08:00"
+weight: 7
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment>
 
 {{< columns >}}
 

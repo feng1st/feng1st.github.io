@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:01+08:00"
 title: "Understand How Wealth Is Created"
+date: "2024-10-09T00:00:00+08:00"
+weight: 1
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created>
 
 {{< columns >}}
 

@@ -1,16 +1,13 @@
 ---
-date: "2024-10-10T01:02:01+08:00"
 title: "Judgment"
+date: "2024-10-10T00:00:00+08:00"
+weight: 12
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/judgment>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/judgment>
 
 {{< columns >}}
 

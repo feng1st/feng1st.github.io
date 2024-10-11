@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:08+08:00"
 title: "Prioritize and Focus"
+date: "2024-10-09T00:00:00+08:00"
+weight: 8
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus>
 
 {{< columns >}}
 

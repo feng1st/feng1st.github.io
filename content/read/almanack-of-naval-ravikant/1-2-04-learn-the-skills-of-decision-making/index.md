@@ -1,16 +1,13 @@
 ---
-date: "2024-10-10T01:02:04+08:00"
 title: "Learn the Skills of Decision-Making"
+date: "2024-10-10T00:00:00+08:00"
+weight: 15
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making>
 
 {{< columns >}}
 

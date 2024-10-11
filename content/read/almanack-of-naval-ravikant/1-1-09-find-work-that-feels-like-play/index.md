@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:09+08:00"
 title: "Find Work That Feels Like Play"
+date: "2024-10-09T00:00:00+08:00"
+weight: 9
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-work-that-feels-like-play>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-work-that-feels-like-play>
 
 {{< columns >}}
 

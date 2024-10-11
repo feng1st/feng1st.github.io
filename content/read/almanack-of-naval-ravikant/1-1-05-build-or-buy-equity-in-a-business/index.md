@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:05+08:00"
 title: "Build or Buy Equity in a Business"
+date: "2024-10-09T00:00:00+08:00"
+weight: 5
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business>
 
 {{< columns >}}
 

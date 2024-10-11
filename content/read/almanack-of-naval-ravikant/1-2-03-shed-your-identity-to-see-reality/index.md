@@ -1,16 +1,13 @@
 ---
-date: "2024-10-10T01:02:03+08:00"
 title: "Shed Your Identity to See Reality"
+date: "2024-10-10T00:00:00+08:00"
+weight: 14
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality>
 
 {{< columns >}}
 

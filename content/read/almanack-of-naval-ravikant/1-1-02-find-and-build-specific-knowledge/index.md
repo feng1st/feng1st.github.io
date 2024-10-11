@@ -1,16 +1,13 @@
 ---
-date: "2024-10-09T01:01:02+08:00"
 title: "Find and Build Specific Knowledge"
+date: "2024-10-09T00:00:00+08:00"
+weight: 2
 tags:
   - book
   - wealth
 ---
 
-ALMANACK OF NAVAL RAVIKANT
-
-A GUIDE TO WEALTH AND HAPPINESS
-
-Original article: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge>
+Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge>
 
 {{< columns >}}
 
