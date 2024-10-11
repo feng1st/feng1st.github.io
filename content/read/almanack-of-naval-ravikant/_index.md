@@ -36,15 +36,15 @@ A Guide to Wealth and Happiness
   - [Learn to Love to Read](1-2-06-learn-to-love-to-read)
 - **PART II: HAPPINESS**
 - LEARNING HAPPINESS
-  - Happiness Is Learned
-  - Happiness Is a Choice
-  - Happiness Requires Presence
-  - Happiness Requires Peace
-  - Every Desire Is a Chosen Unhappiness
-  - Success Does Not Earn Happiness
-  - Envy Is the Enemy of Happiness
-  - Happiness Is Built by Habits
-  - Find Happiness in Acceptance
+  - [Happiness Is Learned](2-1-01-happiness-is-learned)
+  - [Happiness Is a Choice](2-1-02-happiness-is-a-choice)
+  - [Happiness Requires Presence](2-1-03-happiness-requires-presence)
+  - [Happiness Requires Peace](2-1-04-happiness-requires-peace)
+  - [Every Desire Is a Chosen Unhappiness](2-1-05-every-desire-is-a-chosen-unhappiness)
+  - [Success Does Not Earn Happiness](2-1-06-success-does-not-earn-happiness)
+  - [Envy Is the Enemy of Happiness](2-1-07-envy-is-the-enemy-of-happiness)
+  - [Happiness Is Built by Habits](2-1-08-happiness-is-built-by-habits)
+  - [Find Happiness in Acceptance](2-1-09-find-happiness-in-acceptance)
 - SAVING YOURSELF
   - Choosing to Be Yourself
   - Choosing to Care for Yourself
