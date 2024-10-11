@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/be-patient>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/be-patient)
 
 {{< columns >}}
 

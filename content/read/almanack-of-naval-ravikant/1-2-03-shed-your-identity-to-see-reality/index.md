@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality)
 
 {{< columns >}}
 

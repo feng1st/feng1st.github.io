@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created)
 
 {{< columns >}}
 

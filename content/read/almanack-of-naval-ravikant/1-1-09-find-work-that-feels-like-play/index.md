@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-work-that-feels-like-play>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-work-that-feels-like-play)
 
 {{< columns >}}
 

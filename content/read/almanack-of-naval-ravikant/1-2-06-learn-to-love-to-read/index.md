@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/learn-to-love-to-read>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-to-love-to-read)
 
 {{< columns >}}
 

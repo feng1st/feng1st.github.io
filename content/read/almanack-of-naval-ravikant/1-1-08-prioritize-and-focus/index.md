@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus)
 
 {{< columns >}}
 

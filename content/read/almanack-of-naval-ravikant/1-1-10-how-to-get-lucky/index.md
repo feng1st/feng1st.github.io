@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-get-lucky>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-get-lucky)
 
 {{< columns >}}
 

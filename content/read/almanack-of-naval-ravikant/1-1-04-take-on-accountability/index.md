@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/take-on-accountability>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/take-on-accountability)
 
 {{< columns >}}
 

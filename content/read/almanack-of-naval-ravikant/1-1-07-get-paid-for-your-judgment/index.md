@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment)
 
 {{< columns >}}
 

@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making)
 
 {{< columns >}}
 

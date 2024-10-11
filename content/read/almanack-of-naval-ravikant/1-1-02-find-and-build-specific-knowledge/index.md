@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge)
 
 {{< columns >}}
 

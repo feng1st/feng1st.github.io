@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/find-a-position-of-leverage>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-a-position-of-leverage)
 
 {{< columns >}}
 

@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/collect-mental-models>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/collect-mental-models)
 
 {{< columns >}}
 

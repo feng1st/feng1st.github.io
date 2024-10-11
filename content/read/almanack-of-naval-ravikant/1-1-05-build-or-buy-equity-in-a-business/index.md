@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business)
 
 {{< columns >}}
 

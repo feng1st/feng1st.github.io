@@ -7,7 +7,7 @@ tags:
   - wealth
 ---
 
-Source: <https://www.navalmanack.com/almanack-of-naval-ravikant/judgment>
+[Source](https://www.navalmanack.com/almanack-of-naval-ravikant/judgment)
 
 {{< columns >}}
 
