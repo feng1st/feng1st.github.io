@@ -1,10 +1,7 @@
 ---
-title: "Find a Position of Leverage"
-date: "2024-10-09T00:00:00+08:00"
+title: Find a Position of Leverage
+date: 2024-10-09
 weight: 6
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-a-position-of-leverage)

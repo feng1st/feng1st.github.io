@@ -1,10 +1,7 @@
 ---
-title: "Prioritize and Focus"
-date: "2024-10-09T00:00:00+08:00"
+title: Prioritize and Focus
+date: 2024-10-09
 weight: 8
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus)

@@ -1,10 +1,7 @@
 ---
-title: "How to Think Clearly"
-date: "2024-10-10T00:00:00+08:00"
+title: How to Think Clearly
+date: 2024-10-10
 weight: 13
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-think-clearly)

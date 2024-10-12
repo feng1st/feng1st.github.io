@@ -1,10 +1,7 @@
 ---
-title: "Find and Build Specific Knowledge"
-date: "2024-10-09T00:00:00+08:00"
+title: Find and Build Specific Knowledge
+date: 2024-10-09
 weight: 2
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge)

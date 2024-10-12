@@ -1,10 +1,7 @@
 ---
-title: "Understand How Wealth Is Created"
-date: "2024-10-09T00:00:00+08:00"
+title: Understand How Wealth Is Created
+date: 2024-10-09
 weight: 1
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created)

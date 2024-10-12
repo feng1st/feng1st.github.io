@@ -1,10 +1,7 @@
 ---
-title: "Find Happiness in Acceptance"
-date: "2024-10-11T00:00:00+08:00"
+title: Find Happiness in Acceptance
+date: 2024-10-11
 weight: 26
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-happiness-in-acceptance)

@@ -1,10 +1,7 @@
 ---
-title: "Success Does Not Earn Happiness"
-date: "2024-10-11T00:00:00+08:00"
+title: Success Does Not Earn Happiness
+date: 2024-10-11
 weight: 23
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/success-does-not-earn-happiness)

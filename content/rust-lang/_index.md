@@ -1,5 +1,6 @@
 ---
 title: Rust Lang
+type: blog
 ---
 
-Seek freedom and become captive of your desires. Seek discipline and find your liberty.
+> Seek freedom and become captive of your desires. Seek discipline and find your liberty.

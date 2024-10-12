@@ -1,10 +1,7 @@
 ---
-title: "Learn to Love to Read"
-date: "2024-10-10T00:00:00+08:00"
+title: Learn to Love to Read
+date: 2024-10-10
 weight: 17
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-to-love-to-read)

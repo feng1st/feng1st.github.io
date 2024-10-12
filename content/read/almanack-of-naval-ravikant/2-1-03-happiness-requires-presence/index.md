@@ -1,10 +1,7 @@
 ---
-title: "Happiness Requires Presence"
-date: "2024-10-11T00:00:00+08:00"
+title: Happiness Requires Presence
+date: 2024-10-11
 weight: 20
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-requires-presence)

@@ -1,10 +1,7 @@
 ---
-title: "How to Get Lucky"
-date: "2024-10-09T00:00:00+08:00"
+title: How to Get Lucky
+date: 2024-10-09
 weight: 10
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-get-lucky)

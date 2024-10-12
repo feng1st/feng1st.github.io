@@ -1,10 +1,7 @@
 ---
-title: "Play Long-Term Games with Long-Term People"
-date: "2024-10-09T00:00:00+08:00"
+title: Play Long-Term Games with Long-Term People
+date: 2024-10-09
 weight: 3
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/play-long-term-games-with-long-term-people)

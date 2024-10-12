@@ -1,10 +1,7 @@
 ---
-title: "Collect Mental Models"
-date: "2024-10-10T00:00:00+08:00"
+title: Collect Mental Models
+date: 2024-10-10
 weight: 16
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/collect-mental-models)

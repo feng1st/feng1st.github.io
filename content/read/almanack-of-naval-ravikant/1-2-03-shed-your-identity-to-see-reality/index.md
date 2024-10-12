@@ -1,10 +1,7 @@
 ---
-title: "Shed Your Identity to See Reality"
-date: "2024-10-10T00:00:00+08:00"
+title: Shed Your Identity to See Reality
+date: 2024-10-10
 weight: 14
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality)

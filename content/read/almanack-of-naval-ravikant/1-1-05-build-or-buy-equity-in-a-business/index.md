@@ -1,10 +1,7 @@
 ---
-title: "Build or Buy Equity in a Business"
-date: "2024-10-09T00:00:00+08:00"
+title: Build or Buy Equity in a Business
+date: 2024-10-09
 weight: 5
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business)

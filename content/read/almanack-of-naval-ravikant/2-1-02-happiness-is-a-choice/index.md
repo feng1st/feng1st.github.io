@@ -1,10 +1,7 @@
 ---
-title: "Happiness Is a Choice"
-date: "2024-10-11T00:00:00+08:00"
+title: Happiness Is a Choice
+date: 2024-10-11
 weight: 19
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-is-a-choice)

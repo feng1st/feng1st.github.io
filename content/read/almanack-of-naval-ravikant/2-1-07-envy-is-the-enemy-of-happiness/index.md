@@ -1,10 +1,7 @@
 ---
-title: "Envy Is the Enemy of Happiness"
-date: "2024-10-11T00:00:00+08:00"
+title: Envy Is the Enemy of Happiness
+date: 2024-10-11
 weight: 24
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/envy-is-the-enemy-of-happiness)

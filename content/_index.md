@@ -1,9 +1,5 @@
 ---
-title: Home
-toc: false
 ---
-
-Happy coding...
 
 {{< cards >}}
   {{< card link="read" title="Read" icon="book-open" >}}

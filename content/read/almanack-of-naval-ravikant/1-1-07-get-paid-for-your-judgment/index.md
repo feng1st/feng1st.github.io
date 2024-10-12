@@ -1,10 +1,7 @@
 ---
-title: "Get Paid for Your Judgment"
-date: "2024-10-09T00:00:00+08:00"
+title: Get Paid for Your Judgment
+date: 2024-10-09
 weight: 7
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment)

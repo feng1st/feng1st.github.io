@@ -1,6 +1,6 @@
 ---
 title: How to Build and Market a Game
-date: 2024-10-12 00:00:00
+date: 2024-10-12
 type: blog
 ---
 

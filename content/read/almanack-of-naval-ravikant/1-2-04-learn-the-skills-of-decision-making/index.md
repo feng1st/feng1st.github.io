@@ -1,10 +1,7 @@
 ---
-title: "Learn the Skills of Decision-Making"
-date: "2024-10-10T00:00:00+08:00"
+title: Learn the Skills of Decision-Making
+date: 2024-10-10
 weight: 15
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making)

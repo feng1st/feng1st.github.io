@@ -1,10 +1,7 @@
 ---
-title: "Every Desire Is a Chosen Unhappiness"
-date: "2024-10-11T00:00:00+08:00"
+title: Every Desire Is a Chosen Unhappiness
+date: 2024-10-11
 weight: 22
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/every-desire-is-a-chosen-unhappiness)

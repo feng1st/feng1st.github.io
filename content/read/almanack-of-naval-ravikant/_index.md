@@ -1,11 +1,9 @@
 ---
-title: "Almanack of Naval Ravikant"
-date: "2024-10-10T00:00:00+08:00"
+title: Almanack of Naval Ravikant
+summary: A Guide to Wealth and Happiness
+date: 2024-10-09
 cascade:
   type: docs
-tags:
-  - book
-  - wealth
 ---
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/table-of-contents)
