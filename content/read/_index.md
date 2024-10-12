@@ -1,5 +1,6 @@
 ---
 title: Read
+weight: 1
 type: blog
 ---
 
