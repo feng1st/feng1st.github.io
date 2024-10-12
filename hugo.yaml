@@ -21,10 +21,10 @@ menu:
     - name: Read
       pageRef: /read
       weight: 1
-    - name: GameDev
+    - name: Game Dev
       pageRef: /game-dev
       weight: 2
-    - name: RustLang
+    - name: Rust Lang
       pageRef: /rust-lang
       weight: 3
     - name: AI
