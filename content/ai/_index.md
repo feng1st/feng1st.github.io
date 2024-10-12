@@ -1,5 +1,6 @@
 ---
 title: AI
+weight: 4
 type: blog
 ---
 
