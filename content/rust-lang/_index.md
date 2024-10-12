@@ -1,5 +1,6 @@
 ---
 title: Rust Lang
+weight: 3
 type: blog
 ---
 
