@@ -4,6 +4,10 @@ date: 2024-10-12 00:00:00
 type: blog
 ---
 
+How to develop and market a game by focusing on key strengths, player feedback, and targeted marketing.
+
+<!--more-->
+
 - **Target an underserved genre**  
 - **Be the best in at least one aspect** (narrative, mechanics, art, etc.)  
 - **Capture a niche audience** that will love your game early on  
