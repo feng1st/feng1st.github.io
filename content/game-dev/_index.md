@@ -1,5 +1,6 @@
 ---
 title: Game Dev
+weight: 2
 type: blog
 ---
 
