@@ -1,3 +1,4 @@
 ---
 title: GameDev
+type: blog
 ---
