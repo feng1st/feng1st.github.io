@@ -51,7 +51,7 @@ A Guide to Wealth and Happiness
   - [Choosing to Grow Yourself](2-2-05-choosing-to-grow-yourself)
   - [Choosing to Free Yourself](2-2-06-choosing-to-free-yourself)
 - PHILOSOPHY
-  - The Meanings of Life
-  - Live by Your Values
-  - Rational Buddhism
-  - The Present Is All We Have
+  - [The Meanings of Life](2-3-01-the-meanings-of-life)
+  - [Live by Your Values](2-3-02-live-by-your-values)
+  - [Rational Buddhism](2-3-03-rational-buddhism)
+  - [The Present Is All We Have](2-3-04-the-present-is-all-we-have)
