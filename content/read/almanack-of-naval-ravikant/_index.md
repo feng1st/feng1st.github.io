@@ -44,12 +44,12 @@ A Guide to Wealth and Happiness
   - [Happiness Is Built by Habits](2-1-08-happiness-is-built-by-habits)
   - [Find Happiness in Acceptance](2-1-09-find-happiness-in-acceptance)
 - SAVING YOURSELF
-  - Choosing to Be Yourself
-  - Choosing to Care for Yourself
-  - Meditation + Mental Strength
-  - Choosing to Build Yourself
-  - Choosing to Grow Yourself
-  - Choosing to Free Yourself
+  - [Choosing to Be Yourself](2-2-01-choosing-to-be-yourself)
+  - [Choosing to Care for Yourself](2-2-02-choosing-to-care-for-yourself)
+  - [Meditation + Mental Strength](2-2-03-meditation-mental-strength)
+  - [Choosing to Build Yourself](2-2-04-choosing-to-build-yourself)
+  - [Choosing to Grow Yourself](2-2-05-choosing-to-grow-yourself)
+  - [Choosing to Free Yourself](2-2-06-choosing-to-free-yourself)
 - PHILOSOPHY
   - The Meanings of Life
   - Live by Your Values
