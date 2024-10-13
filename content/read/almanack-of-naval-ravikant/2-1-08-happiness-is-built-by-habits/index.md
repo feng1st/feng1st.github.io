@@ -6,7 +6,9 @@ weight: 25
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-is-built-by-habits)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Happiness Is Built by Habits
 
@@ -113,7 +115,8 @@ Bake in the new self-image. It’s who you are—now. [11]
 
 > First, you know it. Then, you understand it. Then, you can explain it. Then, you can feel it. Finally, you are it.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 幸福源于习惯
 
@@ -220,4 +223,6 @@ Bake in the new self-image. It’s who you are—now. [11]
 
 > 首先，你知道它。然后，你理解它。接着，你能解释它。然后，你感受到它。最终，你成为它。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

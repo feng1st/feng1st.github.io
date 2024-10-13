@@ -6,7 +6,9 @@ weight: 14
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/shed-your-identity-to-see-reality)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Shed Your Identity to See Reality
 
@@ -39,7 +41,8 @@ Maybe you’re a competitive athlete, and you get injured badly, like Bruce Lee.
 
 > Facebook redesigns. Twitter redesigns. Personalities, careers, and teams also need redesigns. There are no permanent solutions in a dynamic system.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 舍弃自我以看清现实
 
@@ -72,4 +75,6 @@ Maybe you’re a competitive athlete, and you get injured badly, like Bruce Lee.
 
 > Facebook会重新设计，Twitter会重新设计。个性、职业和团队也需要重新设计。在动态系统中，没有永久的解决方案。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

@@ -6,7 +6,9 @@ weight: 26
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-happiness-in-acceptance)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Find Happiness in Acceptance
 
@@ -64,7 +66,8 @@ So maybe ten thousand years from now or a hundred thousand years from now, peopl
 
 You’re going to die one day, and none of this is going to matter. So enjoy yourself. Do something positive. Project some love. Make someone happy. Laugh a little bit. Appreciate the moment. And do your work. [8]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 在接受中寻找幸福
 
@@ -122,4 +125,6 @@ You’re going to die one day, and none of this is going to matter. So enjoy you
 
 有一天你会死去，这一切都将变得毫无意义。所以，好好享受生活。做一些积极的事情。传递一些爱。让某个人快乐。笑一笑。珍惜当下的时光。并完成你的工作。 [8]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

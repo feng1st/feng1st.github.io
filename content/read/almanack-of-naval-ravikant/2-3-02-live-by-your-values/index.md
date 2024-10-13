@@ -6,7 +6,9 @@ weight: 34
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/live-by-your-values)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Live by Your Values
 
@@ -34,7 +36,8 @@ My wife is an incredibly lovely, family-oriented person, and so am I. That was o
 
 The moment you have a child, it’s this really weird thing, but it answers the meaning-of-life, purpose-of-life, question. All of a sudden, the most important thing in the Universe moves from being in your body into the child’s body. That changes you. Your values inherently become a lot less selfish. [4]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 按照你的价值观生活
 
@@ -62,4 +65,6 @@ The moment you have a child, it’s this really weird thing, but it answers the 
 
 当你有了孩子的那一刻，这是一种非常奇妙的感觉，但它解答了关于“生命的意义”和“生活的目的”的问题。突然之间，宇宙中最重要的东西从你的身体移到了孩子的身体里。这改变了你。你的价值观自然而然地变得不那么自私了。 [4]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

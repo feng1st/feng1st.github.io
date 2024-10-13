@@ -6,7 +6,9 @@ weight: 1
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 # PART I - WEALTH
 
@@ -139,7 +141,8 @@ So, technology is the set of things, as Alan Kay said, that don’t quite work y
 
 Then, you have to figure out how to scale it because if you only build one, that’s not enough. You’ve got to build thousands, or hundreds of thousands, or millions, or billions of them so everybody can have one. Steve Jobs (and his team, of course) figured out society would want smartphones. A computer in their pocket that had all the phone capability times one hundred and was easy to use. So, they figured out how to build it, and then they figured out how to scale it. [78]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 # 第一部分 - 财富
 
@@ -272,4 +275,6 @@ Then, you have to figure out how to scale it because if you only build one, that
 
 然后，你需要弄清楚如何扩展它，因为如果你只生产一个，那是不够的。你需要生产成千上万，数百万甚至数十亿个，以便每个人都能拥有一个。史蒂夫·乔布斯（当然还有他的团队）想到了社会需要智能手机—一个放在口袋里的电脑，具备电话功能且百倍易用。所以他们想出了如何制造它，然后想出了如何大规模生产。[78]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

@@ -6,7 +6,9 @@ weight: 35
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/rational-buddhism)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Rational Buddhism
 
@@ -36,7 +38,8 @@ Understanding the long-term consequences of your actions. [11]
 
 > If wisdom could be imparted through words alone, we’d all be done here.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 理性佛教
 
@@ -66,4 +69,6 @@ Understanding the long-term consequences of your actions. [11]
 
 > 如果智慧能仅通过言语传递，那么我们早就功德圆满了。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

@@ -6,7 +6,9 @@ weight: 9
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-work-that-feels-like-play)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Find Work That Feels Like Play
 
@@ -86,7 +88,8 @@ Some of the most successful people I’ve seen in Silicon Valley had breakouts v
 
 For someone who is early in their career (and maybe even later), the single most important thing about a company is the alumni network you’re going to build. Think about who you will work with and what those people are going on to do. [76]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 找到像玩乐一样的工作
 
@@ -166,4 +169,6 @@ For someone who is early in their career (and maybe even later), the single most
 
 对于刚刚起步（甚至是稍晚一些）的人来说，公司最重要的事情之一是你将建立的校友网络。想想你会和谁一起工作，以及这些人未来会做些什么。[76]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

@@ -6,7 +6,9 @@ weight: 11
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/be-patient)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Be Patient
 
@@ -51,7 +53,8 @@ Then, let’s get them all happy. [77]
 
 > Amazing how many people confuse wealth and wisdom.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 耐心等待
 
@@ -96,4 +99,6 @@ Then, let’s get them all happy. [77]
 
 > 令人惊讶的是，有多少人把财富和智慧混为一谈。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

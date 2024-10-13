@@ -6,7 +6,9 @@ weight: 19
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-is-a-choice)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Happiness Is a Choice
 
@@ -18,7 +20,8 @@ The mind is just as malleable as the body. We spend so much time and effort tryi
 
 We accept the voice in our head as the source of all truth. But all of it is malleable, and every day is new. Memory and identity are burdens from the past preventing us from living freely in the present. [3]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 幸福是一种选择
 
@@ -30,4 +33,6 @@ We accept the voice in our head as the source of all truth. But all of it is mal
 
 我们把脑海中的声音当作所有真理的源泉。然而，所有这些都是可塑的，每一天都是崭新的。记忆和身份是来自过去的负担，它们阻止我们在当下自由地生活。 [3]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

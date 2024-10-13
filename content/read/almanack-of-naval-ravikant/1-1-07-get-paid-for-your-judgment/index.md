@@ -6,7 +6,9 @@ weight: 7
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/get-paid-for-your-judgment)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Get Paid for Your Judgment
 
@@ -24,7 +26,8 @@ Judgment—especially demonstrated judgment, with high accountability and a clea
 
 Just from being marginally better, like running a quarter mile a fraction of a second faster, some people get paid a lot more—orders of magnitude more. Leverage magnifies those differences even more. Being at the extreme in your art is very important in the age of leverage. [2]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 为你的判断力获得报酬
 
@@ -42,4 +45,6 @@ Just from being marginally better, like running a quarter mile a fraction of a s
 
 仅仅因为在某些方面稍微胜出，比如跑四分之一英里快了零点几秒，有些人就能获得更多的报酬——数量级上更多。杠杆进一步放大了这些差异。在杠杆时代，成为你所从事的艺术领域中的极致是非常重要的。[2]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

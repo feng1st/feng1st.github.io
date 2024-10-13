@@ -6,7 +6,9 @@ weight: 2
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-and-build-specific-knowledge)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Find and Build Specific Knowledge
 
@@ -76,7 +78,8 @@ Knowing how to be persuasive when speaking is far more important than being an e
 
 You do need to be deep in something because otherwise you’ll be a mile wide and an inch deep and you won’t get what you want out of life. You can only achieve mastery in one or two things. It’s usually things you’re obsessed about. [74]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 寻找并构建特定知识
 
@@ -146,4 +149,6 @@ You do need to be deep in something because otherwise you’ll be a mile wide an
 
 你确实需要在某些事情上有深度，否则你就会显得广而不深，无法从生活中得到你想要的东西。你只能在一两件事情上达到精通。这通常是你痴迷的事情。[74]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

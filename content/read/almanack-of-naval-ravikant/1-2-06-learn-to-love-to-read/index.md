@@ -6,7 +6,9 @@ weight: 17
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-to-love-to-read)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Learn to Love to Read
 
@@ -130,7 +132,8 @@ Any book that survived for two thousand years has been filtered through many peo
 
 (Specific recommendations for books, blogs, and more are on “[Naval’s Recommended Reading](https://www.navalmanack.com/navals-recommended-reading)” page)
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 学会爱上阅读
 
@@ -254,4 +257,6 @@ Any book that survived for two thousand years has been filtered through many peo
 
 （关于书籍、博客等的具体推荐，请参见“[Naval 推荐阅读](https://www.navalmanack.com/navals-recommended-reading)”页面。）
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

@@ -6,7 +6,9 @@ weight: 4
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/take-on-accountability)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Take on Accountability
 
@@ -32,7 +34,8 @@ Realize that in modern society, the downside risk is not that large. Even person
 
 There’s not really that much to fear in terms of failure, and so people should take on a lot more accountability than they do. [78]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 承担责任
 
@@ -58,4 +61,6 @@ There’s not really that much to fear in terms of failure, and so people should
 
 在失败方面，其实没有那么多值得恐惧的东西，因此人们应该比现在承担更多的责任。[78]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

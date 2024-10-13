@@ -6,7 +6,9 @@ weight: 29
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/meditation-mental-strength)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Meditation + Mental Strength
 
@@ -124,7 +126,8 @@ The mind itself is a muscle—it can be trained and conditioned. It has been hap
 > Showering is accidental meditation.  
 > Sitting quietly is direct meditation.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 冥想 + 精神力量
 
@@ -242,4 +245,6 @@ The mind itself is a muscle—it can be trained and conditioned. It has been hap
 > 沐浴是无意的冥想。  
 > 静坐是直接的冥想。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

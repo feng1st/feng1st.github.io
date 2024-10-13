@@ -6,7 +6,9 @@ weight: 16
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/collect-mental-models)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Collect Mental Models
 
@@ -122,7 +124,8 @@ Read a lot—just read. [2]
 
 > Reading science, math, and philosophy one hour per day will likely put you at the upper echelon of human success within seven years.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 收集心智模型
 
@@ -238,4 +241,6 @@ Read a lot—just read. [2]
 
 > 每天阅读一小时科学、数学和哲学，可能会在七年内让你处于人类成功的上层阶级。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

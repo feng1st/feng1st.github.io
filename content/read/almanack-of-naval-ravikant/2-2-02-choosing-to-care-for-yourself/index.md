@@ -6,7 +6,9 @@ weight: 28
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-care-for-yourself)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Choosing to Care for Yourself
 
@@ -88,7 +90,8 @@ Like everything in life, if you are willing to make the short-term sacrifice, yo
 
 Basically, if you are making the hard choices right now in what to eat, you’re not eating all the junk food you want, and making the hard choice to work out. So, your life long-term will be easy. You won’t be sick. You won’t be unhealthy. The same is true of values. The same is true of saving up for a rainy day. The same is true of how you approach your relationships. If you make the easy choices right now, your overall life will be a lot harder. [4]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 选择关爱自己
 
@@ -170,4 +173,6 @@ Basically, if you are making the hard choices right now in what to eat, you’re
 
 基本上，如果你现在在饮食方面做出艰难的选择，不吃所有你想吃的垃圾食品，做出艰难的选择去锻炼，那么你的长期生活会更加轻松。你不会生病，你不会不健康。这在价值观上同样适用，也适用于为雨天存钱的方法，以及你处理关系的方式。如果你现在做出了轻松的选择，你的整体生活将会更艰难。[4]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

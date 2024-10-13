@@ -6,7 +6,9 @@ weight: 15
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/learn-the-skills-of-decision-making)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Learn the Skills of Decision-Making
 
@@ -41,7 +43,8 @@ If you can be more right and more rational, you’re going to get nonlinear retu
 
 > The more you know, the less you diversify.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 学习决策的技能
 
@@ -76,4 +79,6 @@ If you can be more right and more rational, you’re going to get nonlinear retu
 
 > 你知道得越多，分散投资就越少。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

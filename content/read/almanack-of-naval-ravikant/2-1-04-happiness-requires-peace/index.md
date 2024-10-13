@@ -6,7 +6,9 @@ weight: 21
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-requires-peace)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Happiness Requires Peace
 
@@ -29,7 +31,8 @@ You’ll notice when I say happiness, I mean peace. When a lot of people say hap
 > A happy person isn’t someone who’s happy all the time.  
 > It’s someone who effortlessly interprets events in such a way that they don’t lose their innate peace.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 幸福需要内心的宁静
 
@@ -52,4 +55,6 @@ You’ll notice when I say happiness, I mean peace. When a lot of people say hap
 > 幸福的人并不是一直都感到幸福的人。  
 > 而是能够轻松地解释发生的事情，从而不丢失自己内在宁静的人。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

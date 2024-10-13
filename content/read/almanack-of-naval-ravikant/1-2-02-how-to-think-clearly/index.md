@@ -6,7 +6,9 @@ weight: 13
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-think-clearly)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### How to Think Clearly
 
@@ -56,7 +58,8 @@ It’s only after you’re bored you have the great ideas. It’s never going to
 
 > Cynicism is easy. Mimicry is easy. Optimistic contrarians are the rarest breed.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 如何清晰地思考
 
@@ -106,4 +109,6 @@ It’s only after you’re bored you have the great ideas. It’s never going to
 
 > 犬儒主义很容易。模仿也很容易。乐观的反叛者才是最罕见的品种。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

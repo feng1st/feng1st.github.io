@@ -6,7 +6,9 @@ weight: 33
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/the-meanings-of-life)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ## Part II - Philosophy
 
@@ -48,7 +50,8 @@ In the process, we globally accelerate entropy until the heat death of the Unive
 
 What we do as living systems accelerates getting to that state. The more complex system you create, whether it’s through computers, civilization, art, mathematics, or creating a family—you actually accelerate the heat death of the Universe. You’re pushing us towards this point where we end up as one thing. [4]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ## 第二部分 - 哲学
 
@@ -90,4 +93,6 @@ What we do as living systems accelerates getting to that state. The more complex
 
 我们作为生命系统所做的一切，加速了这种状态的到来。无论是通过计算机、文明、艺术、数学，还是建立家庭，创造越复杂的系统，实际上就越加速宇宙的热寂。我们正推动自己走向那个最终成为一体的点。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

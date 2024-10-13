@@ -6,7 +6,9 @@ weight: 8
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/prioritize-and-focus)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Prioritize and Focus
 
@@ -88,7 +90,8 @@ I was just venting, talking out loud, being overly honest. But I didn’t actual
 
 Yes, I know some people aren’t necessarily ready to be entrepreneurs, but long-term, where did we come up with this idea the correct logical thing to do is for everybody to work for somebody else? It is a very hierarchical model. [14]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 优先与专注
 
@@ -170,4 +173,6 @@ Yes, I know some people aren’t necessarily ready to be entrepreneurs, but long
 
 是的，我知道有些人可能还没准备好成为创业者，但从长远来看，为什么我们会有这样的想法，认为最正确、最理智的事情就是每个人都为别人工作呢？这是一个非常等级化的模式。 [14]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

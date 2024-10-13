@@ -6,7 +6,9 @@ weight: 5
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/build-or-buy-equity-in-a-business)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Build or Buy Equity in a Business
 
@@ -34,7 +36,8 @@ Everybody who really makes money at some point owns a piece of a product, a busi
 
 But usually, the real wealth is created by starting your own companies or even by investing. In an investment firm, they’re buying equity. These are the routes to wealth. It doesn’t come through the hours. [78]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 建立或购买企业股权
 
@@ -62,4 +65,6 @@ But usually, the real wealth is created by starting your own companies or even b
 
 但通常，真正的财富是通过创办自己的公司或投资实现的。在投资公司中，他们购买股权。这些才是通向财富的途径。财富并不来自于你投入的小时数。[78]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

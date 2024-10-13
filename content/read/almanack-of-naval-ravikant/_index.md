@@ -8,7 +8,9 @@ cascade:
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/table-of-contents)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 Almanack of Naval Ravikant
 
@@ -58,7 +60,8 @@ A Guide to Wealth and Happiness
   - [Rational Buddhism](2-3-03-rational-buddhism)
   - [The Present Is All We Have](2-3-04-the-present-is-all-we-have)
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 Naval Ravikant的年鉴
 
@@ -109,4 +112,6 @@ Naval Ravikant的年鉴
   - [理性佛教](2-3-03-rational-buddhism)
   - [当下即是一切](2-3-04-the-present-is-all-we-have)
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

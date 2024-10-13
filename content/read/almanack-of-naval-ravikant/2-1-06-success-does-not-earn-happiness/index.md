@@ -6,7 +6,9 @@ weight: 23
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/success-does-not-earn-happiness)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Success Does Not Earn Happiness
 
@@ -50,7 +52,8 @@ Peace is happiness at rest, and happiness is peace in motion. You can convert pe
 
 Today, the way we think you get peace is by resolving all your external problems. But there are unlimited external problems. The only way to actually get peace on the inside is by giving up this idea of problems. [77]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 成功无法带来幸福
 
@@ -94,4 +97,6 @@ Today, the way we think you get peace is by resolving all your external problems
 
 如今，我们认为获得平和的方式是解决所有外部问题。但外部问题是无限的。唯一能真正获得内心平和的方法是放弃“问题”这个概念。[77]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

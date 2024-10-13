@@ -6,7 +6,9 @@ weight: 10
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/how-to-get-lucky)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### How to Get Lucky
 
@@ -64,7 +66,8 @@ Not in some cosmic, karma kind of way, but I believe deep down we all know who w
 
 I think you just have to be very careful about doing things you are fundamentally not going to be proud of, because they will damage you. The first time someone acts this way, I will warn them. By the way, nobody changes. Then I just distance myself from them. I cut them out of my life. I just have this saying inside my head: “The closer you want to get to me, the better your values have to be.” [4]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 如何走运
 
@@ -122,4 +125,6 @@ I think you just have to be very careful about doing things you are fundamentall
 
 我认为你必须非常谨慎，不去做那些从根本上让你感到骄傲不起来的事情，因为它们会伤害你。第一次某人表现出这种行为时，我会警告他们。顺便说一句，没有人会改变。然后我就会与他们保持距离。我把他们从我的生活中剔除。我在脑海中有一个说法：“你想离我越近，你的价值观就必须越好。”[4]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

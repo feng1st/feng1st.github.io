@@ -6,7 +6,9 @@ weight: 18
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-is-learned)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 # PART II - HAPPINESS
 
@@ -97,7 +99,8 @@ And it works.
 
 You can very slowly but steadily and methodically improve your happiness baseline, just like you can improve your fitness. [10]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 # 第二部分 - 幸福
 
@@ -188,4 +191,6 @@ You can very slowly but steadily and methodically improve your happiness baselin
 
 你可以非常缓慢但稳步且有条不紊地提高你的幸福基线，就像你可以提高你的健康水平一样。[10]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

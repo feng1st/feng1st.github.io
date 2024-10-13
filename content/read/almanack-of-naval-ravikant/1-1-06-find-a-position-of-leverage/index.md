@@ -6,7 +6,9 @@ weight: 6
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/find-a-position-of-leverage)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Find a Position of Leverage
 
@@ -130,7 +132,8 @@ Avoiding ruin means stay out of jail. So, don’t do anything illegal. It’s ne
 
 Stay out of things that could cause you to lose all of your capital, all of your savings. Don’t gamble everything on one go. Instead, take rationally optimistic bets with big upsides. [78]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 寻找杠杆的位置
 
@@ -254,4 +257,6 @@ Stay out of things that could cause you to lose all of your capital, all of your
 
 远离那些可能导致你失去所有资本和积蓄的事情。不要孤注一掷。而是要做理性乐观的赌注，拥有巨大的上升空间。 [78]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

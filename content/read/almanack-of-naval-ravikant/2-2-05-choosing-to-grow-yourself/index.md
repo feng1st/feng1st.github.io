@@ -6,7 +6,9 @@ weight: 31
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-grow-yourself)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Choosing to Grow Yourself
 
@@ -62,7 +64,8 @@ Mathematics helps with all the complex and difficult things in life. If you want
 
 Nature speaks in mathematics. Mathematics is us reverse engineering the language of nature, and we have only scratched the surface. The good news is you don’t have to know a lot of math. You just have to know basic statistics, arithmetic, etc. You should know statistics and probability forwards and backwards and inside out. [8]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 选择成长自己
 
@@ -118,4 +121,6 @@ Nature speaks in mathematics. Mathematics is us reverse engineering the language
 
 自然以数学的方式说话。数学是我们对自然语言的逆向工程，而我们只不过刚刚触及了皮毛。好消息是你不需要掌握很多数学。你只需掌握基本的统计、算术等。你应该对统计学和概率学了如指掌，正反面、里里外外地掌握。[8]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

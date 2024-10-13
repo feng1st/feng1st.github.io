@@ -6,7 +6,9 @@ weight: 30
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-build-yourself)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Choosing to Build Yourself
 
@@ -58,7 +60,8 @@ When you do them, you want to do them as quickly as you can while doing them wel
 
 It takes a long time for markets to adopt products. It takes time for people to get comfortable working with each other. It takes time for great products to emerge as you polish away, polish away, polish away. Impatience with actions, patience with results. As Nivi said, inspiration is perishable. When you have inspiration, act on it right then and there. [78]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 选择塑造自我
 
@@ -110,4 +113,6 @@ It takes a long time for markets to adopt products. It takes time for people to 
 
 市场接受新产品需要时间。人们彼此熟悉、舒适地共事需要时间。伟大的产品也需要时间，不断打磨，不断改进。对行动要急，对结果要耐心。正如Nivi所说，灵感是易逝的。当你有灵感时，要立刻付诸行动。[78]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

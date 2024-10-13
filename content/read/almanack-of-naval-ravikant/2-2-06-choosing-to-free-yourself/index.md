@@ -6,7 +6,9 @@ weight: 32
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-free-yourself)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Choosing to Free Yourself
 
@@ -75,7 +77,8 @@ I think just being aware you’re a rat in a race is about as far as most of us 
 > Lone individuals summoning inhuman willpower, fasting, meditating, and exercising…  
 > Up against armies of scientists and statisticians weaponizing abundant food, screens, and medicine into junk food, clickbait news, infinite porn, endless games, and addictive drugs.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 选择让自己自由
 
@@ -144,4 +147,6 @@ I think just being aware you’re a rat in a race is about as far as most of us 
 > 孤独的个体唤起超人的意志力，禁食、冥想、锻炼…  
 > 对抗的是成群的科学家和统计学家，他们将充足的食物、屏幕和药物武器化，变成垃圾食品、点击诱饵新闻、无穷无尽的游戏和成瘾性药物。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

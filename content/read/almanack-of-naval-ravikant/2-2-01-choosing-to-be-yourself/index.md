@@ -6,7 +6,9 @@ weight: 27
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-be-yourself)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ## PART II - SAVING YOURSELF
 
@@ -35,7 +37,8 @@ Your goal in life is to find the people, business, project, or art that needs yo
 
 > To make an original contribution, you have to be irrationally obsessed with something
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ## 第二部分 - 拯救自己
 
@@ -64,4 +67,6 @@ Your goal in life is to find the people, business, project, or art that needs yo
 
 > 想要做出原创性的贡献，你必须对某件事有非理性的执着
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

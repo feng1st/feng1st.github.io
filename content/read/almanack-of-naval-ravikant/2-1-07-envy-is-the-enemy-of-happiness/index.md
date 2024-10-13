@@ -6,7 +6,9 @@ weight: 24
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/envy-is-the-enemy-of-happiness)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Envy Is the Enemy of Happiness
 
@@ -34,7 +36,8 @@ One day, I realized with all these people I was jealous of, I couldn’t just ch
 
 Once I came to that realization, jealousy faded away because I don’t want to be anybody else. I’m perfectly happy being me. By the way, even that is under my control. To be happy being me. It’s just there are no social rewards for it. [4]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 嫉妒是幸福的敌人
 
@@ -62,4 +65,6 @@ Once I came to that realization, jealousy faded away because I don’t want to b
 
 当我意识到这一点时，嫉妒就消失了，因为我并不想成为任何其他人。我很高兴做我自己。顺便说一句，连这也是在我的掌控之中。让我自己感到幸福的也是由我自己决定的。只不过，这并没有任何社会上的奖励。[4]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

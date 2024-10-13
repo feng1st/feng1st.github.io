@@ -6,7 +6,9 @@ weight: 22
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/every-desire-is-a-chosen-unhappiness)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Every Desire Is a Chosen Unhappiness
 
@@ -34,7 +36,8 @@ When you’re young, you have time. You have health, but you have no money. When
 
 By the time people realize they have enough money, they’ve lost their time and their health. [8]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 每一个欲望都是一种选择的不快乐
 
@@ -62,4 +65,6 @@ By the time people realize they have enough money, they’ve lost their time and
 
 等到人们意识到他们有足够的钱时，他们已经失去了时间和健康。[8]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

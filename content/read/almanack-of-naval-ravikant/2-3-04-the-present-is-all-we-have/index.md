@@ -6,7 +6,9 @@ weight: 36
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/the-present-is-all-we-have)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### The Present Is All We Have
 
@@ -24,7 +26,8 @@ I don’t even remember what I said two minutes ago. At best, the past is some f
 
 > Inspiration is perishable—act on it immediately.
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 当下即是一切
 
@@ -42,4 +45,6 @@ I don’t even remember what I said two minutes ago. At best, the past is some f
 
 > 灵感是易逝的——立即行动。
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

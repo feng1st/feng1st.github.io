@@ -6,7 +6,9 @@ weight: 3
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/play-long-term-games-with-long-term-people)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Play Long-Term Games with Long-Term People
 
@@ -42,7 +44,8 @@ When you’re dating, the instant you know this relationship is not going to be 
 
 I’m not saying don’t do the 99 percent, because it’s very hard to identify what the 1 percent is. What I’m saying is: when you find the 1 percent of your discipline which will not be wasted, which you’ll be able to invest in for the rest of your life and has meaning to you—go all-in and forget about the rest. [10]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 与长期主义者玩长期游戏
 
@@ -78,4 +81,6 @@ I’m not saying don’t do the 99 percent, because it’s very hard to identify
 
 我不是说不要做那99%的事情，因为很难辨认出哪1%是有意义的。我的意思是，当你找到那1%不会被浪费的东西时，你可以为之投资终生，并且它对你有意义——那么就全力以赴，忘掉其他的。[10]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

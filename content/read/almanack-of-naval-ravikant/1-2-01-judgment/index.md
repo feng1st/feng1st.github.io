@@ -6,7 +6,9 @@ weight: 12
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/judgment)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ## PART I - BUILDING JUDGMENT
 
@@ -35,7 +37,8 @@ My definition of wisdom is knowing the long-term consequences of your actions. W
 
 You have to put in the time, but the judgment is more important. The direction you’re heading in matters more than how fast you move, especially with leverage.  Picking the direction you’re heading in for every decision is far, far more important than how much force you apply. Just pick the right direction to start walking in, and start walking. [1]
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ## 第一部分 - 培养判断力
 
@@ -64,4 +67,6 @@ You have to put in the time, but the judgment is more important. The direction y
 
 你需要投入时间，但判断力更为重要。你前进的方向比你前进的速度更重要，尤其是在拥有杠杆的情况下。为每个决定选择正确的方向，远比施加多少力量重要得多。只需选择正确的方向开始行走，并开始前进即可。[1]
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}

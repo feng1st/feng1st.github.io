@@ -6,7 +6,9 @@ weight: 20
 
 [Source](https://www.navalmanack.com/almanack-of-naval-ravikant/happiness-requires-presence)
 
-{{< columns >}}
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
 
 ### Happiness Requires Presence
 
@@ -22,7 +24,8 @@ There’s a great definition I read: “Enlightenment is the space between your 
 
 > What if this life is the paradise we were promised, and we’re just squandering it?
 
-{{< column >}}
+{{< /tab >}}
+{{< tab >}}
 
 ### 幸福需要活在当下
 
@@ -38,4 +41,6 @@ There’s a great definition I read: “Enlightenment is the space between your 
 
 > 如果这世间生活本就是我们被承诺的天堂，而我们却在肆意挥霍它呢？
 
-{{< endcolumns >}}
+{{< /tab >}}
+
+{{< /tabs >}}
