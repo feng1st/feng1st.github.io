@@ -8,4 +8,21 @@ cascade:
 
 [Source](https://www.youtube.com/playlist?list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe-1)
 
+{{< tabs items="English,简体中文" >}}
+
+{{< tab >}}
+
+How to Start a Startup
+
 - [Lecture 1 - How to Start a Startup (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
+
+{{< /tab >}}
+{{< tab >}}
+
+如何开始创业
+
+- [讲座 1 - 如何开始创业 (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
+
+{{< /tab >}}
+
+{{< /tabs >}}
