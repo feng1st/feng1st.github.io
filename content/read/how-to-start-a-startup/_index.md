@@ -15,6 +15,7 @@ cascade:
 How to Start a Startup
 
 - [Lecture 1 - How to Start a Startup (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
+- [Lecture 2 - Team and Execution (Sam Altman)](02-team-and-execution)
 
 {{< /tab >}}
 {{< tab >}}
@@ -22,6 +23,7 @@ How to Start a Startup
 如何开始创业
 
 - [讲座 1 - 如何开始创业 (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
+- [讲座 2 - 团队与执行力 (Sam Altman)](02-team-and-execution)
 
 {{< /tab >}}
 

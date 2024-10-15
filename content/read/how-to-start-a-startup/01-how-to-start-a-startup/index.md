@@ -5,7 +5,7 @@ date: 2024-10-13
 weight: 1
 ---
 
-[Source](https://www.youtube.com/watch?v=CBYhVcO4WgI)
+[Source](https://www.youtube.com/watch?v=CBYhVcO4WgI&list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe-1&index=1)
 
 {{< tabs items="English,简体中文" >}}
 
