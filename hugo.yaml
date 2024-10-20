@@ -30,6 +30,9 @@ menu:
     - name: AI
       pageRef: /ai
       weight: 4
+    - name: and Stuff
+      pageRef: /misc
+      weight: 5
     - name: Search
       weight: 8
       params:
