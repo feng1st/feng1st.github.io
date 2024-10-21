@@ -84,13 +84,13 @@ while true; do
     
     # Prompt the user with options
     echo
-    echo "[P]ull, [D]iff, [A]dd, [C]ommit, P[u]sh, or [Q]uit"
+    echo "Pu[l]l, [D]iff, [A]dd, [C]ommit, [P]ush, or [Q]uit"
     read -n1 -p "Please select an option: " option
     echo
     
     # Handle the user's input
     case $option in
-        [pP])
+        [lL])
             echo "Running git pull -r --ff-only --autostash..."
             git pull -r --ff-only --autostash
             echo "Press any key to continue..."
@@ -113,7 +113,7 @@ while true; do
             echo "Press any key to continue..."
             read -n1 -r
             ;;
-        [uU])
+        [pP])
             echo "Running git push..."
             git push
             echo "Press any key to continue..."
@@ -135,11 +135,11 @@ done
 
 This script provides an interactive menu where you can:
 
-- Pull the latest changes (`P`)
+- Pull the latest changes (`L`)
 - View the differences in your files (`D`)
 - Add all changes to the staging area (`A`)
 - Commit with a timestamped message (`C`)
-- Push your changes to the repository (`U`)
+- Push your changes to the repository (`P`)
 - Quit the script (`Q`)
 
 The script makes the process straightforward and user-friendly, even if you’re new to Git.
