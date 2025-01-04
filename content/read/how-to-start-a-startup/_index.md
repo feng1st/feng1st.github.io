@@ -17,6 +17,7 @@ How to Start a Startup
 - [Lecture 1 - How to Start a Startup (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
 - [Lecture 2 - Team and Execution (Sam Altman)](02-team-and-execution)
 - [Lecture 3 - Before the Startup (Paul Graham)](03-before-the-startup)
+- [Lecture 4 - Building Product, Talking to Users, and Growing (Adora Cheung)](04-building-product-talking-to-users-and-growing)
 
 {{< /tab >}}
 {{< tab >}}
@@ -26,6 +27,7 @@ How to Start a Startup
 - [讲座 1 - 如何开始创业 (Sam Altman, Dustin Moskovitz)](01-how-to-start-a-startup)
 - [讲座 2 - 团队与执行力 (Sam Altman)](02-team-and-execution)
 - [讲座 3 - 创业之前 (Paul Graham)](03-before-the-startup)
+- [讲座 4 - 产品开发、用户交流与增长 (Adora Cheung)](04-building-product-talking-to-users-and-growing)
 
 {{< /tab >}}
 
